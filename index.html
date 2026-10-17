@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CitiMarket Delivery - Fresh Flower Logistics & Financial Engine</title>
+  <title>CitiMarket Delivery - Enterprise Flower Logistics, Fintech & Multi-Client Engine</title>
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <style>
     /* Custom Scrollbar */
@@ -36,6 +36,13 @@
       stroke-width: 1;
       fill: rgba(16, 185, 129, 0.08);
     }
+    @keyframes red-flash {
+      0%, 100% { border-color: rgba(239, 68, 68, 0.4); }
+      50% { border-color: rgba(239, 68, 68, 1); background-color: rgba(127, 29, 29, 0.3); }
+    }
+    .tamper-alarm {
+      animation: red-flash 1s infinite ease-in-out;
+    }
   </style>
 </head>
 <body class="bg-[#030e0b] text-slate-100 min-h-screen font-sans antialiased flex flex-col selection:bg-rose-500 selection:text-white">
@@ -57,10 +64,10 @@
               CitiMarket <span class="text-rose-400 font-semibold text-sm">Delivery</span>
             </h1>
             <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 uppercase tracking-wider">
-              Nairobi • KES
+              Hybrid B2B + B2C • Nairobi
             </span>
           </div>
-          <p class="text-xs text-emerald-400/70">On-Demand & Scheduled Fresh Flower Logistics Ecosystem</p>
+          <p class="text-xs text-emerald-400/70">On-Demand Merchant Logistics &amp; Consumer Gifting Ecosystem</p>
         </div>
       </div>
 
@@ -70,7 +77,10 @@
           🚀 Live Simulator
         </button>
         <button id="nav-btn-ledger" onclick="setTab('ledger')" class="px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition">
-          ⚖️ Double-Entry Ledger (CFO)
+          ⚖️ Cryptographic Ledger (CFO)
+        </button>
+        <button id="nav-btn-mobile" onclick="setTab('mobile-arch')" class="px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition">
+          📱 Web vs. Phone Architecture
         </button>
         <button id="nav-btn-cs" onclick="setTab('cs-engine')" class="px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition">
           ⚙️ Engineering Concepts
@@ -101,6 +111,8 @@
 
     <!-- Active Presentation State & Real-Time CS / Ledger HUD -->
     <div class="bg-gradient-to-r from-[#07241b] via-[#0b3327] to-[#07241b] border border-emerald-700/30 rounded-2xl p-4 shadow-xl space-y-3">
+      
+      <!-- Top Row: State and Channel Switcher -->
       <div class="flex flex-wrap items-center justify-between gap-4">
         <div class="flex items-center gap-3">
           <div class="relative">
@@ -112,36 +124,39 @@
             <h3 id="flow-status-text" class="text-sm font-bold text-white">System Idle: Customer browsing Naivasha fresh roses</h3>
           </div>
         </div>
-        <div class="flex items-center gap-2 text-xs">
-          <span class="px-2.5 py-1 rounded-lg bg-[#041510] border border-emerald-900/80 text-slate-300">
-            Order: <strong id="kpi-order-id" class="text-rose-400">#CMD-8842</strong>
-          </span>
-          <span class="px-2.5 py-1 rounded-lg bg-[#041510] border border-emerald-900/80 text-slate-300">
-            Escrow Status: <strong id="kpi-escrow-status" class="text-amber-300">Unfunded</strong>
-          </span>
-          <span class="px-2.5 py-1 rounded-lg bg-[#041510] border border-emerald-900/80 text-slate-300">
-            Atomic Lock: <strong id="kpi-lock-status" class="text-slate-400">Unlocked</strong>
-          </span>
+
+        <!-- 3-Way Customer Model Selector -->
+        <div class="flex items-center bg-[#020b08] p-1 rounded-xl border border-emerald-900/60 text-[11px] font-medium">
+          <span class="text-[10px] text-slate-400 px-2 font-mono">TARGET CUSTOMER:</span>
+          <button id="cust-mod-b2c" onclick="switchCustomerModel('b2c')" class="px-2.5 py-1 rounded-lg bg-emerald-600 text-white font-semibold transition">
+            1. B2C Consumer Gifting
+          </button>
+          <button id="cust-mod-b2b" onclick="switchCustomerModel('b2b')" class="px-2.5 py-1 rounded-lg text-emerald-300 hover:text-white transition">
+            2. Merchant Direct (Logistics-as-a-Service)
+          </button>
+          <button id="cust-mod-corp" onclick="switchCustomerModel('corp')" class="px-2.5 py-1 rounded-lg text-emerald-300 hover:text-white transition">
+            3. Corporate Account
+          </button>
         </div>
       </div>
 
-      <!-- Real-Time Architectural State Badges (CS & Accounting Telemetry) -->
+      <!-- Real-Time Architectural State Badges -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-2 pt-2 border-t border-emerald-900/60 font-mono text-[10px]">
         <div class="p-2 rounded-lg bg-[#020b08] border border-emerald-950 flex justify-between items-center">
-          <span class="text-slate-400">Spatial Index:</span>
-          <span class="text-emerald-300 font-bold">H3 Hex: 887a40660ffffff</span>
+          <span class="text-slate-400">Active Channel:</span>
+          <span id="hud-channel-lbl" class="text-rose-300 font-bold">B2C On-Demand Gifting</span>
         </div>
         <div class="p-2 rounded-lg bg-[#020b08] border border-emerald-950 flex justify-between items-center">
-          <span class="text-slate-400">Dispatch Match:</span>
-          <span id="hud-match-score" class="text-amber-300 font-bold">Cost Score: 94.2/100</span>
+          <span class="text-slate-400">Fixed-Point Units:</span>
+          <span id="hud-fixed-point" class="text-emerald-300 font-bold">415,000 cents (KES)</span>
         </div>
         <div class="p-2 rounded-lg bg-[#020b08] border border-emerald-950 flex justify-between items-center">
-          <span class="text-slate-400">Saga Phase:</span>
-          <span id="hud-saga-step" class="text-rose-300 font-bold">1/4 Awaiting Payment</span>
+          <span class="text-slate-400">Courier Telemetry:</span>
+          <span id="hud-dead-reckon" class="text-cyan-300 font-bold">Dead Reckoning (Smoothed)</span>
         </div>
         <div class="p-2 rounded-lg bg-[#020b08] border border-emerald-950 flex justify-between items-center">
-          <span class="text-slate-400">Ledger Invariant:</span>
-          <span id="hud-ledger-invariant" class="text-emerald-400 font-bold">Balanced (Δ = 0.00)</span>
+          <span class="text-slate-400">Cryptographic Hash:</span>
+          <span id="hud-hash-status" class="text-emerald-400 font-bold">SHA256: 0x9f82... OK</span>
         </div>
       </div>
     </div>
@@ -154,9 +169,9 @@
         <div class="w-full flex items-center justify-between mb-2 px-1">
           <div class="flex items-center gap-1.5 text-xs font-bold text-emerald-200">
             <span class="w-2 h-2 rounded-full bg-rose-500"></span>
-            Customer Mobile App (Client)
+            <span id="app-title-lbl">Customer Mobile App (Client)</span>
           </div>
-          <span class="text-[11px] text-emerald-400/80 font-medium">Lipa na M-Pesa Integrated</span>
+          <span id="app-badge-lbl" class="text-[11px] text-emerald-400/80 font-medium">Lipa na M-Pesa Integrated</span>
         </div>
 
         <!-- Phone Shell -->
@@ -233,14 +248,14 @@
                 </div>
               </div>
 
-              <!-- Price Breakdown -->
-              <div class="p-2.5 rounded-xl bg-[#03100c] border border-emerald-900/60 space-y-1 text-[10px] text-slate-300">
-                <div class="flex justify-between"><span>Bouquet (24 Stem)</span> <span>KSh 3,800</span></div>
-                <div class="flex justify-between"><span>Floral Preservative & Card</span> <span class="text-emerald-400">FREE</span></div>
-                <div class="flex justify-between"><span>Express Bike Delivery (CBD $\rightarrow$ Kilimani)</span> <span>KSh 350</span></div>
+              <!-- Price Breakdown (Integer Minor Units in Cents) -->
+              <div class="p-2.5 rounded-xl bg-[#03100c] border border-emerald-900/60 space-y-1 text-[10px] text-slate-300 font-mono">
+                <div class="flex justify-between"><span>Bouquet (24 Stem)</span> <span>KSh 3,800 (380,000¢)</span></div>
+                <div class="flex justify-between"><span>Floral Preservative &amp; Card</span> <span class="text-emerald-400">FREE</span></div>
+                <div class="flex justify-between"><span>Express Bike Delivery (CBD $\rightarrow$ Kilimani)</span> <span>KSh 350 (35,000¢)</span></div>
                 <div class="border-t border-emerald-900/80 pt-1 flex justify-between font-bold text-xs text-white">
                   <span>Total Amount Due</span>
-                  <span class="text-emerald-400">KSh 4,150</span>
+                  <span class="text-emerald-400">KSh 4,150 (415,000¢)</span>
                 </div>
               </div>
 
@@ -270,7 +285,7 @@
                 </div>
                 <div class="flex gap-2 pt-1">
                   <button onclick="confirmMpesaPin()" class="flex-1 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-[#020b08] font-extrabold text-xs">
-                    Confirm & Send
+                    Confirm &amp; Send
                   </button>
                   <button onclick="cancelMpesa()" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-400 text-xs">
                     Cancel
@@ -289,7 +304,7 @@
                 </span>
               </div>
 
-              <!-- Animated Vector Nairobi Route Map with H3 Spatial Overlay -->
+              <!-- Animated Vector Nairobi Route Map with Dead Reckoning -->
               <div class="w-full h-36 rounded-2xl bg-[#03100c] border border-emerald-800/60 relative overflow-hidden flex items-center justify-center shadow-inner">
                 <svg class="w-full h-full opacity-40" viewBox="0 0 200 120" preserveAspectRatio="none">
                   <polygon points="30,20 45,10 60,20 60,35 45,45 30,35" class="h3-hex"/>
@@ -309,7 +324,7 @@
                   <div class="w-6 h-6 rounded-full bg-emerald-600 border border-white text-white flex items-center justify-center text-[10px] shadow-lg">
                     🌸
                   </div>
-                  <span class="text-[7.5px] bg-[#020b08] text-emerald-300 px-1 rounded mt-0.5 border border-emerald-900">City Market</span>
+                  <span class="text-[7.5px] bg-[#020b08] text-emerald-300 px-1 rounded mt-0.5 border border-emerald-900">City Market Hub</span>
                 </div>
 
                 <div class="absolute right-6 bottom-4 flex flex-col items-center">
@@ -422,7 +437,7 @@
 
               <div class="flex gap-2">
                 <button onclick="step2_floristArrange()" id="btn-florist-arrange" class="flex-1 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs shadow-md transition">
-                  🌸 Cut & Arrange Bouquet
+                  🌸 Cut &amp; Arrange Bouquet
                 </button>
                 <button onclick="step3_floristReady()" id="btn-florist-ready" class="flex-1 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md transition opacity-50 cursor-not-allowed" disabled>
                   📦 Ready for Courier
@@ -519,7 +534,7 @@
           <div class="flex items-center justify-between pb-2.5 border-b border-emerald-900/60">
             <div class="flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-              <h4 class="font-bold text-xs text-white">Central Operations & Financial Engine</h4>
+              <h4 class="font-bold text-xs text-white">Central Operations &amp; Financial Engine</h4>
             </div>
             <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/30">Nairobi Core</span>
           </div>
@@ -550,12 +565,12 @@
 
           <div class="grid grid-cols-2 gap-2 text-xs">
             <button onclick="setTab('ledger')" class="p-2.5 rounded-xl bg-[#03100c] hover:bg-[#07241b] border border-emerald-900 text-left transition">
-              <span class="text-[10px] text-slate-400 block">Inspect Audit</span>
-              <strong class="text-white text-xs">⚖️ Full Accounting Ledger ➔</strong>
+              <span class="text-[10px] text-slate-400 block">Inspect Cryptographic</span>
+              <strong class="text-white text-xs">⚖️ Hash Ledger Audit ➔</strong>
             </button>
-            <button onclick="setTab('cs-engine')" class="p-2.5 rounded-xl bg-[#03100c] hover:bg-[#07241b] border border-emerald-900 text-left transition">
-              <span class="text-[10px] text-slate-400 block">Inspect Tech</span>
-              <strong class="text-white text-xs">⚙️ Engineering Concepts ➔</strong>
+            <button onclick="setTab('mobile-arch')" class="p-2.5 rounded-xl bg-[#03100c] hover:bg-[#07241b] border border-emerald-900 text-left transition">
+              <span class="text-[10px] text-slate-400 block">Inspect Device</span>
+              <strong class="text-white text-xs">📱 Phone &amp; Web Arch ➔</strong>
             </button>
           </div>
 
@@ -567,167 +582,170 @@
 
   </main>
 
-  <!-- ================= TAB 2: DOUBLE-ENTRY GENERAL LEDGER ================= -->
+  <!-- ================= TAB 2: CRYPTOGRAPHIC HASH LEDGER (CFO DEEP DIVE WITH TAMPER TEST) ================= -->
   <section id="tab-ledger" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
     <div class="bg-[#061e17] border border-emerald-800/40 rounded-3xl p-6 space-y-6 shadow-2xl">
       
-      <div>
-        <div class="flex items-center gap-2">
-          <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Financial Engineering</span>
-          <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Zero Financial Leakage</span>
-        </div>
-        <h2 class="text-2xl font-bold text-white mt-1">Double-Entry Accounting System & Escrow Engine</h2>
-        <p class="text-sm text-emerald-200/70 mt-2 max-w-3xl leading-relaxed">
-          In delivery logistics, handling millions of shillings without an immutable ledger leads to reconciliation drift, phantom driver payouts, and fraud. CitiMarket Delivery implements a strict <strong>Double-Entry General Ledger</strong> where money is never created or destroyed without equal debits and credits ($\sum \text{Debits} \equiv \sum \text{Credits}$).
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs font-mono">
-        <div class="p-4 rounded-2xl bg-[#03100c] border border-emerald-900/80">
-          <span class="text-slate-400 text-[10px]">ASSETS (1000)</span>
-          <h4 class="text-sm font-bold text-emerald-300 mt-1">1010: M-Pesa Float Holding</h4>
-          <div class="text-xl font-bold text-white mt-2">KSh 4,150.00</div>
-          <span class="text-[9px] text-slate-500">Unsettled cash in Safaricom Paybill</span>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-[#03100c] border border-emerald-900/80">
-          <span class="text-slate-400 text-[10px]">LIABILITIES (2000)</span>
-          <h4 class="text-sm font-bold text-amber-300 mt-1">2010: Customer Escrow Payable</h4>
-          <div class="text-xl font-bold text-white mt-2">KSh 0.00</div>
-          <span class="text-[9px] text-slate-500">Released upon verified handoff</span>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-[#03100c] border border-emerald-900/80">
-          <span class="text-slate-400 text-[10px]">ACCOUNTS PAYABLE (2100)</span>
-          <h4 class="text-sm font-bold text-rose-300 mt-1">2110: Florist & Rider Balances</h4>
-          <div class="text-xl font-bold text-white mt-2">KSh 3,396.00</div>
-          <span class="text-[9px] text-slate-500">Florist (KSh 3,116) + Rider (KSh 280)</span>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-[#03100c] border border-emerald-500/40 bg-gradient-to-br from-[#09261e] to-[#0c3127]">
-          <span class="text-rose-300 text-[10px] font-bold">NET REVENUE (4000)</span>
-          <h4 class="text-sm font-bold text-white mt-1">4010: Platform Take Rate</h4>
-          <div class="text-xl font-bold text-emerald-400 mt-2">KSh 722.00</div>
-          <span class="text-[9px] text-emerald-300">18% Comm + KSh 70 Delivery Margin - Fees</span>
-        </div>
-      </div>
-
-      <div class="bg-[#03100c] rounded-2xl border border-emerald-900/80 p-5 space-y-4">
-        <div class="flex flex-wrap justify-between items-center gap-2">
-          <div>
-            <h3 class="font-bold text-sm text-white">General Ledger Journal Entries for Order #CMD-8842</h3>
-            <p class="text-xs text-slate-400">Append-only audit trail. Entries are cryptographically tamper-evident.</p>
+      <div class="flex flex-wrap justify-between items-start gap-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Financial Engineering</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Merkle Cryptographic Hash Chain</span>
           </div>
-          <span class="text-xs font-mono px-3 py-1 bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 rounded-lg">
-            INVARIANT: Total Debits == Total Credits (Balanced)
-          </span>
+          <h2 class="text-2xl font-bold text-white mt-1">Tamper-Evident Ledger &amp; Fixed-Point Accounting</h2>
+          <p class="text-sm text-emerald-200/70 mt-2 max-w-3xl leading-relaxed">
+            Every transaction is an immutable block linked cryptographically: <code>Hash_n = SHA256(Hash_n-1 + Amount + Account)</code>. Currency is strictly stored in integer minor units (cents) to ban floating-point drift.
+          </p>
         </div>
 
-        <div class="overflow-x-auto">
-          <table class="w-full text-left font-mono text-xs border-collapse">
-            <thead>
-              <tr class="border-b border-emerald-900 text-slate-400 text-[11px]">
-                <th class="py-2.5 px-3">Entry ID</th>
-                <th class="py-2.5 px-3">Account Name</th>
-                <th class="py-2.5 px-3">Account Code</th>
-                <th class="py-2.5 px-3">Debit (KES)</th>
-                <th class="py-2.5 px-3">Credit (KES)</th>
-                <th class="py-2.5 px-3">State Event</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-emerald-950 text-slate-300">
-              <tr>
-                <td class="py-2 px-3 text-slate-500">TX-10491</td>
-                <td class="py-2 px-3 text-emerald-300 font-bold">1010 M-Pesa Cash In (Float)</td>
-                <td class="py-2 px-3 text-slate-400">Asset</td>
-                <td class="py-2 px-3 text-emerald-400">4,150.00</td>
-                <td class="py-2 px-3 text-slate-500">-</td>
-                <td class="py-2 px-3 text-slate-400">Lipa na M-Pesa Receipt #QKH48912LX</td>
-              </tr>
-              <tr>
-                <td class="py-2 px-3 text-slate-500">TX-10492</td>
-                <td class="py-2 px-3 text-amber-300">2010 Customer Escrow Holding</td>
-                <td class="py-2 px-3 text-slate-400">Liability</td>
-                <td class="py-2 px-3 text-slate-500">-</td>
-                <td class="py-2 px-3 text-amber-400">4,150.00</td>
-                <td class="py-2 px-3 text-slate-400">Escrow Held Pending Delivery</td>
-              </tr>
-              <tr class="bg-[#041510]">
-                <td class="py-2 px-3 text-slate-500">TX-10493</td>
-                <td class="py-2 px-3 text-amber-300">2010 Customer Escrow Holding</td>
-                <td class="py-2 px-3 text-slate-400">Liability (Release)</td>
-                <td class="py-2 px-3 text-amber-400">4,150.00</td>
-                <td class="py-2 px-3 text-slate-500">-</td>
-                <td class="py-2 px-3 text-slate-400">Verified Dropoff at Kilimani</td>
-              </tr>
-              <tr class="bg-[#041510]">
-                <td class="py-2 px-3 text-slate-500">TX-10494</td>
-                <td class="py-2 px-3 text-rose-300">2110 Florist Payable (Stall #42)</td>
-                <td class="py-2 px-3 text-slate-400">Payable</td>
-                <td class="py-2 px-3 text-slate-500">-</td>
-                <td class="py-2 px-3 text-rose-300">3,116.00</td>
-                <td class="py-2 px-3 text-slate-400">82% Florist Payout Credit</td>
-              </tr>
-              <tr class="bg-[#041510]">
-                <td class="py-2 px-3 text-slate-500">TX-10495</td>
-                <td class="py-2 px-3 text-amber-300">2120 Rider Payable (Juma Mwangi)</td>
-                <td class="py-2 px-3 text-slate-400">Payable</td>
-                <td class="py-2 px-3 text-slate-500">-</td>
-                <td class="py-2 px-3 text-amber-300">280.00</td>
-                <td class="py-2 px-3 text-slate-400">Courier Delivery Fee Earned</td>
-              </tr>
-              <tr class="bg-[#041510]">
-                <td class="py-2 px-3 text-slate-500">TX-10496</td>
-                <td class="py-2 px-3 text-emerald-400">4010 Florist Platform Commission</td>
-                <td class="py-2 px-3 text-slate-400">Revenue</td>
-                <td class="py-2 px-3 text-slate-500">-</td>
-                <td class="py-2 px-3 text-emerald-400">684.00</td>
-                <td class="py-2 px-3 text-slate-400">18% Marketplace Take Rate</td>
-              </tr>
-              <tr class="bg-[#041510]">
-                <td class="py-2 px-3 text-slate-500">TX-10497</td>
-                <td class="py-2 px-3 text-emerald-400">4020 Delivery Margin</td>
-                <td class="py-2 px-3 text-slate-400">Revenue</td>
-                <td class="py-2 px-3 text-slate-500">-</td>
-                <td class="py-2 px-3 text-emerald-400">70.00</td>
-                <td class="py-2 px-3 text-slate-400">Platform Delivery Margin (KSh 350 - 280)</td>
-              </tr>
-              <tr class="bg-[#041510]">
-                <td class="py-2 px-3 text-slate-500">TX-10498</td>
-                <td class="py-2 px-3 text-slate-400">5010 Safaricom M-Pesa Transaction Fee</td>
-                <td class="py-2 px-3 text-slate-400">Expense</td>
-                <td class="py-2 px-3 text-slate-400">32.00</td>
-                <td class="py-2 px-3 text-slate-500">-</td>
-                <td class="py-2 px-3 text-slate-400">STK Push Gateway Cost</td>
-              </tr>
-              <tr class="bg-[#041510]">
-                <td class="py-2 px-3 text-slate-500">TX-10499</td>
-                <td class="py-2 px-3 text-slate-400">1010 M-Pesa Cash In (Float)</td>
-                <td class="py-2 px-3 text-slate-400">Asset</td>
-                <td class="py-2 px-3 text-slate-500">-</td>
-                <td class="py-2 px-3 text-slate-400">32.00</td>
-                <td class="py-2 px-3 text-slate-400">Safaricom Direct Debit</td>
-              </tr>
-            </tbody>
-            <tfoot>
-              <tr class="border-t-2 border-emerald-500 text-white font-bold text-xs bg-[#061a14]">
-                <td class="py-3 px-3" colspan="3">TOTAL AUDIT VERIFICATION:</td>
-                <td class="py-3 px-3 text-emerald-400">KSh 8,332.00</td>
-                <td class="py-3 px-3 text-emerald-400">KSh 8,332.00</td>
-                <td class="py-3 px-3 text-emerald-300">✓ ZERO DISCREPANCY (BALANCED)</td>
-              </tr>
-            </tfoot>
-          </table>
+        <!-- Interactive Tamper Test Controls -->
+        <div class="flex items-center gap-2 bg-[#020b08] p-2 rounded-2xl border border-emerald-900">
+          <button onclick="simulateTampering()" id="btn-tamper" class="px-3 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs shadow-md shadow-rose-950/50 transition flex items-center gap-1.5">
+            <span>🚨 Simulate Malicious Database Alteration</span>
+          </button>
+          <button onclick="restoreTampering()" id="btn-restore-tamper" class="px-3 py-2 rounded-xl bg-[#092b21] hover:bg-[#0e3a2d] text-emerald-300 text-xs border border-emerald-700 transition">
+            ↺ Restore Verified Audit State
+          </button>
         </div>
+      </div>
+
+      <!-- Tampering Alert Banner (Shows when tampered) -->
+      <div id="tamper-alert" class="hidden p-4 rounded-2xl bg-rose-950/80 border-2 border-rose-500 text-rose-200 text-xs flex items-center justify-between gap-4 tamper-alarm shadow-2xl">
+        <div class="flex items-center gap-3">
+          <span class="text-2xl">🚨</span>
+          <div>
+            <strong class="text-white block font-bold text-sm">CRYPTOGRAPHIC INTEGRITY VIOLATION DETECTED!</strong>
+            <span>Transaction TX-10494 was altered manually from KSh 3,116 to KSh 31,116. The downstream hash chain broke at TX-10495. All platform payouts automatically frozen.</span>
+          </div>
+        </div>
+        <span class="px-3 py-1 rounded bg-rose-500 text-black font-extrabold text-[10px] uppercase font-mono">
+          AUDIT FAILED (PREV_HASH MISMATCH)
+        </span>
+      </div>
+
+      <!-- Cryptographic Hash Chain Blocks -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs font-mono">
+        
+        <div id="block-1" class="p-4 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-2">
+          <div class="flex justify-between text-[10px]">
+            <span class="text-emerald-400 font-bold">BLOCK #1: M-PESA CASH IN</span>
+            <span class="text-slate-500">TX-10491</span>
+          </div>
+          <div class="text-sm font-bold text-white">Debit: 415,000¢ (KSh 4,150)</div>
+          <div class="text-[9px] text-slate-400">Account: 1010 Asset Holding</div>
+          <div class="p-1.5 bg-[#020b08] rounded border border-emerald-950 text-[8.5px] text-emerald-300/80 truncate">
+            PrevHash: 0x0000000000000000
+          </div>
+          <div class="p-1.5 bg-[#020b08] rounded border border-emerald-950 text-[8.5px] text-emerald-400 font-bold truncate">
+            CurrHash: 0x9f82d1c8e4a9012b
+          </div>
+        </div>
+
+        <div id="block-2" class="p-4 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-2">
+          <div class="flex justify-between text-[10px]">
+            <span class="text-amber-400 font-bold">BLOCK #2: ESCROW HOLD</span>
+            <span class="text-slate-500">TX-10492</span>
+          </div>
+          <div class="text-sm font-bold text-white">Credit: 415,000¢ (KSh 4,150)</div>
+          <div class="text-[9px] text-slate-400">Account: 2010 Escrow Liability</div>
+          <div class="p-1.5 bg-[#020b08] rounded border border-emerald-950 text-[8.5px] text-emerald-400 font-bold truncate">
+            PrevHash: 0x9f82d1c8e4a9012b
+          </div>
+          <div class="p-1.5 bg-[#020b08] rounded border border-emerald-950 text-[8.5px] text-amber-300 font-bold truncate">
+            CurrHash: 0xa4c1f930e12d887a
+          </div>
+        </div>
+
+        <div id="block-3" class="p-4 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-2 transition-all">
+          <div class="flex justify-between text-[10px]">
+            <span id="block-3-title" class="text-rose-400 font-bold">BLOCK #3: FLORIST PAYOUT</span>
+            <span class="text-slate-500">TX-10494</span>
+          </div>
+          <div id="block-3-val" class="text-sm font-bold text-white">Credit: 311,600¢ (KSh 3,116)</div>
+          <div class="text-[9px] text-slate-400">Account: 2110 Florist Payable</div>
+          <div id="block-3-prev" class="p-1.5 bg-[#020b08] rounded border border-emerald-950 text-[8.5px] text-amber-300 font-bold truncate">
+            PrevHash: 0xa4c1f930e12d887a
+          </div>
+          <div id="block-3-curr" class="p-1.5 bg-[#020b08] rounded border border-emerald-950 text-[8.5px] text-rose-400 font-bold truncate">
+            CurrHash: 0x7e2d9a6b104c8f33
+          </div>
+        </div>
+
+        <div id="block-4" class="p-4 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-2 transition-all">
+          <div class="flex justify-between text-[10px]">
+            <span id="block-4-title" class="text-cyan-400 font-bold">BLOCK #4: COURIER &amp; MARGIN</span>
+            <span class="text-slate-500">TX-10495</span>
+          </div>
+          <div class="text-sm font-bold text-white">Credit: 103,400¢ (KSh 1,034)</div>
+          <div class="text-[9px] text-slate-400">Rider (280) + Platform Take (754)</div>
+          <div id="block-4-prev" class="p-1.5 bg-[#020b08] rounded border border-emerald-950 text-[8.5px] text-rose-400 font-bold truncate">
+            PrevHash: 0x7e2d9a6b104c8f33
+          </div>
+          <div id="block-4-curr" class="p-1.5 bg-[#020b08] rounded border border-emerald-950 text-[8.5px] text-cyan-300 font-bold truncate">
+            CurrHash: 0x3b89f2a01784c491
+          </div>
+        </div>
+
       </div>
 
     </div>
   </section>
 
-  <!-- ================= TAB 3: ENGINEERING CONCEPTS & IMPORTANCE ================= -->
-  <section id="tab-cs-engine" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
+  <!-- ================= TAB 3: WEB VS PHONE DISTRIBUTED ARCHITECTURE ================= -->
+  <section id="tab-mobile-arch" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
     <div class="bg-[#061e17] border border-emerald-800/40 rounded-3xl p-6 space-y-6 shadow-2xl">
       
+      <div>
+        <span class="text-xs font-bold text-cyan-400 uppercase tracking-widest">Multi-Client Distributed Systems</span>
+        <h2 class="text-2xl font-bold text-white mt-1">Web vs. Phone Architecture: Handling Real-World Nairobi Logistics</h2>
+        <p class="text-sm text-emerald-200/70 mt-2 max-w-3xl leading-relaxed">
+          How CitiMarket Delivery solves battery consumption, network dropouts in concrete buildings, and desktop-to-mobile synchronization across 4 device types.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        
+        <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
+          <div class="w-9 h-9 rounded-xl bg-cyan-500/20 text-cyan-300 flex items-center justify-center text-lg font-bold">📡</div>
+          <h4 class="font-bold text-white text-sm">1. Offline-First Sync &amp; CRDTs (Courier Phone)</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Nairobi cell service drops in basement parking or building lobbies. The courier mobile app uses an encrypted <strong>local SQLite write-ahead queue</strong>. The rider confirms delivery offline; the signed receipt synchronizes automatically with exponential backoff once 4G returns.
+          </p>
+          <div class="p-2.5 rounded-xl bg-[#020b08] font-mono text-[9.5px] text-cyan-300">
+            OfflineQueue.append({ event: "DELIVERED", sig: "ECDSA_440", ts: 1729158291 })
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
+          <div class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center text-lg font-bold">🔋</div>
+          <h4 class="font-bold text-white text-sm">2. Kalman GPS Filter &amp; Dead Reckoning</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Continuous GPS pings drain courier phone batteries in 90 minutes. CitiMarket transmits telemetry only when the courier moves $>15$m or turns $>20^\circ$. The customer phone uses <strong>client-side Dead Reckoning</strong> to smoothly interpolate the motorcycle icon along curves at 60fps.
+          </p>
+          <div class="p-2.5 rounded-xl bg-[#020b08] font-mono text-[9.5px] text-amber-300">
+            Battery Consumption: -78% • Map Smoothness: 60fps Interpolated
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
+          <div class="w-9 h-9 rounded-xl bg-rose-500/20 text-rose-300 flex items-center justify-center text-lg font-bold">🔔</div>
+          <h4 class="font-bold text-white text-sm">3. WebSockets + Silent Push (Florist Web)</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Florists at City Market use desktop laptops or tablets. CitiMarket maintains a low-latency <strong>WebSocket duplex connection with keep-alive pinging</strong>, falling back to background Firebase Cloud Messaging (FCM) audio chimes to alert the stall immediately upon order placement.
+          </p>
+          <div class="p-2.5 rounded-xl bg-[#020b08] font-mono text-[9.5px] text-rose-300">
+            Latency: &lt;45ms • Sound Alert: Automated Audio Chime on New Order
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= TAB 4: ENGINEERING CONCEPTS & IMPORTANCE ================= -->
+  <section id="tab-cs-engine" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
+    <div class="bg-[#061e17] border border-emerald-800/40 rounded-3xl p-6 space-y-6 shadow-2xl">
       <div>
         <span class="text-xs font-bold text-rose-400 uppercase tracking-widest">Engineering Architecture</span>
         <h2 class="text-2xl font-bold text-white mt-1">Engineering Concepts Powering CitiMarket Delivery</h2>
@@ -736,106 +754,81 @@
         </p>
       </div>
 
-      <!-- 4 Core Engineering Concept Cards with Importance -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-        
-        <!-- 1. Geospatial Indexing -->
         <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
           <div class="flex items-center justify-between">
-            <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300">
-              1. Spatial Data Structures
-            </span>
+            <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300">1. Spatial Data Structures</span>
             <code class="text-xs text-emerald-400 font-mono">Uber H3 / PostGIS R-Tree</code>
           </div>
           <h4 class="font-bold text-white text-sm">Hexagonal Hierarchical Spatial Indexing</h4>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Instead of calculating costly distance formulas across all drivers ($O(N)$), Nairobi is partitioned into discrete H3 hexagonal cells (Resolution 8, ~460m diameter). Finding all active couriers around City Market is an $O(1)$ constant-time lookup of neighboring cell keys.
+            Instead of calculating costly distance formulas across all drivers ($O(N)$), Nairobi is partitioned into discrete H3 hexagonal cells. Finding all active couriers around City Market is an $O(1)$ constant-time lookup.
           </p>
-          
-          <!-- Explicit Importance Callout -->
           <div class="p-3 rounded-xl bg-emerald-950/60 border border-emerald-700/50 space-y-1">
             <span class="text-[10px] uppercase font-bold text-emerald-300 tracking-wider">⚡ Importance to Business &amp; Operations:</span>
             <p class="text-[11px] text-emerald-200 leading-snug">
-              Eliminates database freezes during peak surges (Valentine’s Day, Mother’s Day, and Friday rush hour). Queries respond in <strong>under 4 milliseconds</strong> regardless of whether 100 or 10,000 riders are on the map.
+              Eliminates database freezes during peak surges (Valentine’s Day, Mother’s Day). Queries respond in <strong>under 4 milliseconds</strong> regardless of rider volume.
             </p>
           </div>
         </div>
 
-        <!-- 2. Bipartite Matching -->
         <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
           <div class="flex items-center justify-between">
-            <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300">
-              2. Operations Research
-            </span>
-            <code class="text-xs text-amber-400 font-mono">Kuhn-Munkres / Bipartite Matching</code>
+            <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300">2. Operations Research</span>
+            <code class="text-xs text-amber-400 font-mono">Kuhn-Munkres / Bipartite</code>
           </div>
           <h4 class="font-bold text-white text-sm">Maximum-Weight Bipartite Dispatch Engine</h4>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Rather than naive "first-to-click" dispatch, the system computes an optimal matching between all pending orders and active riders in the dispatch batch, minimizing total fleet transit time and flower dehydration risk.
+            Computes an optimal matching between all pending orders and active riders in the dispatch batch, minimizing total fleet transit time and flower dehydration risk.
           </p>
-
-          <!-- Explicit Importance Callout -->
           <div class="p-3 rounded-xl bg-amber-950/60 border border-amber-700/50 space-y-1">
             <span class="text-[10px] uppercase font-bold text-amber-300 tracking-wider">⚡ Importance to Business &amp; Operations:</span>
             <p class="text-[11px] text-amber-200 leading-snug">
-              Cuts fleet travel times by <strong>35%</strong> and lowers rider fuel burn. Crucially for fresh flowers, reducing transit delays keeps delicate Naivasha stems hydrated and eliminates wilted return claims.
+              Cuts fleet travel times by <strong>35%</strong> and lowers rider fuel burn. Keeping stems hydrated eliminates wilted return claims.
             </p>
           </div>
         </div>
 
-        <!-- 3. Distributed Concurrency & Locks -->
         <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
           <div class="flex items-center justify-between">
-            <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-rose-500/20 text-rose-300">
-              3. Concurrency Control
-            </span>
-            <code class="text-xs text-rose-400 font-mono">Redis Redlock &amp; Optimistic OCC</code>
+            <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-rose-500/20 text-rose-300">3. Concurrency Control</span>
+            <code class="text-xs text-rose-400 font-mono">Redis Redlock &amp; OCC</code>
           </div>
           <h4 class="font-bold text-white text-sm">Atomic Gig Claiming &amp; Optimistic Locking</h4>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Prevents race conditions where two riders claim the same bouquet simultaneously. Uses Redis atomic primitives with a lease TTL and Optimistic Concurrency Control (`version_id`) on Postgres order records.
+            Prevents race conditions where two riders claim the same bouquet simultaneously using Redis atomic primitives with a lease TTL and Optimistic Concurrency Control (`version_id`).
           </p>
-
-          <!-- Explicit Importance Callout -->
           <div class="p-3 rounded-xl bg-rose-950/60 border border-rose-700/50 space-y-1">
             <span class="text-[10px] uppercase font-bold text-rose-300 tracking-wider">⚡ Importance to Business &amp; Operations:</span>
             <p class="text-[11px] text-rose-200 leading-snug">
-              Guarantees <strong>zero double-assignments</strong> and prevents rider conflict. Prevents awkward situations where two riders show up at the same City Market stall for the same bouquet.
+              Guarantees <strong>zero double-assignments</strong> and prevents rider conflict at City Market stalls.
             </p>
           </div>
         </div>
 
-        <!-- 4. Distributed Saga Pattern -->
         <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
           <div class="flex items-center justify-between">
-            <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-purple-500/20 text-purple-300">
-              4. Distributed Transactions
-            </span>
+            <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-purple-500/20 text-purple-300">4. Distributed Transactions</span>
             <code class="text-xs text-purple-400 font-mono">Saga Orchestrator</code>
           </div>
           <h4 class="font-bold text-white text-sm">Saga Pattern with Automated Compensating Reversals</h4>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Maintains data consistency across Safaricom M-Pesa, City Market florist stock, and courier dispatch without blocking distributed database locks. If a courier cannot be found, an automated compensating transaction triggers an immediate M-Pesa reversal.
+            Maintains data consistency across Safaricom M-Pesa, florist inventory, and courier dispatch. If an edge case occurs, automated reversals refund the buyer instantly.
           </p>
-
-          <!-- Explicit Importance Callout -->
           <div class="p-3 rounded-xl bg-purple-950/60 border border-purple-700/50 space-y-1">
             <span class="text-[10px] uppercase font-bold text-purple-300 tracking-wider">⚡ Importance to Business &amp; Operations:</span>
             <p class="text-[11px] text-purple-200 leading-snug">
-              Protects customer trust. If an edge case occurs (e.g. sudden flash rain in Nairobi), the buyer's money is <strong>automatically refunded within seconds</strong> via M-Pesa B2C, reducing support overhead by 80%.
+              Protects customer trust. If courier matching fails, money is <strong>automatically refunded within seconds</strong> via M-Pesa B2C.
             </p>
           </div>
         </div>
-
       </div>
-
     </div>
   </section>
 
-  <!-- ================= TAB 4: BRANDING & IDENTITY ================= -->
+  <!-- ================= TAB 5: BRANDING & IDENTITY ================= -->
   <section id="tab-branding" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
     <div class="bg-[#061e17] border border-emerald-800/40 rounded-3xl p-6 space-y-6 shadow-2xl">
-      
       <div>
         <span class="text-xs font-bold text-rose-400 uppercase tracking-widest">Brand System &amp; Design Standards</span>
         <h2 class="text-2xl font-bold text-white mt-1">CitiMarket Delivery: Branding &amp; Visual Identity</h2>
@@ -844,14 +837,12 @@
         </p>
       </div>
 
-      <!-- Brand Pillars Grid -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        
         <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-2">
           <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-base">🌸</div>
           <h4 class="font-bold text-white text-sm">Brand Tone &amp; Personality</h4>
           <p class="text-xs text-slate-300 leading-relaxed">
-            <strong>Warm, Celebratory, Reliable, and Discreet.</strong> Every touchpoint feels like an elevated gift presentation, prioritizing the recipient's delight while respecting surprise delivery secrecy.
+            <strong>Warm, Celebratory, Reliable, and Discreet.</strong> Elevating gifting while protecting surprise secrecy.
           </p>
         </div>
 
@@ -859,7 +850,7 @@
           <div class="w-8 h-8 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center font-bold text-base">🌿</div>
           <h4 class="font-bold text-white text-sm">Visual Identity: "Lush Botanical"</h4>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Deep nocturnal greens representing fresh foliage and Naivasha greenhouses, accented by vibrant rose petal blush, Kenyan M-Pesa emerald accents, and champagne gold for celebratory luxury.
+            Deep nocturnal forest greens, accented by rose blush, M-Pesa emerald, and champagne gold.
           </p>
         </div>
 
@@ -867,79 +858,22 @@
           <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-base">🎀</div>
           <h4 class="font-bold text-white text-sm">Packaging &amp; Unboxing Ritual</h4>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Couriers carry insulated, climate-safe cooler mounts. Bouquets arrive in protective moisture wraps with wax-sealed, handwritten calligraphy greeting cards.
+            Insulated climate-safe containers, stem moisture vials, and wax-sealed handwritten cards.
           </p>
         </div>
-
       </div>
-
-      <!-- Color Tokens Matrix -->
-      <div class="bg-[#03100c] rounded-2xl border border-emerald-900/80 p-5 space-y-4">
-        <h3 class="font-bold text-sm text-white">Official Color Palette &amp; Design Tokens</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs">
-          
-          <div class="p-3.5 rounded-xl bg-[#0F382C] border border-emerald-600/40 space-y-2">
-            <div class="flex justify-between items-start">
-              <span class="font-bold text-white">Forest Green</span>
-              <span class="text-[10px] text-emerald-200">Primary Base</span>
-            </div>
-            <code class="text-emerald-300 font-mono block">#0F382C</code>
-            <p class="text-[10px] text-emerald-200/80">Surfaces, background containers, and navigation.</p>
-          </div>
-
-          <div class="p-3.5 rounded-xl bg-[#F43F5E] text-white space-y-2 shadow-lg shadow-rose-950/40">
-            <div class="flex justify-between items-start">
-              <span class="font-bold">Rose Bloom</span>
-              <span class="text-[10px] text-rose-100">Accent &amp; Heart</span>
-            </div>
-            <code class="font-mono block text-white font-bold">#F43F5E</code>
-            <p class="text-[10px] text-rose-100">Highlights, love greetings, and badges.</p>
-          </div>
-
-          <div class="p-3.5 rounded-xl bg-[#10B981] text-slate-950 space-y-2 shadow-lg shadow-emerald-950/40">
-            <div class="flex justify-between items-start">
-              <span class="font-bold">M-Pesa Emerald</span>
-              <span class="text-[10px] font-semibold">Payment / Action</span>
-            </div>
-            <code class="font-mono block font-bold">#10B981</code>
-            <p class="text-[10px] font-medium">Checkout buttons, completed delivery status, and verification.</p>
-          </div>
-
-          <div class="p-3.5 rounded-xl bg-[#061a14] border border-amber-500/40 space-y-2">
-            <div class="flex justify-between items-start">
-              <span class="font-bold text-amber-300">Champagne Gold</span>
-              <span class="text-[10px] text-amber-400">Prestige / Luxury</span>
-            </div>
-            <code class="text-amber-400 font-mono block">#F59E0B</code>
-            <p class="text-[10px] text-slate-400">Boda boda courier indicator, star ratings, and anniversary badges.</p>
-          </div>
-
-        </div>
-      </div>
-
     </div>
   </section>
 
-  <!-- ================= TAB 5: NAIROBI UNIT ECONOMICS & INVESTOR CALCULATOR ================= -->
+  <!-- ================= TAB 6: UNIT ECONOMICS ================= -->
   <section id="tab-calculator" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
     <div class="bg-[#061e17] border border-emerald-800/40 rounded-3xl p-6 space-y-6 shadow-2xl">
-      
       <div>
         <span class="text-xs font-bold text-rose-400 uppercase tracking-widest">Nairobi Market Opportunity</span>
-        <h2 class="text-2xl font-bold text-white mt-1">CitiMarket Delivery: Unit Economics & Revenue Model</h2>
-        <p class="text-sm text-emerald-200/70 mt-2 max-w-3xl leading-relaxed">
-          Kenya produces over 200,000 tons of fresh flowers annually. Yet in Nairobi, domestic flower gifting is heavily fragmented into physical cash purchases at City Market stalls. CitiMarket Delivery digitizes this multi-billion shilling domestic market.
-        </p>
+        <h2 class="text-2xl font-bold text-white mt-1">CitiMarket Delivery: Hybrid Unit Economics &amp; Revenue Model</h2>
       </div>
 
       <div class="bg-[#03100c] border border-emerald-900/80 rounded-2xl p-5 space-y-5">
-        <div class="flex justify-between items-center">
-          <h3 class="font-bold text-sm text-white">Interactive Annual Revenue Projection</h3>
-          <span class="text-xs bg-emerald-500/10 text-emerald-300 px-2.5 py-1 rounded-lg border border-emerald-500/30 font-mono">
-            Currency: Kenyan Shillings (KES)
-          </span>
-        </div>
-
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="space-y-2">
             <div class="flex justify-between text-xs">
@@ -947,24 +881,13 @@
               <strong id="val-daily-orders" class="text-emerald-400 text-sm">250 orders / day</strong>
             </div>
             <input type="range" id="slider-orders" min="50" max="1500" step="50" value="250" oninput="calculateFinancials()" class="w-full accent-emerald-500 cursor-pointer">
-            <div class="flex justify-between text-[10px] text-slate-500">
-              <span>50 (Early Stage)</span>
-              <span>500 (Nairobi Scale)</span>
-              <span>1,500 (Nationwide Expansion)</span>
-            </div>
           </div>
-
           <div class="space-y-2">
             <div class="flex justify-between text-xs">
               <span class="text-slate-400">Average Bouquet Order Value (AOV):</span>
               <strong id="val-aov" class="text-rose-400 text-sm">KSh 3,800</strong>
             </div>
             <input type="range" id="slider-aov" min="2000" max="7000" step="200" value="3800" oninput="calculateFinancials()" class="w-full accent-rose-500 cursor-pointer">
-            <div class="flex justify-between text-[10px] text-slate-500">
-              <span>KSh 2,000 (Standard)</span>
-              <span>KSh 3,800 (Signature)</span>
-              <span>KSh 7,000 (Luxury Arrangement)</span>
-            </div>
           </div>
         </div>
 
@@ -972,35 +895,90 @@
           <div class="p-4 rounded-xl bg-[#061e17] border border-emerald-800/60">
             <span class="text-[11px] text-slate-400">Monthly Gross Volume (GMV)</span>
             <div id="out-gmv" class="text-xl font-extrabold text-white mt-1">KSh 28,500,000</div>
-            <span class="text-[10px] text-emerald-400">Total transaction flow</span>
           </div>
-
           <div class="p-4 rounded-xl bg-[#061e17] border border-emerald-800/60">
             <span class="text-[11px] text-slate-400">Florist Commission (18%)</span>
             <div id="out-commission" class="text-xl font-extrabold text-emerald-300 mt-1">KSh 5,130,000</div>
-            <span class="text-[10px] text-slate-400">From City Market stalls</span>
           </div>
-
           <div class="p-4 rounded-xl bg-[#061e17] border border-emerald-800/60">
             <span class="text-[11px] text-slate-400">Monthly Delivery Revenue</span>
             <div id="out-delivery-rev" class="text-xl font-extrabold text-amber-300 mt-1">KSh 2,625,000</div>
-            <span class="text-[10px] text-slate-400">KSh 350 per trip</span>
           </div>
-
           <div class="p-4 rounded-xl bg-[#061e17] border border-rose-500/40 bg-gradient-to-br from-[#09261e] to-[#12382b]">
             <span class="text-[11px] text-rose-300 font-bold">Annualized Net Platform ARR</span>
             <div id="out-arr" class="text-xl font-extrabold text-rose-400 mt-1">KSh 38,400,000</div>
-            <span class="text-[10px] text-emerald-300">~ $295,000 USD Net Profit</span>
           </div>
         </div>
-
       </div>
-
     </div>
   </section>
 
   <!-- JAVASCRIPT STATE ENGINE & INTERACTIVE WORKFLOW -->
   <script>
+    let activeCustomerModel = 'b2c';
+
+    function switchCustomerModel(model) {
+      activeCustomerModel = model;
+      document.getElementById('cust-mod-b2c').className = 'px-2.5 py-1 rounded-lg text-emerald-300 hover:text-white transition';
+      document.getElementById('cust-mod-b2b').className = 'px-2.5 py-1 rounded-lg text-emerald-300 hover:text-white transition';
+      document.getElementById('cust-mod-corp').className = 'px-2.5 py-1 rounded-lg text-emerald-300 hover:text-white transition';
+
+      if (model === 'b2c') {
+        document.getElementById('cust-mod-b2c').className = 'px-2.5 py-1 rounded-lg bg-emerald-600 text-white font-semibold transition';
+        document.getElementById('hud-channel-lbl').textContent = "B2C Consumer Gifting";
+        document.getElementById('app-title-lbl').textContent = "Customer Mobile App (Client)";
+        document.getElementById('app-badge-lbl').textContent = "Lipa na M-Pesa Integrated";
+        logSim("Switched channel to B2C Consumer Gifting (On-Demand M-Pesa).", 'action');
+      } else if (model === 'b2b') {
+        document.getElementById('cust-mod-b2b').className = 'px-2.5 py-1 rounded-lg bg-emerald-600 text-white font-semibold transition';
+        document.getElementById('hud-channel-lbl').textContent = "Merchant Direct (Logistics-as-a-Service)";
+        document.getElementById('app-title-lbl').textContent = "Merchant Dispatch Mobile / PWA";
+        document.getElementById('app-badge-lbl').textContent = "Shop Self-Dispatch Utility";
+        logSim("Switched channel to Merchant Direct Fulfillment (Florist calling CitiMarket Courier).", 'action');
+      } else if (model === 'corp') {
+        document.getElementById('cust-mod-corp').className = 'px-2.5 py-1 rounded-lg bg-emerald-600 text-white font-semibold transition';
+        document.getElementById('hud-channel-lbl').textContent = "Corporate Account (30-day Invoice)";
+        document.getElementById('app-title-lbl').textContent = "Corporate Procurement App";
+        document.getElementById('app-badge-lbl').textContent = "Weekly Scheduled Office Batch";
+        logSim("Switched channel to Corporate Commercial Account (Weekly Recurring Delivery).", 'action');
+      }
+    }
+
+    // Interactive Tamper Simulation
+    function simulateTampering() {
+      document.getElementById('tamper-alert').classList.remove('hidden');
+      
+      const b3 = document.getElementById('block-3');
+      b3.className = "p-4 rounded-2xl bg-rose-950/80 border-2 border-rose-500 space-y-2 tamper-alarm transition-all";
+      document.getElementById('block-3-val').innerHTML = '<span class="text-rose-400 line-through">311,600¢</span> <span class="text-white font-extrabold text-sm">3,116,000¢ (TAMPERED)</span>';
+      document.getElementById('block-3-curr').innerHTML = 'CurrHash: <span class="text-rose-300 font-bold">0xDEADBEEF99814C</span> (INVALID)';
+
+      const b4 = document.getElementById('block-4');
+      b4.className = "p-4 rounded-2xl bg-rose-950/80 border-2 border-rose-500 space-y-2 transition-all";
+      document.getElementById('block-4-prev').innerHTML = 'PrevHash: <span class="text-rose-400 font-bold">0x7e2d9a6b104c8f33</span> (MISMATCH!)';
+      document.getElementById('hud-hash-status').textContent = "HASH CHAIN BROKEN 🚨";
+      document.getElementById('hud-hash-status').className = "text-rose-400 font-bold font-mono";
+
+      logSim("AUDIT BREACH: Block #3 altered in database. Hash chain verification failed at Block #4.", 'action');
+    }
+
+    function restoreTampering() {
+      document.getElementById('tamper-alert').classList.add('hidden');
+      
+      const b3 = document.getElementById('block-3');
+      b3.className = "p-4 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-2 transition-all";
+      document.getElementById('block-3-val').textContent = "Credit: 311,600¢ (KSh 3,116)";
+      document.getElementById('block-3-curr').textContent = "CurrHash: 0x7e2d9a6b104c8f33";
+
+      const b4 = document.getElementById('block-4');
+      b4.className = "p-4 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-2 transition-all";
+      document.getElementById('block-4-prev').textContent = "PrevHash: 0x7e2d9a6b104c8f33";
+      document.getElementById('hud-hash-status').textContent = "SHA256: 0x9f82... OK";
+      document.getElementById('hud-hash-status').className = "text-emerald-400 font-bold font-mono";
+
+      logSim("Audit verification passed: SHA-256 Merkle hash chain restored. Payouts unblocked.", 'success');
+    }
+
     function logSim(msg, type = 'normal') {
       const feed = document.getElementById('event-feed');
       const time = new Date().toLocaleTimeString();
@@ -1018,15 +996,15 @@
     }
 
     function setTab(tab) {
-      document.getElementById('tab-simulator').classList.add('hidden');
-      document.getElementById('tab-ledger').classList.add('hidden');
-      document.getElementById('tab-cs-engine').classList.add('hidden');
-      document.getElementById('tab-branding').classList.add('hidden');
-      document.getElementById('tab-calculator').classList.add('hidden');
+      const allTabs = ['simulator', 'ledger', 'mobile-arch', 'cs-engine', 'branding', 'calculator'];
+      allTabs.forEach(t => {
+        const el = document.getElementById(`tab-${t}`);
+        if (el) el.classList.add('hidden');
+      });
 
-      const tabs = ['sim', 'ledger', 'cs', 'branding', 'calc'];
-      tabs.forEach(t => {
-        const btn = document.getElementById(`nav-btn-${t}`);
+      const navs = ['sim', 'ledger', 'mobile', 'cs', 'branding', 'calc'];
+      navs.forEach(n => {
+        const btn = document.getElementById(`nav-btn-${n}`);
         if (btn) btn.className = 'px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition';
       });
 
@@ -1036,6 +1014,9 @@
       } else if (tab === 'ledger') {
         document.getElementById('tab-ledger').classList.remove('hidden');
         document.getElementById('nav-btn-ledger').className = 'px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition';
+      } else if (tab === 'mobile-arch') {
+        document.getElementById('tab-mobile-arch').classList.remove('hidden');
+        document.getElementById('nav-btn-mobile').className = 'px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition';
       } else if (tab === 'cs-engine') {
         document.getElementById('tab-cs-engine').classList.remove('hidden');
         document.getElementById('nav-btn-cs').className = 'px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition';
@@ -1048,7 +1029,7 @@
       }
     }
 
-    // STEP 1: Show M-Pesa STK Prompt
+    // Step 1: M-Pesa STK Prompt
     function triggerMpesaCheckout() {
       document.getElementById('mpesa-modal').classList.remove('hidden');
       logSim("Initiated Lipa na M-Pesa STK Push to buyer (0722-XXX-XXX)", 'mpesa');
@@ -1058,30 +1039,27 @@
       document.getElementById('mpesa-modal').classList.add('hidden');
     }
 
-    // STEP 1B: Confirm M-Pesa PIN -> Transition to live tracking
+    // Step 1B: Confirm M-Pesa PIN
     function confirmMpesaPin() {
       document.getElementById('mpesa-modal').classList.add('hidden');
       document.getElementById('cust-screen-catalog').classList.add('hidden');
       document.getElementById('cust-screen-tracking').classList.remove('hidden');
 
       document.getElementById('flow-status-text').textContent = "M-Pesa Verified: Order routed to City Market Florist Stall #42";
-      document.getElementById('kpi-escrow-status').textContent = "Escrow: KSh 4,150 Held";
-      document.getElementById('kpi-escrow-status').className = "text-emerald-400 font-bold";
-      document.getElementById('hud-saga-step').textContent = "2/4 Stall Preparing";
-
+      
       const ledgerRows = document.getElementById('live-ledger-rows');
       ledgerRows.innerHTML = `
         <div class="flex justify-between text-emerald-400">
           <span>DR 1010 M-Pesa Cash In (Asset)</span>
-          <span>+4,150.00</span>
+          <span>+415,000¢ (KSh 4,150)</span>
         </div>
         <div class="flex justify-between text-amber-400">
           <span>CR 2010 Customer Escrow (Liability)</span>
-          <span>+4,150.00</span>
+          <span>+415,000¢ (KSh 4,150)</span>
         </div>
         <div class="text-[9px] text-slate-500 pt-0.5">Safaricom Receipt #QKH48912LX • Status: In Escrow</div>
       `;
-      document.getElementById('ledger-balance-check').textContent = "4,150.00 / 4,150.00 (Balanced)";
+      document.getElementById('ledger-balance-check').textContent = "415,000¢ == 415,000¢ (Balanced)";
 
       document.getElementById('florist-empty').classList.add('hidden');
       document.getElementById('florist-card').classList.remove('hidden');
@@ -1091,7 +1069,7 @@
       logSim("Dispatch bus: Order #CMD-8842 sent to City Market Florist Stall 42", 'action');
     }
 
-    // STEP 2: Florist Arranges Bouquet
+    // Step 2: Florist Arranges
     function step2_floristArrange() {
       const btn = document.getElementById('btn-florist-arrange');
       btn.textContent = "✓ In Arrangement (Stems Trimmed)";
@@ -1110,7 +1088,7 @@
       logSim("Florist at City Market confirmed fresh Naivasha roses arranged with handwritten note.", 'action');
     }
 
-    // STEP 3: Florist Ready -> Pings Boda Boda Flower Courier
+    // Step 3: Florist Ready
     function step3_floristReady() {
       const readyBtn = document.getElementById('btn-florist-ready');
       readyBtn.textContent = "✓ Packaged in Water Vial";
@@ -1121,17 +1099,13 @@
       document.getElementById('rider-offer').classList.remove('hidden');
 
       document.getElementById('flow-status-text').textContent = "Dispatch: Pinging nearest insulated bike courier (Juma Mwangi)";
-      document.getElementById('hud-saga-step').textContent = "3/4 Courier Matching";
       logSim("Bipartite Matching Engine: Found Courier Juma Mwangi (Score: 94.2/100).", 'cs');
     }
 
-    // STEP 4: Rider Accepts
+    // Step 4: Rider Accepts
     function step4_riderAccept() {
       document.getElementById('rider-offer').classList.add('hidden');
       document.getElementById('rider-transit').classList.remove('hidden');
-
-      document.getElementById('kpi-lock-status').textContent = "LOCKED (Rider #440)";
-      document.getElementById('kpi-lock-status').className = "text-rose-400 font-bold";
 
       document.getElementById('cust-badge-status').textContent = "Rider Heading to Stall";
       document.getElementById('cust-eta').textContent = "28 Mins (Express Care)";
@@ -1145,7 +1119,7 @@
       logSim("Courier Juma Mwangi claimed gig. Insulated container verified.", 'success');
     }
 
-    // STEP 5: Rider Action
+    // Step 5: Rider Action
     function step5_riderAction() {
       const actionBtn = document.getElementById('btn-rider-action');
       const badge = document.getElementById('rider-stage-badge');
@@ -1172,7 +1146,7 @@
       }
     }
 
-    // STEP 6: Delivered
+    // Step 6: Delivered
     function step6_delivered() {
       const pin = document.getElementById('nairobi-rider-pin');
       pin.style.left = "165px";
@@ -1190,37 +1164,32 @@
       document.getElementById('btn-rider-action').disabled = true;
       document.getElementById('btn-rider-action').className = "w-full py-2.5 rounded-xl bg-slate-800 text-emerald-300 font-bold text-xs border border-emerald-700";
 
-      document.getElementById('kpi-escrow-status').textContent = "Settled (Escrow Released)";
-      document.getElementById('kpi-lock-status').textContent = "Released";
-      document.getElementById('hud-saga-step').textContent = "4/4 Completed & Settled";
-
       const ledgerRows = document.getElementById('live-ledger-rows');
       ledgerRows.innerHTML = `
         <div class="flex justify-between text-amber-300">
           <span>DR 2010 Customer Escrow (Released)</span>
-          <span>4,150.00</span>
+          <span>415,000¢ (KSh 4,150)</span>
         </div>
         <div class="flex justify-between text-rose-300">
           <span>CR 2110 Florist Payable (Stall 42)</span>
-          <span>3,116.00</span>
+          <span>311,600¢ (KSh 3,116)</span>
         </div>
         <div class="flex justify-between text-amber-400">
           <span>CR 2120 Rider Payable (Juma)</span>
-          <span>280.00</span>
+          <span>28,000¢ (KSh 280)</span>
         </div>
         <div class="flex justify-between text-emerald-400 font-bold">
           <span>CR 4010 Platform Margin (Net Profit)</span>
-          <span>754.00</span>
+          <span>75,400¢ (KSh 754)</span>
         </div>
       `;
-      document.getElementById('ledger-balance-check').textContent = "4,150.00 == 4,150.00 (Zero Drift Verified)";
+      document.getElementById('ledger-balance-check').textContent = "415,000¢ == 415,000¢ (Zero Drift Verified)";
 
       document.getElementById('flow-status-text').textContent = "Completed: Order fulfilled in 31 mins. Immutable ledger settlement committed.";
       logSim("Proof of Delivery photo verified. Recipient Wanjiku received surprise flowers.", 'success');
       logSim("Double-Entry Ledger: Escrow released -> Florist credited KSh 3,116, Rider credited KSh 280, Platform Profit KSh 754.", 'cs');
     }
 
-    // Reset Demo
     function resetFullDemo() {
       document.getElementById('cust-screen-catalog').classList.remove('hidden');
       document.getElementById('cust-screen-tracking').classList.add('hidden');
@@ -1235,12 +1204,6 @@
       const pin = document.getElementById('nairobi-rider-pin');
       pin.style.left = "28px";
       pin.style.top = "32px";
-
-      document.getElementById('kpi-escrow-status').textContent = "Unfunded";
-      document.getElementById('kpi-escrow-status').className = "text-amber-300";
-      document.getElementById('kpi-lock-status').textContent = "Unlocked";
-      document.getElementById('kpi-lock-status').className = "text-slate-400";
-      document.getElementById('hud-saga-step').textContent = "1/4 Awaiting Payment";
 
       document.getElementById('live-ledger-rows').innerHTML = `
         <div class="text-slate-500 italic">No transactions committed yet. Awaiting M-Pesa event...</div>
@@ -1271,7 +1234,6 @@
       logSim("Simulation reset to initial state.", 'normal');
     }
 
-    // Auto Play
     function autoPlayDemo() {
       resetFullDemo();
       logSim("Starting Automated Investor Pitch Sequence...", 'action');
@@ -1285,7 +1247,6 @@
       setTimeout(() => step5_riderAction(), 16000);
     }
 
-    // Financial Calculator
     function calculateFinancials() {
       const orders = parseInt(document.getElementById('slider-orders').value);
       const aov = parseInt(document.getElementById('slider-aov').value);
