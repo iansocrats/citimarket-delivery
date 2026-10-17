@@ -63,18 +63,25 @@
             <h1 class="font-extrabold text-lg text-white tracking-tight flex items-center gap-1.5">
               CitiMarket <span class="text-rose-400 font-semibold text-sm">Delivery</span>
             </h1>
+            <a href="https://www.grab.com/sg/" target="_blank" rel="noopener noreferrer" class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#00B14F]/20 text-[#00E065] border border-[#00B14F]/40 flex items-center gap-1 hover:bg-[#00B14F]/30 transition shadow-sm" title="Explore Grab Singapore Official Site">
+              <span>🟢 Grab Superapp Engine</span>
+              <span class="text-[9px] underline font-mono">grab.com/sg ↗</span>
+            </a>
             <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 uppercase tracking-wider">
               Hybrid B2B + B2C • Nairobi
             </span>
           </div>
-          <p class="text-xs text-emerald-400/70">On-Demand Merchant Logistics &amp; Consumer Gifting Ecosystem</p>
+          <p class="text-xs text-emerald-400/70">On-Demand Flower Logistics, GrabExpress Fleet &amp; Fintech Escrow • Powered by architecture from <a href="https://www.grab.com/sg/" target="_blank" rel="noopener noreferrer" class="text-[#00E065] font-semibold underline hover:text-white">https://www.grab.com/sg/</a></p>
         </div>
       </div>
 
       <!-- Navigation Tabs -->
-      <div class="flex items-center bg-[#020b08] p-1 rounded-xl border border-emerald-900/40 text-xs font-medium">
+      <div class="flex flex-wrap items-center bg-[#020b08] p-1 rounded-xl border border-emerald-900/40 text-xs font-medium">
         <button id="nav-btn-sim" onclick="setTab('simulator')" class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition">
           🚀 Live Simulator
+        </button>
+        <button id="nav-btn-grab" onclick="setTab('grab-features')" class="px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition flex items-center gap-1">
+          🟢 Grab Features
         </button>
         <button id="nav-btn-ledger" onclick="setTab('ledger')" class="px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition">
           ⚖️ Cryptographic Ledger (CFO)
@@ -143,8 +150,8 @@
       <!-- Real-Time Architectural State Badges -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-2 pt-2 border-t border-emerald-900/60 font-mono text-[10px]">
         <div class="p-2 rounded-lg bg-[#020b08] border border-emerald-950 flex justify-between items-center">
-          <span class="text-slate-400">Active Channel:</span>
-          <span id="hud-channel-lbl" class="text-rose-300 font-bold">B2C On-Demand Gifting</span>
+          <span class="text-slate-400">GrabExpress Fleet:</span>
+          <span id="hud-fleet-lbl" class="text-[#00E065] font-bold">🛵 Bike (Fastest)</span>
         </div>
         <div class="p-2 rounded-lg bg-[#020b08] border border-emerald-950 flex justify-between items-center">
           <span class="text-slate-400">Fixed-Point Units:</span>
@@ -155,8 +162,8 @@
           <span id="hud-dead-reckon" class="text-cyan-300 font-bold">Dead Reckoning (Smoothed)</span>
         </div>
         <div class="p-2 rounded-lg bg-[#020b08] border border-emerald-950 flex justify-between items-center">
-          <span class="text-slate-400">Cryptographic Hash:</span>
-          <span id="hud-hash-status" class="text-emerald-400 font-bold">SHA256: 0x9f82... OK</span>
+          <span class="text-slate-400">Grab Pacing / POD:</span>
+          <span id="hud-pacing-status" class="text-emerald-400 font-bold">JIT Pacing • PIN Active</span>
         </div>
       </div>
     </div>
@@ -248,20 +255,102 @@
                 </div>
               </div>
 
+              <!-- GrabExpress™ Fleet Selector (from https://www.grab.com/sg/) -->
+              <div class="p-3 rounded-2xl bg-[#061e17] border border-emerald-800/50 space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-xs text-emerald-300 flex items-center gap-1">
+                    🛵 GrabExpress™ Vehicle Fleet
+                  </span>
+                  <a href="https://www.grab.com/sg/" target="_blank" class="text-[9px] text-[#00E065] font-mono underline hover:text-white">grab.com/sg ↗</a>
+                </div>
+                
+                <div class="grid grid-cols-3 gap-1.5">
+                  <!-- Fleet Option 1: Express Bike -->
+                  <button type="button" id="fleet-btn-bike" onclick="selectFleet('bike')" class="p-2 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-left transition flex flex-col justify-between">
+                    <div class="flex items-center justify-between">
+                      <span class="text-base">🛵</span>
+                      <span class="text-[8px] px-1 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold">Fastest</span>
+                    </div>
+                    <div>
+                      <div class="text-[10px] font-bold text-white mt-1">Express Bike</div>
+                      <div class="text-[9px] text-emerald-300 font-bold">KSh 350</div>
+                      <div class="text-[8px] text-slate-400">25-35 mins</div>
+                    </div>
+                  </button>
+
+                  <!-- Fleet Option 2: Cool-Van Climate Controlled -->
+                  <button type="button" id="fleet-btn-van" onclick="selectFleet('van')" class="p-2 rounded-xl border border-emerald-900 bg-[#03100c] text-left transition flex flex-col justify-between hover:border-emerald-700">
+                    <div class="flex items-center justify-between">
+                      <span class="text-base">🚐</span>
+                      <span class="text-[8px] px-1 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-bold">AC 18°C</span>
+                    </div>
+                    <div>
+                      <div class="text-[10px] font-bold text-white mt-1">Cool-Van</div>
+                      <div class="text-[9px] text-cyan-300 font-bold">KSh 1,200</div>
+                      <div class="text-[8px] text-slate-400">Fragile / Bulk</div>
+                    </div>
+                  </button>
+
+                  <!-- Fleet Option 3: Saver Batched Route -->
+                  <button type="button" id="fleet-btn-saver" onclick="selectFleet('saver')" class="p-2 rounded-xl border border-emerald-900 bg-[#03100c] text-left transition flex flex-col justify-between hover:border-emerald-700">
+                    <div class="flex items-center justify-between">
+                      <span class="text-base">📦</span>
+                      <span class="text-[8px] px-1 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">-35% Off</span>
+                    </div>
+                    <div>
+                      <div class="text-[10px] font-bold text-white mt-1">Saver Batch</div>
+                      <div class="text-[9px] text-amber-300 font-bold">KSh 220</div>
+                      <div class="text-[8px] text-slate-400">4-Hr Window</div>
+                    </div>
+                  </button>
+                </div>
+                <div id="fleet-desc-lbl" class="text-[9px] text-emerald-300/80 italic">
+                  ✓ Ideal for 24-stem fresh bouquet. Equipped with upright water-vial pouch.
+                </div>
+              </div>
+
+              <!-- GrabExpress Multi-Stop Feature Toggle -->
+              <div class="p-2.5 rounded-xl bg-[#061e17] border border-emerald-800/40 flex items-center justify-between">
+                <div>
+                  <div class="font-bold text-white text-[10px] flex items-center gap-1">
+                    <span>📍 Grab Multi-Stop Drop-Off</span>
+                    <span class="text-[8px] bg-emerald-900/60 text-[#00E065] px-1 rounded">Feature</span>
+                  </div>
+                  <div class="text-[8.5px] text-slate-400">Drop 1: Kilimani • Drop 2: Westlands (+KSh 150)</div>
+                </div>
+                <button type="button" onclick="toggleMultiStop()" id="btn-toggle-multistop" class="px-2 py-1 rounded-lg bg-[#03100c] hover:bg-emerald-900 text-[9.5px] text-emerald-300 border border-emerald-700 font-semibold transition">
+                  + Add Stop
+                </button>
+              </div>
+
               <!-- Price Breakdown (Integer Minor Units in Cents) -->
               <div class="p-2.5 rounded-xl bg-[#03100c] border border-emerald-900/60 space-y-1 text-[10px] text-slate-300 font-mono">
                 <div class="flex justify-between"><span>Bouquet (24 Stem)</span> <span>KSh 3,800 (380,000¢)</span></div>
                 <div class="flex justify-between"><span>Floral Preservative &amp; Card</span> <span class="text-emerald-400">FREE</span></div>
-                <div class="flex justify-between"><span>Express Bike Delivery (CBD $\rightarrow$ Kilimani)</span> <span>KSh 350 (35,000¢)</span></div>
+                <div class="flex justify-between"><span id="lbl-delivery-name">Express Bike Delivery (CBD ➔ Kilimani)</span> <span id="lbl-delivery-cost">KSh 350 (35,000¢)</span></div>
+                <div id="row-multistop" class="hidden flex justify-between text-amber-300"><span>2nd Drop-Off Stop (Westlands)</span> <span>+KSh 150 (15,000¢)</span></div>
+                <div class="flex justify-between text-cyan-300"><span>CitiFresh™ 48h Guarantee</span> <span>INCLUDED (KSh 10k Cov.)</span></div>
                 <div class="border-t border-emerald-900/80 pt-1 flex justify-between font-bold text-xs text-white">
                   <span>Total Amount Due</span>
-                  <span class="text-emerald-400">KSh 4,150 (415,000¢)</span>
+                  <span id="lbl-total-amount" class="text-emerald-400">KSh 4,150 (415,000¢)</span>
+                </div>
+              </div>
+
+              <!-- Payment Method & GrabPay / Wallet -->
+              <div class="p-2.5 rounded-xl bg-[#061e17] border border-emerald-800/40 space-y-1.5">
+                <div class="flex justify-between items-center text-[10px]">
+                  <span class="font-bold text-white flex items-center gap-1">💳 Payment: <strong id="lbl-active-pay-method" class="text-emerald-300">Lipa na M-Pesa</strong></span>
+                  <span class="text-[9px] text-amber-300 bg-amber-500/10 px-1.5 py-0.5 rounded border border-amber-500/30">🏆 +41 FlowerPoints</span>
+                </div>
+                <div class="text-[9px] text-slate-400 flex justify-between">
+                  <span>CitiMarket Wallet: <strong class="text-emerald-300">KSh 5,200</strong></span>
+                  <button type="button" onclick="togglePaymentMode()" id="btn-toggle-pay" class="text-emerald-400 underline font-semibold hover:text-white transition">Switch to Wallet Pay</button>
                 </div>
               </div>
 
               <!-- Checkout Button -->
               <button onclick="triggerMpesaCheckout()" id="btn-cust-checkout" class="w-full py-3 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 font-bold text-white text-xs shadow-lg shadow-emerald-950/50 transition flex items-center justify-center gap-2">
-                <span>💚 Pay KSh 4,150 with Lipa na M-Pesa</span>
+                <span id="btn-checkout-label">💚 Pay KSh 4,150 with Lipa na M-Pesa</span>
                 <span>➔</span>
               </button>
 
@@ -346,11 +435,11 @@
                 <div class="flex justify-between items-center">
                   <div>
                     <span class="text-[9px] text-emerald-400/80">Estimated Delivery Arrival</span>
-                    <div id="cust-eta" class="font-extrabold text-sm text-emerald-300">35 Mins (Express Flower Care)</div>
+                    <div id="cust-eta" class="font-extrabold text-sm text-emerald-300">30 Mins (Express Flower Care)</div>
                   </div>
                   <div class="text-right">
-                    <span class="text-[9px] text-emerald-400/80">Flower Courier</span>
-                    <div id="cust-rider-name" class="font-bold text-white">Juma Mwangi</div>
+                    <span id="cust-fleet-type-tag" class="text-[9px] text-[#00E065] font-semibold">🛵 GrabExpress Bike</span>
+                    <div id="cust-rider-name" class="font-bold text-white text-xs">Juma Mwangi</div>
                   </div>
                 </div>
 
@@ -367,17 +456,53 @@
                 </div>
               </div>
 
-              <div class="p-2.5 rounded-xl bg-[#061e17] border border-emerald-800/40 flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                  <div class="w-7 h-7 rounded-lg bg-emerald-950 border border-emerald-500/40 flex items-center justify-center text-xs">
+              <!-- Grab-Style Courier Profile Card with Masked Call, Chat & Share Link -->
+              <div class="p-2.5 rounded-2xl bg-[#061e17] border border-emerald-800/60 space-y-2">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-full bg-emerald-900/80 border border-emerald-500/50 flex items-center justify-center text-sm shadow">
+                      👨🏾‍💼
+                    </div>
+                    <div>
+                      <div class="font-bold text-white text-[11px] flex items-center gap-1">
+                        <span>Juma Mwangi</span>
+                        <span class="text-[8px] px-1 py-0.2 rounded bg-amber-500/20 text-amber-300 font-bold">4.96 ★ (1.4k)</span>
+                      </div>
+                      <div id="track-vehicle-plate" class="text-[8.5px] text-emerald-300/80 font-mono">Yamaha YBR 125 • KDM 482Y</div>
+                    </div>
+                  </div>
+                  <div class="text-right">
+                    <span class="text-[8px] text-slate-400 block">Recipient PIN:</span>
+                    <div class="text-[11px] font-mono font-extrabold text-amber-400">8842</div>
+                  </div>
+                </div>
+
+                <!-- Grab-Style Communication & Sharing Buttons -->
+                <div class="grid grid-cols-3 gap-1 pt-1.5 border-t border-emerald-900/60 text-[9.5px]">
+                  <button type="button" onclick="openMaskedCallModal()" class="py-1 px-1 rounded-lg bg-[#03100c] hover:bg-[#082a20] border border-emerald-800/80 text-emerald-300 font-semibold flex items-center justify-center gap-0.5 transition">
+                    <span>📞 Masked Call</span>
+                  </button>
+                  <button type="button" onclick="openQuickChatModal()" class="py-1 px-1 rounded-lg bg-[#03100c] hover:bg-[#082a20] border border-emerald-800/80 text-emerald-300 font-semibold flex items-center justify-center gap-0.5 transition">
+                    <span>💬 In-App Chat</span>
+                  </button>
+                  <button type="button" onclick="openShareTrackModal()" class="py-1 px-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold flex items-center justify-center gap-0.5 transition shadow-sm">
+                    <span>🔗 Share Link</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- CitiFresh™ 48-Hour Guarantee Card (Grab-Style Transit Coverage) -->
+              <div class="p-2 rounded-xl bg-gradient-to-r from-[#061e17] to-[#092920] border border-emerald-600/40 flex items-center justify-between">
+                <div class="flex items-center gap-1.5">
+                  <div class="w-6 h-6 rounded-lg bg-emerald-950 border border-emerald-500/40 flex items-center justify-center text-[10px]">
                     🛡️
                   </div>
                   <div>
-                    <div class="font-bold text-white text-[10px]">Photo-Verified Guarantee</div>
-                    <div class="text-[9px] text-emerald-300">Escrow released only upon verified handoff</div>
+                    <div class="font-bold text-white text-[9.5px]">CitiFresh™ 48h Guarantee</div>
+                    <div class="text-[8px] text-emerald-300/80">KSh 10k Cold-Chain &amp; Damage Protection</div>
                   </div>
                 </div>
-                <span class="text-[9px] font-mono text-emerald-400">ESCROW_LOCKED</span>
+                <span class="text-[8.5px] font-mono text-[#00E065] font-bold">PROTECTED</span>
               </div>
 
             </div>
@@ -435,6 +560,11 @@
                 <span class="text-emerald-400 font-semibold flex items-center gap-1">📸 Photo Logged #QC-8842</span>
               </div>
 
+              <div class="p-2 rounded-lg bg-[#020b08] border border-emerald-900 flex items-center justify-between text-[10px]">
+                <span class="text-slate-400">GrabMerchant Pacing:</span>
+                <span id="florist-pacing-lbl" class="text-amber-300 font-semibold flex items-center gap-1">⏱️ 12m Prep (JIT Courier Sync)</span>
+              </div>
+
               <div class="flex gap-2">
                 <button onclick="step2_floristArrange()" id="btn-florist-arrange" class="flex-1 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs shadow-md transition">
                   🌸 Cut &amp; Arrange Bouquet
@@ -447,23 +577,29 @@
           </div>
         </div>
 
-        <!-- B. Boda Boda Flower Courier App -->
+        <!-- B. Boda Boda Flower Courier App (Grab Driver) -->
         <div class="w-full flex flex-col items-center">
           <div class="w-full flex items-center justify-between mb-2 px-1">
             <div class="flex items-center gap-1.5 text-xs font-bold text-emerald-200">
               <span class="w-2 h-2 rounded-full bg-amber-400"></span>
-              Flower Courier App (Rider)
+              Flower Courier App (Grab Driver)
             </div>
             <span class="text-[11px] text-amber-400 font-medium">Juma Mwangi (Online)</span>
           </div>
 
-          <div class="w-[330px] sm:w-[350px] h-[350px] bg-[#020b08] rounded-[36px] phone-shell flex flex-col relative overflow-hidden select-none p-3.5 border border-emerald-800/40 bg-[#041410]">
+          <div class="w-[330px] sm:w-[350px] min-h-[360px] bg-[#020b08] rounded-[36px] phone-shell flex flex-col relative overflow-hidden select-none p-3.5 border border-emerald-800/40 bg-[#041410]">
             <div class="flex justify-between items-center pb-2 border-b border-emerald-900/60 text-[10px]">
-              <span class="text-emerald-400/80">Bike #KME-291X (Insulated Box)</span>
-              <span class="text-emerald-300 font-bold">Today: KSh 2,850</span>
+              <span id="rider-fleet-badge" class="text-emerald-400/80 font-mono">Bike #KME-291X</span>
+              <div class="flex items-center gap-1.5">
+                <span class="text-slate-400">Wallet:</span>
+                <span id="rider-wallet-balance" class="text-[#00E065] font-bold">KSh 3,200</span>
+                <button type="button" onclick="triggerRiderCashout()" id="btn-rider-cashout" class="px-1.5 py-0.5 rounded bg-[#00B14F]/20 text-[#00E065] border border-[#00B14F]/40 text-[9px] hover:bg-[#00B14F] hover:text-black font-bold transition flex items-center gap-0.5">
+                  ⚡ Cash-Out
+                </button>
+              </div>
             </div>
 
-            <div id="rider-idle" class="flex-1 flex flex-col items-center justify-center text-center text-emerald-400/50 text-xs">
+            <div id="rider-idle" class="flex-1 flex flex-col items-center justify-center text-center text-emerald-400/50 text-xs py-6">
               <div class="w-10 h-10 rounded-full bg-[#061e17] border border-emerald-800 flex items-center justify-center text-base mb-2">
                 🏍️
               </div>
@@ -480,7 +616,7 @@
                     <h5 class="text-xs font-bold text-white mt-1">City Market Stall 42 $\rightarrow$ Kilimani</h5>
                   </div>
                   <div class="text-right">
-                    <span class="text-xs font-bold text-emerald-300">+KSh 350</span>
+                    <span id="rider-offer-payout" class="text-xs font-bold text-[#00E065]">+KSh 350</span>
                     <div class="text-[9px] text-slate-400">4.5 km route</div>
                   </div>
                 </div>
@@ -500,7 +636,7 @@
               </div>
             </div>
 
-            <div id="rider-transit" class="hidden flex-1 flex flex-col justify-between py-1">
+            <div id="rider-transit" class="hidden flex-1 flex flex-col justify-between py-1 space-y-2">
               <div class="space-y-2">
                 <div class="flex justify-between items-center">
                   <span id="rider-stage-badge" class="text-[9px] font-bold text-amber-300 bg-amber-500/20 px-2 py-0.5 rounded">
@@ -514,6 +650,18 @@
                     <span class="text-emerald-400">Via Uhuru Highway</span>
                   </div>
                   <p class="text-amber-200/80 text-[9px]">⚠️ Note: Do not ring bell; surprise bouquet delivery.</p>
+                </div>
+
+                <!-- Grab POD Recipient PIN Verification Field (Shown when arriving) -->
+                <div id="rider-pod-section" class="hidden p-2 rounded-xl bg-[#020b08] border border-emerald-800 text-[10px] space-y-1">
+                  <div class="flex justify-between items-center">
+                    <span class="font-bold text-slate-300">Grab Proof of Delivery (POD):</span>
+                    <span class="text-[9px] text-[#00E065] font-mono">PIN_REQUIRED</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <input type="text" id="pod-pin-input" value="8842" readonly class="w-16 bg-[#03100c] border border-emerald-700 rounded px-2 py-0.5 text-center font-mono font-bold text-amber-400 text-xs">
+                    <span class="text-[8.5px] text-slate-400">Recipient PIN auto-verified from SMS</span>
+                  </div>
                 </div>
               </div>
 
@@ -581,6 +729,171 @@
     </div>
 
   </main>
+
+  <!-- ================= TAB: GRAB SUPERAPP FEATURES (DIRECT IMPLEMENTATION) ================= -->
+  <section id="tab-grab-features" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
+    <div class="bg-[#061e17] border border-emerald-800/40 rounded-3xl p-6 space-y-6 shadow-2xl">
+      
+      <!-- Header -->
+      <div class="flex flex-wrap justify-between items-start gap-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold text-[#00E065] uppercase tracking-widest flex items-center gap-1">
+              🟢 Grab Superapp Feature Suite
+            </span>
+            <a href="https://www.grab.com/sg/" target="_blank" rel="noopener noreferrer" class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#00B14F]/20 text-[#00E065] border border-[#00B14F]/40 flex items-center gap-1 hover:bg-[#00B14F]/30 transition">
+              <span>Features from grab.com/sg</span>
+              <span>↗</span>
+            </a>
+          </div>
+          <h2 class="text-2xl font-bold text-white mt-1">Grab Superapp Features Built for CitiMarket Delivery</h2>
+          <p class="text-sm text-emerald-200/70 mt-2 max-w-3xl leading-relaxed">
+            Directly adopting Southeast Asia's leading Superapp features from <a href="https://www.grab.com/sg/" target="_blank" rel="noopener noreferrer" class="text-[#00E065] font-semibold underline hover:text-white">https://www.grab.com/sg/</a> into Nairobi's perishable flower ecosystem: multi-tier GrabExpress fleets, GrabMerchant kitchen/florist pacing, GrabFin instant courier liquidity, and the Grab Safety Shield.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <a href="https://www.grab.com/sg/" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 rounded-xl bg-[#00B14F] hover:bg-[#009b45] text-black font-extrabold text-xs shadow-lg shadow-emerald-950/40 transition flex items-center gap-1.5">
+            <span>🌐 Open grab.com/sg</span>
+            <span>↗</span>
+          </a>
+          <button onclick="setTab('simulator')" class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 text-white font-bold text-xs shadow-lg shadow-emerald-950/40 transition flex items-center gap-1.5">
+            <span>🚀 Try in Simulator</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Feature Grid: Direct Feature Implementations -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+        <!-- Feature 1: GrabExpress Multi-Vehicle Fleet -->
+        <div class="p-4 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-2.5 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="w-8 h-8 rounded-xl bg-emerald-950 border border-emerald-700/60 flex items-center justify-center text-base">🛵</span>
+              <span class="text-[9px] font-mono font-bold text-[#00E065] bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800">FLEET_TIERS</span>
+            </div>
+            <h4 class="font-bold text-white text-sm">GrabExpress™ Multi-Vehicle Fleets</h4>
+            <p class="text-[11px] text-slate-300 leading-relaxed">
+              Dynamically select vehicle type based on flower volume and urgency:
+            </p>
+            <ul class="text-[10.5px] text-emerald-200/90 space-y-1">
+              <li>• <strong class="text-white">Express Bike:</strong> Fastest through Nairobi CBD traffic (KSh 350).</li>
+              <li>• <strong class="text-white">Cool-Van (AC 18°C):</strong> Climate-controlled for fragile wedding centerpieces (KSh 1,200).</li>
+              <li>• <strong class="text-white">Saver Batch:</strong> 35% discount for scheduled deliveries (KSh 220).</li>
+            </ul>
+          </div>
+          <button onclick="setTab('simulator'); selectFleet('van')" class="w-full py-1.5 rounded-xl bg-[#061e17] hover:bg-emerald-900 text-emerald-300 text-[10px] font-semibold border border-emerald-800 transition">
+            Test Cool-Van in Simulator ➔
+          </button>
+        </div>
+
+        <!-- Feature 2: Multi-Stop Routing -->
+        <div class="p-4 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-2.5 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="w-8 h-8 rounded-xl bg-emerald-950 border border-emerald-700/60 flex items-center justify-center text-base">📍</span>
+              <span class="text-[9px] font-mono font-bold text-amber-300 bg-amber-950/60 px-2 py-0.5 rounded border border-amber-800">MULTI_STOP</span>
+            </div>
+            <h4 class="font-bold text-white text-sm">Grab Multi-Stop Drop-Off</h4>
+            <p class="text-[11px] text-slate-300 leading-relaxed">
+              Send multiple bouquet surprises on a single booking. The algorithm computes optimal sequential waypoints (e.g., Drop 1 in Kilimani, Drop 2 in Westlands) to minimize total travel time.
+            </p>
+            <div class="p-2 rounded-xl bg-black/60 border border-emerald-950 text-[10px] text-amber-300 font-mono">
+              Stop A: City Market ➔ Stop B: Kilimani ➔ Stop C: Westlands
+            </div>
+          </div>
+          <button onclick="setTab('simulator'); toggleMultiStop()" class="w-full py-1.5 rounded-xl bg-[#061e17] hover:bg-emerald-900 text-amber-300 text-[10px] font-semibold border border-amber-800 transition">
+            Toggle Multi-Stop in App ➔
+          </button>
+        </div>
+
+        <!-- Feature 3: GrabMerchant Dynamic Pacing -->
+        <div class="p-4 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-2.5 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="w-8 h-8 rounded-xl bg-emerald-950 border border-emerald-700/60 flex items-center justify-center text-base">⏱️</span>
+              <span class="text-[9px] font-mono font-bold text-rose-300 bg-rose-950/60 px-2 py-0.5 rounded border border-rose-800">PREP_PACING</span>
+            </div>
+            <h4 class="font-bold text-white text-sm">GrabMerchant Dynamic Prep Pacing</h4>
+            <p class="text-[11px] text-slate-300 leading-relaxed">
+              Prevents courier crowding outside City Market flower stalls. Pacing syncs rider dispatch with florist bouquet completion:
+            </p>
+            <div class="p-2 rounded-xl bg-black/60 border border-emerald-950 text-[10px] text-emerald-300 font-mono">
+              T_dispatch = (T_order + T_prep) - ETA_courier
+            </div>
+            <div class="text-[10px] text-slate-400">Cuts driver curb wait by 68% (from 22m to &lt;3m).</div>
+          </div>
+          <button onclick="setTab('simulator')" class="w-full py-1.5 rounded-xl bg-[#061e17] hover:bg-emerald-900 text-rose-300 text-[10px] font-semibold border border-rose-800 transition">
+            View Stall 42 Pacing ➔
+          </button>
+        </div>
+
+        <!-- Feature 4: Driver Instant M-Pesa Cash-Out -->
+        <div class="p-4 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-2.5 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="w-8 h-8 rounded-xl bg-emerald-950 border border-emerald-700/60 flex items-center justify-center text-base">⚡</span>
+              <span class="text-[9px] font-mono font-bold text-[#00E065] bg-emerald-950 px-2 py-0.5 rounded border border-emerald-800">DAILY_LIQUIDITY</span>
+            </div>
+            <h4 class="font-bold text-white text-sm">Grab Driver Instant M-Pesa Cash-Out</h4>
+            <p class="text-[11px] text-slate-300 leading-relaxed">
+              Couriers in Nairobi need immediate daily liquidity for fuel and bike maintenance. 1-click B2C API transfers earnings straight to the rider's phone with zero settlement delay.
+            </p>
+            <div class="p-2 rounded-xl bg-black/60 border border-emerald-950 text-[10px] text-[#00E065] font-mono">
+              Safaricom B2C API • 0-Day Float Risk • Real-Time Ledger
+            </div>
+          </div>
+          <button onclick="setTab('simulator'); triggerRiderCashout()" class="w-full py-1.5 rounded-xl bg-[#061e17] hover:bg-emerald-900 text-[#00E065] text-[10px] font-semibold border border-emerald-800 transition">
+            Trigger Driver Cash-Out ➔
+          </button>
+        </div>
+
+        <!-- Feature 5: Grab Safety Shield & Masked VoIP -->
+        <div class="p-4 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-2.5 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="w-8 h-8 rounded-xl bg-emerald-950 border border-emerald-700/60 flex items-center justify-center text-base">🔒</span>
+              <span class="text-[9px] font-mono font-bold text-cyan-300 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800">SAFETY_SHIELD</span>
+            </div>
+            <h4 class="font-bold text-white text-sm">Grab Safety Shield &amp; Number Masking</h4>
+            <p class="text-[11px] text-slate-300 leading-relaxed">
+              Complete customer and courier privacy protection. All calls route through a virtual VoIP proxy gateway (<code class="text-white">+254 20 790 4821</code>), keeping personal numbers confidential.
+            </p>
+            <ul class="text-[10.5px] text-slate-300 space-y-0.5">
+              <li>• In-App Quick Chat with message chips</li>
+              <li>• Recipient 4-digit PIN verification (<code class="text-amber-400">8842</code>)</li>
+            </ul>
+          </div>
+          <button onclick="openMaskedCallModal()" class="w-full py-1.5 rounded-xl bg-[#061e17] hover:bg-emerald-900 text-cyan-300 text-[10px] font-semibold border border-cyan-800 transition">
+            Preview Masked VoIP Call ➔
+          </button>
+        </div>
+
+        <!-- Feature 6: Zero-Install Recipient Tracking & CitiFresh -->
+        <div class="p-4 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-2.5 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="w-8 h-8 rounded-xl bg-emerald-950 border border-emerald-700/60 flex items-center justify-center text-base">🛡️</span>
+              <span class="text-[9px] font-mono font-bold text-purple-300 bg-purple-950/60 px-2 py-0.5 rounded border border-purple-800">RECIPIENT_WEB</span>
+            </div>
+            <h4 class="font-bold text-white text-sm">Zero-Install Web Tracking &amp; Warranty</h4>
+            <p class="text-[11px] text-slate-300 leading-relaxed">
+              Recipients never need to install an app. An instant SMS/WhatsApp link opens a lightweight live tracking page with real-time ETA, rider GPS, and their security PIN.
+            </p>
+            <div class="p-2 rounded-xl bg-black/60 border border-emerald-950 text-[10px] text-purple-300 font-mono">
+              CitiFresh™ 48h Guarantee: KSh 10k Damage &amp; Hydration Coverage
+            </div>
+          </div>
+          <button onclick="openShareTrackModal()" class="w-full py-1.5 rounded-xl bg-[#061e17] hover:bg-emerald-900 text-purple-300 text-[10px] font-semibold border border-purple-800 transition">
+            Preview Recipient Web Page ➔
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
 
   <!-- ================= TAB 2: CRYPTOGRAPHIC HASH LEDGER (CFO DEEP DIVE WITH TAMPER TEST) ================= -->
   <section id="tab-ledger" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
@@ -913,9 +1226,381 @@
     </div>
   </section>
 
+  <!-- ================= GRAB INTERACTIVE MODALS ================= -->
+
+  <!-- 1. Grab Safety Shield: Masked VoIP Call Modal -->
+  <div id="modal-masked-call" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="w-full max-w-sm bg-[#061e17] border-2 border-emerald-500/80 rounded-3xl p-5 space-y-4 shadow-2xl animate-toast">
+      <div class="flex items-center justify-between pb-3 border-b border-emerald-900/60">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#00E065] animate-ping"></span>
+          <span class="text-xs font-bold text-white uppercase tracking-wider">Grab Safety Shield • VoIP Proxy</span>
+        </div>
+        <button onclick="closeMaskedCallModal()" class="text-slate-400 hover:text-white text-base">✕</button>
+      </div>
+
+      <div class="text-center py-2 space-y-2">
+        <div class="w-16 h-16 rounded-full bg-emerald-900/70 border-2 border-emerald-400/50 mx-auto flex items-center justify-center text-2xl shadow-lg">
+          📞
+        </div>
+        <h4 class="font-bold text-white text-sm">Encrypted In-App VoIP Call</h4>
+        <div class="text-xs text-[#00E065] font-mono font-bold">+254 20 790 4821 (Virtual Proxy)</div>
+        <p class="text-[11px] text-slate-300">Connecting Buyer ➔ Juma Mwangi (Courier)</p>
+      </div>
+
+      <div class="p-3 rounded-xl bg-[#03100c] border border-emerald-900 text-[10.5px] text-emerald-200/90 space-y-1">
+        <div class="font-bold text-white flex items-center gap-1">🔒 Full Privacy Protection:</div>
+        <div>Neither your phone number nor the courier's personal number is disclosed. Calls route through a tokenized Safaricom proxy gateway.</div>
+      </div>
+
+      <div class="flex gap-2">
+        <button onclick="closeMaskedCallModal()" class="w-full py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs shadow-md transition">
+          End Secure Call
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Grab In-App Quick Chat Modal -->
+  <div id="modal-quick-chat" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="w-full max-w-sm bg-[#061e17] border-2 border-emerald-500/80 rounded-3xl p-5 space-y-3 shadow-2xl animate-toast flex flex-col h-[480px]">
+      <div class="flex items-center justify-between pb-2.5 border-b border-emerald-900/60">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-full bg-emerald-900 flex items-center justify-center text-xs">👨🏾‍💼</div>
+          <div>
+            <div class="font-bold text-white text-xs">Juma Mwangi (Courier)</div>
+            <div class="text-[9px] text-[#00E065]">Online • On Route via Ngong Rd</div>
+          </div>
+        </div>
+        <button onclick="closeQuickChatModal()" class="text-slate-400 hover:text-white text-base">✕</button>
+      </div>
+
+      <!-- Chat Messages Container -->
+      <div id="chat-messages-box" class="flex-1 overflow-y-auto space-y-2 p-2 bg-[#020b08] rounded-2xl border border-emerald-950 text-xs">
+        <div class="bg-[#07241b] text-emerald-200 p-2.5 rounded-2xl rounded-tl-sm max-w-[85%] space-y-0.5 border border-emerald-900/80">
+          <div class="text-[9px] text-[#00E065] font-bold">Juma (Courier):</div>
+          <p class="text-[11px]">Habari Brian! Fresh Naivasha scarlet roses collected from Stall #42. Secured in cold water vial pouch.</p>
+        </div>
+        <div class="bg-[#0b3327] text-white p-2.5 rounded-2xl rounded-tr-sm ml-auto max-w-[85%] space-y-0.5 border border-emerald-700/50">
+          <div class="text-[9px] text-rose-300 font-bold">You (Brian):</div>
+          <p class="text-[11px]">Asante Juma! Remember it's an anniversary surprise for Wanjiku, please don't spoil it at the gate ❤️</p>
+        </div>
+      </div>
+
+      <!-- Quick Reply Preset Chips -->
+      <div class="flex flex-wrap gap-1 pt-1">
+        <button onclick="sendQuickChat('Keep flowers in shade please!')" class="px-2 py-1 rounded-lg bg-[#03100c] hover:bg-emerald-900 text-emerald-300 text-[9.5px] border border-emerald-800">
+          ☀️ Keep in shade
+        </button>
+        <button onclick="sendQuickChat('Call me when you reach gate!')" class="px-2 py-1 rounded-lg bg-[#03100c] hover:bg-emerald-900 text-emerald-300 text-[9.5px] border border-emerald-800">
+          🚪 Call at gate
+        </button>
+        <button onclick="sendQuickChat('Recipient is in Apt 4B!')" class="px-2 py-1 rounded-lg bg-[#03100c] hover:bg-emerald-900 text-emerald-300 text-[9.5px] border border-emerald-800">
+          🏢 Apt 4B
+        </button>
+      </div>
+
+      <!-- Chat Input Field -->
+      <div class="flex gap-1.5 pt-1">
+        <input type="text" id="chat-input-text" placeholder="Type a message to Juma..." class="flex-1 bg-[#020b08] border border-emerald-800 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500">
+        <button onclick="sendUserChatMessage()" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs">
+          Send
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Grab-Style Recipient Web Tracking Preview Modal -->
+  <div id="modal-share-track" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="w-full max-w-sm bg-[#061e17] border-2 border-emerald-500/80 rounded-3xl p-5 space-y-3.5 shadow-2xl animate-toast">
+      <div class="flex items-center justify-between pb-2.5 border-b border-emerald-900/60">
+        <div class="flex items-center gap-1.5">
+          <span class="text-xs font-bold text-white">🔗 Recipient Live Web Tracking</span>
+        </div>
+        <button onclick="closeShareTrackModal()" class="text-slate-400 hover:text-white text-base">✕</button>
+      </div>
+
+      <div class="p-2.5 rounded-xl bg-[#020b08] border border-emerald-900/80 space-y-1 text-xs">
+        <span class="text-[10px] text-slate-400">Recipient SMS Link:</span>
+        <div class="font-mono text-[11px] text-[#00E065] truncate">https://citimarket.ke/track/CMD-8842</div>
+      </div>
+
+      <!-- Recipient Browser Mockup -->
+      <div class="rounded-2xl border-2 border-emerald-800/80 bg-[#03100c] p-3.5 space-y-2.5 shadow-inner">
+        <div class="flex items-center justify-between text-[10px] text-slate-400 pb-1.5 border-b border-emerald-950">
+          <span>📱 Safari • citimarket.ke</span>
+          <span class="text-emerald-400 font-bold">No App Needed</span>
+        </div>
+
+        <div class="text-center py-1">
+          <span class="text-2xl">🌹</span>
+          <h4 class="font-extrabold text-white text-xs mt-1">A Surprise Gift Is On Its Way To You!</h4>
+          <p class="text-[10px] text-emerald-300/80">From: Someone Special ❤️</p>
+        </div>
+
+        <div class="p-2 rounded-xl bg-[#061e17] border border-emerald-800/60 flex items-center justify-between text-[10px]">
+          <div>
+            <div class="text-slate-400 text-[8.5px]">Courier Approaching:</div>
+            <div class="font-bold text-white">Juma Mwangi (4.96 ★)</div>
+            <div class="text-[#00E065] text-[9px]">ETA: ~12 mins</div>
+          </div>
+          <div class="text-right">
+            <span class="text-slate-400 text-[8.5px]">Your Security PIN:</span>
+            <div class="text-xs font-mono font-extrabold text-amber-400">8842</div>
+          </div>
+        </div>
+
+        <div class="p-2 rounded-lg bg-[#020b08] border border-emerald-900 text-[9px] text-slate-300 italic text-center">
+          "Please share PIN 8842 with rider Juma only after receiving your flowers."
+        </div>
+      </div>
+
+      <div class="flex gap-2">
+        <button onclick="copyTrackLink()" id="btn-copy-link" class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md transition flex items-center justify-center gap-1.5">
+          <span>📋 Copy Link to Send via WhatsApp</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Driver Instant Cash-Out Confirmation Toast -->
+  <div id="toast-cashout" class="hidden fixed bottom-6 right-6 z-50 bg-[#061e17] border-2 border-[#00B14F] text-white p-4 rounded-2xl shadow-2xl space-y-1 animate-toast max-w-sm">
+    <div class="flex items-center gap-2">
+      <div class="w-6 h-6 rounded-full bg-[#00B14F] flex items-center justify-center text-black font-extrabold text-xs">✓</div>
+      <h5 class="font-bold text-xs text-white">Instant M-Pesa B2C Cash-Out</h5>
+    </div>
+    <p id="toast-cashout-msg" class="text-[11px] text-emerald-200">
+      KSh 3,200 deposited to Courier Juma Mwangi (0712-449-821) via Safaricom Daraja B2C.
+    </p>
+    <div class="text-[9px] font-mono text-slate-400 pt-0.5">Ref: B2C889412K • Ledger balance updated (Zero Float)</div>
+  </div>
+
   <!-- JAVASCRIPT STATE ENGINE & INTERACTIVE WORKFLOW -->
   <script>
     let activeCustomerModel = 'b2c';
+    let selectedFleet = 'bike';
+    let isMultiStop = false;
+    let paymentMode = 'mpesa';
+    let riderWalletBalance = 3200;
+
+    // GrabExpress Fleet Pricing Configurations (from grab.com/sg)
+    const fleetConfig = {
+      bike: {
+        cost: 350,
+        cents: 35000,
+        name: "Express Bike Delivery (CBD ➔ Kilimani)",
+        desc: "✓ Ideal for 24-stem fresh bouquet. Equipped with upright water-vial pouch.",
+        eta: "30 Mins (Express Flower Care)",
+        plate: "Yamaha YBR 125 • KDM 482Y",
+        icon: "🛵",
+        badge: "🛵 GrabExpress Bike",
+        riderCut: 280,
+        riderCutCents: 28000
+      },
+      van: {
+        cost: 1200,
+        cents: 120000,
+        name: "Cool-Van Climate-Controlled (18°C AC)",
+        desc: "✓ Climate-controlled van for fragile multi-tiered arrangements and glass vases.",
+        eta: "45 Mins (Climate Cool-Van)",
+        plate: "Toyota HiAce Cool-Van • KDA 819C",
+        icon: "🚐",
+        badge: "🚐 GrabExpress Cool-Van",
+        riderCut: 960,
+        riderCutCents: 96000
+      },
+      saver: {
+        cost: 220,
+        cents: 22000,
+        name: "Grab Saver Batch Delivery (4-Hour Window)",
+        desc: "✓ 35% discount. Clustered with nearby deliveries along Ngong Rd corridor.",
+        eta: "Within 4 Hours (Batched Route)",
+        plate: "Box Courier • KME 291X",
+        icon: "📦",
+        badge: "📦 GrabExpress Saver",
+        riderCut: 176,
+        riderCutCents: 17600
+      }
+    };
+
+    function selectFleet(fleet) {
+      selectedFleet = fleet;
+      const conf = fleetConfig[fleet];
+
+      ['bike', 'van', 'saver'].forEach(f => {
+        const btn = document.getElementById(`fleet-btn-${f}`);
+        if (btn) {
+          if (f === fleet) {
+            btn.className = "p-2 rounded-xl border-2 border-emerald-500 bg-emerald-950/80 text-left transition flex flex-col justify-between";
+          } else {
+            btn.className = "p-2 rounded-xl border border-emerald-900 bg-[#03100c] text-left transition flex flex-col justify-between hover:border-emerald-700";
+          }
+        }
+      });
+
+      document.getElementById('fleet-desc-lbl').textContent = conf.desc;
+      document.getElementById('lbl-delivery-name').textContent = conf.name;
+      document.getElementById('lbl-delivery-cost').textContent = `KSh ${conf.cost.toLocaleString()} (${conf.cents.toLocaleString()}¢)`;
+
+      updatePricingTotals();
+
+      // Update Rider Offer card if active
+      const payoutElem = document.getElementById('rider-offer-payout');
+      if (payoutElem) payoutElem.textContent = `+KSh ${conf.cost + (isMultiStop ? 150 : 0)}`;
+      const badgeElem = document.getElementById('rider-fleet-badge');
+      if (badgeElem) badgeElem.textContent = `${fleet.toUpperCase()} • ${conf.plate.split('•')[1] || conf.plate}`;
+      const tagElem = document.getElementById('cust-fleet-type-tag');
+      if (tagElem) tagElem.textContent = conf.badge;
+      const plateElem = document.getElementById('track-vehicle-plate');
+      if (plateElem) plateElem.textContent = conf.plate;
+
+      const pin = document.getElementById('nairobi-rider-pin');
+      if (pin && pin.firstElementChild) pin.firstElementChild.textContent = conf.icon;
+
+      logSim(`GrabExpress Fleet: Selected ${fleet.toUpperCase()} (${conf.name}). Delivery fee: KSh ${conf.cost}.`, 'action');
+    }
+
+    function toggleMultiStop() {
+      isMultiStop = !isMultiStop;
+      const row = document.getElementById('row-multistop');
+      const btn = document.getElementById('btn-toggle-multistop');
+      if (isMultiStop) {
+        if (row) row.classList.remove('hidden');
+        if (btn) {
+          btn.textContent = "✓ Multi-Stop (2 Drops)";
+          btn.className = "px-2 py-1 rounded-lg bg-emerald-600 text-[9.5px] text-white font-bold transition";
+        }
+        logSim("Grab Multi-Stop: Added 2nd dropoff stop in Westlands (+KSh 150).", 'action');
+      } else {
+        if (row) row.classList.add('hidden');
+        if (btn) {
+          btn.textContent = "+ Add Stop";
+          btn.className = "px-2 py-1 rounded-lg bg-[#03100c] hover:bg-emerald-900 text-[9.5px] text-emerald-300 border border-emerald-700 font-semibold transition";
+        }
+        logSim("Grab Multi-Stop: Reverted to single dropoff stop.", 'normal');
+      }
+      updatePricingTotals();
+    }
+
+    function updatePricingTotals() {
+      const conf = fleetConfig[selectedFleet];
+      const bouquetPrice = 3800;
+      const multiStopFee = isMultiStop ? 150 : 0;
+      const multiStopCents = isMultiStop ? 15000 : 0;
+      const total = bouquetPrice + conf.cost + multiStopFee;
+      const totalCents = (bouquetPrice * 100) + conf.cents + multiStopCents;
+
+      document.getElementById('lbl-total-amount').textContent = `KSh ${total.toLocaleString()} (${totalCents.toLocaleString()}¢)`;
+      document.getElementById('hud-fixed-point').textContent = `${totalCents.toLocaleString()} cents (KES)`;
+      document.getElementById('hud-fleet-lbl').textContent = `${conf.icon} ${selectedFleet === 'bike' ? 'Bike (Fastest)' : selectedFleet === 'van' ? 'Cool-Van (AC 18°C)' : 'Saver Batch (-35%)'}`;
+      
+      const payLabel = paymentMode === 'mpesa' ? `💚 Pay KSh ${total.toLocaleString()} with Lipa na M-Pesa` : `⚡ Pay KSh ${total.toLocaleString()} from CitiMarket Wallet`;
+      document.getElementById('btn-checkout-label').textContent = payLabel;
+    }
+
+    function togglePaymentMode() {
+      if (paymentMode === 'mpesa') {
+        paymentMode = 'wallet';
+        document.getElementById('lbl-active-pay-method').textContent = "CitiMarket Wallet (GrabPay)";
+        document.getElementById('btn-toggle-pay').textContent = "Switch to M-Pesa Pay";
+        logSim("Payment mode toggled to CitiMarket Stored Wallet (GrabPay style).", 'normal');
+      } else {
+        paymentMode = 'mpesa';
+        document.getElementById('lbl-active-pay-method').textContent = "Lipa na M-Pesa";
+        document.getElementById('btn-toggle-pay').textContent = "Switch to Wallet Pay";
+        logSim("Payment mode toggled to Lipa na M-Pesa STK Push.", 'normal');
+      }
+      updatePricingTotals();
+    }
+
+    // Driver Instant Cash-Out to M-Pesa (from grab.com/sg Driver Financials)
+    function triggerRiderCashout() {
+      if (riderWalletBalance <= 0) {
+        alert("Wallet balance is KSh 0. Complete deliveries to accumulate earnings.");
+        return;
+      }
+
+      const cashedAmount = riderWalletBalance;
+      riderWalletBalance = 0;
+      document.getElementById('rider-wallet-balance').textContent = "KSh 0";
+      const btn = document.getElementById('btn-rider-cashout');
+      btn.textContent = "✓ Cashed";
+      btn.className = "px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700 text-[9px] font-bold";
+
+      const toast = document.getElementById('toast-cashout');
+      document.getElementById('toast-cashout-msg').textContent = `KSh ${cashedAmount.toLocaleString()} deposited to Courier Juma Mwangi (0712-449-821) via Safaricom Daraja B2C.`;
+      toast.classList.remove('hidden');
+
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 5000);
+
+      logSim(`[FINTECH] Safaricom B2C API: KSh ${cashedAmount.toLocaleString()} transferred to Juma Mwangi (0712-449-821). Tx Ref #B2C889412K.`, 'success');
+      logSim("Driver daily micro-liquidity disbursed. Courier wallet balanced to zero.", 'cs');
+    }
+
+    // Modal Handlers
+    function openMaskedCallModal() {
+      document.getElementById('modal-masked-call').classList.remove('hidden');
+      logSim("Grab Safety Shield: Initiated masked VoIP call through Safaricom virtual proxy (+254 20 790 4821).", 'action');
+    }
+
+    function closeMaskedCallModal() {
+      document.getElementById('modal-masked-call').classList.add('hidden');
+    }
+
+    function openQuickChatModal() {
+      document.getElementById('modal-quick-chat').classList.remove('hidden');
+    }
+
+    function closeQuickChatModal() {
+      document.getElementById('modal-quick-chat').classList.add('hidden');
+    }
+
+    function sendQuickChat(text) {
+      appendChatMessage("You (Brian)", text, true);
+    }
+
+    function sendUserChatMessage() {
+      const input = document.getElementById('chat-input-text');
+      if (input.value.trim() !== '') {
+        appendChatMessage("You (Brian)", input.value.trim(), true);
+        input.value = '';
+      }
+    }
+
+    function appendChatMessage(sender, msg, isUser) {
+      const box = document.getElementById('chat-messages-box');
+      const div = document.createElement('div');
+      if (isUser) {
+        div.className = "bg-[#0b3327] text-white p-2.5 rounded-2xl rounded-tr-sm ml-auto max-w-[85%] space-y-0.5 border border-emerald-700/50";
+        div.innerHTML = `<div class="text-[9px] text-rose-300 font-bold">${sender}:</div><p class="text-[11px]">${msg}</p>`;
+      } else {
+        div.className = "bg-[#07241b] text-emerald-200 p-2.5 rounded-2xl rounded-tl-sm max-w-[85%] space-y-0.5 border border-emerald-900/80";
+        div.innerHTML = `<div class="text-[9px] text-[#00E065] font-bold">${sender}:</div><p class="text-[11px]">${msg}</p>`;
+      }
+      box.appendChild(div);
+      box.scrollTop = box.scrollHeight;
+    }
+
+    function openShareTrackModal() {
+      document.getElementById('modal-share-track').classList.remove('hidden');
+      logSim("Generated recipient live web tracking link: https://citimarket.ke/track/CMD-8842", 'action');
+    }
+
+    function closeShareTrackModal() {
+      document.getElementById('modal-share-track').classList.add('hidden');
+    }
+
+    function copyTrackLink() {
+      const btn = document.getElementById('btn-copy-link');
+      btn.innerHTML = `<span>✓ Copied to Clipboard!</span>`;
+      btn.className = "w-full py-2.5 rounded-xl bg-slate-800 text-emerald-300 font-bold text-xs border border-emerald-700";
+      setTimeout(() => {
+        btn.innerHTML = `<span>📋 Copy Link to Send via WhatsApp</span>`;
+        btn.className = "w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md transition flex items-center justify-center gap-1.5";
+      }, 2500);
+    }
 
     function switchCustomerModel(model) {
       activeCustomerModel = model;
@@ -925,19 +1610,16 @@
 
       if (model === 'b2c') {
         document.getElementById('cust-mod-b2c').className = 'px-2.5 py-1 rounded-lg bg-emerald-600 text-white font-semibold transition';
-        document.getElementById('hud-channel-lbl').textContent = "B2C Consumer Gifting";
         document.getElementById('app-title-lbl').textContent = "Customer Mobile App (Client)";
         document.getElementById('app-badge-lbl').textContent = "Lipa na M-Pesa Integrated";
         logSim("Switched channel to B2C Consumer Gifting (On-Demand M-Pesa).", 'action');
       } else if (model === 'b2b') {
         document.getElementById('cust-mod-b2b').className = 'px-2.5 py-1 rounded-lg bg-emerald-600 text-white font-semibold transition';
-        document.getElementById('hud-channel-lbl').textContent = "Merchant Direct (Logistics-as-a-Service)";
         document.getElementById('app-title-lbl').textContent = "Merchant Dispatch Mobile / PWA";
         document.getElementById('app-badge-lbl').textContent = "Shop Self-Dispatch Utility";
         logSim("Switched channel to Merchant Direct Fulfillment (Florist calling CitiMarket Courier).", 'action');
       } else if (model === 'corp') {
         document.getElementById('cust-mod-corp').className = 'px-2.5 py-1 rounded-lg bg-emerald-600 text-white font-semibold transition';
-        document.getElementById('hud-channel-lbl').textContent = "Corporate Account (30-day Invoice)";
         document.getElementById('app-title-lbl').textContent = "Corporate Procurement App";
         document.getElementById('app-badge-lbl').textContent = "Weekly Scheduled Office Batch";
         logSim("Switched channel to Corporate Commercial Account (Weekly Recurring Delivery).", 'action');
@@ -987,7 +1669,7 @@
       let cls = 'text-emerald-300/80';
       if (type === 'action') cls = 'text-rose-400 font-bold';
       if (type === 'success') cls = 'text-emerald-300 font-bold';
-      if (type === 'mpesa') cls = 'text-emerald-400 font-mono font-bold';
+      if (type === 'mpesa') cls = 'text-[#00E065] font-mono font-bold';
       if (type === 'cs') cls = 'text-cyan-400 font-mono';
 
       el.className = cls;
@@ -996,13 +1678,13 @@
     }
 
     function setTab(tab) {
-      const allTabs = ['simulator', 'ledger', 'mobile-arch', 'cs-engine', 'branding', 'calculator'];
+      const allTabs = ['simulator', 'grab-features', 'ledger', 'mobile-arch', 'cs-engine', 'branding', 'calculator'];
       allTabs.forEach(t => {
         const el = document.getElementById(`tab-${t}`);
         if (el) el.classList.add('hidden');
       });
 
-      const navs = ['sim', 'ledger', 'mobile', 'cs', 'branding', 'calc'];
+      const navs = ['sim', 'grab', 'ledger', 'mobile', 'cs', 'branding', 'calc'];
       navs.forEach(n => {
         const btn = document.getElementById(`nav-btn-${n}`);
         if (btn) btn.className = 'px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition';
@@ -1011,6 +1693,9 @@
       if (tab === 'simulator') {
         document.getElementById('tab-simulator').classList.remove('hidden');
         document.getElementById('nav-btn-sim').className = 'px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition';
+      } else if (tab === 'grab-features') {
+        document.getElementById('tab-grab-features').classList.remove('hidden');
+        document.getElementById('nav-btn-grab').className = 'px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition';
       } else if (tab === 'ledger') {
         document.getElementById('tab-ledger').classList.remove('hidden');
         document.getElementById('nav-btn-ledger').className = 'px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition';
@@ -1031,8 +1716,13 @@
 
     // Step 1: M-Pesa STK Prompt
     function triggerMpesaCheckout() {
+      const conf = fleetConfig[selectedFleet];
+      const multiStopFee = isMultiStop ? 150 : 0;
+      const total = 3800 + conf.cost + multiStopFee;
+      const pElem = document.querySelector('#mpesa-modal p');
+      if (pElem) pElem.innerHTML = `Do you want to pay <strong>KSh ${total.toLocaleString()}</strong> to <strong>CitiMarket Escrow</strong> for Order #CMD-8842?`;
       document.getElementById('mpesa-modal').classList.remove('hidden');
-      logSim("Initiated Lipa na M-Pesa STK Push to buyer (0722-XXX-XXX)", 'mpesa');
+      logSim(`Initiated ${paymentMode === 'mpesa' ? 'Lipa na M-Pesa STK Push' : 'CitiMarket Wallet Checkout'} for KSh ${total.toLocaleString()} (Buyer: 0722-XXX-XXX)`, 'mpesa');
     }
 
     function cancelMpesa() {
@@ -1041,6 +1731,12 @@
 
     // Step 1B: Confirm M-Pesa PIN
     function confirmMpesaPin() {
+      const conf = fleetConfig[selectedFleet];
+      const multiStopFee = isMultiStop ? 150 : 0;
+      const multiStopCents = isMultiStop ? 15000 : 0;
+      const total = 3800 + conf.cost + multiStopFee;
+      const totalCents = (3800 * 100) + conf.cents + multiStopCents;
+
       document.getElementById('mpesa-modal').classList.add('hidden');
       document.getElementById('cust-screen-catalog').classList.add('hidden');
       document.getElementById('cust-screen-tracking').classList.remove('hidden');
@@ -1051,22 +1747,22 @@
       ledgerRows.innerHTML = `
         <div class="flex justify-between text-emerald-400">
           <span>DR 1010 M-Pesa Cash In (Asset)</span>
-          <span>+415,000¢ (KSh 4,150)</span>
+          <span>+${totalCents.toLocaleString()}¢ (KSh ${total.toLocaleString()})</span>
         </div>
         <div class="flex justify-between text-amber-400">
           <span>CR 2010 Customer Escrow (Liability)</span>
-          <span>+415,000¢ (KSh 4,150)</span>
+          <span>+${totalCents.toLocaleString()}¢ (KSh ${total.toLocaleString()})</span>
         </div>
-        <div class="text-[9px] text-slate-500 pt-0.5">Safaricom Receipt #QKH48912LX • Status: In Escrow</div>
+        <div class="text-[9px] text-slate-500 pt-0.5">Safaricom Receipt #QKH48912LX • Status: In Escrow • GrabPay Verified</div>
       `;
-      document.getElementById('ledger-balance-check').textContent = "415,000¢ == 415,000¢ (Balanced)";
+      document.getElementById('ledger-balance-check').textContent = `${totalCents.toLocaleString()}¢ == ${totalCents.toLocaleString()}¢ (Balanced)`;
 
       document.getElementById('florist-empty').classList.add('hidden');
       document.getElementById('florist-card').classList.remove('hidden');
 
-      logSim("M-Pesa Receipt: QKH48912LX Confirmed KSh 4,150 received into escrow.", 'success');
-      logSim("Ledger Entry: DR M-Pesa Holding, CR Customer Escrow (+KSh 4,150).", 'cs');
-      logSim("Dispatch bus: Order #CMD-8842 sent to City Market Florist Stall 42", 'action');
+      logSim(`M-Pesa Receipt: QKH48912LX Confirmed KSh ${total.toLocaleString()} received into escrow.`, 'success');
+      logSim(`Ledger Entry: DR M-Pesa Holding, CR Customer Escrow (+KSh ${total.toLocaleString()}).`, 'cs');
+      logSim("GrabMerchant bus: Order #CMD-8842 dispatched to City Market Florist Stall 42", 'action');
     }
 
     // Step 2: Florist Arranges
@@ -1080,12 +1776,14 @@
       readyBtn.disabled = false;
       readyBtn.classList.remove('opacity-50', 'cursor-not-allowed');
 
-      document.getElementById('flow-status-text').textContent = "Florist Arranging: Hand-writing card note & wrapping roses";
+      const pacing = document.getElementById('florist-pacing-lbl');
+      if (pacing) pacing.innerHTML = "⏱️ 5m Remaining (Rider En Route)";
+      document.getElementById('flow-status-text').textContent = "Florist Arranging: Hand-writing card note & hydrating roses in water vials";
       document.getElementById('cust-badge-status').textContent = "Arranging & Card Inscription";
       document.getElementById('stg-2').className = "text-rose-400 font-bold";
       document.getElementById('cust-progress-bar').style.width = "40%";
 
-      logSim("Florist at City Market confirmed fresh Naivasha roses arranged with handwritten note.", 'action');
+      logSim("GrabMerchant Pacing: Florist active. Courier dispatch timed to arrive exactly upon bouquet wrapping.", 'action');
     }
 
     // Step 3: Florist Ready
@@ -1098,49 +1796,58 @@
       document.getElementById('rider-idle').classList.add('hidden');
       document.getElementById('rider-offer').classList.remove('hidden');
 
-      document.getElementById('flow-status-text').textContent = "Dispatch: Pinging nearest insulated bike courier (Juma Mwangi)";
-      logSim("Bipartite Matching Engine: Found Courier Juma Mwangi (Score: 94.2/100).", 'cs');
+      const conf = fleetConfig[selectedFleet];
+      const pacing = document.getElementById('florist-pacing-lbl');
+      if (pacing) pacing.innerHTML = "✓ Ready for Handoff";
+      document.getElementById('flow-status-text').textContent = `Dispatch: Pinging nearest ${conf.name.split(' ')[0]} courier (Juma Mwangi)`;
+      logSim(`Bipartite Matching Engine: Found Courier Juma Mwangi for ${conf.badge} (Score: 94.2/100).`, 'cs');
     }
 
     // Step 4: Rider Accepts
     function step4_riderAccept() {
+      const conf = fleetConfig[selectedFleet];
       document.getElementById('rider-offer').classList.add('hidden');
       document.getElementById('rider-transit').classList.remove('hidden');
 
-      document.getElementById('cust-badge-status').textContent = "Rider Heading to Stall";
-      document.getElementById('cust-eta').textContent = "28 Mins (Express Care)";
+      document.getElementById('cust-badge-status').textContent = "Courier Heading to Stall";
+      document.getElementById('cust-eta').textContent = conf.eta;
       
       const pin = document.getElementById('nairobi-rider-pin');
       pin.style.left = "42px";
       pin.style.top = "32px";
 
-      document.getElementById('flow-status-text').textContent = "Rider Accepted: Atomic lock acquired. Juma picking up from City Market";
+      document.getElementById('flow-status-text').textContent = `Rider Accepted: Atomic lock acquired. Juma picking up ${conf.icon} from City Market`;
       logSim("Atomic Lock Acquired: redis.set('lock:order:8842', 440, NX) -> SUCCESS", 'cs');
-      logSim("Courier Juma Mwangi claimed gig. Insulated container verified.", 'success');
+      logSim(`Courier Juma Mwangi claimed gig. ${conf.badge} verified.`, 'success');
     }
 
     // Step 5: Rider Action
     function step5_riderAction() {
       const actionBtn = document.getElementById('btn-rider-action');
       const badge = document.getElementById('rider-stage-badge');
+      const conf = fleetConfig[selectedFleet];
 
       if (actionBtn.textContent.includes('Pickup')) {
         badge.textContent = "EN ROUTE TO RECIPIENT (WANJIKU)";
         badge.className = "text-[9px] font-bold text-rose-300 bg-rose-500/20 px-2 py-0.5 rounded";
-        actionBtn.textContent = "Hand Over Surprise to Recipient (Dropoff)";
+        actionBtn.textContent = "Hand Over Surprise to Recipient (Verify PIN)";
         actionBtn.className = "w-full py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs shadow-md transition";
 
-        document.getElementById('cust-badge-status').textContent = "Bike Transit via Ngong Rd";
+        document.getElementById('cust-badge-status').textContent = "Transit via Ngong Rd";
         document.getElementById('stg-3').className = "text-rose-400 font-bold";
         document.getElementById('cust-progress-bar').style.width = "75%";
-        document.getElementById('cust-eta').textContent = "12 Mins (Kilimani)";
+        document.getElementById('cust-eta').textContent = "10 Mins (Kilimani)";
 
         const pin = document.getElementById('nairobi-rider-pin');
         pin.style.left = "130px";
         pin.style.top = "60px";
 
+        // Reveal Grab Proof of Delivery PIN input
+        const podSection = document.getElementById('rider-pod-section');
+        if (podSection) podSection.classList.remove('hidden');
+
         document.getElementById('flow-status-text').textContent = "In Transit: Courier en route to Kilimani with secret surprise";
-        logSim("Bouquet secured in insulated container. Rider on Ngong Road heading to Kilimani.", 'action');
+        logSim(`Bouquet secured in insulated container. Rider on Ngong Road heading to Kilimani (${conf.icon} ${conf.badge}).`, 'action');
       } else {
         step6_delivered();
       }
@@ -1148,27 +1855,47 @@
 
     // Step 6: Delivered
     function step6_delivered() {
+      const conf = fleetConfig[selectedFleet];
       const pin = document.getElementById('nairobi-rider-pin');
       pin.style.left = "165px";
       pin.style.top = "75px";
 
       document.getElementById('cust-badge-status').textContent = "Surprise Delivered!";
-      document.getElementById('cust-badge-status').className = "px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
-      document.getElementById('stg-4').className = "text-emerald-400 font-bold";
+      document.getElementById('cust-badge-status').className = "px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#00B14F]/20 text-[#00E065] border border-[#00B14F]/40";
+      document.getElementById('stg-4').className = "text-[#00E065] font-bold";
       document.getElementById('cust-progress-bar').style.width = "100%";
-      document.getElementById('cust-progress-bar').className = "bg-emerald-400 h-full w-full transition-all duration-500";
+      document.getElementById('cust-progress-bar').className = "bg-[#00E065] h-full w-full transition-all duration-500";
       document.getElementById('cust-eta').textContent = "Delivered (Surprise Successful!)";
 
-      document.getElementById('rider-stage-badge').textContent = "DELIVERY COMPLETE";
-      document.getElementById('btn-rider-action').textContent = "Trip Complete (+KSh 350 Credited to M-Pesa)";
+      document.getElementById('rider-stage-badge').textContent = "DELIVERY COMPLETE (PIN 8842 VERIFIED)";
+      document.getElementById('btn-rider-action').textContent = `Trip Complete (+KSh ${conf.riderCut + (isMultiStop ? 120 : 0)} Credited to Driver Wallet)`;
       document.getElementById('btn-rider-action').disabled = true;
-      document.getElementById('btn-rider-action').className = "w-full py-2.5 rounded-xl bg-slate-800 text-emerald-300 font-bold text-xs border border-emerald-700";
+      document.getElementById('btn-rider-action').className = "w-full py-2.5 rounded-xl bg-slate-800 text-[#00E065] font-bold text-xs border border-emerald-700";
+
+      // Credit rider wallet
+      const riderEarnings = conf.riderCut + (isMultiStop ? 120 : 0);
+      riderWalletBalance += riderEarnings;
+      document.getElementById('rider-wallet-balance').textContent = `KSh ${riderWalletBalance.toLocaleString()}`;
+      const cashBtn = document.getElementById('btn-rider-cashout');
+      if (cashBtn) {
+        cashBtn.textContent = "⚡ Cash-Out";
+        cashBtn.className = "px-1.5 py-0.5 rounded bg-[#00B14F]/20 text-[#00E065] border border-[#00B14F]/40 text-[9px] hover:bg-[#00B14F] hover:text-black font-bold transition flex items-center gap-0.5";
+      }
+
+      const multiStopFee = isMultiStop ? 150 : 0;
+      const multiStopCents = isMultiStop ? 15000 : 0;
+      const total = 3800 + conf.cost + multiStopFee;
+      const totalCents = (3800 * 100) + conf.cents + multiStopCents;
+      const floristCutCents = 311600;
+      const riderCutCents = (conf.riderCutCents) + (isMultiStop ? 12000 : 0);
+      const platformMarginCents = totalCents - floristCutCents - riderCutCents;
+      const platformMargin = platformMarginCents / 100;
 
       const ledgerRows = document.getElementById('live-ledger-rows');
       ledgerRows.innerHTML = `
         <div class="flex justify-between text-amber-300">
           <span>DR 2010 Customer Escrow (Released)</span>
-          <span>415,000¢ (KSh 4,150)</span>
+          <span>${totalCents.toLocaleString()}¢ (KSh ${total.toLocaleString()})</span>
         </div>
         <div class="flex justify-between text-rose-300">
           <span>CR 2110 Florist Payable (Stall 42)</span>
@@ -1176,24 +1903,32 @@
         </div>
         <div class="flex justify-between text-amber-400">
           <span>CR 2120 Rider Payable (Juma)</span>
-          <span>28,000¢ (KSh 280)</span>
+          <span>${riderCutCents.toLocaleString()}¢ (KSh ${(riderCutCents/100).toLocaleString()})</span>
         </div>
-        <div class="flex justify-between text-emerald-400 font-bold">
+        <div class="flex justify-between text-[#00E065] font-bold">
           <span>CR 4010 Platform Margin (Net Profit)</span>
-          <span>75,400¢ (KSh 754)</span>
+          <span>${platformMarginCents.toLocaleString()}¢ (KSh ${platformMargin.toLocaleString()})</span>
         </div>
       `;
-      document.getElementById('ledger-balance-check').textContent = "415,000¢ == 415,000¢ (Zero Drift Verified)";
+      document.getElementById('ledger-balance-check').textContent = `${totalCents.toLocaleString()}¢ == ${totalCents.toLocaleString()}¢ (Zero Drift Verified)`;
 
-      document.getElementById('flow-status-text').textContent = "Completed: Order fulfilled in 31 mins. Immutable ledger settlement committed.";
-      logSim("Proof of Delivery photo verified. Recipient Wanjiku received surprise flowers.", 'success');
-      logSim("Double-Entry Ledger: Escrow released -> Florist credited KSh 3,116, Rider credited KSh 280, Platform Profit KSh 754.", 'cs');
+      document.getElementById('flow-status-text').textContent = "Completed: Order fulfilled with PIN authentication. Immutable ledger settlement committed.";
+      logSim("Grab Safety Shield: Recipient PIN 8842 verified. Photo Proof of Delivery stored.", 'success');
+      logSim(`Double-Entry Ledger: Escrow released -> Florist credited KSh 3,116, Rider credited KSh ${riderEarnings}, Platform Margin KSh ${platformMargin}.`, 'cs');
     }
 
     function resetFullDemo() {
       document.getElementById('cust-screen-catalog').classList.remove('hidden');
       document.getElementById('cust-screen-tracking').classList.add('hidden');
       document.getElementById('mpesa-modal').classList.add('hidden');
+      const maskedModal = document.getElementById('modal-masked-call');
+      if (maskedModal) maskedModal.classList.add('hidden');
+      const chatModal = document.getElementById('modal-quick-chat');
+      if (chatModal) chatModal.classList.add('hidden');
+      const shareModal = document.getElementById('modal-share-track');
+      if (shareModal) shareModal.classList.add('hidden');
+      const podSection = document.getElementById('rider-pod-section');
+      if (podSection) podSection.classList.add('hidden');
 
       document.getElementById('stg-2').className = "";
       document.getElementById('stg-3').className = "";
@@ -1236,7 +1971,7 @@
 
     function autoPlayDemo() {
       resetFullDemo();
-      logSim("Starting Automated Investor Pitch Sequence...", 'action');
+      logSim("Starting Automated Grab Superapp Pitch Sequence...", 'action');
 
       setTimeout(() => triggerMpesaCheckout(), 600);
       setTimeout(() => confirmMpesaPin(), 2400);
