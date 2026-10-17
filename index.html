@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CitiMarket Delivery - Enterprise Flower Logistics, G.R.A.B. Pitch &amp; Financial Engine</title>
+  <title>CitiMarket Delivery - Enterprise Flower Logistics, Fintech & Multi-Client Engine</title>
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <style>
     /* Custom Scrollbar */
@@ -43,13 +43,6 @@
     .tamper-alarm {
       animation: red-flash 1s infinite ease-in-out;
     }
-    @keyframes presenter-glow {
-      0%, 100% { box-shadow: 0 0 15px rgba(16, 185, 129, 0.3); }
-      50% { box-shadow: 0 0 25px rgba(244, 63, 94, 0.5); }
-    }
-    .presenter-active {
-      animation: presenter-glow 3s infinite ease-in-out;
-    }
   </style>
 </head>
 <body class="bg-[#030e0b] text-slate-100 min-h-screen font-sans antialiased flex flex-col selection:bg-rose-500 selection:text-white">
@@ -71,10 +64,10 @@
               CitiMarket <span class="text-rose-400 font-semibold text-sm">Delivery</span>
             </h1>
             <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 uppercase tracking-wider">
-              G.R.A.B. Pitch Edition
+              Hybrid B2B + B2C • Nairobi
             </span>
           </div>
-          <p class="text-xs text-emerald-400/70">On-Demand Cold-Chain Flower Logistics &amp; Financial Ledger</p>
+          <p class="text-xs text-emerald-400/70">On-Demand Merchant Logistics &amp; Consumer Gifting Ecosystem</p>
         </div>
       </div>
 
@@ -83,14 +76,14 @@
         <button id="nav-btn-sim" onclick="setTab('simulator')" class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition">
           🚀 Live Simulator
         </button>
-        <button id="nav-btn-grab" onclick="setTab('grab-pitch')" class="px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition">
-          📊 G.R.A.B. Pitch Deck
-        </button>
         <button id="nav-btn-ledger" onclick="setTab('ledger')" class="px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition">
-          ⚖️ Cryptographic Ledger
+          ⚖️ Cryptographic Ledger (CFO)
         </button>
         <button id="nav-btn-mobile" onclick="setTab('mobile-arch')" class="px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition">
-          📱 Phone &amp; Web Arch
+          📱 Web vs. Phone Architecture
+        </button>
+        <button id="nav-btn-cs" onclick="setTab('cs-engine')" class="px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition">
+          ⚙️ Engineering Concepts
         </button>
         <button id="nav-btn-branding" onclick="setTab('branding')" class="px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition">
           🎨 Branding
@@ -100,41 +93,18 @@
         </button>
       </div>
 
-      <!-- Quick Action Controls -->
+      <!-- Presentation Action Controls -->
       <div class="flex items-center gap-2">
-        <button onclick="togglePresenterPrompter()" id="btn-presenter" class="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold rounded-xl text-xs shadow-md transition">
-          <span>🎤 Presenter Mode</span>
+        <button onclick="autoPlayDemo()" id="btn-autoplay" class="flex items-center gap-1.5 px-3.5 py-1.5 bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-400 hover:to-rose-500 text-white font-bold rounded-xl text-xs shadow-lg shadow-rose-950/40 transition">
+          <span>⚡ Auto-Play Pitch (15s)</span>
         </button>
-        <button onclick="autoPlayDemo()" id="btn-autoplay" class="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-400 hover:to-rose-500 text-white font-bold rounded-xl text-xs shadow-lg shadow-rose-950/40 transition">
-          <span>⚡ Auto-Play (15s)</span>
-        </button>
-        <button onclick="resetFullDemo()" class="px-2.5 py-1.5 bg-[#09231b] hover:bg-[#0d3126] text-emerald-300 rounded-xl text-xs border border-emerald-800/40 transition">
+        <button onclick="resetFullDemo()" class="px-3 py-1.5 bg-[#09231b] hover:bg-[#0d3126] text-emerald-300 rounded-xl text-xs border border-emerald-800/40 transition">
           ↺ Reset
         </button>
       </div>
 
     </div>
   </header>
-
-  <!-- FLOATING PRESENTER PROMPTER (Toggleable) -->
-  <div id="presenter-prompter" class="hidden sticky top-[60px] z-40 bg-gradient-to-r from-[#061e17] via-[#092920] to-[#061e17] border-y border-emerald-500/40 px-5 py-2.5 shadow-2xl backdrop-blur">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
-      <div class="flex items-center gap-3">
-        <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping"></span>
-        <span id="prompt-stage-badge" class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold uppercase font-mono text-[10px]">
-          [1/4] G - GRAB THE ATTENTION
-        </span>
-        <p id="prompt-script-text" class="text-white font-medium text-xs">
-          "Kenya exports $1.1B in flowers, yet buying in Nairobi is broken by traffic. Watch this 45-minute cold-chain fix."
-        </p>
-      </div>
-      <div class="flex items-center gap-1.5">
-        <button onclick="navPrompter(-1)" class="px-2.5 py-1 bg-[#020b08] hover:bg-[#041410] border border-emerald-800 text-slate-300 rounded-lg text-xs">◀ Prev</button>
-        <button onclick="navPrompter(1)" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-500 font-bold text-white rounded-lg text-xs">Next Cue ▶</button>
-        <button onclick="togglePresenterPrompter()" class="ml-2 text-slate-400 hover:text-white text-xs">✕ Close</button>
-      </div>
-    </div>
-  </div>
 
   <!-- ================= TAB 1: LIVE MULTI-ROLE SIMULATOR ================= -->
   <main id="tab-simulator" class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-5">
@@ -159,13 +129,13 @@
         <div class="flex items-center bg-[#020b08] p-1 rounded-xl border border-emerald-900/60 text-[11px] font-medium">
           <span class="text-[10px] text-slate-400 px-2 font-mono">TARGET CUSTOMER:</span>
           <button id="cust-mod-b2c" onclick="switchCustomerModel('b2c')" class="px-2.5 py-1 rounded-lg bg-emerald-600 text-white font-semibold transition">
-            1. B2C Gifting
+            1. B2C Consumer Gifting
           </button>
           <button id="cust-mod-b2b" onclick="switchCustomerModel('b2b')" class="px-2.5 py-1 rounded-lg text-emerald-300 hover:text-white transition">
-            2. Merchant Direct (LaaS)
+            2. Merchant Direct (Logistics-as-a-Service)
           </button>
           <button id="cust-mod-corp" onclick="switchCustomerModel('corp')" class="px-2.5 py-1 rounded-lg text-emerald-300 hover:text-white transition">
-            3. Corporate
+            3. Corporate Account
           </button>
         </div>
       </div>
@@ -181,8 +151,8 @@
           <span id="hud-fixed-point" class="text-emerald-300 font-bold">415,000 cents (KES)</span>
         </div>
         <div class="p-2 rounded-lg bg-[#020b08] border border-emerald-950 flex justify-between items-center">
-          <span class="text-slate-400">VRPTW Batching:</span>
-          <span id="hud-vrptw-status" class="text-amber-300 font-bold">Optimal Multi-Drop (28.4% Margin)</span>
+          <span class="text-slate-400">Courier Telemetry:</span>
+          <span id="hud-dead-reckon" class="text-cyan-300 font-bold">Dead Reckoning (Smoothed)</span>
         </div>
         <div class="p-2 rounded-lg bg-[#020b08] border border-emerald-950 flex justify-between items-center">
           <span class="text-slate-400">Cryptographic Hash:</span>
@@ -594,13 +564,13 @@
           </div>
 
           <div class="grid grid-cols-2 gap-2 text-xs">
-            <button onclick="setTab('grab-pitch')" class="p-2.5 rounded-xl bg-[#03100c] hover:bg-[#07241b] border border-emerald-900 text-left transition">
-              <span class="text-[10px] text-slate-400 block">Venture Deck</span>
-              <strong class="text-white text-xs">📊 G.R.A.B. Pitch ➔</strong>
-            </button>
             <button onclick="setTab('ledger')" class="p-2.5 rounded-xl bg-[#03100c] hover:bg-[#07241b] border border-emerald-900 text-left transition">
               <span class="text-[10px] text-slate-400 block">Inspect Cryptographic</span>
               <strong class="text-white text-xs">⚖️ Hash Ledger Audit ➔</strong>
+            </button>
+            <button onclick="setTab('mobile-arch')" class="p-2.5 rounded-xl bg-[#03100c] hover:bg-[#07241b] border border-emerald-900 text-left transition">
+              <span class="text-[10px] text-slate-400 block">Inspect Device</span>
+              <strong class="text-white text-xs">📱 Phone &amp; Web Arch ➔</strong>
             </button>
           </div>
 
@@ -612,149 +582,7 @@
 
   </main>
 
-  <!-- ================= TAB 2: G.R.A.B. INVESTOR PITCH DECK & STRATEGY ================= -->
-  <section id="tab-grab-pitch" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
-    <div class="bg-[#061e17] border border-emerald-800/40 rounded-3xl p-6 space-y-6 shadow-2xl">
-      
-      <!-- Top Title -->
-      <div>
-        <div class="flex items-center gap-2">
-          <span class="text-xs font-bold text-rose-400 uppercase tracking-widest">G.R.A.B. Pitch Architecture</span>
-          <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Venture Capital Approved</span>
-        </div>
-        <h2 class="text-2xl font-bold text-white mt-1">The G.R.A.B. System: Why CitiMarket Delivery Wins</h2>
-        <p class="text-sm text-emerald-200/70 mt-2 max-w-3xl leading-relaxed">
-          How we leverage the multi-sided platform playbook (modeled on Grab &amp; Uber) to capture Kenya’s high-margin gifting logistics market.
-        </p>
-      </div>
-
-      <!-- G.R.A.B. 4-Pillar Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-        
-        <!-- G: Grab -->
-        <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-2.5">
-          <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-500/20 text-rose-300">G • GRAB ATTENTION</span>
-          <h4 class="font-bold text-white text-sm">The $1.1B Paradox</h4>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Kenya exports $1.1B in roses globally, but Nairobi's local market is paralyzed by 2.5-hour traffic gridlocks and 40% flower wilt rates.
-          </p>
-          <div class="text-[10px] text-emerald-400 font-mono font-bold">TAM: $120M Nairobi Gifting</div>
-        </div>
-
-        <!-- R: Relate -->
-        <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-2.5">
-          <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300">R • RELATE THE PAIN</span>
-          <h4 class="font-bold text-white text-sm">The 3-Sided Friction</h4>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Florists lose 45% of sales due to no delivery fleet; buyers panic at 2 PM on anniversaries; couriers lack delicate handling tools.
-          </p>
-          <div class="text-[10px] text-amber-300 font-mono font-bold">45% Florist Sales Lost Offline</div>
-        </div>
-
-        <!-- A: Advance -->
-        <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-2.5">
-          <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-500/20 text-cyan-300">A • ADVANCE THE MOAT</span>
-          <h4 class="font-bold text-white text-sm">Cold-Chain + VRPTW</h4>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Proprietary 18°C insulated bike brackets, H3 sub-4ms dispatch, and batched routing cutting courier costs by 53%.
-          </p>
-          <div class="text-[10px] text-cyan-300 font-mono font-bold">53% Drop in Courier Costs</div>
-        </div>
-
-        <!-- B: Bottom-Line -->
-        <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-2.5">
-          <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-500/20 text-purple-300">B • BOTTOM LINE</span>
-          <h4 class="font-bold text-white text-sm">The Grab Super-App</h4>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Expand from flowers $\rightarrow$ luxury perishables $\rightarrow$ B2B cold-chain API for all East African boutique retail.
-          </p>
-          <div class="text-[10px] text-purple-300 font-mono font-bold">LTV / CAC = 9.3x Ratio</div>
-        </div>
-
-      </div>
-
-      <!-- INTERACTIVE VRPTW ROUTE BATCHING COST COMPARATOR -->
-      <div class="bg-[#03100c] rounded-2xl border border-emerald-900/80 p-5 space-y-4">
-        <div class="flex flex-wrap justify-between items-center gap-2">
-          <div>
-            <h3 class="font-bold text-sm text-white">Interactive VRPTW Route Batching Cost Simulator</h3>
-            <p class="text-xs text-slate-400">See how multi-order bundling dramatically cuts delivery costs and expands gross margin.</p>
-          </div>
-          <span class="text-xs font-mono px-3 py-1 bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 rounded-lg">
-            Algorithm: Clarke-Wright Savings VRPTW
-          </span>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-          <div class="space-y-3">
-            <div class="flex justify-between text-xs">
-              <span class="text-slate-400">Select Order Batch Density per Courier Run:</span>
-              <strong id="vrptw-batch-label" class="text-emerald-400 text-sm">2 Orders Batched (Standard Run)</strong>
-            </div>
-            <input type="range" id="slider-vrptw" min="1" max="4" step="1" value="2" oninput="calculateVRPTW()" class="w-full accent-emerald-500 cursor-pointer">
-            <div class="flex justify-between text-[10px] text-slate-500 font-mono">
-              <span>1 Drop (Unbatched)</span>
-              <span>2 Drops (Ngong Rd Corridor)</span>
-              <span>3 Drops (Kilimani + Kileleshwa)</span>
-              <span>4 Drops (Peak Valentine's)</span>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 gap-3 text-xs font-mono">
-            <div class="p-3 rounded-xl bg-[#061e17] border border-emerald-800">
-              <span class="text-slate-400 text-[10px]">Courier Cost / Dropoff:</span>
-              <div id="vrptw-cost-per-drop" class="text-base font-bold text-amber-300 mt-1">KSh 175.00</div>
-              <span id="vrptw-cost-reduction" class="text-[9px] text-emerald-400">-50% vs unbatched</span>
-            </div>
-
-            <div class="p-3 rounded-xl bg-[#061e17] border border-emerald-500/40">
-              <span class="text-emerald-300 text-[10px] font-bold">Platform Gross Margin:</span>
-              <div id="vrptw-margin-val" class="text-base font-bold text-emerald-400 mt-1">28.4% Net</div>
-              <span id="vrptw-margin-boost" class="text-[9px] text-rose-300">+10.4% margin expansion</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- THE "GRAB PLAYBOOK" 3-PHASE EXPANSION ROADMAP -->
-      <div class="bg-[#03100c] rounded-2xl border border-emerald-900/80 p-5 space-y-4">
-        <h3 class="font-bold text-sm text-white">The "Grab" Multi-Category Expansion Playbook</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-          
-          <div class="p-4 rounded-xl bg-[#041410] border border-emerald-800/60 space-y-2">
-            <span class="text-[10px] uppercase font-bold text-rose-300">Phase 1: Present</span>
-            <h4 class="font-bold text-white text-sm">Dominate Nairobi Fresh Flowers</h4>
-            <p class="text-[11px] text-slate-300 leading-relaxed">
-              Capture 35% of City Market's daily volume. Establish fleet density in Kilimani, Westlands, and Karen with 45-min SLA guarantee.
-            </p>
-            <div class="text-[10px] text-emerald-400 font-mono">$30 AOV • 18% Marketplace Take</div>
-          </div>
-
-          <div class="p-4 rounded-xl bg-[#041410] border border-emerald-800/60 space-y-2">
-            <span class="text-[10px] uppercase font-bold text-amber-300">Phase 2: Month 6–12</span>
-            <h4 class="font-bold text-white text-sm">Luxury Perishables &amp; Gifting</h4>
-            <p class="text-[11px] text-slate-300 leading-relaxed">
-              Leverage the exact same 18°C cold-chain fleet for artisanal cakes, fine wines, luxury hampers, and gourmet gifting.
-            </p>
-            <div class="text-[10px] text-amber-300 font-mono">$45 AOV • Zero Additional Fleet Cost</div>
-          </div>
-
-          <div class="p-4 rounded-xl bg-[#041410] border border-emerald-800/60 space-y-2">
-            <span class="text-[10px] uppercase font-bold text-cyan-300">Phase 3: Year 2+</span>
-            <h4 class="font-bold text-white text-sm">B2B Cold-Chain Logistics API</h4>
-            <p class="text-[11px] text-slate-300 leading-relaxed">
-              Enable any e-commerce, pharmacy, or boutique brand across East Africa to embed CitiMarket cold-chain delivery into their checkout.
-            </p>
-            <div class="text-[10px] text-cyan-300 font-mono">The Cold-Chain Infrastructure of Africa</div>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ================= TAB 3: CRYPTOGRAPHIC HASH LEDGER ================= -->
+  <!-- ================= TAB 2: CRYPTOGRAPHIC HASH LEDGER (CFO DEEP DIVE WITH TAMPER TEST) ================= -->
   <section id="tab-ledger" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
     <div class="bg-[#061e17] border border-emerald-800/40 rounded-3xl p-6 space-y-6 shadow-2xl">
       
@@ -770,6 +598,7 @@
           </p>
         </div>
 
+        <!-- Interactive Tamper Test Controls -->
         <div class="flex items-center gap-2 bg-[#020b08] p-2 rounded-2xl border border-emerald-900">
           <button onclick="simulateTampering()" id="btn-tamper" class="px-3 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs shadow-md shadow-rose-950/50 transition flex items-center gap-1.5">
             <span>🚨 Simulate Malicious Database Alteration</span>
@@ -780,6 +609,7 @@
         </div>
       </div>
 
+      <!-- Tampering Alert Banner (Shows when tampered) -->
       <div id="tamper-alert" class="hidden p-4 rounded-2xl bg-rose-950/80 border-2 border-rose-500 text-rose-200 text-xs flex items-center justify-between gap-4 tamper-alarm shadow-2xl">
         <div class="flex items-center gap-3">
           <span class="text-2xl">🚨</span>
@@ -793,7 +623,9 @@
         </span>
       </div>
 
+      <!-- Cryptographic Hash Chain Blocks -->
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs font-mono">
+        
         <div id="block-1" class="p-4 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-2">
           <div class="flex justify-between text-[10px]">
             <span class="text-emerald-400 font-bold">BLOCK #1: M-PESA CASH IN</span>
@@ -853,41 +685,142 @@
             CurrHash: 0x3b89f2a01784c491
           </div>
         </div>
+
       </div>
+
     </div>
   </section>
 
-  <!-- ================= TAB 4: WEB VS PHONE DISTRIBUTED ARCHITECTURE ================= -->
+  <!-- ================= TAB 3: WEB VS PHONE DISTRIBUTED ARCHITECTURE ================= -->
   <section id="tab-mobile-arch" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
     <div class="bg-[#061e17] border border-emerald-800/40 rounded-3xl p-6 space-y-6 shadow-2xl">
+      
       <div>
         <span class="text-xs font-bold text-cyan-400 uppercase tracking-widest">Multi-Client Distributed Systems</span>
         <h2 class="text-2xl font-bold text-white mt-1">Web vs. Phone Architecture: Handling Real-World Nairobi Logistics</h2>
+        <p class="text-sm text-emerald-200/70 mt-2 max-w-3xl leading-relaxed">
+          How CitiMarket Delivery solves battery consumption, network dropouts in concrete buildings, and desktop-to-mobile synchronization across 4 device types.
+        </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        
         <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
           <div class="w-9 h-9 rounded-xl bg-cyan-500/20 text-cyan-300 flex items-center justify-center text-lg font-bold">📡</div>
           <h4 class="font-bold text-white text-sm">1. Offline-First Sync &amp; CRDTs (Courier Phone)</h4>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Encrypted <strong>local SQLite write-ahead queue</strong>. The rider confirms delivery offline in basements; syncs automatically with exponential backoff once 4G returns.
+            Nairobi cell service drops in basement parking or building lobbies. The courier mobile app uses an encrypted <strong>local SQLite write-ahead queue</strong>. The rider confirms delivery offline; the signed receipt synchronizes automatically with exponential backoff once 4G returns.
           </p>
+          <div class="p-2.5 rounded-xl bg-[#020b08] font-mono text-[9.5px] text-cyan-300">
+            OfflineQueue.append({ event: "DELIVERED", sig: "ECDSA_440", ts: 1729158291 })
+          </div>
         </div>
 
         <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
           <div class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center text-lg font-bold">🔋</div>
           <h4 class="font-bold text-white text-sm">2. Kalman GPS Filter &amp; Dead Reckoning</h4>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Transmits GPS coordinates only when the courier moves $>15$m or turns $>20^\circ$. Cuts battery drain by <strong>78%</strong> while customer phone glides smoothly at 60fps.
+            Continuous GPS pings drain courier phone batteries in 90 minutes. CitiMarket transmits telemetry only when the courier moves $>15$m or turns $>20^\circ$. The customer phone uses <strong>client-side Dead Reckoning</strong> to smoothly interpolate the motorcycle icon along curves at 60fps.
           </p>
+          <div class="p-2.5 rounded-xl bg-[#020b08] font-mono text-[9.5px] text-amber-300">
+            Battery Consumption: -78% • Map Smoothness: 60fps Interpolated
+          </div>
         </div>
 
         <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
           <div class="w-9 h-9 rounded-xl bg-rose-500/20 text-rose-300 flex items-center justify-center text-lg font-bold">🔔</div>
           <h4 class="font-bold text-white text-sm">3. WebSockets + Silent Push (Florist Web)</h4>
           <p class="text-xs text-slate-300 leading-relaxed">
-            Low-latency WebSocket duplex connection with keep-alive pinging, falling back to background Firebase Cloud Messaging (FCM) audio chimes.
+            Florists at City Market use desktop laptops or tablets. CitiMarket maintains a low-latency <strong>WebSocket duplex connection with keep-alive pinging</strong>, falling back to background Firebase Cloud Messaging (FCM) audio chimes to alert the stall immediately upon order placement.
           </p>
+          <div class="p-2.5 rounded-xl bg-[#020b08] font-mono text-[9.5px] text-rose-300">
+            Latency: &lt;45ms • Sound Alert: Automated Audio Chime on New Order
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= TAB 4: ENGINEERING CONCEPTS & IMPORTANCE ================= -->
+  <section id="tab-cs-engine" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
+    <div class="bg-[#061e17] border border-emerald-800/40 rounded-3xl p-6 space-y-6 shadow-2xl">
+      <div>
+        <span class="text-xs font-bold text-rose-400 uppercase tracking-widest">Engineering Architecture</span>
+        <h2 class="text-2xl font-bold text-white mt-1">Engineering Concepts Powering CitiMarket Delivery</h2>
+        <p class="text-sm text-emerald-200/70 mt-2 max-w-3xl leading-relaxed">
+          The technical foundations ensuring CitiMarket Delivery scales from 50 orders a day to 50,000 without server crashes, ghost couriers, lost payments, or wilted flowers.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300">1. Spatial Data Structures</span>
+            <code class="text-xs text-emerald-400 font-mono">Uber H3 / PostGIS R-Tree</code>
+          </div>
+          <h4 class="font-bold text-white text-sm">Hexagonal Hierarchical Spatial Indexing</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Instead of calculating costly distance formulas across all drivers ($O(N)$), Nairobi is partitioned into discrete H3 hexagonal cells. Finding all active couriers around City Market is an $O(1)$ constant-time lookup.
+          </p>
+          <div class="p-3 rounded-xl bg-emerald-950/60 border border-emerald-700/50 space-y-1">
+            <span class="text-[10px] uppercase font-bold text-emerald-300 tracking-wider">⚡ Importance to Business &amp; Operations:</span>
+            <p class="text-[11px] text-emerald-200 leading-snug">
+              Eliminates database freezes during peak surges (Valentine’s Day, Mother’s Day). Queries respond in <strong>under 4 milliseconds</strong> regardless of rider volume.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300">2. Operations Research</span>
+            <code class="text-xs text-amber-400 font-mono">Kuhn-Munkres / Bipartite</code>
+          </div>
+          <h4 class="font-bold text-white text-sm">Maximum-Weight Bipartite Dispatch Engine</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Computes an optimal matching between all pending orders and active riders in the dispatch batch, minimizing total fleet transit time and flower dehydration risk.
+          </p>
+          <div class="p-3 rounded-xl bg-amber-950/60 border border-amber-700/50 space-y-1">
+            <span class="text-[10px] uppercase font-bold text-amber-300 tracking-wider">⚡ Importance to Business &amp; Operations:</span>
+            <p class="text-[11px] text-amber-200 leading-snug">
+              Cuts fleet travel times by <strong>35%</strong> and lowers rider fuel burn. Keeping stems hydrated eliminates wilted return claims.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-rose-500/20 text-rose-300">3. Concurrency Control</span>
+            <code class="text-xs text-rose-400 font-mono">Redis Redlock &amp; OCC</code>
+          </div>
+          <h4 class="font-bold text-white text-sm">Atomic Gig Claiming &amp; Optimistic Locking</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Prevents race conditions where two riders claim the same bouquet simultaneously using Redis atomic primitives with a lease TTL and Optimistic Concurrency Control (`version_id`).
+          </p>
+          <div class="p-3 rounded-xl bg-rose-950/60 border border-rose-700/50 space-y-1">
+            <span class="text-[10px] uppercase font-bold text-rose-300 tracking-wider">⚡ Importance to Business &amp; Operations:</span>
+            <p class="text-[11px] text-rose-200 leading-snug">
+              Guarantees <strong>zero double-assignments</strong> and prevents rider conflict at City Market stalls.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-purple-500/20 text-purple-300">4. Distributed Transactions</span>
+            <code class="text-xs text-purple-400 font-mono">Saga Orchestrator</code>
+          </div>
+          <h4 class="font-bold text-white text-sm">Saga Pattern with Automated Compensating Reversals</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Maintains data consistency across Safaricom M-Pesa, florist inventory, and courier dispatch. If an edge case occurs, automated reversals refund the buyer instantly.
+          </p>
+          <div class="p-3 rounded-xl bg-purple-950/60 border border-purple-700/50 space-y-1">
+            <span class="text-[10px] uppercase font-bold text-purple-300 tracking-wider">⚡ Importance to Business &amp; Operations:</span>
+            <p class="text-[11px] text-purple-200 leading-snug">
+              Protects customer trust. If courier matching fails, money is <strong>automatically refunded within seconds</strong> via M-Pesa B2C.
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -899,6 +832,9 @@
       <div>
         <span class="text-xs font-bold text-rose-400 uppercase tracking-widest">Brand System &amp; Design Standards</span>
         <h2 class="text-2xl font-bold text-white mt-1">CitiMarket Delivery: Branding &amp; Visual Identity</h2>
+        <p class="text-sm text-emerald-200/70 mt-2 max-w-3xl leading-relaxed">
+          CitiMarket Delivery combines the historic heritage of Nairobi's premier flower hub with modern, white-glove luxury gifting logistics.
+        </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -980,84 +916,6 @@
   <!-- JAVASCRIPT STATE ENGINE & INTERACTIVE WORKFLOW -->
   <script>
     let activeCustomerModel = 'b2c';
-    let prompterStep = 0;
-
-    const prompterCues = [
-      {
-        badge: "[1/4] G - GRAB THE ATTENTION",
-        script: "Hook: 'Kenya exports $1.1B in roses, yet buying in Nairobi takes 3 hours in traffic. CitiMarket cuts this to 45 mins with on-demand cold chain.'",
-        action: () => { setTab('simulator'); }
-      },
-      {
-        badge: "[2/4] R - RELATE THE PAIN",
-        script: "Friction: 'Florists lose 45% of orders because they have no riders. Buyers panic at 2 PM. We are their instant outsourced fleet.'",
-        action: () => { setTab('grab-pitch'); }
-      },
-      {
-        badge: "[3/4] A - ADVANCE THE MOAT",
-        script: "Moat: 'Generic couriers carry hot pizza destroying roses. Our insulated upright containers and VRPTW route batching cut delivery costs by 53%.'",
-        action: () => { setTab('grab-pitch'); }
-      },
-      {
-        badge: "[4/4] B - BOTTOM-LINE & SCALE",
-        script: "The Math: 'At 250 orders/day, we generate KSh 38M ARR at an exceptional 9.3x LTV/CAC ratio, expanding across East Africa.'",
-        action: () => { setTab('calculator'); }
-      }
-    ];
-
-    function togglePresenterPrompter() {
-      const p = document.getElementById('presenter-prompter');
-      p.classList.toggle('hidden');
-      updatePrompter();
-    }
-
-    function navPrompter(direction) {
-      prompterStep = (prompterStep + direction + prompterCues.length) % prompterCues.length;
-      updatePrompter();
-    }
-
-    function updatePrompter() {
-      const cue = prompterCues[prompterStep];
-      document.getElementById('prompt-stage-badge').textContent = cue.badge;
-      document.getElementById('prompt-script-text').textContent = cue.script;
-      if (cue.action) cue.action();
-    }
-
-    // VRPTW Calculator Logic
-    function calculateVRPTW() {
-      const drops = parseInt(document.getElementById('slider-vrptw').value);
-      const label = document.getElementById('vrptw-batch-label');
-      const costEl = document.getElementById('vrptw-cost-per-drop');
-      const redEl = document.getElementById('vrptw-cost-reduction');
-      const marginEl = document.getElementById('vrptw-margin-val');
-      const boostEl = document.getElementById('vrptw-margin-boost');
-
-      if (drops === 1) {
-        label.textContent = "1 Order (Unbatched Solo Ride)";
-        costEl.textContent = "KSh 350.00";
-        redEl.textContent = "Baseline courier cost";
-        marginEl.textContent = "18.0% Net";
-        boostEl.textContent = "Standard take rate";
-      } else if (drops === 2) {
-        label.textContent = "2 Orders Batched (Standard Run)";
-        costEl.textContent = "KSh 175.00";
-        redEl.textContent = "-50% courier cost reduction";
-        marginEl.textContent = "28.4% Net";
-        boostEl.textContent = "+10.4% margin expansion";
-      } else if (drops === 3) {
-        label.textContent = "3 Orders Batched (Kilimani Corridor)";
-        costEl.textContent = "KSh 116.60";
-        redEl.textContent = "-66.7% courier cost reduction";
-        marginEl.textContent = "34.1% Net";
-        boostEl.textContent = "+16.1% margin expansion";
-      } else if (drops === 4) {
-        label.textContent = "4 Orders Batched (Peak Holiday Cluster)";
-        costEl.textContent = "KSh 87.50";
-        redEl.textContent = "-75% courier cost reduction";
-        marginEl.textContent = "38.5% Net";
-        boostEl.textContent = "+20.5% margin expansion";
-      }
-    }
 
     function switchCustomerModel(model) {
       activeCustomerModel = model;
@@ -1086,6 +944,7 @@
       }
     }
 
+    // Interactive Tamper Simulation
     function simulateTampering() {
       document.getElementById('tamper-alert').classList.remove('hidden');
       
@@ -1137,13 +996,13 @@
     }
 
     function setTab(tab) {
-      const allTabs = ['simulator', 'grab-pitch', 'ledger', 'mobile-arch', 'branding', 'calculator'];
+      const allTabs = ['simulator', 'ledger', 'mobile-arch', 'cs-engine', 'branding', 'calculator'];
       allTabs.forEach(t => {
         const el = document.getElementById(`tab-${t}`);
         if (el) el.classList.add('hidden');
       });
 
-      const navs = ['sim', 'grab', 'ledger', 'mobile', 'branding', 'calc'];
+      const navs = ['sim', 'ledger', 'mobile', 'cs', 'branding', 'calc'];
       navs.forEach(n => {
         const btn = document.getElementById(`nav-btn-${n}`);
         if (btn) btn.className = 'px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition';
@@ -1152,15 +1011,15 @@
       if (tab === 'simulator') {
         document.getElementById('tab-simulator').classList.remove('hidden');
         document.getElementById('nav-btn-sim').className = 'px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition';
-      } else if (tab === 'grab-pitch') {
-        document.getElementById('tab-grab-pitch').classList.remove('hidden');
-        document.getElementById('nav-btn-grab').className = 'px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition';
       } else if (tab === 'ledger') {
         document.getElementById('tab-ledger').classList.remove('hidden');
         document.getElementById('nav-btn-ledger').className = 'px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition';
       } else if (tab === 'mobile-arch') {
         document.getElementById('tab-mobile-arch').classList.remove('hidden');
         document.getElementById('nav-btn-mobile').className = 'px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition';
+      } else if (tab === 'cs-engine') {
+        document.getElementById('tab-cs-engine').classList.remove('hidden');
+        document.getElementById('nav-btn-cs').className = 'px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition';
       } else if (tab === 'branding') {
         document.getElementById('tab-branding').classList.remove('hidden');
         document.getElementById('nav-btn-branding').className = 'px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition';
@@ -1170,6 +1029,7 @@
       }
     }
 
+    // Step 1: M-Pesa STK Prompt
     function triggerMpesaCheckout() {
       document.getElementById('mpesa-modal').classList.remove('hidden');
       logSim("Initiated Lipa na M-Pesa STK Push to buyer (0722-XXX-XXX)", 'mpesa');
@@ -1179,6 +1039,7 @@
       document.getElementById('mpesa-modal').classList.add('hidden');
     }
 
+    // Step 1B: Confirm M-Pesa PIN
     function confirmMpesaPin() {
       document.getElementById('mpesa-modal').classList.add('hidden');
       document.getElementById('cust-screen-catalog').classList.add('hidden');
@@ -1208,6 +1069,7 @@
       logSim("Dispatch bus: Order #CMD-8842 sent to City Market Florist Stall 42", 'action');
     }
 
+    // Step 2: Florist Arranges
     function step2_floristArrange() {
       const btn = document.getElementById('btn-florist-arrange');
       btn.textContent = "✓ In Arrangement (Stems Trimmed)";
@@ -1226,6 +1088,7 @@
       logSim("Florist at City Market confirmed fresh Naivasha roses arranged with handwritten note.", 'action');
     }
 
+    // Step 3: Florist Ready
     function step3_floristReady() {
       const readyBtn = document.getElementById('btn-florist-ready');
       readyBtn.textContent = "✓ Packaged in Water Vial";
@@ -1239,6 +1102,7 @@
       logSim("Bipartite Matching Engine: Found Courier Juma Mwangi (Score: 94.2/100).", 'cs');
     }
 
+    // Step 4: Rider Accepts
     function step4_riderAccept() {
       document.getElementById('rider-offer').classList.add('hidden');
       document.getElementById('rider-transit').classList.remove('hidden');
@@ -1255,6 +1119,7 @@
       logSim("Courier Juma Mwangi claimed gig. Insulated container verified.", 'success');
     }
 
+    // Step 5: Rider Action
     function step5_riderAction() {
       const actionBtn = document.getElementById('btn-rider-action');
       const badge = document.getElementById('rider-stage-badge');
@@ -1281,6 +1146,7 @@
       }
     }
 
+    // Step 6: Delivered
     function step6_delivered() {
       const pin = document.getElementById('nairobi-rider-pin');
       pin.style.left = "165px";
