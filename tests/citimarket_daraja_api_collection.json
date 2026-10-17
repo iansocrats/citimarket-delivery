@@ -1,0 +1,196 @@
+{
+  "info": {
+    "name": "CitiMarket Delivery API Suite (Daraja & Telephony)",
+    "_postman_id": "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
+    "description": "Production Postman / Bruno collection for CitiMarket Delivery API contracts: Safaricom Daraja C2B STK Push, B2C Instant Driver Cash-Out, Africa's Talking Number Masking, and Salted PIN Proof of Delivery.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "orderId",
+      "value": "CMD-8842",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('Service reports UP', function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.status).to.eql('UP');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Safaricom C2B STK Push (Lipa na M-Pesa)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"phone_number\": \"254712449821\",\n  \"amount\": 3850,\n  \"order_number\": \"CMD-8842\",\n  \"account_reference\": \"CitiMarket-8842\",\n  \"transaction_desc\": \"Fresh Flower Gift Delivery\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/payments/mpesa/stkpush",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "payments", "mpesa", "stkpush"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('Returns valid Merchant and Checkout Request IDs', function () {",
+              "    var json = pm.response.json();",
+              "    pm.expect(json).to.have.property('MerchantRequestID');",
+              "    pm.expect(json).to.have.property('CheckoutRequestID');",
+              "    pm.expect(json.ResponseCode).to.eql('0');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Safaricom B2C Instant Driver Cash-Out",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "X-Idempotency-Key", "value": "B2C-PAYOUT-CMD-8842-RIDER" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"courier_id\": \"c71a3401-449e-4c2f-b011-893047a04910\",\n  \"phone_number\": \"254722000000\",\n  \"amount_cents\": 28000,\n  \"command_id\": \"SalaryPayment\",\n  \"remarks\": \"Delivery CMD-8842 Payout\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/payments/mpesa/b2c-disburse",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "payments", "mpesa", "b2c-disburse"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('B2C payout successfully confirmed', function () {",
+              "    var json = pm.response.json();",
+              "    pm.expect(json.Result.ResultCode).to.eql(0);",
+              "    pm.expect(json.Result.TransactionID).to.be.a('string');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Africa's Talking Masked VoIP Proxy Bridge",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"isActive\": \"1\",\n  \"direction\": \"Inbound\",\n  \"callerNumber\": \"+254712449821\",\n  \"destinationNumber\": \"+254207904821\",\n  \"sessionId\": \"AT-VOICE-SESSION-994182\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/telephony/voice-bridge",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "telephony", "voice-bridge"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('Returns valid XML Dial instructions with caller masking', function () {",
+              "    pm.expect(pm.response.text()).to.include('<Dial');",
+              "    pm.expect(pm.response.text()).to.include('callerId=\"+254207904821\"');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Cryptographic Salted PIN Verification",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"entered_pin\": \"8842\",\n  \"order_id\": \"CMD-8842\",\n  \"salt\": \"e0d1f2a3b4c5d6e7\",\n  \"expected_hash\": \"798399e527d91e604ec282054c256038a834278e3f4eef5889bc83beeb7e890c\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders/verify-pin",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "orders", "verify-pin"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('PIN hash verified with zero knowledge', function () {",
+              "    var json = pm.response.json();",
+              "    pm.expect(json.verified).to.eql(true);",
+              "    pm.expect(json.proof_token).to.be.a('string');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    }
+  ]
+}

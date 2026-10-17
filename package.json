@@ -5,7 +5,9 @@
   "main": "index.html",
   "scripts": {
     "start": "npx serve .",
-    "test": "node scripts/verify_ledger_invariants.js"
+    "test": "node scripts/verify_ledger_invariants.js",
+    "standup": "node scripts/daily_standup_bot.js",
+    "mock:server": "node scripts/mock_daraja_server.js"
   },
   "keywords": [
     "delivery",
