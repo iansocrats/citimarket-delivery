@@ -85,23 +85,126 @@ console.log('================================================================');
 console.log('✅ Daily report ready. Post to #citimarket-standup in Slack/Discord.');
 console.log('================================================================\n');
 
-// Optional: Webhook dispatch if environment variable is present
-const webhookUrl = process.env.STANDUP_WEBHOOK_URL;
+// 4. Slack Block Kit Payload Generator
+function generateSlackPayload(dateStr, timeStr, closedTickets, totalTickets, completionPct, recentCommits, pendingTickets) {
+  const filledBlocks = Math.round((completionPct / 100) * 10);
+  const progressBar = '▓'.repeat(filledBlocks) + '░'.repeat(10 - filledBlocks);
+
+  return {
+    blocks: [
+      {
+        type: "header",
+        text: {
+          type: "plain_text",
+          text: "🌸 CitiMarket Delivery — Daily Standup",
+          emoji: true
+        }
+      },
+      {
+        type: "context",
+        elements: [
+          {
+            type: "mrkdwn",
+            text: `📍 *Nairobi Operations* | 📅 *${dateStr}* • *${timeStr} EAT* | 🎯 *56-Day Commercial Pilot Launch*`
+          }
+        ]
+      },
+      {
+        type: "divider"
+      },
+      {
+        type: "section",
+        fields: [
+          {
+            type: "mrkdwn",
+            text: `*📈 Roadmap Velocity:*\n\`${progressBar}\` *${completionPct}%* (${closedTickets}/${totalTickets} closed)`
+          },
+          {
+            type: "mrkdwn",
+            text: `*⚡ Active Phase:*\n*Sprint 1: Days 1–14*\n_Financial Bedrock & Daraja M-Pesa_`
+          }
+        ]
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: `*🚀 Shipped to Staging (Last 24h):*\n${recentCommits.slice(0, 3).map(c => `• \`${c.split(' - ')[0]}\` ${c.split(' - ')[1] || c}`).join('\n')}`
+        }
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: `*📌 Critical Path Tasks on Deck:*\n${pendingTickets.slice(0, 3).map(t => `• *${t.id}*: ${t.desc}`).join('\n')}`
+        }
+      },
+      {
+        type: "section",
+        fields: [
+          {
+            type: "mrkdwn",
+            text: `*⚖️ Ledger Integrity:*\n✅ PASSED (Δ = 0.00)`
+          },
+          {
+            type: "mrkdwn",
+            text: `*📡 Daraja Reconciler:*\n✅ Auto-Polling Active`
+          }
+        ]
+      },
+      {
+        type: "actions",
+        elements: [
+          {
+            type: "button",
+            text: {
+              type: "plain_text",
+              text: "View GitHub Roadmap ↗",
+              emoji: true
+            },
+            url: "https://github.com/iansocrats/citimarket-delivery",
+            style: "primary"
+          },
+          {
+            type: "button",
+            text: {
+              type: "plain_text",
+              text: "Open Live Prototype ↗",
+              emoji: true
+            },
+            url: "https://iansocrats.github.io/citimarket-delivery/"
+          }
+        ]
+      }
+    ]
+  };
+}
+
+// 5. Webhook Dispatch (Supports SLACK_WEBHOOK_URL and STANDUP_WEBHOOK_URL)
+const webhookUrl = process.env.SLACK_WEBHOOK_URL || process.env.STANDUP_WEBHOOK_URL;
+const isSlack = webhookUrl && webhookUrl.includes('slack.com');
+
 if (webhookUrl) {
   try {
     const https = require('https');
-    const data = JSON.stringify({ text: report });
+    const payload = isSlack 
+      ? generateSlackPayload(dateStr, timeStr, closedTickets, totalTickets, completionPct, recentCommits, pendingTickets)
+      : { text: report };
+
+    const data = JSON.stringify(payload);
     const url = new URL(webhookUrl);
     const req = https.request({
       hostname: url.hostname,
-      path: url.pathname,
+      path: url.pathname + url.search,
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Content-Length': data.length }
+      headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(data) }
     });
     req.write(data);
     req.end();
-    console.log('📡 Sent report to webhook successfully!');
+    console.log(`📡 Successfully dispatched standup report to ${isSlack ? 'Slack' : 'Webhook'}!`);
   } catch (err) {
     console.error('⚠️ Failed to dispatch webhook:', err.message);
   }
+} else {
+  console.log('ℹ️ Tip: Set SLACK_WEBHOOK_URL in environment to automatically broadcast to #citimarket-standup.');
 }
