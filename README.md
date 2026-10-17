@@ -28,13 +28,13 @@ CitiMarket Delivery digitizes the historic flower stalls at City Market (Muindi 
    - Cryptographically verifiable T-Accounts (Assets, Liabilities, Accounts Payable, Net Platform Take Rate).
    - Strict audit invariant: $\sum \text{Debits} \equiv \sum \text{Credits}$ ($\Delta = 0.00$).
 
-5. **Grab Superapp Feature Engine (from [grab.com/sg](https://www.grab.com/sg/))**:
-   - **GrabExpress Multi-Tier Fleets**: Express Boda Boda (35-45m), Climate-Controlled Cool-Van (AC 18°C for delicate hydrangeas/lilies), and Saver Batch Delivery (-35% discount).
+5. **Superapp Feature Suite (On-Demand Logistics & Safety Engine)**:
+   - **CitiExpress™ Multi-Tier Fleets**: Express Boda Boda (35-45m), Climate-Controlled Cool-Van (AC 18°C for delicate hydrangeas/lilies), and Saver Batch Delivery (-35% discount).
    - **Multi-Stop Drop-Off**: Multi-destination routing (e.g. Kilimani + Westlands in a single dispatch).
-   - **GrabPay Wallet & FlowerPoints**: 10 FlowerPoints earned per KSh 1,000 spent, stored value balance.
-   - **Grab Safety Shield**: Masked VoIP proxy calling (`+254 20 790 4821`), in-app quick chat, 4-digit recipient PIN proof-of-delivery (`8842`), and CitiFresh™ freshness guarantee.
-   - **Grab Driver Instant M-Pesa Cash-Out**: 1-click B2C liquidity payout for couriers immediately upon PIN escrow release.
-   - **GrabMerchant Prep Pacing**: JIT courier dispatch synchronization to minimize flower exposure.
+   - **Stored Wallet & FlowerPoints**: 10 FlowerPoints earned per KSh 1,000 spent, stored value balance.
+   - **Safety Shield & Privacy**: Masked VoIP proxy calling (`+254 20 790 4821`), in-app quick chat, 4-digit recipient PIN proof-of-delivery (`8842`), and CitiFresh™ freshness guarantee.
+   - **Driver Instant M-Pesa Cash-Out**: 1-click B2C liquidity payout for couriers immediately upon PIN escrow release.
+   - **Merchant Prep Pacing**: JIT courier dispatch synchronization to minimize flower exposure.
 
 6. **Engineering Architecture**:
    - **Spatial Indexing**: Uber H3 Resolution 8 Hexagons (`0x887a40660ffffff`).
