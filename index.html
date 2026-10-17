@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CitiMarket Delivery - Fresh Flower Logistics & Financial Engine</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(52, 211, 153, 0.2); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(52, 211, 153, 0.4); }
+
+    .phone-shell {
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 0 10px #061e16, 0 0 0 12px #0f382c;
+    }
+    
+    @keyframes pulse-bloom {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.08); opacity: 0.85; }
+    }
+    .pulse-rider {
+      animation: pulse-bloom 2s infinite ease-in-out;
+    }
+
+    @keyframes slide-down {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .animate-toast {
+      animation: slide-down 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .h3-hex {
+      stroke: #10b981;
+      stroke-width: 1;
+      fill: rgba(16, 185, 129, 0.08);
+    }
+  </style>
+</head>
+<body class="bg-[#030e0b] text-slate-100 min-h-screen font-sans antialiased flex flex-col selection:bg-rose-500 selection:text-white">
+
+  <!-- TOP BRANDING & MULTI-TAB PRESENTATION BAR -->
+  <header class="border-b border-emerald-950/80 bg-[#061a14]/95 backdrop-blur sticky top-0 z-50 px-5 py-3">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+      
+      <!-- Logo & Brand Identity -->
+      <div class="flex items-center gap-3">
+        <div class="h-11 w-11 rounded-2xl bg-gradient-to-tr from-emerald-600 via-teal-500 to-rose-400 p-[1px] shadow-lg shadow-emerald-950/50 flex items-center justify-center">
+          <div class="h-full w-full bg-[#061a14] rounded-2xl flex items-center justify-center text-xl">
+            🌸
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-extrabold text-lg text-white tracking-tight flex items-center gap-1.5">
+              CitiMarket <span class="text-rose-400 font-semibold text-sm">Delivery</span>
+            </h1>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 uppercase tracking-wider">
+              Nairobi • KES
+            </span>
+          </div>
+          <p class="text-xs text-emerald-400/70">On-Demand & Scheduled Fresh Flower Logistics Ecosystem</p>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="flex items-center bg-[#020b08] p-1 rounded-xl border border-emerald-900/40 text-xs font-medium">
+        <button id="nav-btn-sim" onclick="setTab('simulator')" class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition">
+          🚀 Live Simulator
+        </button>
+        <button id="nav-btn-ledger" onclick="setTab('ledger')" class="px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition">
+          ⚖️ Double-Entry Ledger (CFO)
+        </button>
+        <button id="nav-btn-cs" onclick="setTab('cs-engine')" class="px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition">
+          ⚙️ Engineering Concepts
+        </button>
+        <button id="nav-btn-branding" onclick="setTab('branding')" class="px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition">
+          🎨 Branding
+        </button>
+        <button id="nav-btn-calc" onclick="setTab('calculator')" class="px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition">
+          💰 Unit Economics (KES)
+        </button>
+      </div>
+
+      <!-- Presentation Action Controls -->
+      <div class="flex items-center gap-2">
+        <button onclick="autoPlayDemo()" id="btn-autoplay" class="flex items-center gap-1.5 px-3.5 py-1.5 bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-400 hover:to-rose-500 text-white font-bold rounded-xl text-xs shadow-lg shadow-rose-950/40 transition">
+          <span>⚡ Auto-Play Pitch (15s)</span>
+        </button>
+        <button onclick="resetFullDemo()" class="px-3 py-1.5 bg-[#09231b] hover:bg-[#0d3126] text-emerald-300 rounded-xl text-xs border border-emerald-800/40 transition">
+          ↺ Reset
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================= TAB 1: LIVE MULTI-ROLE SIMULATOR ================= -->
+  <main id="tab-simulator" class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-5">
+
+    <!-- Active Presentation State & Real-Time CS / Ledger HUD -->
+    <div class="bg-gradient-to-r from-[#07241b] via-[#0b3327] to-[#07241b] border border-emerald-700/30 rounded-2xl p-4 shadow-xl space-y-3">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="relative">
+            <div class="w-3.5 h-3.5 rounded-full bg-emerald-400"></div>
+            <div class="w-3.5 h-3.5 rounded-full bg-emerald-400 absolute top-0 left-0 animate-ping opacity-75"></div>
+          </div>
+          <div>
+            <span class="text-[10px] font-bold text-emerald-300 uppercase tracking-widest">Live Execution Loop</span>
+            <h3 id="flow-status-text" class="text-sm font-bold text-white">System Idle: Customer browsing Naivasha fresh roses</h3>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="px-2.5 py-1 rounded-lg bg-[#041510] border border-emerald-900/80 text-slate-300">
+            Order: <strong id="kpi-order-id" class="text-rose-400">#CMD-8842</strong>
+          </span>
+          <span class="px-2.5 py-1 rounded-lg bg-[#041510] border border-emerald-900/80 text-slate-300">
+            Escrow Status: <strong id="kpi-escrow-status" class="text-amber-300">Unfunded</strong>
+          </span>
+          <span class="px-2.5 py-1 rounded-lg bg-[#041510] border border-emerald-900/80 text-slate-300">
+            Atomic Lock: <strong id="kpi-lock-status" class="text-slate-400">Unlocked</strong>
+          </span>
+        </div>
+      </div>
+
+      <!-- Real-Time Architectural State Badges (CS & Accounting Telemetry) -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-2 pt-2 border-t border-emerald-900/60 font-mono text-[10px]">
+        <div class="p-2 rounded-lg bg-[#020b08] border border-emerald-950 flex justify-between items-center">
+          <span class="text-slate-400">Spatial Index:</span>
+          <span class="text-emerald-300 font-bold">H3 Hex: 887a40660ffffff</span>
+        </div>
+        <div class="p-2 rounded-lg bg-[#020b08] border border-emerald-950 flex justify-between items-center">
+          <span class="text-slate-400">Dispatch Match:</span>
+          <span id="hud-match-score" class="text-amber-300 font-bold">Cost Score: 94.2/100</span>
+        </div>
+        <div class="p-2 rounded-lg bg-[#020b08] border border-emerald-950 flex justify-between items-center">
+          <span class="text-slate-400">Saga Phase:</span>
+          <span id="hud-saga-step" class="text-rose-300 font-bold">1/4 Awaiting Payment</span>
+        </div>
+        <div class="p-2 rounded-lg bg-[#020b08] border border-emerald-950 flex justify-between items-center">
+          <span class="text-slate-400">Ledger Invariant:</span>
+          <span id="hud-ledger-invariant" class="text-emerald-400 font-bold">Balanced (Δ = 0.00)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Multi-Screen Matrix -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+      <!-- ================= 1. CUSTOMER MOBILE APP (iPhone Mockup) ================= -->
+      <div class="lg:col-span-4 flex flex-col items-center">
+        <div class="w-full flex items-center justify-between mb-2 px-1">
+          <div class="flex items-center gap-1.5 text-xs font-bold text-emerald-200">
+            <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+            Customer Mobile App (Client)
+          </div>
+          <span class="text-[11px] text-emerald-400/80 font-medium">Lipa na M-Pesa Integrated</span>
+        </div>
+
+        <!-- Phone Shell -->
+        <div class="w-[330px] sm:w-[350px] h-[670px] bg-[#020b08] rounded-[48px] phone-shell flex flex-col relative overflow-hidden select-none border border-emerald-800/40">
+          
+          <!-- Dynamic Island -->
+          <div class="w-full pt-3 pb-2 flex justify-center bg-[#020b08] z-30">
+            <div class="h-5 w-28 bg-black rounded-full flex items-center justify-between px-3 border border-emerald-950">
+              <span class="text-[9px] text-emerald-400 font-mono">9:41</span>
+              <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+            </div>
+          </div>
+
+          <!-- Phone Inner Screen -->
+          <div class="flex-1 flex flex-col overflow-y-auto px-4 pb-4 text-xs bg-[#041410] relative">
+
+            <!-- SCREEN 1A: BOUQUET SELECTION & SURPRISE CUSTOMIZATION -->
+            <div id="cust-screen-catalog" class="space-y-3.5 pt-1">
+              
+              <div class="flex justify-between items-center">
+                <div>
+                  <span class="text-[10px] text-emerald-400/70 font-medium">Delivering Surprise To</span>
+                  <div class="font-bold text-white text-xs flex items-center gap-1">
+                    📍 Kilimani, Denis Pritt Rd <span class="text-rose-400 text-[10px]">▼</span>
+                  </div>
+                </div>
+                <div class="w-8 h-8 rounded-full bg-emerald-900/60 border border-emerald-600/40 flex items-center justify-center text-xs">
+                  💐
+                </div>
+              </div>
+
+              <!-- Selected Bouquet Card -->
+              <div class="p-3 rounded-2xl bg-gradient-to-br from-[#09261e] to-[#0c3127] border border-emerald-600/40 shadow-lg relative overflow-hidden">
+                <div class="flex gap-3">
+                  <div class="w-16 h-16 rounded-xl bg-gradient-to-tr from-rose-900 to-rose-700 border border-rose-400/30 flex items-center justify-center text-2xl shadow-md">
+                    🌹
+                  </div>
+                  <div class="flex-1">
+                    <span class="text-[9px] uppercase font-bold text-rose-300 tracking-wider">City Market Signature</span>
+                    <h4 class="font-bold text-white text-xs mt-0.5">Scarlet Passion (24 Red Roses)</h4>
+                    <p class="text-[10px] text-emerald-300/80">Fresh Naivasha Cut • Stem Wrapped</p>
+                    <div class="mt-1 flex items-center justify-between">
+                      <span class="font-extrabold text-sm text-emerald-300">KSh 3,800</span>
+                      <span class="text-[9px] bg-emerald-950 text-emerald-300 px-1.5 py-0.5 rounded border border-emerald-800">In Stock</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Gifting & Surprise Options -->
+              <div class="p-3 rounded-2xl bg-[#061e17] border border-emerald-800/40 space-y-2.5">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-xs text-rose-300 flex items-center gap-1">
+                    🎁 Surprise Gifting Options
+                  </span>
+                  <span class="text-[9px] text-emerald-400">Included</span>
+                </div>
+
+                <div>
+                  <label class="text-[10px] text-slate-300 font-medium block mb-1">Handwritten Greeting Card Note:</label>
+                  <div class="w-full bg-[#03100c] border border-emerald-800/60 rounded-xl p-2 text-[10px] text-rose-200 font-serif italic">
+                    "Happy 5th Anniversary Wanjiku! Forever grateful for you. Love, Brian ❤️"
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between pt-1 border-t border-emerald-900/60">
+                  <div>
+                    <div class="text-[11px] font-bold text-white">🤫 Keep it a Surprise!</div>
+                    <div class="text-[9px] text-slate-400">Call sender, don't spoil secret to recipient</div>
+                  </div>
+                  <div class="w-8 h-4 bg-emerald-500 rounded-full flex items-center justify-end px-0.5">
+                    <div class="w-3 h-3 bg-white rounded-full"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Price Breakdown -->
+              <div class="p-2.5 rounded-xl bg-[#03100c] border border-emerald-900/60 space-y-1 text-[10px] text-slate-300">
+                <div class="flex justify-between"><span>Bouquet (24 Stem)</span> <span>KSh 3,800</span></div>
+                <div class="flex justify-between"><span>Floral Preservative & Card</span> <span class="text-emerald-400">FREE</span></div>
+                <div class="flex justify-between"><span>Express Bike Delivery (CBD $\rightarrow$ Kilimani)</span> <span>KSh 350</span></div>
+                <div class="border-t border-emerald-900/80 pt-1 flex justify-between font-bold text-xs text-white">
+                  <span>Total Amount Due</span>
+                  <span class="text-emerald-400">KSh 4,150</span>
+                </div>
+              </div>
+
+              <!-- Checkout Button -->
+              <button onclick="triggerMpesaCheckout()" id="btn-cust-checkout" class="w-full py-3 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 font-bold text-white text-xs shadow-lg shadow-emerald-950/50 transition flex items-center justify-center gap-2">
+                <span>💚 Pay KSh 4,150 with Lipa na M-Pesa</span>
+                <span>➔</span>
+              </button>
+
+            </div>
+
+            <!-- SIMULATED M-PESA STK PUSH POPUP MODAL -->
+            <div id="mpesa-modal" class="hidden absolute inset-0 z-40 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
+              <div class="w-full bg-[#0a231b] border-2 border-emerald-500/80 rounded-2xl p-4 space-y-3 shadow-2xl animate-toast">
+                <div class="flex items-center gap-2 border-b border-emerald-800 pb-2">
+                  <div class="w-6 h-6 rounded-full bg-emerald-500 flex items-center justify-center text-white text-[10px] font-bold">M</div>
+                  <span class="font-bold text-xs text-white">Lipa na M-Pesa Online</span>
+                </div>
+                <p class="text-[11px] text-emerald-200">
+                  Do you want to pay <strong>KSh 4,150</strong> to <strong>CitiMarket Escrow</strong> for Order #CMD-8842?
+                </p>
+                <div>
+                  <label class="text-[10px] text-slate-400 block mb-1">Enter M-Pesa PIN:</label>
+                  <div class="bg-black/60 border border-emerald-700 rounded-lg p-2 text-center text-sm tracking-widest text-emerald-400 font-mono">
+                    ••••
+                  </div>
+                </div>
+                <div class="flex gap-2 pt-1">
+                  <button onclick="confirmMpesaPin()" class="flex-1 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-[#020b08] font-extrabold text-xs">
+                    Confirm & Send
+                  </button>
+                  <button onclick="cancelMpesa()" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-400 text-xs">
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- SCREEN 1B: LIVE ORDER TRACKING & MAP -->
+            <div id="cust-screen-tracking" class="hidden space-y-3 pt-1 flex-1 flex flex-col">
+              
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-white text-xs">Flower Delivery Tracking</span>
+                <span id="cust-badge-status" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                  Florist Arranging
+                </span>
+              </div>
+
+              <!-- Animated Vector Nairobi Route Map with H3 Spatial Overlay -->
+              <div class="w-full h-36 rounded-2xl bg-[#03100c] border border-emerald-800/60 relative overflow-hidden flex items-center justify-center shadow-inner">
+                <svg class="w-full h-full opacity-40" viewBox="0 0 200 120" preserveAspectRatio="none">
+                  <polygon points="30,20 45,10 60,20 60,35 45,45 30,35" class="h3-hex"/>
+                  <polygon points="65,20 80,10 95,20 95,35 80,45 65,35" class="h3-hex"/>
+                  <polygon points="100,20 115,10 130,20 130,35 115,45 100,35" class="h3-hex"/>
+                  <polygon points="45,45 60,35 75,45 75,60 60,70 45,60" class="h3-hex"/>
+                  <polygon points="80,45 95,35 110,45 110,60 95,70 80,60" class="h3-hex"/>
+                  <polygon points="115,45 130,35 145,45 145,60 130,70 115,60" class="h3-hex"/>
+                  <polygon points="150,45 165,35 180,45 180,60 165,70 150,60" class="h3-hex"/>
+                  <path d="M 10,40 Q 70,30 110,65 T 195,50" fill="none" stroke="#0f382c" stroke-width="8"/>
+                  <path d="M 45,0 L 55,120" fill="none" stroke="#0f382c" stroke-width="5"/>
+                  <path d="M 140,0 Q 130,70 175,120" fill="none" stroke="#0f382c" stroke-width="5"/>
+                  <path d="M 45,35 Q 90,45 155,75" fill="none" stroke="#10b981" stroke-width="3" stroke-dasharray="4"/>
+                </svg>
+
+                <div class="absolute left-6 top-7 flex flex-col items-center">
+                  <div class="w-6 h-6 rounded-full bg-emerald-600 border border-white text-white flex items-center justify-center text-[10px] shadow-lg">
+                    🌸
+                  </div>
+                  <span class="text-[7.5px] bg-[#020b08] text-emerald-300 px-1 rounded mt-0.5 border border-emerald-900">City Market</span>
+                </div>
+
+                <div class="absolute right-6 bottom-4 flex flex-col items-center">
+                  <div class="w-6 h-6 rounded-full bg-rose-600 border border-white text-white flex items-center justify-center text-[10px] shadow-lg">
+                    🏠
+                  </div>
+                  <span class="text-[7.5px] bg-[#020b08] text-rose-300 px-1 rounded mt-0.5 border border-rose-900">Wanjiku (Recipient)</span>
+                </div>
+
+                <div id="nairobi-rider-pin" class="absolute left-7 top-8 transition-all duration-1000 flex flex-col items-center pulse-rider">
+                  <div class="w-6 h-6 rounded-full bg-amber-400 border-2 border-black text-black flex items-center justify-center text-[10px] shadow-lg font-bold">
+                    🛵
+                  </div>
+                </div>
+              </div>
+
+              <!-- ETA & Stage Card -->
+              <div class="p-3 rounded-2xl bg-[#061e17] border border-emerald-800/40 space-y-2">
+                <div class="flex justify-between items-center">
+                  <div>
+                    <span class="text-[9px] text-emerald-400/80">Estimated Delivery Arrival</span>
+                    <div id="cust-eta" class="font-extrabold text-sm text-emerald-300">35 Mins (Express Flower Care)</div>
+                  </div>
+                  <div class="text-right">
+                    <span class="text-[9px] text-emerald-400/80">Flower Courier</span>
+                    <div id="cust-rider-name" class="font-bold text-white">Juma Mwangi</div>
+                  </div>
+                </div>
+
+                <div class="space-y-1.5 pt-1">
+                  <div class="flex justify-between text-[8.5px] text-emerald-400/70 font-medium">
+                    <span id="stg-1" class="text-rose-400 font-bold">1. Escrow Held</span>
+                    <span id="stg-2">2. Hand-Arranged</span>
+                    <span id="stg-3">3. Insulated Transit</span>
+                    <span id="stg-4">4. Surprise Delivered</span>
+                  </div>
+                  <div class="w-full bg-[#03100c] rounded-full h-1.5 overflow-hidden">
+                    <div id="cust-progress-bar" class="bg-rose-500 h-full w-1/4 transition-all duration-500"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-2.5 rounded-xl bg-[#061e17] border border-emerald-800/40 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <div class="w-7 h-7 rounded-lg bg-emerald-950 border border-emerald-500/40 flex items-center justify-center text-xs">
+                    🛡️
+                  </div>
+                  <div>
+                    <div class="font-bold text-white text-[10px]">Photo-Verified Guarantee</div>
+                    <div class="text-[9px] text-emerald-300">Escrow released only upon verified handoff</div>
+                  </div>
+                </div>
+                <span class="text-[9px] font-mono text-emerald-400">ESCROW_LOCKED</span>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Phone Bottom Indicator -->
+          <div class="h-4 w-full bg-[#020b08] flex justify-center items-center pb-1">
+            <div class="w-24 h-1 bg-emerald-900 rounded-full"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= 2. FLORIST & COURIER PORTALS (Center 4 Cols) ================= -->
+      <div class="lg:col-span-4 flex flex-col gap-5 items-center">
+
+        <!-- A. City Market Florist Workshop Portal -->
+        <div class="w-full bg-[#061e17] rounded-3xl border border-emerald-800/40 p-4 shadow-xl">
+          <div class="flex items-center justify-between pb-2.5 border-b border-emerald-900/60">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-rose-400"></span>
+              <h4 class="font-bold text-xs text-white">City Market Florist Stall #42</h4>
+            </div>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/30">Nairobi CBD</span>
+          </div>
+
+          <div class="py-3">
+            <div id="florist-empty" class="text-center py-6 text-emerald-400/50 text-xs">
+              <div class="text-2xl mb-1">💐</div>
+              Awaiting confirmed M-Pesa order from buyer...
+            </div>
+
+            <div id="florist-card" class="hidden space-y-3">
+              <div class="flex justify-between items-start">
+                <div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="font-bold text-white text-xs">Order #CMD-8842</span>
+                    <span class="px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300 text-[9px] font-bold">M-PESA CONFIRMED</span>
+                  </div>
+                  <p class="text-[10px] text-emerald-300/80 mt-0.5">Scarlet Passion (24 Stems) • Handwritten Note Req.</p>
+                </div>
+                <div class="text-right">
+                  <span class="text-xs font-bold text-emerald-300">KSh 3,800</span>
+                  <div class="text-[9px] text-slate-400">Payout: KSh 3,116</div>
+                </div>
+              </div>
+
+              <div class="bg-[#03100c] p-2.5 rounded-xl border border-emerald-900 text-[10px] space-y-1">
+                <span class="text-[9px] uppercase font-bold text-rose-300">Card Inscription Required:</span>
+                <p class="italic text-slate-300">"Happy 5th Anniversary Wanjiku! Forever grateful for you. Love, Brian ❤️"</p>
+              </div>
+
+              <div class="p-2 rounded-lg bg-[#020b08] border border-emerald-900 flex items-center justify-between text-[10px]">
+                <span class="text-slate-400">Pre-Dispatch Inspection:</span>
+                <span class="text-emerald-400 font-semibold flex items-center gap-1">📸 Photo Logged #QC-8842</span>
+              </div>
+
+              <div class="flex gap-2">
+                <button onclick="step2_floristArrange()" id="btn-florist-arrange" class="flex-1 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs shadow-md transition">
+                  🌸 Cut & Arrange Bouquet
+                </button>
+                <button onclick="step3_floristReady()" id="btn-florist-ready" class="flex-1 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md transition opacity-50 cursor-not-allowed" disabled>
+                  📦 Ready for Courier
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- B. Boda Boda Flower Courier App -->
+        <div class="w-full flex flex-col items-center">
+          <div class="w-full flex items-center justify-between mb-2 px-1">
+            <div class="flex items-center gap-1.5 text-xs font-bold text-emerald-200">
+              <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+              Flower Courier App (Rider)
+            </div>
+            <span class="text-[11px] text-amber-400 font-medium">Juma Mwangi (Online)</span>
+          </div>
+
+          <div class="w-[330px] sm:w-[350px] h-[350px] bg-[#020b08] rounded-[36px] phone-shell flex flex-col relative overflow-hidden select-none p-3.5 border border-emerald-800/40 bg-[#041410]">
+            <div class="flex justify-between items-center pb-2 border-b border-emerald-900/60 text-[10px]">
+              <span class="text-emerald-400/80">Bike #KME-291X (Insulated Box)</span>
+              <span class="text-emerald-300 font-bold">Today: KSh 2,850</span>
+            </div>
+
+            <div id="rider-idle" class="flex-1 flex flex-col items-center justify-center text-center text-emerald-400/50 text-xs">
+              <div class="w-10 h-10 rounded-full bg-[#061e17] border border-emerald-800 flex items-center justify-center text-base mb-2">
+                🏍️
+              </div>
+              <span>Cruising near City Market / CBD for flower dispatches...</span>
+            </div>
+
+            <div id="rider-offer" class="hidden flex-1 flex flex-col justify-between py-1">
+              <div class="p-3 rounded-2xl bg-[#08281f] border border-emerald-500/40 space-y-2">
+                <div class="flex justify-between items-start">
+                  <div>
+                    <span class="px-2 py-0.5 rounded text-[9px] font-bold bg-amber-500/20 text-amber-300">
+                      FRAGILE BOUQUET GIG
+                    </span>
+                    <h5 class="text-xs font-bold text-white mt-1">City Market Stall 42 $\rightarrow$ Kilimani</h5>
+                  </div>
+                  <div class="text-right">
+                    <span class="text-xs font-bold text-emerald-300">+KSh 350</span>
+                    <div class="text-[9px] text-slate-400">4.5 km route</div>
+                  </div>
+                </div>
+                <div class="text-[10px] text-emerald-200/90 space-y-0.5">
+                  <div>🌸 Pickup: City Market, Muindi Mbingu St.</div>
+                  <div>🏠 Dropoff: Denis Pritt Rd, Kilimani (Surprise Handoff)</div>
+                </div>
+              </div>
+
+              <div class="space-y-1">
+                <button onclick="step4_riderAccept()" class="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs shadow-lg transition">
+                  Accept Delivery (Acquire Atomic Lock)
+                </button>
+                <div class="text-[9px] text-center text-slate-400 font-mono">
+                  redis.set("lock:order:8842", rider_id, NX, EX=15s)
+                </div>
+              </div>
+            </div>
+
+            <div id="rider-transit" class="hidden flex-1 flex flex-col justify-between py-1">
+              <div class="space-y-2">
+                <div class="flex justify-between items-center">
+                  <span id="rider-stage-badge" class="text-[9px] font-bold text-amber-300 bg-amber-500/20 px-2 py-0.5 rounded">
+                    EN ROUTE TO CITY MARKET
+                  </span>
+                  <span class="text-[10px] text-slate-400">#CMD-8842</span>
+                </div>
+                <div class="p-2.5 rounded-xl bg-[#03100c] border border-emerald-900 text-[10px] space-y-1">
+                  <div class="font-bold text-white flex justify-between">
+                    <span>Navigation</span>
+                    <span class="text-emerald-400">Via Uhuru Highway</span>
+                  </div>
+                  <p class="text-amber-200/80 text-[9px]">⚠️ Note: Do not ring bell; surprise bouquet delivery.</p>
+                </div>
+              </div>
+
+              <button onclick="step5_riderAction()" id="btn-rider-action" class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md transition">
+                Confirm Bouquet Pickup from Stall
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= 3. NAIROBI OPERATIONS & REAL-TIME LEDGER HUB (Right 4 Cols) ================= -->
+      <div class="lg:col-span-4 flex flex-col gap-5">
+        
+        <div class="w-full bg-[#061e17] rounded-3xl border border-emerald-800/40 p-4 shadow-xl space-y-4">
+          <div class="flex items-center justify-between pb-2.5 border-b border-emerald-900/60">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              <h4 class="font-bold text-xs text-white">Central Operations & Financial Engine</h4>
+            </div>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/30">Nairobi Core</span>
+          </div>
+
+          <div class="p-3 rounded-2xl bg-[#020b08] border border-emerald-900/80 space-y-2 font-mono text-[10px]">
+            <div class="flex justify-between items-center border-b border-emerald-950 pb-1">
+              <span class="font-bold text-slate-300">Real-Time Ledger Transaction Journal</span>
+              <span class="text-emerald-400 text-[9px]">SHA-256 Verified</span>
+            </div>
+            <div id="live-ledger-rows" class="space-y-1 text-slate-400">
+              <div class="text-slate-500 italic">No transactions committed yet. Awaiting M-Pesa event...</div>
+            </div>
+            <div class="border-t border-emerald-900/80 pt-1 flex justify-between text-xs font-bold text-emerald-300">
+              <span>Debit / Credit Balance:</span>
+              <span id="ledger-balance-check">0.00 / 0.00 (Zero Drift)</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between items-center mb-1.5">
+              <span class="text-[11px] font-bold text-slate-300">Live Logistics Event Stream</span>
+              <span class="text-[9px] font-mono text-emerald-400">WebSocket: Connected</span>
+            </div>
+            <div id="event-feed" class="h-40 rounded-2xl bg-[#020b08] border border-emerald-950 p-2.5 font-mono text-[9.5px] overflow-y-auto space-y-1.5 text-emerald-300/80">
+              <div class="text-emerald-500/60">[SYSTEM READY] Spatial geo-indexing active. Redis pub/sub online.</div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <button onclick="setTab('ledger')" class="p-2.5 rounded-xl bg-[#03100c] hover:bg-[#07241b] border border-emerald-900 text-left transition">
+              <span class="text-[10px] text-slate-400 block">Inspect Audit</span>
+              <strong class="text-white text-xs">⚖️ Full Accounting Ledger ➔</strong>
+            </button>
+            <button onclick="setTab('cs-engine')" class="p-2.5 rounded-xl bg-[#03100c] hover:bg-[#07241b] border border-emerald-900 text-left transition">
+              <span class="text-[10px] text-slate-400 block">Inspect Tech</span>
+              <strong class="text-white text-xs">⚙️ Engineering Concepts ➔</strong>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ================= TAB 2: DOUBLE-ENTRY GENERAL LEDGER ================= -->
+  <section id="tab-ledger" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
+    <div class="bg-[#061e17] border border-emerald-800/40 rounded-3xl p-6 space-y-6 shadow-2xl">
+      
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Financial Engineering</span>
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Zero Financial Leakage</span>
+        </div>
+        <h2 class="text-2xl font-bold text-white mt-1">Double-Entry Accounting System & Escrow Engine</h2>
+        <p class="text-sm text-emerald-200/70 mt-2 max-w-3xl leading-relaxed">
+          In delivery logistics, handling millions of shillings without an immutable ledger leads to reconciliation drift, phantom driver payouts, and fraud. CitiMarket Delivery implements a strict <strong>Double-Entry General Ledger</strong> where money is never created or destroyed without equal debits and credits ($\sum \text{Debits} \equiv \sum \text{Credits}$).
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs font-mono">
+        <div class="p-4 rounded-2xl bg-[#03100c] border border-emerald-900/80">
+          <span class="text-slate-400 text-[10px]">ASSETS (1000)</span>
+          <h4 class="text-sm font-bold text-emerald-300 mt-1">1010: M-Pesa Float Holding</h4>
+          <div class="text-xl font-bold text-white mt-2">KSh 4,150.00</div>
+          <span class="text-[9px] text-slate-500">Unsettled cash in Safaricom Paybill</span>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-[#03100c] border border-emerald-900/80">
+          <span class="text-slate-400 text-[10px]">LIABILITIES (2000)</span>
+          <h4 class="text-sm font-bold text-amber-300 mt-1">2010: Customer Escrow Payable</h4>
+          <div class="text-xl font-bold text-white mt-2">KSh 0.00</div>
+          <span class="text-[9px] text-slate-500">Released upon verified handoff</span>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-[#03100c] border border-emerald-900/80">
+          <span class="text-slate-400 text-[10px]">ACCOUNTS PAYABLE (2100)</span>
+          <h4 class="text-sm font-bold text-rose-300 mt-1">2110: Florist & Rider Balances</h4>
+          <div class="text-xl font-bold text-white mt-2">KSh 3,396.00</div>
+          <span class="text-[9px] text-slate-500">Florist (KSh 3,116) + Rider (KSh 280)</span>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-[#03100c] border border-emerald-500/40 bg-gradient-to-br from-[#09261e] to-[#0c3127]">
+          <span class="text-rose-300 text-[10px] font-bold">NET REVENUE (4000)</span>
+          <h4 class="text-sm font-bold text-white mt-1">4010: Platform Take Rate</h4>
+          <div class="text-xl font-bold text-emerald-400 mt-2">KSh 722.00</div>
+          <span class="text-[9px] text-emerald-300">18% Comm + KSh 70 Delivery Margin - Fees</span>
+        </div>
+      </div>
+
+      <div class="bg-[#03100c] rounded-2xl border border-emerald-900/80 p-5 space-y-4">
+        <div class="flex flex-wrap justify-between items-center gap-2">
+          <div>
+            <h3 class="font-bold text-sm text-white">General Ledger Journal Entries for Order #CMD-8842</h3>
+            <p class="text-xs text-slate-400">Append-only audit trail. Entries are cryptographically tamper-evident.</p>
+          </div>
+          <span class="text-xs font-mono px-3 py-1 bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 rounded-lg">
+            INVARIANT: Total Debits == Total Credits (Balanced)
+          </span>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left font-mono text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-emerald-900 text-slate-400 text-[11px]">
+                <th class="py-2.5 px-3">Entry ID</th>
+                <th class="py-2.5 px-3">Account Name</th>
+                <th class="py-2.5 px-3">Account Code</th>
+                <th class="py-2.5 px-3">Debit (KES)</th>
+                <th class="py-2.5 px-3">Credit (KES)</th>
+                <th class="py-2.5 px-3">State Event</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-emerald-950 text-slate-300">
+              <tr>
+                <td class="py-2 px-3 text-slate-500">TX-10491</td>
+                <td class="py-2 px-3 text-emerald-300 font-bold">1010 M-Pesa Cash In (Float)</td>
+                <td class="py-2 px-3 text-slate-400">Asset</td>
+                <td class="py-2 px-3 text-emerald-400">4,150.00</td>
+                <td class="py-2 px-3 text-slate-500">-</td>
+                <td class="py-2 px-3 text-slate-400">Lipa na M-Pesa Receipt #QKH48912LX</td>
+              </tr>
+              <tr>
+                <td class="py-2 px-3 text-slate-500">TX-10492</td>
+                <td class="py-2 px-3 text-amber-300">2010 Customer Escrow Holding</td>
+                <td class="py-2 px-3 text-slate-400">Liability</td>
+                <td class="py-2 px-3 text-slate-500">-</td>
+                <td class="py-2 px-3 text-amber-400">4,150.00</td>
+                <td class="py-2 px-3 text-slate-400">Escrow Held Pending Delivery</td>
+              </tr>
+              <tr class="bg-[#041510]">
+                <td class="py-2 px-3 text-slate-500">TX-10493</td>
+                <td class="py-2 px-3 text-amber-300">2010 Customer Escrow Holding</td>
+                <td class="py-2 px-3 text-slate-400">Liability (Release)</td>
+                <td class="py-2 px-3 text-amber-400">4,150.00</td>
+                <td class="py-2 px-3 text-slate-500">-</td>
+                <td class="py-2 px-3 text-slate-400">Verified Dropoff at Kilimani</td>
+              </tr>
+              <tr class="bg-[#041510]">
+                <td class="py-2 px-3 text-slate-500">TX-10494</td>
+                <td class="py-2 px-3 text-rose-300">2110 Florist Payable (Stall #42)</td>
+                <td class="py-2 px-3 text-slate-400">Payable</td>
+                <td class="py-2 px-3 text-slate-500">-</td>
+                <td class="py-2 px-3 text-rose-300">3,116.00</td>
+                <td class="py-2 px-3 text-slate-400">82% Florist Payout Credit</td>
+              </tr>
+              <tr class="bg-[#041510]">
+                <td class="py-2 px-3 text-slate-500">TX-10495</td>
+                <td class="py-2 px-3 text-amber-300">2120 Rider Payable (Juma Mwangi)</td>
+                <td class="py-2 px-3 text-slate-400">Payable</td>
+                <td class="py-2 px-3 text-slate-500">-</td>
+                <td class="py-2 px-3 text-amber-300">280.00</td>
+                <td class="py-2 px-3 text-slate-400">Courier Delivery Fee Earned</td>
+              </tr>
+              <tr class="bg-[#041510]">
+                <td class="py-2 px-3 text-slate-500">TX-10496</td>
+                <td class="py-2 px-3 text-emerald-400">4010 Florist Platform Commission</td>
+                <td class="py-2 px-3 text-slate-400">Revenue</td>
+                <td class="py-2 px-3 text-slate-500">-</td>
+                <td class="py-2 px-3 text-emerald-400">684.00</td>
+                <td class="py-2 px-3 text-slate-400">18% Marketplace Take Rate</td>
+              </tr>
+              <tr class="bg-[#041510]">
+                <td class="py-2 px-3 text-slate-500">TX-10497</td>
+                <td class="py-2 px-3 text-emerald-400">4020 Delivery Margin</td>
+                <td class="py-2 px-3 text-slate-400">Revenue</td>
+                <td class="py-2 px-3 text-slate-500">-</td>
+                <td class="py-2 px-3 text-emerald-400">70.00</td>
+                <td class="py-2 px-3 text-slate-400">Platform Delivery Margin (KSh 350 - 280)</td>
+              </tr>
+              <tr class="bg-[#041510]">
+                <td class="py-2 px-3 text-slate-500">TX-10498</td>
+                <td class="py-2 px-3 text-slate-400">5010 Safaricom M-Pesa Transaction Fee</td>
+                <td class="py-2 px-3 text-slate-400">Expense</td>
+                <td class="py-2 px-3 text-slate-400">32.00</td>
+                <td class="py-2 px-3 text-slate-500">-</td>
+                <td class="py-2 px-3 text-slate-400">STK Push Gateway Cost</td>
+              </tr>
+              <tr class="bg-[#041510]">
+                <td class="py-2 px-3 text-slate-500">TX-10499</td>
+                <td class="py-2 px-3 text-slate-400">1010 M-Pesa Cash In (Float)</td>
+                <td class="py-2 px-3 text-slate-400">Asset</td>
+                <td class="py-2 px-3 text-slate-500">-</td>
+                <td class="py-2 px-3 text-slate-400">32.00</td>
+                <td class="py-2 px-3 text-slate-400">Safaricom Direct Debit</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr class="border-t-2 border-emerald-500 text-white font-bold text-xs bg-[#061a14]">
+                <td class="py-3 px-3" colspan="3">TOTAL AUDIT VERIFICATION:</td>
+                <td class="py-3 px-3 text-emerald-400">KSh 8,332.00</td>
+                <td class="py-3 px-3 text-emerald-400">KSh 8,332.00</td>
+                <td class="py-3 px-3 text-emerald-300">✓ ZERO DISCREPANCY (BALANCED)</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= TAB 3: ENGINEERING CONCEPTS & IMPORTANCE ================= -->
+  <section id="tab-cs-engine" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
+    <div class="bg-[#061e17] border border-emerald-800/40 rounded-3xl p-6 space-y-6 shadow-2xl">
+      
+      <div>
+        <span class="text-xs font-bold text-rose-400 uppercase tracking-widest">Engineering Architecture</span>
+        <h2 class="text-2xl font-bold text-white mt-1">Engineering Concepts Powering CitiMarket Delivery</h2>
+        <p class="text-sm text-emerald-200/70 mt-2 max-w-3xl leading-relaxed">
+          The technical foundations ensuring CitiMarket Delivery scales from 50 orders a day to 50,000 without server crashes, ghost couriers, lost payments, or wilted flowers.
+        </p>
+      </div>
+
+      <!-- 4 Core Engineering Concept Cards with Importance -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        
+        <!-- 1. Geospatial Indexing -->
+        <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300">
+              1. Spatial Data Structures
+            </span>
+            <code class="text-xs text-emerald-400 font-mono">Uber H3 / PostGIS R-Tree</code>
+          </div>
+          <h4 class="font-bold text-white text-sm">Hexagonal Hierarchical Spatial Indexing</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Instead of calculating costly distance formulas across all drivers ($O(N)$), Nairobi is partitioned into discrete H3 hexagonal cells (Resolution 8, ~460m diameter). Finding all active couriers around City Market is an $O(1)$ constant-time lookup of neighboring cell keys.
+          </p>
+          
+          <!-- Explicit Importance Callout -->
+          <div class="p-3 rounded-xl bg-emerald-950/60 border border-emerald-700/50 space-y-1">
+            <span class="text-[10px] uppercase font-bold text-emerald-300 tracking-wider">⚡ Importance to Business &amp; Operations:</span>
+            <p class="text-[11px] text-emerald-200 leading-snug">
+              Eliminates database freezes during peak surges (Valentine’s Day, Mother’s Day, and Friday rush hour). Queries respond in <strong>under 4 milliseconds</strong> regardless of whether 100 or 10,000 riders are on the map.
+            </p>
+          </div>
+        </div>
+
+        <!-- 2. Bipartite Matching -->
+        <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300">
+              2. Operations Research
+            </span>
+            <code class="text-xs text-amber-400 font-mono">Kuhn-Munkres / Bipartite Matching</code>
+          </div>
+          <h4 class="font-bold text-white text-sm">Maximum-Weight Bipartite Dispatch Engine</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Rather than naive "first-to-click" dispatch, the system computes an optimal matching between all pending orders and active riders in the dispatch batch, minimizing total fleet transit time and flower dehydration risk.
+          </p>
+
+          <!-- Explicit Importance Callout -->
+          <div class="p-3 rounded-xl bg-amber-950/60 border border-amber-700/50 space-y-1">
+            <span class="text-[10px] uppercase font-bold text-amber-300 tracking-wider">⚡ Importance to Business &amp; Operations:</span>
+            <p class="text-[11px] text-amber-200 leading-snug">
+              Cuts fleet travel times by <strong>35%</strong> and lowers rider fuel burn. Crucially for fresh flowers, reducing transit delays keeps delicate Naivasha stems hydrated and eliminates wilted return claims.
+            </p>
+          </div>
+        </div>
+
+        <!-- 3. Distributed Concurrency & Locks -->
+        <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-rose-500/20 text-rose-300">
+              3. Concurrency Control
+            </span>
+            <code class="text-xs text-rose-400 font-mono">Redis Redlock &amp; Optimistic OCC</code>
+          </div>
+          <h4 class="font-bold text-white text-sm">Atomic Gig Claiming &amp; Optimistic Locking</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Prevents race conditions where two riders claim the same bouquet simultaneously. Uses Redis atomic primitives with a lease TTL and Optimistic Concurrency Control (`version_id`) on Postgres order records.
+          </p>
+
+          <!-- Explicit Importance Callout -->
+          <div class="p-3 rounded-xl bg-rose-950/60 border border-rose-700/50 space-y-1">
+            <span class="text-[10px] uppercase font-bold text-rose-300 tracking-wider">⚡ Importance to Business &amp; Operations:</span>
+            <p class="text-[11px] text-rose-200 leading-snug">
+              Guarantees <strong>zero double-assignments</strong> and prevents rider conflict. Prevents awkward situations where two riders show up at the same City Market stall for the same bouquet.
+            </p>
+          </div>
+        </div>
+
+        <!-- 4. Distributed Saga Pattern -->
+        <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-purple-500/20 text-purple-300">
+              4. Distributed Transactions
+            </span>
+            <code class="text-xs text-purple-400 font-mono">Saga Orchestrator</code>
+          </div>
+          <h4 class="font-bold text-white text-sm">Saga Pattern with Automated Compensating Reversals</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Maintains data consistency across Safaricom M-Pesa, City Market florist stock, and courier dispatch without blocking distributed database locks. If a courier cannot be found, an automated compensating transaction triggers an immediate M-Pesa reversal.
+          </p>
+
+          <!-- Explicit Importance Callout -->
+          <div class="p-3 rounded-xl bg-purple-950/60 border border-purple-700/50 space-y-1">
+            <span class="text-[10px] uppercase font-bold text-purple-300 tracking-wider">⚡ Importance to Business &amp; Operations:</span>
+            <p class="text-[11px] text-purple-200 leading-snug">
+              Protects customer trust. If an edge case occurs (e.g. sudden flash rain in Nairobi), the buyer's money is <strong>automatically refunded within seconds</strong> via M-Pesa B2C, reducing support overhead by 80%.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= TAB 4: BRANDING & IDENTITY ================= -->
+  <section id="tab-branding" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
+    <div class="bg-[#061e17] border border-emerald-800/40 rounded-3xl p-6 space-y-6 shadow-2xl">
+      
+      <div>
+        <span class="text-xs font-bold text-rose-400 uppercase tracking-widest">Brand System &amp; Design Standards</span>
+        <h2 class="text-2xl font-bold text-white mt-1">CitiMarket Delivery: Branding &amp; Visual Identity</h2>
+        <p class="text-sm text-emerald-200/70 mt-2 max-w-3xl leading-relaxed">
+          CitiMarket Delivery combines the historic heritage of Nairobi's premier flower hub with modern, white-glove luxury gifting logistics.
+        </p>
+      </div>
+
+      <!-- Brand Pillars Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        
+        <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-2">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-base">🌸</div>
+          <h4 class="font-bold text-white text-sm">Brand Tone &amp; Personality</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            <strong>Warm, Celebratory, Reliable, and Discreet.</strong> Every touchpoint feels like an elevated gift presentation, prioritizing the recipient's delight while respecting surprise delivery secrecy.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-2">
+          <div class="w-8 h-8 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center font-bold text-base">🌿</div>
+          <h4 class="font-bold text-white text-sm">Visual Identity: "Lush Botanical"</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Deep nocturnal greens representing fresh foliage and Naivasha greenhouses, accented by vibrant rose petal blush, Kenyan M-Pesa emerald accents, and champagne gold for celebratory luxury.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-2">
+          <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-base">🎀</div>
+          <h4 class="font-bold text-white text-sm">Packaging &amp; Unboxing Ritual</h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Couriers carry insulated, climate-safe cooler mounts. Bouquets arrive in protective moisture wraps with wax-sealed, handwritten calligraphy greeting cards.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Color Tokens Matrix -->
+      <div class="bg-[#03100c] rounded-2xl border border-emerald-900/80 p-5 space-y-4">
+        <h3 class="font-bold text-sm text-white">Official Color Palette &amp; Design Tokens</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+          
+          <div class="p-3.5 rounded-xl bg-[#0F382C] border border-emerald-600/40 space-y-2">
+            <div class="flex justify-between items-start">
+              <span class="font-bold text-white">Forest Green</span>
+              <span class="text-[10px] text-emerald-200">Primary Base</span>
+            </div>
+            <code class="text-emerald-300 font-mono block">#0F382C</code>
+            <p class="text-[10px] text-emerald-200/80">Surfaces, background containers, and navigation.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-[#F43F5E] text-white space-y-2 shadow-lg shadow-rose-950/40">
+            <div class="flex justify-between items-start">
+              <span class="font-bold">Rose Bloom</span>
+              <span class="text-[10px] text-rose-100">Accent &amp; Heart</span>
+            </div>
+            <code class="font-mono block text-white font-bold">#F43F5E</code>
+            <p class="text-[10px] text-rose-100">Highlights, love greetings, and badges.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-[#10B981] text-slate-950 space-y-2 shadow-lg shadow-emerald-950/40">
+            <div class="flex justify-between items-start">
+              <span class="font-bold">M-Pesa Emerald</span>
+              <span class="text-[10px] font-semibold">Payment / Action</span>
+            </div>
+            <code class="font-mono block font-bold">#10B981</code>
+            <p class="text-[10px] font-medium">Checkout buttons, completed delivery status, and verification.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-[#061a14] border border-amber-500/40 space-y-2">
+            <div class="flex justify-between items-start">
+              <span class="font-bold text-amber-300">Champagne Gold</span>
+              <span class="text-[10px] text-amber-400">Prestige / Luxury</span>
+            </div>
+            <code class="text-amber-400 font-mono block">#F59E0B</code>
+            <p class="text-[10px] text-slate-400">Boda boda courier indicator, star ratings, and anniversary badges.</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= TAB 5: NAIROBI UNIT ECONOMICS & INVESTOR CALCULATOR ================= -->
+  <section id="tab-calculator" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
+    <div class="bg-[#061e17] border border-emerald-800/40 rounded-3xl p-6 space-y-6 shadow-2xl">
+      
+      <div>
+        <span class="text-xs font-bold text-rose-400 uppercase tracking-widest">Nairobi Market Opportunity</span>
+        <h2 class="text-2xl font-bold text-white mt-1">CitiMarket Delivery: Unit Economics & Revenue Model</h2>
+        <p class="text-sm text-emerald-200/70 mt-2 max-w-3xl leading-relaxed">
+          Kenya produces over 200,000 tons of fresh flowers annually. Yet in Nairobi, domestic flower gifting is heavily fragmented into physical cash purchases at City Market stalls. CitiMarket Delivery digitizes this multi-billion shilling domestic market.
+        </p>
+      </div>
+
+      <div class="bg-[#03100c] border border-emerald-900/80 rounded-2xl p-5 space-y-5">
+        <div class="flex justify-between items-center">
+          <h3 class="font-bold text-sm text-white">Interactive Annual Revenue Projection</h3>
+          <span class="text-xs bg-emerald-500/10 text-emerald-300 px-2.5 py-1 rounded-lg border border-emerald-500/30 font-mono">
+            Currency: Kenyan Shillings (KES)
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-2">
+            <div class="flex justify-between text-xs">
+              <span class="text-slate-400">Daily Completed Flower Orders (Nairobi):</span>
+              <strong id="val-daily-orders" class="text-emerald-400 text-sm">250 orders / day</strong>
+            </div>
+            <input type="range" id="slider-orders" min="50" max="1500" step="50" value="250" oninput="calculateFinancials()" class="w-full accent-emerald-500 cursor-pointer">
+            <div class="flex justify-between text-[10px] text-slate-500">
+              <span>50 (Early Stage)</span>
+              <span>500 (Nairobi Scale)</span>
+              <span>1,500 (Nationwide Expansion)</span>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <div class="flex justify-between text-xs">
+              <span class="text-slate-400">Average Bouquet Order Value (AOV):</span>
+              <strong id="val-aov" class="text-rose-400 text-sm">KSh 3,800</strong>
+            </div>
+            <input type="range" id="slider-aov" min="2000" max="7000" step="200" value="3800" oninput="calculateFinancials()" class="w-full accent-rose-500 cursor-pointer">
+            <div class="flex justify-between text-[10px] text-slate-500">
+              <span>KSh 2,000 (Standard)</span>
+              <span>KSh 3,800 (Signature)</span>
+              <span>KSh 7,000 (Luxury Arrangement)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+          <div class="p-4 rounded-xl bg-[#061e17] border border-emerald-800/60">
+            <span class="text-[11px] text-slate-400">Monthly Gross Volume (GMV)</span>
+            <div id="out-gmv" class="text-xl font-extrabold text-white mt-1">KSh 28,500,000</div>
+            <span class="text-[10px] text-emerald-400">Total transaction flow</span>
+          </div>
+
+          <div class="p-4 rounded-xl bg-[#061e17] border border-emerald-800/60">
+            <span class="text-[11px] text-slate-400">Florist Commission (18%)</span>
+            <div id="out-commission" class="text-xl font-extrabold text-emerald-300 mt-1">KSh 5,130,000</div>
+            <span class="text-[10px] text-slate-400">From City Market stalls</span>
+          </div>
+
+          <div class="p-4 rounded-xl bg-[#061e17] border border-emerald-800/60">
+            <span class="text-[11px] text-slate-400">Monthly Delivery Revenue</span>
+            <div id="out-delivery-rev" class="text-xl font-extrabold text-amber-300 mt-1">KSh 2,625,000</div>
+            <span class="text-[10px] text-slate-400">KSh 350 per trip</span>
+          </div>
+
+          <div class="p-4 rounded-xl bg-[#061e17] border border-rose-500/40 bg-gradient-to-br from-[#09261e] to-[#12382b]">
+            <span class="text-[11px] text-rose-300 font-bold">Annualized Net Platform ARR</span>
+            <div id="out-arr" class="text-xl font-extrabold text-rose-400 mt-1">KSh 38,400,000</div>
+            <span class="text-[10px] text-emerald-300">~ $295,000 USD Net Profit</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- JAVASCRIPT STATE ENGINE & INTERACTIVE WORKFLOW -->
+  <script>
+    function logSim(msg, type = 'normal') {
+      const feed = document.getElementById('event-feed');
+      const time = new Date().toLocaleTimeString();
+      const el = document.createElement('div');
+      
+      let cls = 'text-emerald-300/80';
+      if (type === 'action') cls = 'text-rose-400 font-bold';
+      if (type === 'success') cls = 'text-emerald-300 font-bold';
+      if (type === 'mpesa') cls = 'text-emerald-400 font-mono font-bold';
+      if (type === 'cs') cls = 'text-cyan-400 font-mono';
+
+      el.className = cls;
+      el.innerHTML = `<span class="text-emerald-700">[${time}]</span> ${msg}`;
+      feed.prepend(el);
+    }
+
+    function setTab(tab) {
+      document.getElementById('tab-simulator').classList.add('hidden');
+      document.getElementById('tab-ledger').classList.add('hidden');
+      document.getElementById('tab-cs-engine').classList.add('hidden');
+      document.getElementById('tab-branding').classList.add('hidden');
+      document.getElementById('tab-calculator').classList.add('hidden');
+
+      const tabs = ['sim', 'ledger', 'cs', 'branding', 'calc'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`nav-btn-${t}`);
+        if (btn) btn.className = 'px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition';
+      });
+
+      if (tab === 'simulator') {
+        document.getElementById('tab-simulator').classList.remove('hidden');
+        document.getElementById('nav-btn-sim').className = 'px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition';
+      } else if (tab === 'ledger') {
+        document.getElementById('tab-ledger').classList.remove('hidden');
+        document.getElementById('nav-btn-ledger').className = 'px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition';
+      } else if (tab === 'cs-engine') {
+        document.getElementById('tab-cs-engine').classList.remove('hidden');
+        document.getElementById('nav-btn-cs').className = 'px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition';
+      } else if (tab === 'branding') {
+        document.getElementById('tab-branding').classList.remove('hidden');
+        document.getElementById('nav-btn-branding').className = 'px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition';
+      } else if (tab === 'calculator') {
+        document.getElementById('tab-calculator').classList.remove('hidden');
+        document.getElementById('nav-btn-calc').className = 'px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition';
+      }
+    }
+
+    // STEP 1: Show M-Pesa STK Prompt
+    function triggerMpesaCheckout() {
+      document.getElementById('mpesa-modal').classList.remove('hidden');
+      logSim("Initiated Lipa na M-Pesa STK Push to buyer (0722-XXX-XXX)", 'mpesa');
+    }
+
+    function cancelMpesa() {
+      document.getElementById('mpesa-modal').classList.add('hidden');
+    }
+
+    // STEP 1B: Confirm M-Pesa PIN -> Transition to live tracking
+    function confirmMpesaPin() {
+      document.getElementById('mpesa-modal').classList.add('hidden');
+      document.getElementById('cust-screen-catalog').classList.add('hidden');
+      document.getElementById('cust-screen-tracking').classList.remove('hidden');
+
+      document.getElementById('flow-status-text').textContent = "M-Pesa Verified: Order routed to City Market Florist Stall #42";
+      document.getElementById('kpi-escrow-status').textContent = "Escrow: KSh 4,150 Held";
+      document.getElementById('kpi-escrow-status').className = "text-emerald-400 font-bold";
+      document.getElementById('hud-saga-step').textContent = "2/4 Stall Preparing";
+
+      const ledgerRows = document.getElementById('live-ledger-rows');
+      ledgerRows.innerHTML = `
+        <div class="flex justify-between text-emerald-400">
+          <span>DR 1010 M-Pesa Cash In (Asset)</span>
+          <span>+4,150.00</span>
+        </div>
+        <div class="flex justify-between text-amber-400">
+          <span>CR 2010 Customer Escrow (Liability)</span>
+          <span>+4,150.00</span>
+        </div>
+        <div class="text-[9px] text-slate-500 pt-0.5">Safaricom Receipt #QKH48912LX • Status: In Escrow</div>
+      `;
+      document.getElementById('ledger-balance-check').textContent = "4,150.00 / 4,150.00 (Balanced)";
+
+      document.getElementById('florist-empty').classList.add('hidden');
+      document.getElementById('florist-card').classList.remove('hidden');
+
+      logSim("M-Pesa Receipt: QKH48912LX Confirmed KSh 4,150 received into escrow.", 'success');
+      logSim("Ledger Entry: DR M-Pesa Holding, CR Customer Escrow (+KSh 4,150).", 'cs');
+      logSim("Dispatch bus: Order #CMD-8842 sent to City Market Florist Stall 42", 'action');
+    }
+
+    // STEP 2: Florist Arranges Bouquet
+    function step2_floristArrange() {
+      const btn = document.getElementById('btn-florist-arrange');
+      btn.textContent = "✓ In Arrangement (Stems Trimmed)";
+      btn.className = "flex-1 py-2 rounded-xl bg-slate-800 text-rose-300 font-bold text-xs border border-rose-500/40";
+      btn.disabled = true;
+
+      const readyBtn = document.getElementById('btn-florist-ready');
+      readyBtn.disabled = false;
+      readyBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+
+      document.getElementById('flow-status-text').textContent = "Florist Arranging: Hand-writing card note & wrapping roses";
+      document.getElementById('cust-badge-status').textContent = "Arranging & Card Inscription";
+      document.getElementById('stg-2').className = "text-rose-400 font-bold";
+      document.getElementById('cust-progress-bar').style.width = "40%";
+
+      logSim("Florist at City Market confirmed fresh Naivasha roses arranged with handwritten note.", 'action');
+    }
+
+    // STEP 3: Florist Ready -> Pings Boda Boda Flower Courier
+    function step3_floristReady() {
+      const readyBtn = document.getElementById('btn-florist-ready');
+      readyBtn.textContent = "✓ Packaged in Water Vial";
+      readyBtn.className = "flex-1 py-2 rounded-xl bg-emerald-950 text-emerald-300 font-bold text-xs border border-emerald-600/40";
+      readyBtn.disabled = true;
+
+      document.getElementById('rider-idle').classList.add('hidden');
+      document.getElementById('rider-offer').classList.remove('hidden');
+
+      document.getElementById('flow-status-text').textContent = "Dispatch: Pinging nearest insulated bike courier (Juma Mwangi)";
+      document.getElementById('hud-saga-step').textContent = "3/4 Courier Matching";
+      logSim("Bipartite Matching Engine: Found Courier Juma Mwangi (Score: 94.2/100).", 'cs');
+    }
+
+    // STEP 4: Rider Accepts
+    function step4_riderAccept() {
+      document.getElementById('rider-offer').classList.add('hidden');
+      document.getElementById('rider-transit').classList.remove('hidden');
+
+      document.getElementById('kpi-lock-status').textContent = "LOCKED (Rider #440)";
+      document.getElementById('kpi-lock-status').className = "text-rose-400 font-bold";
+
+      document.getElementById('cust-badge-status').textContent = "Rider Heading to Stall";
+      document.getElementById('cust-eta').textContent = "28 Mins (Express Care)";
+      
+      const pin = document.getElementById('nairobi-rider-pin');
+      pin.style.left = "42px";
+      pin.style.top = "32px";
+
+      document.getElementById('flow-status-text').textContent = "Rider Accepted: Atomic lock acquired. Juma picking up from City Market";
+      logSim("Atomic Lock Acquired: redis.set('lock:order:8842', 440, NX) -> SUCCESS", 'cs');
+      logSim("Courier Juma Mwangi claimed gig. Insulated container verified.", 'success');
+    }
+
+    // STEP 5: Rider Action
+    function step5_riderAction() {
+      const actionBtn = document.getElementById('btn-rider-action');
+      const badge = document.getElementById('rider-stage-badge');
+
+      if (actionBtn.textContent.includes('Pickup')) {
+        badge.textContent = "EN ROUTE TO RECIPIENT (WANJIKU)";
+        badge.className = "text-[9px] font-bold text-rose-300 bg-rose-500/20 px-2 py-0.5 rounded";
+        actionBtn.textContent = "Hand Over Surprise to Recipient (Dropoff)";
+        actionBtn.className = "w-full py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs shadow-md transition";
+
+        document.getElementById('cust-badge-status').textContent = "Bike Transit via Ngong Rd";
+        document.getElementById('stg-3').className = "text-rose-400 font-bold";
+        document.getElementById('cust-progress-bar').style.width = "75%";
+        document.getElementById('cust-eta').textContent = "12 Mins (Kilimani)";
+
+        const pin = document.getElementById('nairobi-rider-pin');
+        pin.style.left = "130px";
+        pin.style.top = "60px";
+
+        document.getElementById('flow-status-text').textContent = "In Transit: Courier en route to Kilimani with secret surprise";
+        logSim("Bouquet secured in insulated container. Rider on Ngong Road heading to Kilimani.", 'action');
+      } else {
+        step6_delivered();
+      }
+    }
+
+    // STEP 6: Delivered
+    function step6_delivered() {
+      const pin = document.getElementById('nairobi-rider-pin');
+      pin.style.left = "165px";
+      pin.style.top = "75px";
+
+      document.getElementById('cust-badge-status').textContent = "Surprise Delivered!";
+      document.getElementById('cust-badge-status').className = "px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
+      document.getElementById('stg-4').className = "text-emerald-400 font-bold";
+      document.getElementById('cust-progress-bar').style.width = "100%";
+      document.getElementById('cust-progress-bar').className = "bg-emerald-400 h-full w-full transition-all duration-500";
+      document.getElementById('cust-eta').textContent = "Delivered (Surprise Successful!)";
+
+      document.getElementById('rider-stage-badge').textContent = "DELIVERY COMPLETE";
+      document.getElementById('btn-rider-action').textContent = "Trip Complete (+KSh 350 Credited to M-Pesa)";
+      document.getElementById('btn-rider-action').disabled = true;
+      document.getElementById('btn-rider-action').className = "w-full py-2.5 rounded-xl bg-slate-800 text-emerald-300 font-bold text-xs border border-emerald-700";
+
+      document.getElementById('kpi-escrow-status').textContent = "Settled (Escrow Released)";
+      document.getElementById('kpi-lock-status').textContent = "Released";
+      document.getElementById('hud-saga-step').textContent = "4/4 Completed & Settled";
+
+      const ledgerRows = document.getElementById('live-ledger-rows');
+      ledgerRows.innerHTML = `
+        <div class="flex justify-between text-amber-300">
+          <span>DR 2010 Customer Escrow (Released)</span>
+          <span>4,150.00</span>
+        </div>
+        <div class="flex justify-between text-rose-300">
+          <span>CR 2110 Florist Payable (Stall 42)</span>
+          <span>3,116.00</span>
+        </div>
+        <div class="flex justify-between text-amber-400">
+          <span>CR 2120 Rider Payable (Juma)</span>
+          <span>280.00</span>
+        </div>
+        <div class="flex justify-between text-emerald-400 font-bold">
+          <span>CR 4010 Platform Margin (Net Profit)</span>
+          <span>754.00</span>
+        </div>
+      `;
+      document.getElementById('ledger-balance-check').textContent = "4,150.00 == 4,150.00 (Zero Drift Verified)";
+
+      document.getElementById('flow-status-text').textContent = "Completed: Order fulfilled in 31 mins. Immutable ledger settlement committed.";
+      logSim("Proof of Delivery photo verified. Recipient Wanjiku received surprise flowers.", 'success');
+      logSim("Double-Entry Ledger: Escrow released -> Florist credited KSh 3,116, Rider credited KSh 280, Platform Profit KSh 754.", 'cs');
+    }
+
+    // Reset Demo
+    function resetFullDemo() {
+      document.getElementById('cust-screen-catalog').classList.remove('hidden');
+      document.getElementById('cust-screen-tracking').classList.add('hidden');
+      document.getElementById('mpesa-modal').classList.add('hidden');
+
+      document.getElementById('stg-2').className = "";
+      document.getElementById('stg-3').className = "";
+      document.getElementById('stg-4').className = "";
+      document.getElementById('cust-progress-bar').style.width = "25%";
+      document.getElementById('cust-progress-bar').className = "bg-rose-500 h-full w-1/4 transition-all duration-500";
+
+      const pin = document.getElementById('nairobi-rider-pin');
+      pin.style.left = "28px";
+      pin.style.top = "32px";
+
+      document.getElementById('kpi-escrow-status').textContent = "Unfunded";
+      document.getElementById('kpi-escrow-status').className = "text-amber-300";
+      document.getElementById('kpi-lock-status').textContent = "Unlocked";
+      document.getElementById('kpi-lock-status').className = "text-slate-400";
+      document.getElementById('hud-saga-step').textContent = "1/4 Awaiting Payment";
+
+      document.getElementById('live-ledger-rows').innerHTML = `
+        <div class="text-slate-500 italic">No transactions committed yet. Awaiting M-Pesa event...</div>
+      `;
+      document.getElementById('ledger-balance-check').textContent = "0.00 / 0.00 (Zero Drift)";
+
+      document.getElementById('florist-empty').classList.remove('hidden');
+      document.getElementById('florist-card').classList.add('hidden');
+      const bArrange = document.getElementById('btn-florist-arrange');
+      bArrange.textContent = "🌸 Cut & Arrange Bouquet";
+      bArrange.className = "flex-1 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs shadow-md transition";
+      bArrange.disabled = false;
+
+      const bReady = document.getElementById('btn-florist-ready');
+      bReady.textContent = "📦 Ready for Courier";
+      bReady.className = "flex-1 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md transition opacity-50 cursor-not-allowed";
+      bReady.disabled = true;
+
+      document.getElementById('rider-idle').classList.remove('hidden');
+      document.getElementById('rider-offer').classList.add('hidden');
+      document.getElementById('rider-transit').classList.add('hidden');
+      const bAction = document.getElementById('btn-rider-action');
+      bAction.textContent = "Confirm Bouquet Pickup from Stall";
+      bAction.className = "w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md transition";
+      bAction.disabled = false;
+
+      document.getElementById('flow-status-text').textContent = "System Idle: Customer browsing Naivasha fresh roses";
+      logSim("Simulation reset to initial state.", 'normal');
+    }
+
+    // Auto Play
+    function autoPlayDemo() {
+      resetFullDemo();
+      logSim("Starting Automated Investor Pitch Sequence...", 'action');
+
+      setTimeout(() => triggerMpesaCheckout(), 600);
+      setTimeout(() => confirmMpesaPin(), 2400);
+      setTimeout(() => step2_floristArrange(), 5000);
+      setTimeout(() => step3_floristReady(), 7800);
+      setTimeout(() => step4_riderAccept(), 10200);
+      setTimeout(() => step5_riderAction(), 13000);
+      setTimeout(() => step5_riderAction(), 16000);
+    }
+
+    // Financial Calculator
+    function calculateFinancials() {
+      const orders = parseInt(document.getElementById('slider-orders').value);
+      const aov = parseInt(document.getElementById('slider-aov').value);
+
+      document.getElementById('val-daily-orders').textContent = `${orders} orders / day`;
+      document.getElementById('val-aov').textContent = `KSh ${aov.toLocaleString()}`;
+
+      const monthlyOrders = orders * 30;
+      const monthlyGMV = monthlyOrders * aov;
+      const floristCommission = monthlyGMV * 0.18;
+      const deliveryRev = monthlyOrders * 350;
+      const platformNetMonthly = floristCommission + (deliveryRev * 0.20);
+      const annualizedARR = platformNetMonthly * 12;
+
+      document.getElementById('out-gmv').textContent = `KSh ${monthlyGMV.toLocaleString()}`;
+      document.getElementById('out-commission').textContent = `KSh ${Math.round(floristCommission).toLocaleString()}`;
+      document.getElementById('out-delivery-rev').textContent = `KSh ${deliveryRev.toLocaleString()}`;
+      document.getElementById('out-arr').textContent = `KSh ${Math.round(annualizedARR).toLocaleString()}`;
+    }
+  </script>
+</body>
+</html>

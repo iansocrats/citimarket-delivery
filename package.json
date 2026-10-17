@@ -1,0 +1,19 @@
+{
+  "name": "citimarket-delivery",
+  "version": "1.0.0",
+  "description": "On-demand fresh flower delivery logistics engine and financial ledger for Nairobi, Kenya.",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "delivery",
+    "logistics",
+    "mpesa",
+    "kenya",
+    "flowers",
+    "fintech"
+  ],
+  "author": "CitiMarket Delivery",
+  "license": "MIT"
+}
