@@ -1561,7 +1561,7 @@
             </button>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
             <div class="p-3.5 rounded-xl bg-[#061e17] border border-emerald-950 space-y-2">
               <span class="font-bold text-cyan-300 flex items-center gap-1">🏛️ Aggregates &amp; Roots</span>
               <ul class="text-[11px] text-slate-300 space-y-1 list-disc list-inside">
@@ -1572,22 +1572,31 @@
             </div>
 
             <div class="p-3.5 rounded-xl bg-[#061e17] border border-emerald-950 space-y-2">
-              <span class="font-bold text-emerald-300 flex items-center gap-1">💎 Immutable Value Objects</span>
+              <span class="font-bold text-emerald-300 flex items-center gap-1">💎 Value Objects</span>
               <ul class="text-[11px] text-slate-300 space-y-1 list-disc list-inside">
                 <li><strong>Money</strong>: Positive integer cents (`BIGINT`), no float drift.</li>
                 <li><strong>ProofOfDelivery</strong>: Salted SHA-256 hash &amp; ECDSA token.</li>
                 <li><strong>GeoCoordinate</strong>: Lat/Lng + Uber H3 Res 8/10 index.</li>
-                <li><strong>CalligraphyNote</strong>: Text + secret surprise flag.</li>
+                <li><strong>PerishableCargo</strong>: Vibration limit + 45-min hydration timer.</li>
               </ul>
             </div>
 
             <div class="p-3.5 rounded-xl bg-[#061e17] border border-emerald-950 space-y-2">
-              <span class="font-bold text-amber-300 flex items-center gap-1">⚙️ GoF Design Patterns</span>
+              <span class="font-bold text-amber-300 flex items-center gap-1">🏭 Creational Patterns</span>
               <ul class="text-[11px] text-slate-300 space-y-1 list-disc list-inside">
-                <li><strong>State Pattern</strong>: Polymorphic `OrderState` FSM.</li>
+                <li><strong>Factory Method</strong>: `DeliveryOrderFactory` hierarchy (`FragileFloral`, `Corporate`, `MultiStop`).</li>
+                <li><strong>Abstract Factory</strong>: `ColdChainEquipmentFactory` (carriers &amp; sensors for ICE vs EV Boda).</li>
+                <li><strong>Builder Pattern</strong>: `BouquetCustomizationBuilder`.</li>
+              </ul>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#061e17] border border-emerald-950 space-y-2">
+              <span class="font-bold text-rose-300 flex items-center gap-1">⚙️ Structural &amp; Behavioral</span>
+              <ul class="text-[11px] text-slate-300 space-y-1 list-disc list-inside">
+                <li><strong>State Pattern</strong>: Polymorphic `OrderLifecycleState` FSM.</li>
                 <li><strong>Strategy Pattern</strong>: Kuhn-Munkres + Corridor Batching.</li>
-                <li><strong>Domain Events</strong>: `OrderDeliveredEvent` $\to$ Ledger.</li>
-                <li><strong>Builder Pattern</strong>: `BouquetArrangementBuilder`.</li>
+                <li><strong>Adapter / ACL</strong>: Daraja M-Pesa webhook translation.</li>
+                <li><strong>Saga Coordinator</strong>: Distributed rollback with M-Pesa refunds.</li>
               </ul>
             </div>
           </div>
@@ -1738,27 +1747,67 @@
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="p-4 rounded-xl bg-[#061e17] border border-emerald-950 space-y-2 text-xs">
-              <span class="font-bold text-white flex items-center gap-1">📅 56-Day Phase Breakdown</span>
+            <div class="p-4 rounded-xl bg-[#061e17] border border-emerald-950 space-y-3 text-xs">
+              <span class="font-bold text-white flex items-center gap-1">📅 56-Day Production Execution Roadmap</span>
               <ul class="text-[11px] text-slate-300 space-y-1.5">
                 <li>• <strong>Phase 1 (Days 4–9)</strong>: Financial Bedrock &amp; Safaricom Daraja M-Pesa.</li>
                 <li>• <strong>Phase 2 (Days 10–16)</strong>: Order Saga Orchestrator &amp; Inventory Locking.</li>
                 <li>• <strong>Phase 3 (Days 17–23)</strong>: Uber H3 Spatial Telemetry &amp; JIT Dispatch.</li>
                 <li>• <strong>Phase 4 (Days 24–28)</strong>: Africa's Talking VoIP Proxy &amp; Offline PIN.</li>
                 <li>• <strong>Phase 5 (Days 29–44)</strong>: Edge Apps (Consumer Web $\to$ Stall Tablet $\to$ Courier APK).</li>
-                <li>• <strong>Phase 6 (Days 45–56)</strong>: City Market Ground Alpha (2 Stalls, 3 Riders, 25 Deliveries).</li>
+                <li>• <strong>Phase 6 (Days 45–56)</strong>: City Market Ground Alpha (2 Stalls, 3 Riders, 25 Live Deliveries).</li>
               </ul>
+
+              <div class="pt-2 border-t border-emerald-900/60">
+                <span class="text-[10px] uppercase font-bold text-emerald-400">Milestone Quality Gate:</span>
+                <p class="text-[10.5px] text-slate-300 mt-0.5">
+                  Gate 1 ($\Delta = 0.00$), Gate 2 (Dropped M-Pesa recovery), Gate 3 (Offline basement PIN), Gate 4 (Alpha commercial launch).
+                </p>
+              </div>
             </div>
 
             <div class="p-4 rounded-xl bg-[#061e17] border border-rose-500/30 bg-gradient-to-br from-[#09261e] to-[#1a0e14] space-y-3">
-              <span class="font-bold text-rose-300 text-xs flex items-center gap-1">💰 Ground Pilot Runway: KSh 229,000 (~$1,800 USD)</span>
-              <p class="text-[11px] text-slate-300 leading-relaxed">
-                Covers 2 months cloud, Safaricom B2C float, 3 insulated courier backpacks, 500 water vials, and 2 florist Android tablets.
-              </p>
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-rose-300 text-xs flex items-center gap-1">💰 Ground Pilot Runway: KSh 229,000 (~$1,760 USD)</span>
+                <span class="text-[10px] font-mono text-emerald-400 font-bold">8 Weeks / 2 Stalls</span>
+              </div>
+
+              <!-- Itemized Shilling Table -->
+              <div class="space-y-1 text-[10.5px] text-slate-300">
+                <div class="flex justify-between py-0.5 border-b border-emerald-950">
+                  <span>• 3 Upright Boda Backpacks + 500 Water Phials</span>
+                  <span class="font-mono text-white font-bold">KSh 35,500</span>
+                </div>
+                <div class="flex justify-between py-0.5 border-b border-emerald-950">
+                  <span>• 2 Florist Rugged 10" Tablets + 2 BT Thermal Printers</span>
+                  <span class="font-mono text-white font-bold">KSh 44,000</span>
+                </div>
+                <div class="flex justify-between py-0.5 border-b border-emerald-950">
+                  <span>• Cloud Droplet, 4G Data, VoIP Trunk &amp; Paybill KYC</span>
+                  <span class="font-mono text-white font-bold">KSh 26,500</span>
+                </div>
+                <div class="flex justify-between py-0.5 border-b border-emerald-950">
+                  <span>• Safaricom Daraja B2C Instant Payout Float</span>
+                  <span class="font-mono text-white font-bold">KSh 25,000</span>
+                </div>
+                <div class="flex justify-between py-0.5 border-b border-emerald-950">
+                  <span>• 3 Dedicated Riders (14d Retainer + Fuel + Bonus)</span>
+                  <span class="font-mono text-white font-bold">KSh 57,100</span>
+                </div>
+                <div class="flex justify-between py-0.5 border-b border-emerald-950">
+                  <span>• Florist Onboarding + 25 Pilot Vouchers + Contingency</span>
+                  <span class="font-mono text-white font-bold">KSh 40,900</span>
+                </div>
+                <div class="flex justify-between pt-1 font-bold text-rose-300">
+                  <span>EXACT PILOT SUM TOTAL:</span>
+                  <span class="font-mono text-[#00E065]">KSh 229,000</span>
+                </div>
+              </div>
+
               <div class="p-3 rounded-lg bg-[#03100c] border border-rose-500/50 space-y-1">
                 <div class="text-[10px] uppercase font-bold text-rose-300">Seed Financing Target:</div>
                 <div class="text-xl font-black text-white">KSh 5,000,000 <span class="text-xs font-normal text-slate-400">(~$38,000 USD)</span></div>
-                <div class="text-[10px] text-emerald-300">To scale from 2 stalls to 30 stalls and capture 45% of Nairobi's premium flower delivery market.</div>
+                <div class="text-[10px] text-emerald-300">To onboard 30 City Market florists, 25 cold-chain Boda couriers, and capture 45% of Nairobi's premium perishable market.</div>
               </div>
             </div>
           </div>
