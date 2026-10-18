@@ -97,6 +97,9 @@
         <button id="nav-btn-calc" onclick="setTab('calculator')" class="px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition">
           💰 Unit Economics (KES)
         </button>
+        <button id="nav-btn-pitch" onclick="setTab('pitch')" class="px-3 py-1.5 rounded-lg text-rose-300 bg-rose-500/10 border border-rose-500/30 hover:bg-rose-500/20 font-bold transition flex items-center gap-1 shadow-sm">
+          🎙️ Master Pitch Deck
+        </button>
       </div>
 
       <!-- Presentation Action Controls -->
@@ -1434,6 +1437,337 @@
     </div>
   </section>
 
+  <!-- ================= TAB 7: EXECUTIVE TECHNICAL MASTER PITCH DECK ================= -->
+  <section id="tab-pitch" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
+    <div class="bg-[#061e17] border border-rose-800/40 rounded-3xl p-6 space-y-6 shadow-2xl">
+      
+      <!-- Pitch Header -->
+      <div class="flex flex-wrap justify-between items-start gap-4 pb-4 border-b border-emerald-900/60">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold text-rose-400 uppercase tracking-widest flex items-center gap-1">
+              🎙️ Executive Technical Master Pitch Deck
+            </span>
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40">
+              Investor &amp; Architecture Briefing
+            </span>
+          </div>
+          <h2 class="text-2xl font-bold text-white mt-1">CitiMarket Delivery: Perishable Cold-Chain Logistics &amp; Fintech Escrow</h2>
+          <p class="text-sm text-emerald-200/70 mt-1 max-w-3xl leading-relaxed">
+            From Enterprise System Design &amp; OOAD to Production Specs, Distributed Edge Computing, and 56-Day Execution Roadmap.
+          </p>
+        </div>
+
+        <!-- Slide Controls -->
+        <div class="flex items-center gap-2">
+          <button onclick="prevPitchSlide()" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs transition flex items-center gap-1 border border-slate-700">
+            <span>◀ Prev</span>
+          </button>
+          <span id="pitch-slide-indicator" class="text-xs font-mono font-bold text-rose-300 px-2 py-1 bg-rose-950/60 rounded-lg border border-rose-800/50">
+            Slide 1 of 6
+          </span>
+          <button onclick="nextPitchSlide()" class="px-3 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs transition flex items-center gap-1 shadow-lg shadow-rose-950/40">
+            <span>Next ▶</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Slide Navigation Pills -->
+      <div class="flex flex-wrap gap-2 text-xs font-medium">
+        <button id="pitch-pill-1" onclick="setPitchSlide(1)" class="px-3 py-1.5 rounded-xl bg-rose-600 text-white font-bold transition">
+          1. Problem &amp; Economics
+        </button>
+        <button id="pitch-pill-2" onclick="setPitchSlide(2)" class="px-3 py-1.5 rounded-xl bg-[#03100c] text-slate-400 hover:text-white transition border border-emerald-900/60">
+          2. OOAD System Design
+        </button>
+        <button id="pitch-pill-3" onclick="setPitchSlide(3)" class="px-3 py-1.5 rounded-xl bg-[#03100c] text-slate-400 hover:text-white transition border border-emerald-900/60">
+          3. Fintech &amp; Ledger
+        </button>
+        <button id="pitch-pill-4" onclick="setPitchSlide(4)" class="px-3 py-1.5 rounded-xl bg-[#03100c] text-slate-400 hover:text-white transition border border-emerald-900/60">
+          4. Edge Computing &amp; Offline PIN
+        </button>
+        <button id="pitch-pill-5" onclick="setPitchSlide(5)" class="px-3 py-1.5 rounded-xl bg-[#03100c] text-slate-400 hover:text-white transition border border-emerald-900/60">
+          5. Superapp Innovations
+        </button>
+        <button id="pitch-pill-6" onclick="setPitchSlide(6)" class="px-3 py-1.5 rounded-xl bg-[#03100c] text-slate-400 hover:text-white transition border border-emerald-900/60">
+          6. 56-Day Plan &amp; Seed Ask
+        </button>
+      </div>
+
+      <!-- ================= SLIDE 1: PROBLEM & UNIT ECONOMICS ================= -->
+      <div id="pitch-slide-1" class="space-y-5">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div class="p-4 rounded-2xl bg-[#03100c] border border-rose-500/30 space-y-1">
+            <span class="text-[10px] uppercase font-bold text-rose-300">Target Opportunity</span>
+            <div class="text-2xl font-black text-white">$12M+ ARR</div>
+            <div class="text-[10.5px] text-slate-400">Nairobi Premium Gifting Market</div>
+          </div>
+          <div class="p-4 rounded-2xl bg-[#03100c] border border-emerald-500/30 space-y-1">
+            <span class="text-[10px] uppercase font-bold text-emerald-300">Average Order Value (AOV)</span>
+            <div class="text-2xl font-black text-[#00E065]">KSh 3,850</div>
+            <div class="text-[10.5px] text-slate-400">High-basket perishable gifting</div>
+          </div>
+          <div class="p-4 rounded-2xl bg-[#03100c] border border-amber-500/30 space-y-1">
+            <span class="text-[10px] uppercase font-bold text-amber-300">Platform Take-Rate</span>
+            <div class="text-2xl font-black text-amber-300">35% Net</div>
+            <div class="text-[10.5px] text-slate-400">18% Wholesale + 20% Logistics Cut</div>
+          </div>
+          <div class="p-4 rounded-2xl bg-[#03100c] border border-cyan-500/30 space-y-1">
+            <span class="text-[10px] uppercase font-bold text-cyan-300">Spoilage Reduction</span>
+            <div class="text-2xl font-black text-cyan-300">40% ➔ &lt;1.5%</div>
+            <div class="text-[10.5px] text-slate-400">Via Upright Stem Water Phials</div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="p-5 rounded-2xl bg-[#03100c] border border-rose-900/60 space-y-3">
+            <div class="flex items-center gap-2">
+              <span class="text-lg">❌</span>
+              <h4 class="font-bold text-white text-sm">The Generic Courier Failure in Nairobi</h4>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Standard couriers (Uber, Glovo, Bolt) carry flowers horizontally in warm bags. Over Nairobi's 45-minute traffic corridors, cut Naivasha roses suffer from vascular air embolisms and wilt prematurely. Furthermore, <strong>70% of deliveries are surprise gifts</strong>; generic drivers call the recipient and spoil the surprise.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/60 space-y-3">
+            <div class="flex items-center gap-2">
+              <span class="text-lg">✅</span>
+              <h4 class="font-bold text-white text-sm">The CitiMarket Delivery Moat</h4>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Digitizing historic City Market (Muindi Mbingu St) with an insulated Boda Boda network equipped with <strong>15ml stem-hydration vials</strong>, handwritten calligraphy card previews, ephemeral number masking, and an automated double-entry general ledger with zero floating-point leakage.
+            </p>
+            <div class="pt-1">
+              <button onclick="setTab('calculator')" class="text-xs font-bold text-[#00E065] underline hover:text-white flex items-center gap-1">
+                <span>Explore Interactive Margins &amp; ARR Calculator ↗</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= SLIDE 2: OOAD SYSTEM DESIGN ================= -->
+      <div id="pitch-slide-2" class="hidden space-y-5">
+        <div class="p-5 rounded-2xl bg-[#03100c] border border-cyan-900/60 space-y-4">
+          <div class="flex justify-between items-start">
+            <div>
+              <span class="text-xs font-bold text-cyan-400 uppercase tracking-widest">Enterprise Architecture</span>
+              <h3 class="text-lg font-bold text-white mt-1">Domain-Driven Design (DDD) &amp; Clean OOAD</h3>
+              <p class="text-xs text-slate-300 mt-1">Separating domain logic from infrastructure with explicit Aggregates, Value Objects, and Design Patterns.</p>
+            </div>
+            <button onclick="setTab('simulator')" class="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition">
+              🚀 Try in Live Simulator
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+            <div class="p-3.5 rounded-xl bg-[#061e17] border border-emerald-950 space-y-2">
+              <span class="font-bold text-cyan-300 flex items-center gap-1">🏛️ Aggregates &amp; Roots</span>
+              <ul class="text-[11px] text-slate-300 space-y-1 list-disc list-inside">
+                <li><strong>OrderAggregate</strong>: Encapsulates lifecycle invariants &amp; escrow.</li>
+                <li><strong>LedgerTransactionAggregate</strong>: Enforces $\Delta = 0.00$ zero-sum conservation.</li>
+                <li><strong>CourierAggregate</strong>: Kinematics &amp; local SQLite outbox.</li>
+              </ul>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#061e17] border border-emerald-950 space-y-2">
+              <span class="font-bold text-emerald-300 flex items-center gap-1">💎 Immutable Value Objects</span>
+              <ul class="text-[11px] text-slate-300 space-y-1 list-disc list-inside">
+                <li><strong>Money</strong>: Positive integer cents (`BIGINT`), no float drift.</li>
+                <li><strong>ProofOfDelivery</strong>: Salted SHA-256 hash &amp; ECDSA token.</li>
+                <li><strong>GeoCoordinate</strong>: Lat/Lng + Uber H3 Res 8/10 index.</li>
+                <li><strong>CalligraphyNote</strong>: Text + secret surprise flag.</li>
+              </ul>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#061e17] border border-emerald-950 space-y-2">
+              <span class="font-bold text-amber-300 flex items-center gap-1">⚙️ GoF Design Patterns</span>
+              <ul class="text-[11px] text-slate-300 space-y-1 list-disc list-inside">
+                <li><strong>State Pattern</strong>: Polymorphic `OrderState` FSM.</li>
+                <li><strong>Strategy Pattern</strong>: Kuhn-Munkres + Corridor Batching.</li>
+                <li><strong>Domain Events</strong>: `OrderDeliveredEvent` $\to$ Ledger.</li>
+                <li><strong>Builder Pattern</strong>: `BouquetArrangementBuilder`.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= SLIDE 3: FINTECH & LEDGER ================= -->
+      <div id="pitch-slide-3" class="hidden space-y-5">
+        <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/60 space-y-4">
+          <div class="flex justify-between items-start">
+            <div>
+              <span class="text-xs font-bold text-[#00E065] uppercase tracking-widest">Financial Engineering</span>
+              <h3 class="text-lg font-bold text-white mt-1">Double-Entry Cryptographic General Ledger (Zero Leakage)</h3>
+              <p class="text-xs text-slate-300 mt-1">Mathematical financial conservation with automated Safaricom Daraja C2B/B2C reconciliation.</p>
+            </div>
+            <button onclick="setTab('ledger')" class="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition">
+              ⚖️ Open CFO Ledger
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-4 rounded-xl bg-[#061e17] border border-emerald-950 space-y-2">
+              <div class="text-xs font-bold text-white flex items-center gap-1.5">
+                <span>🔒</span> Strict Invariant Formula:
+              </div>
+              <div class="p-3 rounded-lg bg-[#020b08] font-mono text-center text-xs text-[#00E065] font-bold">
+                ∑ Debits ≡ ∑ Credits &nbsp;&nbsp;(Δ = 0.00 KES)
+              </div>
+              <p class="text-[11px] text-slate-300 leading-relaxed">
+                Every transaction requires equal debit and credit legs. Enforced via PostgreSQL trigger functions. Updates and deletes are blocked; the journal is strictly append-only.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-[#061e17] border border-emerald-950 space-y-2">
+              <div class="text-xs font-bold text-white flex items-center gap-1.5">
+                <span>📡</span> Active Daraja Reconciliation Worker
+              </div>
+              <div class="p-3 rounded-lg bg-[#020b08] font-mono text-center text-xs text-cyan-300 font-bold">
+                Poll(t = 10s, 25s, 50s) ➔ 100% Recovery
+              </div>
+              <p class="text-[11px] text-slate-300 leading-relaxed">
+                Safaricom STK Push webhooks often lag or drop. Our active reconciliation worker polls Daraja's transaction query API, ensuring no payment is lost.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= SLIDE 4: DISTRIBUTED EDGE COMPUTING ================= -->
+      <div id="pitch-slide-4" class="hidden space-y-5">
+        <div class="p-5 rounded-2xl bg-[#03100c] border border-cyan-900/60 space-y-4">
+          <div class="flex justify-between items-start">
+            <div>
+              <span class="text-xs font-bold text-cyan-400 uppercase tracking-widest">Distributed Systems</span>
+              <h3 class="text-lg font-bold text-white mt-1">CAP Theorem on the Move: Event Sourcing Core + Edge CRDTs</h3>
+              <p class="text-xs text-slate-300 mt-1">Couriers' smartphones are autonomous computing nodes that function seamlessly in 0G basement parking.</p>
+            </div>
+            <button onclick="setTab('mobile-arch')" class="px-3 py-1.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs transition">
+              📱 Test Offline Sandbox
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+            <div class="p-3.5 rounded-xl bg-[#061e17] border border-emerald-950 space-y-2">
+              <span class="font-bold text-amber-300">🔑 Offline Salted Hash PIN</span>
+              <p class="text-[11px] text-slate-300 leading-relaxed">
+                Cloud sends $H = \text{SHA256}(\text{PIN} + \text{Salt})$ to driver, plaintext PIN to recipient. Driver verifies in basement parking with 0ms server latency. Plaintext PIN is never leaked.
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#061e17] border border-emerald-950 space-y-2">
+              <span class="font-bold text-cyan-300">📦 Local SQLite Outbox</span>
+              <p class="text-[11px] text-slate-300 leading-relaxed">
+                Handover commits locally to flash storage first. Flushes binary Protobuf batch (24 bytes) upon surface reconnection with monotonic vector clocks.
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#061e17] border border-emerald-950 space-y-2">
+              <span class="font-bold text-emerald-300">🔋 Conquering Tecno/Infinix</span>
+              <p class="text-[11px] text-slate-300 leading-relaxed">
+                Android ForegroundService with `START_STICKY` prevents OEM battery killers from murdering GPS tracking. Protobuf saves 79% of mobile data bundles.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= SLIDE 5: SUPERAPP INNOVATIONS ================= -->
+      <div id="pitch-slide-5" class="hidden space-y-5">
+        <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/60 space-y-4">
+          <div class="flex justify-between items-start">
+            <div>
+              <span class="text-xs font-bold text-[#00E065] uppercase tracking-widest">Superapp Engineering</span>
+              <h3 class="text-lg font-bold text-white mt-1">High-Margin Moats Adopted from Grab's Architecture</h3>
+              <p class="text-xs text-slate-300 mt-1">Operational superapp features adapted specifically to Nairobi's perishable flower ecosystem.</p>
+            </div>
+            <button onclick="setTab('grab-features')" class="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition">
+              ⚡ View Superapp Suite
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 text-xs">
+            <div class="p-3 rounded-xl bg-[#061e17] border border-emerald-950 space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5">🛵 1. Smart Corridor Pooling</div>
+              <p class="text-[11px] text-slate-300">Batched Ngong Rd / Waiyaki Way drops: -35% fee to user, +57% hourly pay to driver.</p>
+            </div>
+
+            <div class="p-3 rounded-xl bg-[#061e17] border border-emerald-950 space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5">⛽ 2. Driver Fuel Float Advances</div>
+              <p class="text-[11px] text-slate-300">Pre-approved KSh 500 morning fuel advance via M-Pesa B2C, auto-repaid from first 2 trips.</p>
+            </div>
+
+            <div class="p-3 rounded-xl bg-[#061e17] border border-emerald-950 space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5">⏱️ 3. Stall Capacity "Busy Mode"</div>
+              <p class="text-[11px] text-slate-300">Monitors Stall 42 active queue; auto-spills excess orders to adjacent verified Stall 43.</p>
+            </div>
+
+            <div class="p-3 rounded-xl bg-[#061e17] border border-emerald-950 space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5">🚨 4. Crash Detection Telematics</div>
+              <p class="text-[11px] text-slate-300">IMU sensor fusion detects $\ge 4.5g$ deceleration; auto-dispatches emergency &amp; replacement.</p>
+            </div>
+
+            <div class="p-3 rounded-xl bg-[#061e17] border border-emerald-950 space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5">📷 5. Computer Vision Quality Gate</div>
+              <p class="text-[11px] text-slate-300">ML scans pre-dispatch photos to verify 24 stem heads, water vials, and calligraphy card.</p>
+            </div>
+
+            <div class="p-3 rounded-xl bg-[#061e17] border border-emerald-950 space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5">📅 6. Corporate Subscription Engine</div>
+              <p class="text-[11px] text-slate-300">Weekly fresh lilies for banks/hotels &amp; auto-anniversary gifting via M-Pesa Standing Orders.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= SLIDE 6: 56-DAY PLAN & SEED ASK ================= -->
+      <div id="pitch-slide-6" class="hidden space-y-5">
+        <div class="p-5 rounded-2xl bg-[#03100c] border border-rose-900/60 space-y-4">
+          <div class="flex justify-between items-start">
+            <div>
+              <span class="text-xs font-bold text-rose-400 uppercase tracking-widest">Execution Roadmap &amp; Investment</span>
+              <h3 class="text-lg font-bold text-white mt-1">The 56-Day Master Plan &amp; Seed Capital Ask</h3>
+              <p class="text-xs text-slate-300 mt-1">8 weeks from engineering kickoff to live commercial operations on the streets of Nairobi.</p>
+            </div>
+            <button onclick="autoPlayDemo()" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-400 text-white font-bold text-xs transition shadow-lg shadow-rose-950/40">
+              ⚡ Watch 15s Pitch Demo
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-4 rounded-xl bg-[#061e17] border border-emerald-950 space-y-2 text-xs">
+              <span class="font-bold text-white flex items-center gap-1">📅 56-Day Phase Breakdown</span>
+              <ul class="text-[11px] text-slate-300 space-y-1.5">
+                <li>• <strong>Phase 1 (Days 4–9)</strong>: Financial Bedrock &amp; Safaricom Daraja M-Pesa.</li>
+                <li>• <strong>Phase 2 (Days 10–16)</strong>: Order Saga Orchestrator &amp; Inventory Locking.</li>
+                <li>• <strong>Phase 3 (Days 17–23)</strong>: Uber H3 Spatial Telemetry &amp; JIT Dispatch.</li>
+                <li>• <strong>Phase 4 (Days 24–28)</strong>: Africa's Talking VoIP Proxy &amp; Offline PIN.</li>
+                <li>• <strong>Phase 5 (Days 29–44)</strong>: Edge Apps (Consumer Web $\to$ Stall Tablet $\to$ Courier APK).</li>
+                <li>• <strong>Phase 6 (Days 45–56)</strong>: City Market Ground Alpha (2 Stalls, 3 Riders, 25 Deliveries).</li>
+              </ul>
+            </div>
+
+            <div class="p-4 rounded-xl bg-[#061e17] border border-rose-500/30 bg-gradient-to-br from-[#09261e] to-[#1a0e14] space-y-3">
+              <span class="font-bold text-rose-300 text-xs flex items-center gap-1">💰 Ground Pilot Runway: KSh 229,000 (~$1,800 USD)</span>
+              <p class="text-[11px] text-slate-300 leading-relaxed">
+                Covers 2 months cloud, Safaricom B2C float, 3 insulated courier backpacks, 500 water vials, and 2 florist Android tablets.
+              </p>
+              <div class="p-3 rounded-lg bg-[#03100c] border border-rose-500/50 space-y-1">
+                <div class="text-[10px] uppercase font-bold text-rose-300">Seed Financing Target:</div>
+                <div class="text-xl font-black text-white">KSh 5,000,000 <span class="text-xs font-normal text-slate-400">(~$38,000 USD)</span></div>
+                <div class="text-[10px] text-emerald-300">To scale from 2 stalls to 30 stalls and capture 45% of Nairobi's premium flower delivery market.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ================= GRAB INTERACTIVE MODALS ================= -->
 
   <!-- 1. Grab Safety Shield: Masked VoIP Call Modal -->
@@ -1886,16 +2220,22 @@
     }
 
     function setTab(tab) {
-      const allTabs = ['simulator', 'grab-features', 'ledger', 'mobile-arch', 'cs-engine', 'branding', 'calculator'];
+      const allTabs = ['simulator', 'grab-features', 'ledger', 'mobile-arch', 'cs-engine', 'branding', 'calculator', 'pitch'];
       allTabs.forEach(t => {
         const el = document.getElementById(`tab-${t}`);
         if (el) el.classList.add('hidden');
       });
 
-      const navs = ['sim', 'grab', 'ledger', 'mobile', 'cs', 'branding', 'calc'];
+      const navs = ['sim', 'grab', 'ledger', 'mobile', 'cs', 'branding', 'calc', 'pitch'];
       navs.forEach(n => {
         const btn = document.getElementById(`nav-btn-${n}`);
-        if (btn) btn.className = 'px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition';
+        if (btn) {
+          if (n === 'pitch') {
+            btn.className = 'px-3 py-1.5 rounded-lg text-rose-300 bg-rose-500/10 border border-rose-500/30 hover:bg-rose-500/20 font-bold transition flex items-center gap-1 shadow-sm';
+          } else {
+            btn.className = 'px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition';
+          }
+        }
       });
 
       if (tab === 'simulator') {
@@ -1919,6 +2259,9 @@
       } else if (tab === 'calculator') {
         document.getElementById('tab-calculator').classList.remove('hidden');
         document.getElementById('nav-btn-calc').className = 'px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition';
+      } else if (tab === 'pitch') {
+        document.getElementById('tab-pitch').classList.remove('hidden');
+        document.getElementById('nav-btn-pitch').className = 'px-3 py-1.5 rounded-lg bg-rose-600 text-white font-bold shadow-sm transition flex items-center gap-1';
       }
     }
 
@@ -2415,6 +2758,32 @@
       document.getElementById('out-commission').textContent = `KSh ${Math.round(floristCommission).toLocaleString()}`;
       document.getElementById('out-delivery-rev').textContent = `KSh ${deliveryRev.toLocaleString()}`;
       document.getElementById('out-arr').textContent = `KSh ${Math.round(annualizedARR).toLocaleString()}`;
+    }
+
+    // Master Pitch Deck Slide Controller
+    let pitchCurrentSlide = 1;
+    function setPitchSlide(n) {
+      pitchCurrentSlide = n;
+      for (let i = 1; i <= 6; i++) {
+        const s = document.getElementById(`pitch-slide-${i}`);
+        const p = document.getElementById(`pitch-pill-${i}`);
+        if (s) s.classList.toggle('hidden', i !== n);
+        if (p) {
+          p.className = i === n 
+            ? 'px-3 py-1.5 rounded-xl bg-rose-600 text-white font-bold transition'
+            : 'px-3 py-1.5 rounded-xl bg-[#03100c] text-slate-400 hover:text-white transition border border-emerald-900/60';
+        }
+      }
+      const ind = document.getElementById('pitch-slide-indicator');
+      if (ind) ind.textContent = `Slide ${n} of 6`;
+    }
+
+    function nextPitchSlide() {
+      setPitchSlide(pitchCurrentSlide < 6 ? pitchCurrentSlide + 1 : 1);
+    }
+
+    function prevPitchSlide() {
+      setPitchSlide(pitchCurrentSlide > 1 ? pitchCurrentSlide - 1 : 6);
     }
   </script>
 </body>
