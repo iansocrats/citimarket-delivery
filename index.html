@@ -1659,25 +1659,32 @@
             </button>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs">
             <div class="p-3.5 rounded-xl bg-[#061e17] border border-emerald-950 space-y-2">
               <span class="font-bold text-amber-300">🔑 Offline Salted Hash PIN</span>
               <p class="text-[11px] text-slate-300 leading-relaxed">
-                Cloud sends $H = \text{SHA256}(\text{PIN} + \text{Salt})$ to driver, plaintext PIN to recipient. Driver verifies in basement parking with 0ms server latency. Plaintext PIN is never leaked.
+                Cloud sends $H = \text{SHA256}(\text{PIN} + \text{Salt})$ to driver, plaintext PIN to recipient. Driver verifies in basement parking with 0ms latency.
               </p>
             </div>
 
             <div class="p-3.5 rounded-xl bg-[#061e17] border border-emerald-950 space-y-2">
-              <span class="font-bold text-cyan-300">📦 Local SQLite Outbox</span>
+              <span class="font-bold text-cyan-300">📦 Edge Outbox &amp; CRDTs</span>
               <p class="text-[11px] text-slate-300 leading-relaxed">
-                Handover commits locally to flash storage first. Flushes binary Protobuf batch (24 bytes) upon surface reconnection with monotonic vector clocks.
+                Local-first SQLite outbox on Android. Optimistic UI commit; flushes binary Protobuf (24 bytes) upon surface reconnection via LWW join-semilattices.
               </p>
             </div>
 
             <div class="p-3.5 rounded-xl bg-[#061e17] border border-emerald-950 space-y-2">
-              <span class="font-bold text-emerald-300">🔋 Conquering Tecno/Infinix</span>
+              <span class="font-bold text-[#00E065]">🏛️ 3-Node Raft Consensus</span>
               <p class="text-[11px] text-slate-300 leading-relaxed">
-                Android ForegroundService with `START_STICKY` prevents OEM battery killers from murdering GPS tracking. Protobuf saves 79% of mobile data bundles.
+                Cloud financial core runs strict CP Raft across Nairobi DC &amp; AWS Cape Town. Quorum ($2/3$) commits escrow settlement with zero split-brain risk.
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#061e17] border border-emerald-950 space-y-2">
+              <span class="font-bold text-emerald-300">🔋 Battery &amp; Telematics</span>
+              <p class="text-[11px] text-slate-300 leading-relaxed">
+                ForegroundService with `START_STICKY` bypasses Tecno/Infinix battery killers. EKF adaptive GPS saves 68% battery on Kenyan budget hardware.
               </p>
             </div>
           </div>
