@@ -968,6 +968,21 @@
             <div id="out-arr" class="text-xl font-extrabold text-rose-400 mt-1">KSh 38,400,000</div>
           </div>
         </div>
+
+        <!-- Cross-link to 56-Day Engineering Build Budget & Optimal Capital Deployment -->
+        <div class="mt-4 p-3.5 rounded-xl bg-[#061e17] border border-rose-500/40 flex flex-wrap items-center justify-between gap-3">
+          <div class="space-y-0.5">
+            <span class="text-xs font-bold text-rose-300 flex items-center gap-1.5">
+              <span>💼</span> System Engineering Build Budget &amp; Optimal Pre-Seed Capital Allocation
+            </span>
+            <p class="text-[11px] text-slate-300">
+              See the full 56-day software build budget (KSh 1,660,000 / ~$12.8k) and optimal pre-seed deployment models (KSh 1.98M vs KSh 5.0M ask).
+            </p>
+          </div>
+          <button onclick="setTab('pitch'); setPitchSlide(6);" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-500 text-white font-bold text-xs shadow-md transition flex items-center gap-1">
+            <span>View Build Budget &amp; Optimal Cost ➔</span>
+          </button>
+        </div>
       </div>
 
       <!-- Ledger Header & Invariant Controls -->
@@ -1450,7 +1465,7 @@
             <span>◀ Prev</span>
           </button>
           <span id="pitch-slide-indicator" class="text-xs font-mono font-bold text-rose-300 px-2 py-1 bg-rose-950/60 rounded-lg border border-rose-800/50">
-            Slide 1 of 6
+            Slide 1 of 7
           </span>
           <button onclick="nextPitchSlide()" class="px-3 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs transition flex items-center gap-1 shadow-lg shadow-rose-950/40">
             <span>Next ▶</span>
@@ -1476,7 +1491,10 @@
           5. Superapp Innovations
         </button>
         <button id="pitch-pill-6" onclick="setPitchSlide(6)" class="px-3 py-1.5 rounded-xl bg-[#03100c] text-slate-400 hover:text-white transition border border-emerald-900/60">
-          6. 56-Day Plan &amp; Seed Ask
+          6. Build Budget &amp; Optimal Cost
+        </button>
+        <button id="pitch-pill-7" onclick="setPitchSlide(7)" class="px-3 py-1.5 rounded-xl bg-[#03100c] text-slate-400 hover:text-white transition border border-emerald-900/60">
+          7. 56-Day Plan &amp; Governance
         </button>
       </div>
 
@@ -1725,117 +1743,461 @@
         </div>
       </div>
 
-      <!-- ================= SLIDE 6: 56-DAY PLAN & SEED ASK ================= -->
+      <!-- ================= SLIDE 6: BUILD BUDGET & OPTIMAL CAPITAL ALLOCATION ================= -->
       <div id="pitch-slide-6" class="hidden space-y-5">
-        <div class="p-5 rounded-2xl bg-[#03100c] border border-rose-900/60 space-y-4">
-          <div class="flex justify-between items-start">
+        <div class="p-5 rounded-2xl bg-[#03100c] border border-rose-900/60 space-y-5 shadow-xl">
+          
+          <!-- Slide Header -->
+          <div class="flex flex-wrap justify-between items-start gap-4 pb-3 border-b border-emerald-950">
             <div>
-              <span class="text-xs font-bold text-rose-400 uppercase tracking-widest">Execution Roadmap &amp; Investment</span>
-              <h3 class="text-lg font-bold text-white mt-1">The 56-Day Master Plan &amp; Seed Capital Ask</h3>
-              <p class="text-xs text-slate-300 mt-1">8 weeks from engineering kickoff to live commercial operations on the streets of Nairobi.</p>
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-bold text-rose-400 uppercase tracking-widest">Act 6: Financial Engineering &amp; Capitalization</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40">Itemized 56-Day Cost Structure</span>
+              </div>
+              <h3 class="text-xl font-bold text-white mt-1">Software Engineering Build Budget &amp; Optimal Pre-Seed Models</h3>
+              <p class="text-xs text-slate-300 mt-1 max-w-3xl leading-relaxed">
+                A complete transparent accounting of the 56-day software construction cost (5 engineering specialists + tooling + security audits), the 30-day ground pilot operational budget, and the strategic rationale for the KSh 5.0M optimal seed ask.
+              </p>
             </div>
-            <button onclick="autoPlayDemo()" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-400 text-white font-bold text-xs transition shadow-lg shadow-rose-950/40">
-              ⚡ Watch 15s Pitch Demo
+            
+            <!-- Interactive Model Selector -->
+            <div class="flex items-center gap-1.5 bg-[#020b08] p-1.5 rounded-2xl border border-emerald-900/80">
+              <button id="btn-budget-optimal" onclick="selectBudgetModel('optimal')" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold text-xs shadow-md shadow-emerald-950/40 transition border border-emerald-500/50">
+                ⭐ Recommended Optimal (5M KES)
+              </button>
+              <button id="btn-budget-turnkey" onclick="selectBudgetModel('turnkey')" class="px-3 py-1.5 rounded-xl bg-[#03100c] text-slate-400 hover:text-white text-xs font-semibold transition border border-emerald-900/60">
+                Turnkey Market (1.98M KES)
+              </button>
+              <button id="btn-budget-founder" onclick="selectBudgetModel('founder')" class="px-3 py-1.5 rounded-xl bg-[#03100c] text-slate-400 hover:text-white text-xs font-semibold transition border border-emerald-900/60">
+                Founder Sweat-Equity (399k KES)
+              </button>
+            </div>
+          </div>
+
+          <!-- DYNAMIC MODEL VIEW 1: RECOMMENDED OPTIMAL PRE-SEED ASK (KSh 5,000,000 / ~$38,460 USD) -->
+          <div id="card-budget-optimal" class="space-y-4">
+            <div class="p-4 rounded-2xl bg-[#061e17] border border-rose-500/50 bg-gradient-to-br from-[#08241c] via-[#0d2f24] to-[#1a0e14] space-y-4 shadow-xl">
+              <div class="flex flex-wrap justify-between items-center gap-3 pb-3 border-b border-emerald-900/60">
+                <div>
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-rose-300">Strategic Capital Recommendation</span>
+                  <div class="text-2xl font-black text-white flex items-center gap-2">
+                    <span>KSh 5,000,000</span>
+                    <span class="text-xs font-normal text-slate-400 font-mono">(~$38,461.54 USD at 1:130)</span>
+                    <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-[#00E065]/20 text-[#00E065] border border-[#00E065]/40 uppercase">Optimal Runway</span>
+                  </div>
+                </div>
+                <div class="flex items-center gap-4 text-xs">
+                  <div class="text-right">
+                    <span class="text-slate-400 block text-[10px]">Operational Runway:</span>
+                    <strong class="text-emerald-300 font-bold">6 Months Post-Launch</strong>
+                  </div>
+                  <div class="text-right">
+                    <span class="text-slate-400 block text-[10px]">Breakeven Target:</span>
+                    <strong class="text-amber-300 font-bold">Month 5 (150 orders/day)</strong>
+                  </div>
+                  <div class="text-right">
+                    <span class="text-slate-400 block text-[10px]">Year 1 Projected ARR:</span>
+                    <strong class="text-rose-400 font-bold">$560,000+ USD</strong>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Capital Deployment Breakdown Bar & Grid -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+                <div class="p-3 rounded-xl bg-[#03100c] border border-emerald-900/80 space-y-1">
+                  <div class="flex justify-between items-center">
+                    <span class="font-bold text-white">1. Core Eng &amp; Ops Payroll</span>
+                    <span class="font-mono text-emerald-400 font-bold">KSh 2,400,000 (48.0%)</span>
+                  </div>
+                  <p class="text-[10.5px] text-slate-300">6 months hypercare retainer for Lead Architect, Android Engineer, and Full-Stack PWA Lead to iterate on live production feedback.</p>
+                </div>
+
+                <div class="p-3 rounded-xl bg-[#03100c] border border-emerald-900/80 space-y-1">
+                  <div class="flex justify-between items-center">
+                    <span class="font-bold text-white">2. Merchant Network Expansion</span>
+                    <span class="font-mono text-cyan-400 font-bold">KSh 660,000 (13.2%)</span>
+                  </div>
+                  <p class="text-[10.5px] text-slate-300">30 City Market Florist Stalls × KSh 22,000 (rugged 10" Android touch tablets + Bluetooth thermal order receipt printers).</p>
+                </div>
+
+                <div class="p-3 rounded-xl bg-[#03100c] border border-emerald-900/80 space-y-1">
+                  <div class="flex justify-between items-center">
+                    <span class="font-bold text-white">3. High-Margin Corporate B2B</span>
+                    <span class="font-mono text-rose-400 font-bold">KSh 800,000 (16.0%)</span>
+                  </div>
+                  <p class="text-[10.5px] text-slate-300">Acquiring corporate floral gifting subscriptions with Upper Hill &amp; Westlands commercial banks, luxury hotels, and embassies (CAC payback &lt;42 days).</p>
+                </div>
+
+                <div class="p-3 rounded-xl bg-[#03100c] border border-emerald-900/80 space-y-1">
+                  <div class="flex justify-between items-center">
+                    <span class="font-bold text-white">4. Working Capital Reserve</span>
+                    <span class="font-mono text-amber-400 font-bold">KSh 490,000 (9.8%)</span>
+                  </div>
+                  <p class="text-[10.5px] text-slate-300">Buffer against regulatory filing fees (ODPC), cloud auto-scaling spikes, and inventory advances during Valentine's Day surge demand.</p>
+                </div>
+
+                <div class="p-3 rounded-xl bg-[#03100c] border border-emerald-900/80 space-y-1">
+                  <div class="flex justify-between items-center">
+                    <span class="font-bold text-white">5. M-Pesa B2C Float Reserve</span>
+                    <span class="font-mono text-[#00E065] font-bold">KSh 350,000 (7.0%)</span>
+                  </div>
+                  <p class="text-[10.5px] text-slate-300">Dedicated liquidity pool guaranteeing instant driver cash-outs &amp; florist settlements 24/7, buffering weekend bank clearing lags.</p>
+                </div>
+
+                <div class="p-3 rounded-xl bg-[#03100c] border border-emerald-900/80 space-y-1">
+                  <div class="flex justify-between items-center">
+                    <span class="font-bold text-white">6. Fleet Cold-Chain Hardware</span>
+                    <span class="font-mono text-purple-400 font-bold">KSh 300,000 (6.0%)</span>
+                  </div>
+                  <p class="text-[10.5px] text-slate-300">25 custom insulated upright backpacks with shock-absorbing foam inserts + 5,000 sterile stem-hydration water phials.</p>
+                </div>
+              </div>
+
+              <!-- Deep Explanation Box: Why KSh 5M is the Optimal Cost -->
+              <div class="p-4 rounded-xl bg-[#020b08] border border-rose-500/40 space-y-2">
+                <div class="flex items-center gap-2">
+                  <span class="text-base">💡</span>
+                  <strong class="text-rose-300 text-xs uppercase tracking-wider">Deep Dive: Why is KSh 5.0M the Mathematically Optimal Pre-Seed Cost?</strong>
+                </div>
+                <div class="text-[11px] text-slate-300 space-y-1.5 leading-relaxed">
+                  <p>
+                    <strong>1. Prevents Working Capital Starvation:</strong> The bare-minimum build (KSh 1.98M) covers the 56-day software construction and a 30-day proof-of-concept pilot. However, in Nairobi logistics, early-stage ventures often fail not from technical defects, but from <em>working capital locks</em>. Safaricom B2C escrow settlements can experience clearing lags over weekends and national holidays. Operating with zero buffer causes driver cashout freezes and destroys courier trust.
+                  </p>
+                  <p>
+                    <strong>2. 6-Month Hypercare &amp; Zero Churn:</strong> The KSh 5.0M pre-seed retains our senior systems architect and mobile telematics engineers through post-launch hypercare, telemetry tuning, and continuous deployment until the platform reaches 150 daily orders ($KSh 17.3M GMV / KSh 6.06M net platform revenue / mo).
+                  </p>
+                  <p>
+                    <strong>3. Network Lock-In at City Market:</strong> By funding 30 merchant tablet touch terminals upfront, CitiMarket Delivery locks in the supply side of Nairobi's premier flower hub before generic ride-hail platforms can react.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DYNAMIC MODEL VIEW 2: TURNKEY COMMERCIAL BUILD (KSh 1,984,000 / ~$15,261 USD) -->
+          <div id="card-budget-turnkey" class="hidden space-y-4">
+            <div class="p-4 rounded-2xl bg-[#061e17] border border-emerald-800/80 space-y-3">
+              <div class="flex justify-between items-center pb-2 border-b border-emerald-950">
+                <div>
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-cyan-300">Model A: Commercial Market Agency Build</span>
+                  <div class="text-xl font-black text-white">KSh 1,984,000 <span class="text-xs font-normal text-slate-400 font-mono">(~$15,261.54 USD)</span></div>
+                </div>
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">56-Day Build + 30-Day Pilot</span>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Covers market contracting rates for all 5 specialized engineers, plus hard dev tooling, hardware profiling lab, external financial ledger audit, ODPC registration, and a 30-day physical launch pilot with 3 dedicated riders and 2 florist stalls.
+              </p>
+              <div class="p-3 rounded-xl bg-amber-950/40 border border-amber-500/40 text-[11px] text-amber-200">
+                ⚠️ <strong>Risk Factor:</strong> Zero working capital buffer post-launch. Must raise Seed Round immediately on Day 56 to avoid operational pause.
+              </div>
+            </div>
+          </div>
+
+          <!-- DYNAMIC MODEL VIEW 3: FOUNDER SWEAT-EQUITY BUILD (KSh 399,000 / ~$3,070 USD) -->
+          <div id="card-budget-founder" class="hidden space-y-4">
+            <div class="p-4 rounded-2xl bg-[#061e17] border border-amber-800/80 space-y-3">
+              <div class="flex justify-between items-center pb-2 border-b border-emerald-950">
+                <div>
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-amber-300">Model B: Founder-Led Sweat-Equity Build</span>
+                  <div class="text-xl font-black text-white">KSh 399,000 <span class="text-xs font-normal text-slate-400 font-mono">(~$3,069.23 USD Out-of-Pocket)</span></div>
+                </div>
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">Zero-Salary Sweat Equity</span>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                If technical co-founders code the architecture in-house for equity, all engineering labor (KSh 1,490,000) is converted to sweat-equity. Cash out-of-pocket collapses to purely non-labor hard costs: dev tooling &amp; hardware lab (KSh 170,000) + ground pilot operations &amp; M-Pesa float (KSh 229,000).
+              </p>
+            </div>
+          </div>
+
+          <!-- COMPREHENSIVE ITEMISED BUDGET TABLES: 6.1 (SOFTWARE BUILD) & 6.2 (GROUND PILOT) -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 pt-2">
+            
+            <!-- Table 6.1: Software Engineering & System Construction Cost (The 56-Day Build) -->
+            <div class="p-4 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
+              <div class="flex justify-between items-center pb-2 border-b border-emerald-950">
+                <div>
+                  <span class="text-[10px] font-bold text-cyan-300 uppercase tracking-widest">Section 6.1: System Construction</span>
+                  <h4 class="font-bold text-white text-sm">Software Engineering Budget (56 Days / 8 Weeks)</h4>
+                </div>
+                <span class="text-xs font-mono font-bold text-[#00E065]">KSh 1,660,000</span>
+              </div>
+
+              <div class="space-y-2 text-[10.5px]">
+                <div class="p-2.5 rounded-xl bg-[#061e17] border border-emerald-950 space-y-1">
+                  <div class="flex justify-between font-bold text-white">
+                    <span>1. Lead Systems Architect &amp; Backend Core</span>
+                    <span class="font-mono text-cyan-300">KSh 440,000</span>
+                  </div>
+                  <p class="text-slate-400">PostgreSQL double-entry schema &amp; triggers, Daraja C2B/B2C gateway, Saga orchestrator &amp; polling worker. (KSh 220,000/mo × 2.0 mos)</p>
+                </div>
+
+                <div class="p-2.5 rounded-xl bg-[#061e17] border border-emerald-950 space-y-1">
+                  <div class="flex justify-between font-bold text-white">
+                    <span>2. Senior Mobile Android &amp; Edge Engineer</span>
+                    <span class="font-mono text-cyan-300">KSh 360,000</span>
+                  </div>
+                  <p class="text-slate-400">Kotlin APK with START_STICKY service, SQLite outbox, CRDT join-semilattice sync, salted HMAC-SHA256 offline PIN, IMU crash filter. (KSh 180,000/mo × 2.0 mos)</p>
+                </div>
+
+                <div class="p-2.5 rounded-xl bg-[#061e17] border border-emerald-950 space-y-1">
+                  <div class="flex justify-between font-bold text-white">
+                    <span>3. Full-Stack Web &amp; PWA Engineer</span>
+                    <span class="font-mono text-cyan-300">KSh 320,000</span>
+                  </div>
+                  <p class="text-slate-400">Next.js 14 Consumer storefront, Florist Stall touch tablet UI, WebSockets real-time dispatch dashboard. (KSh 160,000/mo × 2.0 mos)</p>
+                </div>
+
+                <div class="p-2.5 rounded-xl bg-[#061e17] border border-emerald-950 space-y-1">
+                  <div class="flex justify-between font-bold text-white">
+                    <span>4. QA Automation, Security &amp; DevOps</span>
+                    <span class="font-mono text-cyan-300">KSh 280,000</span>
+                  </div>
+                  <p class="text-slate-400">Automated test suites &amp; Daraja mock server, chaos network stress tests &amp; fuzzing, Docker &amp; CI/CD automation. (KSh 140,000/mo × 2.0 mos)</p>
+                </div>
+
+                <div class="p-2.5 rounded-xl bg-[#061e17] border border-emerald-950 space-y-1">
+                  <div class="flex justify-between font-bold text-white">
+                    <span>5. Product Ergonomics &amp; UI/UX Specialist</span>
+                    <span class="font-mono text-cyan-300">KSh 90,000</span>
+                  </div>
+                  <p class="text-slate-400">Outdoor sunlight glare readability, wet-hand florist tablet UX, courier night navigation ergonomics. (KSh 90,000/mo × 1.0 mo)</p>
+                </div>
+
+                <div class="p-2.5 rounded-xl bg-[#061e17] border border-emerald-950 space-y-1">
+                  <div class="flex justify-between font-bold text-cyan-300">
+                    <span>6. Dev Tooling, Hardware Lab &amp; Audit</span>
+                    <span class="font-mono text-cyan-300">KSh 170,000</span>
+                  </div>
+                  <p class="text-slate-400">2x Tecno/Infinix profiling phones (KSh 26k), Sentry/Postman/Figma tooling (KSh 24k), External Ledger Audit (KSh 75k), ODPC &amp; IP legal (KSh 45k).</p>
+                </div>
+
+                <div class="flex justify-between pt-2 border-t border-emerald-900/60 font-bold text-xs">
+                  <span class="text-white">TOTAL SYSTEM ENGINEERING &amp; BUILD:</span>
+                  <span class="font-mono text-[#00E065]">KSh 1,660,000.00 (~$12,769 USD)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Table 6.2: Ground Pilot Operational Launch Budget (30 Days) -->
+            <div class="p-4 rounded-2xl bg-[#03100c] border border-rose-900/80 space-y-3">
+              <div class="flex justify-between items-center pb-2 border-b border-emerald-950">
+                <div>
+                  <span class="text-[10px] font-bold text-rose-300 uppercase tracking-widest">Section 6.2: Ground Validation</span>
+                  <h4 class="font-bold text-white text-sm">Physical Pilot Launch Budget (30 Days)</h4>
+                </div>
+                <span class="text-xs font-mono font-bold text-amber-300">KSh 229,000</span>
+              </div>
+
+              <div class="space-y-2 text-[10.5px]">
+                <div class="p-2.5 rounded-xl bg-[#061e17] border border-emerald-950 space-y-1">
+                  <div class="flex justify-between font-bold text-white">
+                    <span>1. Courier Hardware &amp; Cold-Chain</span>
+                    <span class="font-mono text-white">KSh 35,500</span>
+                  </div>
+                  <p class="text-slate-400">3 custom upright insulated backpacks (KSh 27k) + 500 sterile stem-hydration phials (KSh 8.5k).</p>
+                </div>
+
+                <div class="p-2.5 rounded-xl bg-[#061e17] border border-emerald-950 space-y-1">
+                  <div class="flex justify-between font-bold text-white">
+                    <span>2. Florist Stall Hardware Terminals</span>
+                    <span class="font-mono text-white">KSh 44,000</span>
+                  </div>
+                  <p class="text-slate-400">2 rugged 10" Android touch tablets for Stalls #42 &amp; #43 (KSh 32k) + 2 Bluetooth thermal slip printers (KSh 12k).</p>
+                </div>
+
+                <div class="p-2.5 rounded-xl bg-[#061e17] border border-emerald-950 space-y-1">
+                  <div class="flex justify-between font-bold text-white">
+                    <span>3. Telecom, Cloud &amp; Safaricom Paybill</span>
+                    <span class="font-mono text-white">KSh 26,500</span>
+                  </div>
+                  <p class="text-slate-400">Cloud Droplet &amp; managed PostgreSQL (KSh 12.5k), 3x 4G data SIMs (KSh 4.5k), VoIP SIP trunk (KSh 4.5k), Paybill KYC (KSh 5k).</p>
+                </div>
+
+                <div class="p-2.5 rounded-xl bg-[#061e17] border border-emerald-950 space-y-1">
+                  <div class="flex justify-between font-bold text-white">
+                    <span>4. Dedicated Courier Retainer &amp; Fuel</span>
+                    <span class="font-mono text-white">KSh 57,100</span>
+                  </div>
+                  <p class="text-slate-400">3 dedicated Boda riders for 14-day live pilot: KSh 1,000/day retainer (KSh 42k) + fuel allowance (KSh 8.5k) + on-time bonus (KSh 6.6k).</p>
+                </div>
+
+                <div class="p-2.5 rounded-xl bg-[#061e17] border border-emerald-950 space-y-1">
+                  <div class="flex justify-between font-bold text-white">
+                    <span>5. Daraja B2C Instant Float &amp; Onboarding</span>
+                    <span class="font-mono text-white">KSh 65,900</span>
+                  </div>
+                  <p class="text-slate-400">Safaricom B2C payout float reserve (KSh 25k), 2 florist onboarding honorariums (KSh 20k), 25 pilot vouchers (KSh 15k), contingency (KSh 5.9k).</p>
+                </div>
+
+                <div class="flex justify-between pt-2 border-t border-emerald-900/60 font-bold text-xs">
+                  <span class="text-white">TOTAL GROUND PILOT LAUNCH BUDGET:</span>
+                  <span class="font-mono text-amber-300">KSh 229,000.00 (~$1,762 USD)</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Summary Banner -->
+          <div class="p-3.5 rounded-xl bg-[#061e17] border border-emerald-800/80 flex flex-wrap justify-between items-center gap-3">
+            <div class="flex items-center gap-2">
+              <span class="text-emerald-400 font-bold text-xs">Summary Capital Breakdown:</span>
+              <span class="text-xs text-slate-300">Build (83.7%) + Ground Pilot (11.5%) + Contingency (4.8%) = <strong>KSh 1,984,000 ($15.3k USD)</strong></span>
+            </div>
+            <button onclick="setPitchSlide(7)" class="px-4 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs shadow-md transition flex items-center gap-1">
+              <span>View Act 7: 56-Day Implementation Schedule ➔</span>
             </button>
           </div>
 
+        </div>
+      </div>
+
+      <!-- ================= SLIDE 7: 56-DAY MASTER IMPLEMENTATION PLAN & GOVERNANCE ================= -->
+      <div id="pitch-slide-7" class="hidden space-y-5">
+        <div class="p-5 rounded-2xl bg-[#03100c] border border-rose-900/60 space-y-5 shadow-xl">
+          
+          <!-- Slide Header -->
+          <div class="flex flex-wrap justify-between items-start gap-4 pb-3 border-b border-emerald-950">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-bold text-rose-400 uppercase tracking-widest">Act 7: Execution Schedule &amp; Governance</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#00E065]/20 text-[#00E065] border border-[#00E065]/40">8 Weeks to Commercial Launch</span>
+              </div>
+              <h3 class="text-xl font-bold text-white mt-1">Master 56-Day Implementation Plan &amp; Engineering Governance</h3>
+              <p class="text-xs text-slate-300 mt-1 max-w-3xl leading-relaxed">
+                A disciplined four-sprint development lifecycle enforcing strict go/no-go quality gates, automated daily standups, and rigorous red-team chaos stress testing.
+              </p>
+            </div>
+            
+            <button onclick="autoPlayDemo()" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-400 text-white font-bold text-xs transition shadow-lg shadow-rose-950/40 flex items-center gap-1.5">
+              <span>⚡ Watch 15s Pitch Demo</span>
+            </button>
+          </div>
+
+          <!-- 4 Phased Production Sprints Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3.5 text-xs">
+            
+            <!-- Sprint 1 -->
+            <div class="p-4 rounded-xl bg-[#061e17] border border-emerald-950 space-y-2 flex flex-col justify-between">
+              <div class="space-y-1.5">
+                <div class="flex justify-between items-center">
+                  <span class="px-2 py-0.5 rounded text-[9px] font-bold bg-emerald-500/20 text-emerald-300">SPRINT 1 (W1-W2)</span>
+                  <span class="font-mono text-slate-400 text-[10px]">Days 1–14</span>
+                </div>
+                <h4 class="font-bold text-white text-sm">Ledger Core &amp; Daraja Integration</h4>
+                <p class="text-[11px] text-slate-300 leading-relaxed">
+                  PostgreSQL append-only double-entry ledger schema with trigger enforcement. Safaricom Daraja C2B/B2C gateway adapter with active polling reconciliation worker.
+                </p>
+              </div>
+              <div class="p-2 rounded-lg bg-[#03100c] border border-emerald-900/60 text-[10px] space-y-0.5">
+                <span class="text-emerald-400 font-bold block uppercase tracking-wider">Quality Gate 1 (Day 14):</span>
+                <span class="text-slate-300">• ∑ Debits ≡ ∑ Credits (Δ = 0.00)<br>• 1,000 simulated M-Pesa orders pass</span>
+              </div>
+            </div>
+
+            <!-- Sprint 2 -->
+            <div class="p-4 rounded-xl bg-[#061e17] border border-emerald-950 space-y-2 flex flex-col justify-between">
+              <div class="space-y-1.5">
+                <div class="flex justify-between items-center">
+                  <span class="px-2 py-0.5 rounded text-[9px] font-bold bg-cyan-500/20 text-cyan-300">SPRINT 2 (W3-W4)</span>
+                  <span class="font-mono text-slate-400 text-[10px]">Days 15–28</span>
+                </div>
+                <h4 class="font-bold text-white text-sm">Mobile Edge &amp; 0G Telematics</h4>
+                <p class="text-[11px] text-slate-300 leading-relaxed">
+                  Kotlin APK with START_STICKY foreground service. Room SQLite Outbox with CRDT join-semilattices, offline salted HMAC-SHA256 PIN verification, and EKF battery filter.
+                </p>
+              </div>
+              <div class="p-2 rounded-lg bg-[#03100c] border border-emerald-900/60 text-[10px] space-y-0.5">
+                <span class="text-cyan-400 font-bold block uppercase tracking-wider">Quality Gate 2 (Day 28):</span>
+                <span class="text-slate-300">• 100% offline PIN verify in 0G<br>• Zero battery kill on Tecno devices</span>
+              </div>
+            </div>
+
+            <!-- Sprint 3 -->
+            <div class="p-4 rounded-xl bg-[#061e17] border border-emerald-950 space-y-2 flex flex-col justify-between">
+              <div class="space-y-1.5">
+                <div class="flex justify-between items-center">
+                  <span class="px-2 py-0.5 rounded text-[9px] font-bold bg-amber-500/20 text-amber-300">SPRINT 3 (W5-W6)</span>
+                  <span class="font-mono text-slate-400 text-[10px]">Days 29–42</span>
+                </div>
+                <h4 class="font-bold text-white text-sm">Web PWA &amp; Merchant Tablet</h4>
+                <p class="text-[11px] text-slate-300 leading-relaxed">
+                  Next.js 14 Consumer storefront with gift card previews. Wet-hand resistant florist stall tablet interface with prep pacing timers. Africa's Talking masked VoIP gateway.
+                </p>
+              </div>
+              <div class="p-2 rounded-lg bg-[#03100c] border border-emerald-900/60 text-[10px] space-y-0.5">
+                <span class="text-amber-400 font-bold block uppercase tracking-wider">Quality Gate 3 (Day 42):</span>
+                <span class="text-slate-300">• P99 latency &lt;120ms on 3G<br>• Zero unhandled promise errors</span>
+              </div>
+            </div>
+
+            <!-- Sprint 4 -->
+            <div class="p-4 rounded-xl bg-[#061e17] border border-emerald-950 space-y-2 flex flex-col justify-between">
+              <div class="space-y-1.5">
+                <div class="flex justify-between items-center">
+                  <span class="px-2 py-0.5 rounded text-[9px] font-bold bg-rose-500/20 text-rose-300">SPRINT 4 (W7-W8)</span>
+                  <span class="font-mono text-slate-400 text-[10px]">Days 43–56</span>
+                </div>
+                <h4 class="font-bold text-white text-sm">Hardening &amp; Ground Pilot</h4>
+                <p class="text-[11px] text-slate-300 leading-relaxed">
+                  Chaos network fuzzing, end-to-end stress tests, 25 live customer gift deliveries across Nairobi CBD &amp; Westlands, external security ledger audit sign-off, commercial handover.
+                </p>
+              </div>
+              <div class="p-2 rounded-lg bg-[#03100c] border border-emerald-900/60 text-[10px] space-y-0.5">
+                <span class="text-rose-400 font-bold block uppercase tracking-wider">Quality Gate 4 (Day 56):</span>
+                <span class="text-slate-300">• Floral spoilage rate &lt;1.5%<br>• 100% zero-leakage settlements</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Governance Cadence & Live Proof Grid -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <!-- Left Card: Roadmap & Software Engineering Build Cost -->
-            <div class="p-4 rounded-xl bg-[#061e17] border border-emerald-950 space-y-3 text-xs">
-              <div class="flex justify-between items-center">
-                <span class="font-bold text-white flex items-center gap-1">💻 1. Software Engineering Build (56 Days)</span>
-                <span class="font-mono text-cyan-400 font-bold">KSh 1,660,000 (~$12.8k)</span>
+            
+            <!-- Left: Governance Cadence -->
+            <div class="p-4 rounded-xl bg-[#061e17] border border-emerald-950 space-y-2 text-xs">
+              <div class="font-bold text-white flex items-center gap-1.5 pb-1 border-b border-emerald-900/40">
+                <span>🤖</span> Daily Engineering Governance Cadence
               </div>
+              <ul class="text-[11px] text-slate-300 space-y-1.5">
+                <li>• <strong>Daily Asynchronous Slack Standup Bot</strong> (<code>npm run standup</code>): Broadcasts daily at 09:00 EAT with yesterday's completions, blockers, PR counts, and CI status.</li>
+                <li>• <strong>Weekly Risk Register Triage</strong>: Active tracking of Safaricom Daraja API latency spikes, Boda courier retention rates, and stem-hydration sensor metrics.</li>
+                <li>• <strong>Bi-Weekly Quality Gate Sign-Off</strong>: Formal verification of zero-sum financial invariants and offline edge protocols before merging into main.</li>
+                <li>• <strong>Monthly Board &amp; Investor Governance</strong>: Unit economics P&amp;L review against the KSh 38.4M ARR roadmap.</li>
+              </ul>
+            </div>
 
-              <!-- Engineering Labor Table -->
-              <div class="space-y-1 text-[10.5px] text-slate-300">
-                <div class="flex justify-between py-0.5 border-b border-emerald-950">
-                  <span>• Lead Architect &amp; Backend Core (2.0 Mos)</span>
-                  <span class="font-mono text-white">KSh 440,000</span>
+            <!-- Right: Live System Execution Proof & The Seed Ask -->
+            <div class="p-4 rounded-xl bg-[#061e17] border border-rose-500/40 bg-gradient-to-br from-[#09261e] to-[#1a0e14] space-y-2 text-xs">
+              <div class="font-bold text-rose-300 flex items-center gap-1.5 pb-1 border-b border-rose-900/40">
+                <span>🚀</span> Live Running Execution Proof &amp; Seed Financing Ask
+              </div>
+              <p class="text-[11px] text-slate-300 leading-relaxed">
+                This system is not an unproven theoretical concept. It is an active, running, verified codebase:
+              </p>
+              <div class="grid grid-cols-2 gap-2 text-[10px] font-mono">
+                <div class="p-2 rounded-lg bg-[#020b08] border border-emerald-900">
+                  <span class="text-emerald-400 font-bold">npm test</span>
+                  <span class="text-slate-400 block mt-0.5">8/8 Automated Tests Pass</span>
                 </div>
-                <div class="flex justify-between py-0.5 border-b border-emerald-950">
-                  <span>• Senior Android &amp; Edge Telematics Engineer (2.0 Mos)</span>
-                  <span class="font-mono text-white">KSh 360,000</span>
-                </div>
-                <div class="flex justify-between py-0.5 border-b border-emerald-950">
-                  <span>• Full-Stack Web &amp; Tablet PWA Engineer (2.0 Mos)</span>
-                  <span class="font-mono text-white">KSh 320,000</span>
-                </div>
-                <div class="flex justify-between py-0.5 border-b border-emerald-950">
-                  <span>• QA Automation, DevOps &amp; Security Engineer (2.0 Mos)</span>
-                  <span class="font-mono text-white">KSh 280,000</span>
-                </div>
-                <div class="flex justify-between py-0.5 border-b border-emerald-950">
-                  <span>• Product Ergonomics &amp; UI/UX Specialist (1.0 Mo)</span>
-                  <span class="font-mono text-white">KSh 90,000</span>
-                </div>
-                <div class="flex justify-between py-0.5 border-b border-emerald-950">
-                  <span>• Dev Hardware Lab, Tooling, Ledger Audit &amp; ODPC</span>
-                  <span class="font-mono text-cyan-300 font-bold">KSh 170,000</span>
-                </div>
-                <div class="flex justify-between pt-1 font-bold text-cyan-300">
-                  <span>TOTAL SYSTEM BUILD COST:</span>
-                  <span class="font-mono text-[#00E065]">KSh 1,660,000</span>
+                <div class="p-2 rounded-lg bg-[#020b08] border border-emerald-900">
+                  <span class="text-cyan-400 font-bold">npm run mock:server</span>
+                  <span class="text-slate-400 block mt-0.5">Daraja C2B/B2C on :8080</span>
                 </div>
               </div>
-
-              <div class="pt-2 border-t border-emerald-900/60">
-                <span class="text-[10px] uppercase font-bold text-emerald-400">Milestone Quality Gates:</span>
-                <p class="text-[10.5px] text-slate-300 mt-0.5">
-                  Gate 1 ($\Delta = 0.00$), Gate 2 (Dropped M-Pesa recovery), Gate 3 (Offline basement PIN), Gate 4 (Alpha commercial pilot).
+              <div class="p-3 rounded-lg bg-[#03100c] border border-rose-500/60 mt-1">
+                <div class="flex justify-between items-center">
+                  <span class="text-[10px] uppercase font-bold text-rose-300">The Seed Ask:</span>
+                  <span class="text-xs font-mono text-emerald-400 font-bold">KSh 5,000,000 (~$38.5k USD)</span>
+                </div>
+                <p class="text-[10.5px] text-slate-300 mt-1">
+                  Onboards 30 City Market florists, scales 25 cold-chain couriers, and captures 45% of Nairobi's premium perishable floral gifting market.
                 </p>
               </div>
             </div>
 
-            <!-- Right Card: Ground Pilot & Capitalization -->
-            <div class="p-4 rounded-xl bg-[#061e17] border border-rose-500/30 bg-gradient-to-br from-[#09261e] to-[#1a0e14] space-y-3">
-              <div class="flex justify-between items-center">
-                <span class="font-bold text-rose-300 text-xs flex items-center gap-1">💰 2. Ground Pilot Operations Runway</span>
-                <span class="text-[10px] font-mono text-[#00E065] font-bold">KSh 229,000 (~$1.76k)</span>
-              </div>
-
-              <!-- Itemized Shilling Table -->
-              <div class="space-y-1 text-[10.5px] text-slate-300">
-                <div class="flex justify-between py-0.5 border-b border-emerald-950">
-                  <span>• 3 Upright Boda Backpacks + 500 Water Phials</span>
-                  <span class="font-mono text-white">KSh 35,500</span>
-                </div>
-                <div class="flex justify-between py-0.5 border-b border-emerald-950">
-                  <span>• 2 Florist Rugged 10" Tablets + 2 BT Thermal Printers</span>
-                  <span class="font-mono text-white">KSh 44,000</span>
-                </div>
-                <div class="flex justify-between py-0.5 border-b border-emerald-950">
-                  <span>• Cloud Droplet, 4G Data, VoIP Trunk &amp; Paybill KYC</span>
-                  <span class="font-mono text-white">KSh 26,500</span>
-                </div>
-                <div class="flex justify-between py-0.5 border-b border-emerald-950">
-                  <span>• Safaricom Daraja B2C Instant Payout Float</span>
-                  <span class="font-mono text-white">KSh 25,000</span>
-                </div>
-                <div class="flex justify-between py-0.5 border-b border-emerald-950">
-                  <span>• 3 Dedicated Riders (14d Retainer + Fuel + Bonus)</span>
-                  <span class="font-mono text-white">KSh 57,100</span>
-                </div>
-                <div class="flex justify-between py-0.5 border-b border-emerald-950">
-                  <span>• Florist Onboarding + 25 Pilot Vouchers + Reserve</span>
-                  <span class="font-mono text-white">KSh 40,900</span>
-                </div>
-                <div class="flex justify-between pt-1 font-bold text-amber-300">
-                  <span>TOTAL PRE-SEED CAPITAL (BUILD + PILOT):</span>
-                  <span class="font-mono text-[#00E065]">KSh 1,984,000</span>
-                </div>
-              </div>
-
-              <div class="p-3 rounded-lg bg-[#03100c] border border-rose-500/50 space-y-1">
-                <div class="flex justify-between items-center">
-                  <span class="text-[10px] uppercase font-bold text-rose-300">Post-Pilot Seed Target:</span>
-                  <span class="text-xs font-mono text-slate-400">Month 6</span>
-                </div>
-                <div class="text-xl font-black text-white">KSh 5,000,000 <span class="text-xs font-normal text-slate-400">(~$38,000 USD)</span></div>
-                <div class="text-[10px] text-emerald-300">Scales to 30 City Market florists, 25 cold-chain Boda couriers, and captures 45% of Nairobi's perishable gifting market.</div>
-              </div>
-            </div>
           </div>
+
         </div>
       </div>
 
@@ -2854,11 +3216,11 @@
       document.getElementById('out-arr').textContent = `KSh ${Math.round(annualizedARR).toLocaleString()}`;
     }
 
-    // Master Pitch Deck Slide Controller
+    // Master Pitch Deck Slide Controller (7 Acts)
     let pitchCurrentSlide = 1;
     function setPitchSlide(n) {
       pitchCurrentSlide = n;
-      for (let i = 1; i <= 6; i++) {
+      for (let i = 1; i <= 7; i++) {
         const s = document.getElementById(`pitch-slide-${i}`);
         const p = document.getElementById(`pitch-pill-${i}`);
         if (s) s.classList.toggle('hidden', i !== n);
@@ -2869,15 +3231,34 @@
         }
       }
       const ind = document.getElementById('pitch-slide-indicator');
-      if (ind) ind.textContent = `Slide ${n} of 6`;
+      if (ind) ind.textContent = `Slide ${n} of 7`;
     }
 
     function nextPitchSlide() {
-      setPitchSlide(pitchCurrentSlide < 6 ? pitchCurrentSlide + 1 : 1);
+      setPitchSlide(pitchCurrentSlide < 7 ? pitchCurrentSlide + 1 : 1);
     }
 
     function prevPitchSlide() {
-      setPitchSlide(pitchCurrentSlide > 1 ? pitchCurrentSlide - 1 : 6);
+      setPitchSlide(pitchCurrentSlide > 1 ? pitchCurrentSlide - 1 : 7);
+    }
+
+    // Capital Allocation Model Switcher (Slide 6)
+    function selectBudgetModel(model) {
+      const models = ['optimal', 'turnkey', 'founder'];
+      models.forEach(m => {
+        const btn = document.getElementById(`btn-budget-${m}`);
+        const card = document.getElementById(`card-budget-${m}`);
+        if (btn) {
+          if (m === model) {
+            btn.className = 'px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold text-xs shadow-md shadow-emerald-950/40 transition border border-emerald-500/50';
+          } else {
+            btn.className = 'px-3 py-1.5 rounded-xl bg-[#03100c] text-slate-400 hover:text-white text-xs font-semibold transition border border-emerald-900/60';
+          }
+        }
+        if (card) {
+          card.classList.toggle('hidden', m !== model);
+        }
+      });
     }
   </script>
 </body>
