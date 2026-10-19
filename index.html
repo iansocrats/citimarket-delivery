@@ -2072,17 +2072,94 @@
           <!-- COMPREHENSIVE ITEMISED BUDGET TABLES: 6.1 (SOFTWARE BUILD) & 6.2 (GROUND PILOT) -->
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 pt-2">
             
-            <!-- Table 6.1: Software Engineering & System Construction Cost (The 56-Day Build) -->
+            <!-- Table 6.1: Software Engineering & System Construction Cost -->
             <div class="p-4 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
-              <div class="flex justify-between items-center pb-2 border-b border-emerald-950">
+              <div class="flex flex-wrap justify-between items-center pb-2 border-b border-emerald-950 gap-2">
                 <div>
-                  <span class="text-[10px] font-bold text-cyan-300 uppercase tracking-widest">Section 6.1: System Construction</span>
-                  <h4 class="font-bold text-white text-sm">Software Engineering Budget (56 Days / 8 Weeks)</h4>
+                  <div class="flex items-center gap-1.5">
+                    <span class="text-[10px] font-bold text-cyan-300 uppercase tracking-widest">Section 6.1: System Construction</span>
+                    <span id="construction-header-total" class="text-xs font-mono font-bold text-rose-400">KSh 580,000 (-65%)</span>
+                  </div>
+                  <h4 class="font-bold text-white text-sm">System Construction: Traditional vs. AI Cost Matrix</h4>
                 </div>
-                <span class="text-xs font-mono font-bold text-[#00E065]">KSh 1,660,000</span>
+
+                <!-- Mode Switcher -->
+                <div class="flex items-center gap-1 bg-[#020b08] p-1 rounded-xl border border-emerald-900/60">
+                  <button id="btn-construction-ai" onclick="setConstructionTableMode('ai')" class="px-2 py-0.5 rounded text-[10px] font-bold text-white bg-rose-600 transition shadow-sm">
+                    ⚡ AI-Augmented (18d)
+                  </button>
+                  <button id="btn-construction-trad" onclick="setConstructionTableMode('trad')" class="px-2 py-0.5 rounded text-[10px] font-bold text-slate-400 hover:text-white bg-[#020b08] border border-emerald-950 transition">
+                    👥 Human Baseline (56d)
+                  </button>
+                </div>
               </div>
 
-              <div class="space-y-2 text-[10.5px]">
+              <!-- VIEW 1: AI-ACCELERATED SYSTEM CONSTRUCTION (ACTIVE BY DEFAULT) -->
+              <div id="construction-view-ai" class="space-y-2 text-[10.5px]">
+                <div class="p-2.5 rounded-xl bg-[#061e17] border border-rose-500/30 space-y-1">
+                  <div class="flex justify-between font-bold text-white">
+                    <span class="flex items-center gap-1"><span>🏗️</span> 1. Lead Systems Architect &amp; Backend</span>
+                    <span class="font-mono text-cyan-300">KSh 154,000 <span class="text-[9px] text-emerald-400 font-bold">(-65%)</span></span>
+                  </div>
+                  <p class="text-slate-300">Agentic code synthesis generates PostgreSQL double-entry triggers, Protobuf schemas, and Saga rollback state machines in days instead of weeks. (0.7 mos @ KSh 220k)</p>
+                  <div class="text-[9px] font-mono text-rose-300">Savings: KSh 286,000 • Replaced 5.5 weeks of manual SQL/boilerplate drafting</div>
+                </div>
+
+                <div class="p-2.5 rounded-xl bg-[#061e17] border border-rose-500/30 space-y-1">
+                  <div class="flex justify-between font-bold text-white">
+                    <span class="flex items-center gap-1"><span>📱</span> 2. Senior Android &amp; Edge Engineer</span>
+                    <span class="font-mono text-cyan-300">KSh 126,000 <span class="text-[9px] text-emerald-400 font-bold">(-65%)</span></span>
+                  </div>
+                  <p class="text-slate-300">Room SQLite Outbox, LWW CRDT join-semilattice merge algorithms, and salted HMAC-SHA256 offline PIN verification synthesized with verified test proofs. (0.7 mos @ KSh 180k)</p>
+                  <div class="text-[9px] font-mono text-rose-300">Savings: KSh 234,000 • Replaced manual Kotlin persistence &amp; sync scaffolding</div>
+                </div>
+
+                <div class="p-2.5 rounded-xl bg-[#061e17] border border-rose-500/30 space-y-1">
+                  <div class="flex justify-between font-bold text-white">
+                    <span class="flex items-center gap-1"><span>💻</span> 3. Full-Stack Web &amp; PWA Engineer</span>
+                    <span class="font-mono text-cyan-300">KSh 80,000 <span class="text-[9px] text-emerald-400 font-bold">(-75%)</span></span>
+                  </div>
+                  <p class="text-slate-300">Figma-to-Next.js 14 generative scaffolding creates responsive storefront, card preview modal, and florist tablet touch screens in real-time. (0.5 mos @ KSh 160k)</p>
+                  <div class="text-[9px] font-mono text-rose-300">Savings: KSh 240,000 • Merged into AI-assisted frontend sprint</div>
+                </div>
+
+                <div class="p-2.5 rounded-xl bg-[#061e17] border border-rose-500/30 space-y-1">
+                  <div class="flex justify-between font-bold text-white">
+                    <span class="flex items-center gap-1"><span>🧪</span> 4. Autonomous AI Test Synthesis &amp; DevOps</span>
+                    <span class="font-mono text-cyan-300">KSh 49,000 <span class="text-[9px] text-emerald-400 font-bold">(-82.5%)</span></span>
+                  </div>
+                  <p class="text-slate-300">LLM test synthesizers generate 10,000 Daraja callback edge cases, chaos network disconnection fixtures, and CI/CD pipelines autonomously. (0.35 mos @ KSh 140k)</p>
+                  <div class="text-[9px] font-mono text-rose-300">Savings: KSh 231,000 • Replaced 7 weeks of manual script writing</div>
+                </div>
+
+                <div class="p-2.5 rounded-xl bg-[#061e17] border border-rose-500/30 space-y-1">
+                  <div class="flex justify-between font-bold text-white">
+                    <span class="flex items-center gap-1"><span>🎨</span> 5. Product Ergonomics &amp; UI/UX</span>
+                    <span class="font-mono text-cyan-300">KSh 22,500 <span class="text-[9px] text-emerald-400 font-bold">(-75%)</span></span>
+                  </div>
+                  <p class="text-slate-300">Generative UI prompts auto-generate high-contrast daylight palettes for motorcycle glare and wet-hand florist touch targets. (0.25 mos @ KSh 90k)</p>
+                  <div class="text-[9px] font-mono text-rose-300">Savings: KSh 67,500 • Instant responsive accessibility audits</div>
+                </div>
+
+                <div class="p-2.5 rounded-xl bg-[#061e17] border border-emerald-950 space-y-1">
+                  <div class="flex justify-between font-bold text-cyan-300">
+                    <span class="flex items-center gap-1"><span>⚙️</span> 6. Dev Tooling, Hardware Lab &amp; Audit</span>
+                    <span class="font-mono text-cyan-300">KSh 148,500 <span class="text-[9px] text-emerald-400 font-bold">(-12.6%)</span></span>
+                  </div>
+                  <p class="text-slate-400">Tecno phones (KSh 26k) + Sentry (KSh 24k) + AI-assisted pre-audited security review (KSh 50k) + AI legal ODPC filings (KSh 48.5k).</p>
+                </div>
+
+                <div class="flex justify-between pt-2 border-t border-rose-900/60 font-bold text-xs">
+                  <span class="text-rose-300">AI SYSTEM CONSTRUCTION TOTAL:</span>
+                  <span class="font-mono text-rose-400 font-extrabold">KSh 580,000 (~$4,461 USD)</span>
+                </div>
+                <div class="p-2 rounded bg-rose-950/40 border border-rose-500/40 text-[10px] text-rose-200 text-center font-bold">
+                  🎉 Net Construction Savings: KSh 1,080,000.00 (-65.1%) in 18 Days
+                </div>
+              </div>
+
+              <!-- VIEW 2: TRADITIONAL HUMAN SYSTEM CONSTRUCTION (HIDDEN BY DEFAULT) -->
+              <div id="construction-view-trad" class="hidden space-y-2 text-[10.5px]">
                 <div class="p-2.5 rounded-xl bg-[#061e17] border border-emerald-950 space-y-1">
                   <div class="flex justify-between font-bold text-white">
                     <span>1. Lead Systems Architect &amp; Backend Core</span>
@@ -2132,7 +2209,7 @@
                 </div>
 
                 <div class="flex justify-between pt-2 border-t border-emerald-900/60 font-bold text-xs">
-                  <span class="text-white">TOTAL SYSTEM ENGINEERING &amp; BUILD:</span>
+                  <span class="text-white">TOTAL TRADITIONAL SYSTEM BUILD:</span>
                   <span class="font-mono text-[#00E065]">KSh 1,660,000.00 (~$12,769 USD)</span>
                 </div>
               </div>
@@ -3427,6 +3504,33 @@
           card.classList.toggle('hidden', m !== model);
         }
       });
+    }
+
+    // Construction Table Mode Switcher (Table 6.1)
+    function setConstructionTableMode(mode) {
+      const isAI = mode === 'ai';
+      const btnTrad = document.getElementById('btn-construction-trad');
+      const btnAI = document.getElementById('btn-construction-ai');
+      const viewTrad = document.getElementById('construction-view-trad');
+      const viewAI = document.getElementById('construction-view-ai');
+      const totalHeader = document.getElementById('construction-header-total');
+
+      if (btnTrad) {
+        btnTrad.className = isAI 
+          ? 'px-2 py-0.5 rounded text-[10px] font-bold text-slate-400 hover:text-white bg-[#020b08] border border-emerald-950 transition'
+          : 'px-2 py-0.5 rounded text-[10px] font-bold text-white bg-emerald-600 transition';
+      }
+      if (btnAI) {
+        btnAI.className = isAI 
+          ? 'px-2 py-0.5 rounded text-[10px] font-bold text-white bg-rose-600 transition shadow-sm'
+          : 'px-2 py-0.5 rounded text-[10px] font-bold text-rose-300 hover:text-white bg-[#020b08] border border-rose-950 transition';
+      }
+      if (viewTrad) viewTrad.classList.toggle('hidden', isAI);
+      if (viewAI) viewAI.classList.toggle('hidden', !isAI);
+      if (totalHeader) {
+        totalHeader.textContent = isAI ? 'KSh 580,000 (-65%)' : 'KSh 1,660,000';
+        totalHeader.className = isAI ? 'text-xs font-mono font-bold text-rose-400' : 'text-xs font-mono font-bold text-[#00E065]';
+      }
     }
   </script>
 </body>
