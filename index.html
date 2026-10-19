@@ -74,28 +74,19 @@
         </div>
       </div>
 
-      <!-- Navigation Tabs -->
+      <!-- Navigation Tabs (Consolidated 5 Master Workspaces) -->
       <div class="flex flex-wrap items-center bg-[#020b08] p-1 rounded-xl border border-emerald-900/40 text-xs font-medium">
         <button id="nav-btn-sim" onclick="setTab('simulator')" class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition">
           🚀 Live Simulator
         </button>
-        <button id="nav-btn-grab" onclick="setTab('grab-features')" class="px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition flex items-center gap-1">
-          ⚡ Superapp Suite
+        <button id="nav-btn-superapp" onclick="setTab('superapp')" class="px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition flex items-center gap-1">
+          ⚡ Superapp &amp; Brand
         </button>
-        <button id="nav-btn-ledger" onclick="setTab('ledger')" class="px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition">
-          ⚖️ Cryptographic Ledger (CFO)
+        <button id="nav-btn-fintech" onclick="setTab('fintech')" class="px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition flex items-center gap-1">
+          💳 Fintech &amp; Economics
         </button>
-        <button id="nav-btn-mobile" onclick="setTab('mobile-arch')" class="px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition">
-          📱 Web vs. Phone Architecture
-        </button>
-        <button id="nav-btn-cs" onclick="setTab('cs-engine')" class="px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition">
-          ⚙️ Engineering Concepts
-        </button>
-        <button id="nav-btn-branding" onclick="setTab('branding')" class="px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition">
-          🎨 Branding
-        </button>
-        <button id="nav-btn-calc" onclick="setTab('calculator')" class="px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition">
-          💰 Unit Economics (KES)
+        <button id="nav-btn-architecture" onclick="setTab('architecture')" class="px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition flex items-center gap-1">
+          🛰️ Distributed Architecture
         </button>
         <button id="nav-btn-pitch" onclick="setTab('pitch')" class="px-3 py-1.5 rounded-lg text-rose-300 bg-rose-500/10 border border-rose-500/30 hover:bg-rose-500/20 font-bold transition flex items-center gap-1 shadow-sm">
           🎙️ Master Pitch Deck
@@ -732,8 +723,8 @@
 
   </main>
 
-  <!-- ================= TAB: GRAB SUPERAPP FEATURES (DIRECT IMPLEMENTATION) ================= -->
-  <section id="tab-grab-features" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
+  <!-- ================= CONSOLIDATED TAB 2: SUPERAPP SUITE & BRAND EXPERIENCE ================= -->
+  <section id="tab-superapp" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
     <div class="bg-[#061e17] border border-emerald-800/40 rounded-3xl p-6 space-y-6 shadow-2xl">
       
       <!-- Header -->
@@ -884,34 +875,118 @@
           </div>
           <button onclick="openShareTrackModal()" class="w-full py-1.5 rounded-xl bg-[#061e17] hover:bg-emerald-900 text-purple-300 text-[10px] font-semibold border border-purple-800 transition">
             Preview Recipient Web Page ➔
-          </button>
         </div>
 
+      </div>
+
+      <!-- Sub-Section: Brand Identity & Cold-Chain Packaging Standards -->
+      <div id="sub-branding" class="pt-6 border-t border-emerald-900/60 space-y-4">
+        <div>
+          <span class="text-xs font-bold text-rose-400 uppercase tracking-widest">Brand System &amp; Design Standards</span>
+          <h3 class="text-xl font-bold text-white mt-1">CitiMarket Delivery: Branding &amp; Cold-Chain Unboxing Ritual</h3>
+          <p class="text-xs text-emerald-200/70 mt-1 max-w-3xl leading-relaxed">
+            CitiMarket Delivery combines the historic heritage of Nairobi's premier flower hub with modern, white-glove luxury gifting logistics.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-base">🌸</div>
+            <h4 class="font-bold text-white text-sm">Brand Tone &amp; Personality</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              <strong>Warm, Celebratory, Reliable, and Discreet.</strong> Elevating gifting while protecting surprise secrecy.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center font-bold text-base">🌿</div>
+            <h4 class="font-bold text-white text-sm">Visual Identity: "Lush Botanical"</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Deep nocturnal forest greens, accented by rose blush, M-Pesa emerald, and champagne gold.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-base">🎀</div>
+            <h4 class="font-bold text-white text-sm">Packaging &amp; Unboxing Ritual</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Insulated climate-safe containers, 30ml stem moisture vials, and wax-sealed handwritten cards.
+            </p>
+          </div>
+        </div>
       </div>
 
     </div>
   </section>
 
-  <!-- ================= TAB 2: CRYPTOGRAPHIC HASH LEDGER (CFO DEEP DIVE WITH TAMPER TEST) ================= -->
-  <section id="tab-ledger" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
+  <!-- ================= CONSOLIDATED TAB 3: FINTECH ESCROW LEDGER & UNIT ECONOMICS ================= -->
+  <section id="tab-fintech" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
     <div class="bg-[#061e17] border border-emerald-800/40 rounded-3xl p-6 space-y-6 shadow-2xl">
       
-      <div class="flex flex-wrap justify-between items-start gap-4">
+      <!-- Interactive Unit Economics & Market Model -->
+      <div class="bg-[#03100c] border border-emerald-900/80 rounded-2xl p-5 space-y-5">
+        <div class="flex justify-between items-center pb-2 border-b border-emerald-950">
+          <div>
+            <span class="text-[10px] font-bold text-rose-400 uppercase tracking-widest">Nairobi Market Opportunity</span>
+            <h3 class="text-base font-bold text-white">CitiMarket Unit Economics &amp; Revenue Projection Model</h3>
+          </div>
+          <span class="text-[10px] font-mono text-emerald-400 bg-emerald-950/80 px-2.5 py-0.5 rounded-full border border-emerald-800/40">Interactive Calculator</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-2">
+            <div class="flex justify-between text-xs">
+              <span class="text-slate-400">Daily Completed Flower Orders (Nairobi):</span>
+              <strong id="val-daily-orders" class="text-emerald-400 text-sm">250 orders / day</strong>
+            </div>
+            <input type="range" id="slider-orders" min="50" max="1500" step="50" value="250" oninput="calculateFinancials()" class="w-full accent-emerald-500 cursor-pointer">
+          </div>
+          <div class="space-y-2">
+            <div class="flex justify-between text-xs">
+              <span class="text-slate-400">Average Bouquet Order Value (AOV):</span>
+              <strong id="val-aov" class="text-rose-400 text-sm">KSh 3,800</strong>
+            </div>
+            <input type="range" id="slider-aov" min="2000" max="7000" step="200" value="3800" oninput="calculateFinancials()" class="w-full accent-rose-500 cursor-pointer">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+          <div class="p-4 rounded-xl bg-[#061e17] border border-emerald-800/60">
+            <span class="text-[11px] text-slate-400">Monthly Gross Volume (GMV)</span>
+            <div id="out-gmv" class="text-xl font-extrabold text-white mt-1">KSh 28,500,000</div>
+          </div>
+          <div class="p-4 rounded-xl bg-[#061e17] border border-emerald-800/60">
+            <span class="text-[11px] text-slate-400">Florist Commission (18%)</span>
+            <div id="out-commission" class="text-xl font-extrabold text-emerald-300 mt-1">KSh 5,130,000</div>
+          </div>
+          <div class="p-4 rounded-xl bg-[#061e17] border border-emerald-800/60">
+            <span class="text-[11px] text-slate-400">Monthly Delivery Revenue</span>
+            <div id="out-delivery-rev" class="text-xl font-extrabold text-amber-300 mt-1">KSh 2,625,000</div>
+          </div>
+          <div class="p-4 rounded-xl bg-[#061e17] border border-rose-500/40 bg-gradient-to-br from-[#09261e] to-[#12382b]">
+            <span class="text-[11px] text-rose-300 font-bold">Annualized Net Platform ARR</span>
+            <div id="out-arr" class="text-xl font-extrabold text-rose-400 mt-1">KSh 38,400,000</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ledger Header & Invariant Controls -->
+      <div id="sub-ledger" class="flex flex-wrap justify-between items-start gap-4 pt-4 border-t border-emerald-900/60">
         <div>
           <div class="flex items-center gap-2">
             <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Financial Engineering</span>
             <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Merkle Cryptographic Hash Chain</span>
           </div>
-          <h2 class="text-2xl font-bold text-white mt-1">Tamper-Evident Ledger &amp; Fixed-Point Accounting</h2>
+          <h2 class="text-2xl font-bold text-white mt-1">Tamper-Evident Escrow Ledger &amp; Fixed-Point Accounting</h2>
           <p class="text-sm text-emerald-200/70 mt-2 max-w-3xl leading-relaxed">
-            Every transaction is an immutable block linked cryptographically: <code>Hash_n = SHA256(Hash_n-1 + Amount + Account)</code>. Currency is strictly stored in integer minor units (cents) to ban floating-point drift.
+            Every transaction is an immutable block linked cryptographically: <code>Hash_n = SHA256(Hash_n-1 + Amount + Account)</code>. Currency is strictly stored in integer minor units (cents) to ban floating-point drift ($\Delta = 0.00$).
           </p>
         </div>
 
         <!-- Interactive Tamper Test Controls -->
         <div class="flex items-center gap-2 bg-[#020b08] p-2 rounded-2xl border border-emerald-900">
           <button onclick="simulateTampering()" id="btn-tamper" class="px-3 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs shadow-md shadow-rose-950/50 transition flex items-center gap-1.5">
-            <span>🚨 Simulate Malicious Database Alteration</span>
+            <span>🚨 Simulate Malicious Alteration</span>
           </button>
           <button onclick="restoreTampering()" id="btn-restore-tamper" class="px-3 py-2 rounded-xl bg-[#092b21] hover:bg-[#0e3a2d] text-emerald-300 text-xs border border-emerald-700 transition">
             ↺ Restore Verified Audit State
@@ -1001,8 +1076,8 @@
     </div>
   </section>
 
-  <!-- ================= TAB 3: HYBRID DISTRIBUTED ARCHITECTURE (EVENT SOURCING + CRDTs) ================= -->
-  <section id="tab-mobile-arch" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
+  <!-- ================= CONSOLIDATED TAB 4: DISTRIBUTED EDGE & SYSTEM ARCHITECTURE ================= -->
+  <section id="tab-architecture" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
     <div class="bg-[#061e17] border border-emerald-800/40 rounded-3xl p-6 space-y-6 shadow-2xl">
       
       <!-- Header -->
@@ -1030,7 +1105,7 @@
       </div>
 
       <!-- ================= INTERACTIVE DISTRIBUTED EDGE SANDBOX ================= -->
-      <div class="p-5 rounded-2xl bg-[#03100c] border border-cyan-900/60 space-y-4 shadow-xl">
+      <div id="sub-mobile-arch" class="p-5 rounded-2xl bg-[#03100c] border border-cyan-900/60 space-y-4 shadow-xl">
         <div class="flex flex-wrap items-center justify-between pb-3 border-b border-emerald-900/60 gap-3">
           <div>
             <div class="flex items-center gap-2">
@@ -1264,176 +1339,87 @@
 
       </div>
 
-    </div>
-  </section>
-
-  <!-- ================= TAB 4: ENGINEERING CONCEPTS & IMPORTANCE ================= -->
-  <section id="tab-cs-engine" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
-    <div class="bg-[#061e17] border border-emerald-800/40 rounded-3xl p-6 space-y-6 shadow-2xl">
-      <div>
-        <span class="text-xs font-bold text-rose-400 uppercase tracking-widest">Engineering Architecture</span>
-        <h2 class="text-2xl font-bold text-white mt-1">Engineering Concepts Powering CitiMarket Delivery</h2>
-        <p class="text-sm text-emerald-200/70 mt-2 max-w-3xl leading-relaxed">
-          The technical foundations ensuring CitiMarket Delivery scales from 50 orders a day to 50,000 without server crashes, ghost couriers, lost payments, or wilted flowers.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-        <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
-          <div class="flex items-center justify-between">
-            <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300">1. Spatial Data Structures</span>
-            <code class="text-xs text-emerald-400 font-mono">Uber H3 / PostGIS R-Tree</code>
-          </div>
-          <h4 class="font-bold text-white text-sm">Hexagonal Hierarchical Spatial Indexing</h4>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Instead of calculating costly distance formulas across all drivers ($O(N)$), Nairobi is partitioned into discrete H3 hexagonal cells. Finding all active couriers around City Market is an $O(1)$ constant-time lookup.
-          </p>
-          <div class="p-3 rounded-xl bg-emerald-950/60 border border-emerald-700/50 space-y-1">
-            <span class="text-[10px] uppercase font-bold text-emerald-300 tracking-wider">⚡ Importance to Business &amp; Operations:</span>
-            <p class="text-[11px] text-emerald-200 leading-snug">
-              Eliminates database freezes during peak surges (Valentine’s Day, Mother’s Day). Queries respond in <strong>under 4 milliseconds</strong> regardless of rider volume.
-            </p>
-          </div>
-        </div>
-
-        <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
-          <div class="flex items-center justify-between">
-            <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300">2. Operations Research</span>
-            <code class="text-xs text-amber-400 font-mono">Kuhn-Munkres / Bipartite</code>
-          </div>
-          <h4 class="font-bold text-white text-sm">Maximum-Weight Bipartite Dispatch Engine</h4>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Computes an optimal matching between all pending orders and active riders in the dispatch batch, minimizing total fleet transit time and flower dehydration risk.
-          </p>
-          <div class="p-3 rounded-xl bg-amber-950/60 border border-amber-700/50 space-y-1">
-            <span class="text-[10px] uppercase font-bold text-amber-300 tracking-wider">⚡ Importance to Business &amp; Operations:</span>
-            <p class="text-[11px] text-amber-200 leading-snug">
-              Cuts fleet travel times by <strong>35%</strong> and lowers rider fuel burn. Keeping stems hydrated eliminates wilted return claims.
-            </p>
-          </div>
-        </div>
-
-        <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
-          <div class="flex items-center justify-between">
-            <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-rose-500/20 text-rose-300">3. Concurrency Control</span>
-            <code class="text-xs text-rose-400 font-mono">Redis Redlock &amp; OCC</code>
-          </div>
-          <h4 class="font-bold text-white text-sm">Atomic Gig Claiming &amp; Optimistic Locking</h4>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Prevents race conditions where two riders claim the same bouquet simultaneously using Redis atomic primitives with a lease TTL and Optimistic Concurrency Control (`version_id`).
-          </p>
-          <div class="p-3 rounded-xl bg-rose-950/60 border border-rose-700/50 space-y-1">
-            <span class="text-[10px] uppercase font-bold text-rose-300 tracking-wider">⚡ Importance to Business &amp; Operations:</span>
-            <p class="text-[11px] text-rose-200 leading-snug">
-              Guarantees <strong>zero double-assignments</strong> and prevents rider conflict at City Market stalls.
-            </p>
-          </div>
-        </div>
-
-        <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
-          <div class="flex items-center justify-between">
-            <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-purple-500/20 text-purple-300">4. Distributed Transactions</span>
-            <code class="text-xs text-purple-400 font-mono">Saga Orchestrator</code>
-          </div>
-          <h4 class="font-bold text-white text-sm">Saga Pattern with Automated Compensating Reversals</h4>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Maintains data consistency across Safaricom M-Pesa, florist inventory, and courier dispatch. If an edge case occurs, automated reversals refund the buyer instantly.
-          </p>
-          <div class="p-3 rounded-xl bg-purple-950/60 border border-purple-700/50 space-y-1">
-            <span class="text-[10px] uppercase font-bold text-purple-300 tracking-wider">⚡ Importance to Business &amp; Operations:</span>
-            <p class="text-[11px] text-purple-200 leading-snug">
-              Protects customer trust. If courier matching fails, money is <strong>automatically refunded within seconds</strong> via M-Pesa B2C.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= TAB 5: BRANDING & IDENTITY ================= -->
-  <section id="tab-branding" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
-    <div class="bg-[#061e17] border border-emerald-800/40 rounded-3xl p-6 space-y-6 shadow-2xl">
-      <div>
-        <span class="text-xs font-bold text-rose-400 uppercase tracking-widest">Brand System &amp; Design Standards</span>
-        <h2 class="text-2xl font-bold text-white mt-1">CitiMarket Delivery: Branding &amp; Visual Identity</h2>
-        <p class="text-sm text-emerald-200/70 mt-2 max-w-3xl leading-relaxed">
-          CitiMarket Delivery combines the historic heritage of Nairobi's premier flower hub with modern, white-glove luxury gifting logistics.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-2">
-          <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-base">🌸</div>
-          <h4 class="font-bold text-white text-sm">Brand Tone &amp; Personality</h4>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            <strong>Warm, Celebratory, Reliable, and Discreet.</strong> Elevating gifting while protecting surprise secrecy.
+      <!-- Sub-Section: Enterprise Computer Science Foundations -->
+      <div id="sub-cs-engine" class="pt-6 border-t border-emerald-900/60 space-y-4">
+        <div>
+          <span class="text-xs font-bold text-rose-400 uppercase tracking-widest">Engineering Architecture</span>
+          <h3 class="text-xl font-bold text-white mt-1">Enterprise Computer Science Foundations Powering CitiMarket</h3>
+          <p class="text-xs text-emerald-200/70 mt-1 max-w-3xl leading-relaxed">
+            The technical foundations ensuring CitiMarket Delivery scales from 50 orders a day to 50,000 without server crashes, ghost couriers, lost payments, or wilted flowers.
           </p>
         </div>
 
-        <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-2">
-          <div class="w-8 h-8 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center font-bold text-base">🌿</div>
-          <h4 class="font-bold text-white text-sm">Visual Identity: "Lush Botanical"</h4>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Deep nocturnal forest greens, accented by rose blush, M-Pesa emerald, and champagne gold.
-          </p>
-        </div>
-
-        <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-2">
-          <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-base">🎀</div>
-          <h4 class="font-bold text-white text-sm">Packaging &amp; Unboxing Ritual</h4>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Insulated climate-safe containers, stem moisture vials, and wax-sealed handwritten cards.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= TAB 6: UNIT ECONOMICS ================= -->
-  <section id="tab-calculator" class="hidden flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 space-y-6">
-    <div class="bg-[#061e17] border border-emerald-800/40 rounded-3xl p-6 space-y-6 shadow-2xl">
-      <div>
-        <span class="text-xs font-bold text-rose-400 uppercase tracking-widest">Nairobi Market Opportunity</span>
-        <h2 class="text-2xl font-bold text-white mt-1">CitiMarket Delivery: Hybrid Unit Economics &amp; Revenue Model</h2>
-      </div>
-
-      <div class="bg-[#03100c] border border-emerald-900/80 rounded-2xl p-5 space-y-5">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="space-y-2">
-            <div class="flex justify-between text-xs">
-              <span class="text-slate-400">Daily Completed Flower Orders (Nairobi):</span>
-              <strong id="val-daily-orders" class="text-emerald-400 text-sm">250 orders / day</strong>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300">1. Spatial Data Structures</span>
+              <code class="text-xs text-emerald-400 font-mono">Uber H3 / PostGIS R-Tree</code>
             </div>
-            <input type="range" id="slider-orders" min="50" max="1500" step="50" value="250" oninput="calculateFinancials()" class="w-full accent-emerald-500 cursor-pointer">
-          </div>
-          <div class="space-y-2">
-            <div class="flex justify-between text-xs">
-              <span class="text-slate-400">Average Bouquet Order Value (AOV):</span>
-              <strong id="val-aov" class="text-rose-400 text-sm">KSh 3,800</strong>
+            <h4 class="font-bold text-white text-sm">Hexagonal Hierarchical Spatial Indexing</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Instead of calculating costly distance formulas across all drivers ($O(N)$), Nairobi is partitioned into discrete H3 hexagonal cells. Finding all active couriers around City Market is an $O(1)$ constant-time lookup.
+            </p>
+            <div class="p-3 rounded-xl bg-emerald-950/60 border border-emerald-700/50 space-y-1">
+              <span class="text-[10px] uppercase font-bold text-emerald-300 tracking-wider">⚡ Importance to Business &amp; Operations:</span>
+              <p class="text-[11px] text-emerald-200 leading-snug">
+                Eliminates database freezes during peak surges (Valentine’s Day, Mother’s Day). Queries respond in <strong>under 4 milliseconds</strong> regardless of rider volume.
+              </p>
             </div>
-            <input type="range" id="slider-aov" min="2000" max="7000" step="200" value="3800" oninput="calculateFinancials()" class="w-full accent-rose-500 cursor-pointer">
           </div>
-        </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
-          <div class="p-4 rounded-xl bg-[#061e17] border border-emerald-800/60">
-            <span class="text-[11px] text-slate-400">Monthly Gross Volume (GMV)</span>
-            <div id="out-gmv" class="text-xl font-extrabold text-white mt-1">KSh 28,500,000</div>
+          <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300">2. Operations Research</span>
+              <code class="text-xs text-amber-400 font-mono">Kuhn-Munkres / Bipartite</code>
+            </div>
+            <h4 class="font-bold text-white text-sm">Maximum-Weight Bipartite Dispatch Engine</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Computes an optimal matching between all pending orders and active riders in the dispatch batch, minimizing total fleet transit time and flower dehydration risk.
+            </p>
+            <div class="p-3 rounded-xl bg-amber-950/60 border border-amber-700/50 space-y-1">
+              <span class="text-[10px] uppercase font-bold text-amber-300 tracking-wider">⚡ Importance to Business &amp; Operations:</span>
+              <p class="text-[11px] text-amber-200 leading-snug">
+                Cuts fleet travel times by <strong>35%</strong> and lowers rider fuel burn. Keeping stems hydrated eliminates wilted return claims.
+              </p>
+            </div>
           </div>
-          <div class="p-4 rounded-xl bg-[#061e17] border border-emerald-800/60">
-            <span class="text-[11px] text-slate-400">Florist Commission (18%)</span>
-            <div id="out-commission" class="text-xl font-extrabold text-emerald-300 mt-1">KSh 5,130,000</div>
+
+          <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-rose-500/20 text-rose-300">3. Concurrency Control</span>
+              <code class="text-xs text-rose-400 font-mono">Redis Redlock &amp; OCC</code>
+            </div>
+            <h4 class="font-bold text-white text-sm">Atomic Gig Claiming &amp; Optimistic Locking</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Prevents race conditions where two riders claim the same bouquet simultaneously using Redis atomic primitives with a lease TTL and Optimistic Concurrency Control (`version_id`).
+            </p>
+            <div class="p-3 rounded-xl bg-rose-950/60 border border-rose-700/50 space-y-1">
+              <span class="text-[10px] uppercase font-bold text-rose-300 tracking-wider">⚡ Importance to Business &amp; Operations:</span>
+              <p class="text-[11px] text-rose-200 leading-snug">
+                Guarantees <strong>zero double-assignments</strong> and prevents rider conflict at City Market stalls.
+              </p>
+            </div>
           </div>
-          <div class="p-4 rounded-xl bg-[#061e17] border border-emerald-800/60">
-            <span class="text-[11px] text-slate-400">Monthly Delivery Revenue</span>
-            <div id="out-delivery-rev" class="text-xl font-extrabold text-amber-300 mt-1">KSh 2,625,000</div>
-          </div>
-          <div class="p-4 rounded-xl bg-[#061e17] border border-rose-500/40 bg-gradient-to-br from-[#09261e] to-[#12382b]">
-            <span class="text-[11px] text-rose-300 font-bold">Annualized Net Platform ARR</span>
-            <div id="out-arr" class="text-xl font-extrabold text-rose-400 mt-1">KSh 38,400,000</div>
+
+          <div class="p-5 rounded-2xl bg-[#03100c] border border-emerald-900/80 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-purple-500/20 text-purple-300">4. Distributed Transactions</span>
+              <code class="text-xs text-purple-400 font-mono">Saga Orchestrator</code>
+            </div>
+            <h4 class="font-bold text-white text-sm">Saga Pattern with Automated Compensating Reversals</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Maintains data consistency across Safaricom M-Pesa, florist inventory, and courier dispatch. If an edge case occurs, automated reversals refund the buyer instantly.
+            </p>
+            <div class="p-3 rounded-xl bg-purple-950/60 border border-purple-700/50 space-y-1">
+              <span class="text-[10px] uppercase font-bold text-purple-300 tracking-wider">⚡ Importance to Business &amp; Operations:</span>
+              <p class="text-[11px] text-purple-200 leading-snug">
+                Protects customer trust. If courier matching fails, money is <strong>automatically refunded within seconds</strong> via M-Pesa B2C.
+              </p>
+            </div>
           </div>
         </div>
       </div>
+
     </div>
   </section>
 
@@ -2308,48 +2294,68 @@
     }
 
     function setTab(tab) {
-      const allTabs = ['simulator', 'grab-features', 'ledger', 'mobile-arch', 'cs-engine', 'branding', 'calculator', 'pitch'];
-      allTabs.forEach(t => {
+      let activeTab = tab;
+      let targetSubId = null;
+
+      if (tab === 'grab-features') { activeTab = 'superapp'; targetSubId = 'tab-superapp'; }
+      else if (tab === 'branding') { activeTab = 'superapp'; targetSubId = 'sub-branding'; }
+      else if (tab === 'ledger') { activeTab = 'fintech'; targetSubId = 'sub-ledger'; }
+      else if (tab === 'calculator') { activeTab = 'fintech'; targetSubId = 'tab-fintech'; }
+      else if (tab === 'mobile-arch') { activeTab = 'architecture'; targetSubId = 'sub-mobile-arch'; }
+      else if (tab === 'cs-engine') { activeTab = 'architecture'; targetSubId = 'sub-cs-engine'; }
+
+      const masterTabs = ['simulator', 'superapp', 'fintech', 'architecture', 'pitch'];
+      masterTabs.forEach(t => {
         const el = document.getElementById(`tab-${t}`);
         if (el) el.classList.add('hidden');
       });
 
-      const navs = ['sim', 'grab', 'ledger', 'mobile', 'cs', 'branding', 'calc', 'pitch'];
-      navs.forEach(n => {
-        const btn = document.getElementById(`nav-btn-${n}`);
+      const navButtons = [
+        { id: 'nav-btn-sim', tab: 'simulator' },
+        { id: 'nav-btn-superapp', tab: 'superapp' },
+        { id: 'nav-btn-fintech', tab: 'fintech' },
+        { id: 'nav-btn-architecture', tab: 'architecture' },
+        { id: 'nav-btn-pitch', tab: 'pitch' }
+      ];
+
+      navButtons.forEach(item => {
+        const btn = document.getElementById(item.id);
         if (btn) {
-          if (n === 'pitch') {
-            btn.className = 'px-3 py-1.5 rounded-lg text-rose-300 bg-rose-500/10 border border-rose-500/30 hover:bg-rose-500/20 font-bold transition flex items-center gap-1 shadow-sm';
+          if (item.tab === activeTab) {
+            if (item.tab === 'pitch') {
+              btn.className = 'px-3 py-1.5 rounded-lg bg-rose-600 text-white font-bold shadow-sm transition flex items-center gap-1';
+            } else {
+              btn.className = 'px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition flex items-center gap-1';
+            }
           } else {
-            btn.className = 'px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition';
+            if (item.tab === 'pitch') {
+              btn.className = 'px-3 py-1.5 rounded-lg text-rose-300 bg-rose-500/10 border border-rose-500/30 hover:bg-rose-500/20 font-bold transition flex items-center gap-1 shadow-sm';
+            } else {
+              btn.className = 'px-3 py-1.5 rounded-lg text-emerald-200/70 hover:text-white transition flex items-center gap-1';
+            }
           }
         }
       });
 
-      if (tab === 'simulator') {
-        document.getElementById('tab-simulator').classList.remove('hidden');
-        document.getElementById('nav-btn-sim').className = 'px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition';
-      } else if (tab === 'grab-features') {
-        document.getElementById('tab-grab-features').classList.remove('hidden');
-        document.getElementById('nav-btn-grab').className = 'px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition';
-      } else if (tab === 'ledger') {
-        document.getElementById('tab-ledger').classList.remove('hidden');
-        document.getElementById('nav-btn-ledger').className = 'px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition';
-      } else if (tab === 'mobile-arch') {
-        document.getElementById('tab-mobile-arch').classList.remove('hidden');
-        document.getElementById('nav-btn-mobile').className = 'px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition';
-      } else if (tab === 'cs-engine') {
-        document.getElementById('tab-cs-engine').classList.remove('hidden');
-        document.getElementById('nav-btn-cs').className = 'px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition';
-      } else if (tab === 'branding') {
-        document.getElementById('tab-branding').classList.remove('hidden');
-        document.getElementById('nav-btn-branding').className = 'px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition';
-      } else if (tab === 'calculator') {
-        document.getElementById('tab-calculator').classList.remove('hidden');
-        document.getElementById('nav-btn-calc').className = 'px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-semibold shadow-sm transition';
-      } else if (tab === 'pitch') {
-        document.getElementById('tab-pitch').classList.remove('hidden');
-        document.getElementById('nav-btn-pitch').className = 'px-3 py-1.5 rounded-lg bg-rose-600 text-white font-bold shadow-sm transition flex items-center gap-1';
+      const activeEl = document.getElementById(`tab-${activeTab}`);
+      if (activeEl) {
+        activeEl.classList.remove('hidden');
+        if (targetSubId) {
+          setTimeout(() => {
+            const subEl = document.getElementById(targetSubId);
+            if (subEl) {
+              subEl.scrollIntoView({ behavior: 'smooth' });
+            } else {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          }, 50);
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }
+
+      if (tab === 'calculator' || activeTab === 'fintech') {
+        calculateFinancials();
       }
     }
 
