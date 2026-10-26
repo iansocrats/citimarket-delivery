@@ -278,15 +278,15 @@
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 text-[11px] sm:text-xs font-mono">
         <button onclick="goToSlide(1)" class="p-2.5 rounded-lg glass-card hover:border-brand-500/40 text-left transition flex flex-col touch-target justify-center">
           <span class="text-slate-500 text-[10px]">01. Purpose</span>
-          <span class="text-slate-200 font-medium truncate">Nationwide Vision</span>
+          <span class="text-slate-200 font-medium truncate">Shop-to-Consumer</span>
         </button>
         <button onclick="goToSlide(2)" class="p-2.5 rounded-lg glass-card hover:border-brand-500/40 text-left transition flex flex-col touch-target justify-center">
           <span class="text-slate-500 text-[10px]">02. Problem</span>
-          <span class="text-slate-200 font-medium truncate">Transit Decay</span>
+          <span class="text-slate-200 font-medium truncate">No Delivery System</span>
         </button>
         <button onclick="goToSlide(3)" class="p-2.5 rounded-lg glass-card hover:border-brand-500/40 text-left transition flex flex-col touch-target justify-center">
           <span class="text-slate-500 text-[10px]">03. Solution</span>
-          <span class="text-slate-200 font-medium truncate">Hub-and-Spoke</span>
+          <span class="text-slate-200 font-medium truncate">15-45m Dedicated Fleet</span>
         </button>
         <button onclick="goToSlide(4)" class="p-2.5 rounded-lg glass-card hover:border-brand-500/40 text-left transition flex flex-col touch-target justify-center">
           <span class="text-slate-500 text-[10px]">04. Market</span>
@@ -3839,32 +3839,33 @@ val Background = Color(0xFF080D1A)</pre>
         badge: "Slide 01 // Vision",
         content: `
           <div class="space-y-5 sm:space-y-6">
-            <span class="text-xs uppercase tracking-wider text-brand-400 font-mono">The Hook (In Plain Words)</span>
+            <span class="text-xs uppercase tracking-wider text-brand-400 font-mono">The Purpose (In Plain Words)</span>
             <h1 class="text-2xl sm:text-4xl font-extrabold text-white leading-tight">
-              The precision cold-chain logistics & escrow backbone powering Africa's high-stakes gifting economy.
+              The automated on-demand delivery network connecting local shops across Kenya directly to consumers in 15 to 45 minutes.
             </h1>
             
             <!-- Layman Explanation Box -->
             <div class="p-4 rounded-xl bg-brand-500/10 border border-brand-500/20 text-xs sm:text-sm text-brand-200 leading-relaxed font-sans">
-              <strong class="text-brand-400 font-mono uppercase block mb-1">What does this mean in simple words?</strong>
-              When someone sends fresh flowers or a special surprise gift in Kenya, it cannot travel like a cold box of pizza. CitiMarket Delivery connects Lake Naivasha farm gates directly to Nairobi City Market, and shuttles fresh blooms to Nakuru and Mombasa in refrigerated corridors—delivering within 45 minutes locally in Nairobi and same-day across inter-city hubs, while holding money safely in Safaricom M-Pesa escrow until verified.
+              <strong class="text-brand-400 font-mono uppercase block mb-1">What problem are we solving?</strong>
+              Across Nairobi, Nakuru, and the rest of the country, there are thousands of flower shops, gift boutiques, and specialty merchants with great products who cannot reach customers because they lack a delivery system and a digital connection to consumers. At the same time, consumers across town have no easy way to get items delivered from these shops quickly.<br><br>
+              <strong>CitiMarket is that delivery system:</strong> an automated platform that automatically takes consumer orders, connects them directly to local shops, and dispatches dedicated couriers to pick up and deliver within <strong>15 to 45 minutes</strong> (often 15 minutes for nearby deliveries, at most 45 minutes citywide). Starting with delicate flowers as our high-standard proof of concept, the system is engineered to deliver any specialty retail goods across the whole of Kenya.
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 pt-2 max-w-3xl font-mono text-xs">
               <div class="p-3.5 sm:p-4 rounded-xl bg-slate-900 border border-dark-border">
                 <div class="text-slate-400">Guaranteed Speed</div>
-                <div class="text-xl sm:text-2xl font-bold text-brand-400 mt-1">45 Mins</div>
-                <div class="text-[11px] text-slate-500 mt-1">Local Nairobi SLA; Same-Day Inter-City</div>
+                <div class="text-xl sm:text-2xl font-bold text-brand-400 mt-1">15 – 45 Mins</div>
+                <div class="text-[11px] text-slate-500 mt-1">15 mins nearby; max 45 mins citywide</div>
               </div>
               <div class="p-3.5 sm:p-4 rounded-xl bg-slate-900 border border-dark-border">
-                <div class="text-slate-400">Platform Take-Rate</div>
-                <div class="text-xl sm:text-2xl font-bold text-white mt-1">35.0%</div>
-                <div class="text-[11px] text-slate-500 mt-1">Wholesale margin + Delivery markup</div>
+                <div class="text-slate-400">Merchant System</div>
+                <div class="text-xl sm:text-2xl font-bold text-white mt-1">Automated Dispatch</div>
+                <div class="text-[11px] text-slate-500 mt-1">Auto-picks orders & pairs dedicated riders</div>
               </div>
               <div class="p-3.5 sm:p-4 rounded-xl bg-slate-900 border border-dark-border">
-                <div class="text-slate-400">Ledger Balance</div>
-                <div class="text-xl sm:text-2xl font-bold text-cyan-400 mt-1">Δ = KSh 0.00</div>
-                <div class="text-[11px] text-slate-500 mt-1">Mathematical zero-loss escrow</div>
+                <div class="text-slate-400">Reach & Coverage</div>
+                <div class="text-xl sm:text-2xl font-bold text-cyan-400 mt-1">Cross-Country</div>
+                <div class="text-[11px] text-slate-500 mt-1">Nairobi, Nakuru, Mombasa & Naivasha</div>
               </div>
             </div>
           </div>
@@ -3878,47 +3879,47 @@ val Background = Color(0xFF080D1A)</pre>
           <div class="space-y-5 sm:space-y-6">
             <span class="text-xs uppercase tracking-wider text-red-400 font-mono">What is Broken Today Across Kenya?</span>
             <h2 class="text-xl sm:text-3xl font-extrabold text-white leading-tight">
-              Generic on-demand delivery apps ruin 40% of fresh bouquets, and long-distance buses destroy flower stems.
+              Shops cannot reach consumers because Kenya lacks dedicated delivery infrastructure—and generic apps like Uber and Glovo fail merchant logistics.
             </h2>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 max-w-4xl text-xs font-sans">
               <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
                 <div class="font-bold text-white text-sm flex items-center space-x-2">
-                  <i data-lucide="alert-octagon" class="w-4 h-4 text-red-400 shrink-0"></i>
-                  <span>40% Transit Spoilage & Bus Damage</span>
+                  <i data-lucide="store" class="w-4 h-4 text-red-400 shrink-0"></i>
+                  <span>Shops Have No Delivery System</span>
                 </div>
                 <p class="text-slate-300 leading-relaxed">
-                  <strong>Why generic transit fails flowers:</strong> Standard apps (Uber, Glovo, Bolt) stuff bouquets into uninsulated food boxes. On inter-city routes (Naivasha to Mombasa or Nairobi to Nakuru), flowers travel in hot bus cargo holds without water. Stems snap, petals rot, and arrangements arrive ruined.
+                  <strong>Trapped in foot traffic:</strong> Thousands of flower shops, gift boutiques, and specialty merchants in Nairobi, Nakuru, and across Kenya have no delivery system. They have no courier fleet, no software, and no connection to consumers living 5 to 15 kilometers away who want their goods delivered.
                 </p>
               </div>
 
               <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
                 <div class="font-bold text-white text-sm flex items-center space-x-2">
-                  <i data-lucide="phone-off" class="w-4 h-4 text-red-400 shrink-0"></i>
-                  <span>70% Surprise Ruin Rate</span>
+                  <i data-lucide="truck" class="w-4 h-4 text-red-400 shrink-0"></i>
+                  <span>Uber & Glovo Lack Dedicated Couriers & Systems</span>
                 </div>
                 <p class="text-slate-300 leading-relaxed">
-                  <strong>The "Ruined Surprise" Problem:</strong> Over 70% of flower gifts are surprises sent by spouses, loved ones, or diaspora family living in the US/UK. Normal riders ruin the surprise 15 minutes before arrival by calling the recipient: <em>"Niko kwa gate, wewe ni nani?"</em>
+                  <strong>Generic food apps fail shops:</strong> While Uber and Glovo operate in Kenya, they focus narrowly on fast food from corporate restaurant chains. They do <em>not</em> have dedicated couriers or automated systems built for merchant pickups. Independent gig riders cancel orders, lack proper cargo equipment, and refuse to handle delicate, time-sensitive goods.
                 </p>
               </div>
 
               <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
                 <div class="font-bold text-white text-sm flex items-center space-x-2">
-                  <i data-lucide="wifi-off" class="w-4 h-4 text-red-400 shrink-0"></i>
-                  <span>Underground Parking Dead Zones (0G)</span>
+                  <i data-lucide="map-pin-off" class="w-4 h-4 text-red-400 shrink-0"></i>
+                  <span>No Cross-Country Connection Between Towns</span>
                 </div>
                 <p class="text-slate-300 leading-relaxed">
-                  <strong>The Basement Signal Blackout:</strong> Corporate towers in Westlands and Upper Hill (and coastal beach resorts) have deep basements where cellular networks drop to zero bars. Standard apps freeze and cannot confirm delivery codes.
+                  <strong>Disconnected inter-county commerce:</strong> When a consumer in Nairobi or Nakuru wants items from another town (e.g. farm-fresh flowers from Naivasha or coastal goods from Mombasa), there is no modern logistics service. People rely on unmonitored matatus (public buses), leading to crushed parcels, zero tracking, and massive delays.
                 </p>
               </div>
 
               <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
                 <div class="font-bold text-white text-sm flex items-center space-x-2">
-                  <i data-lucide="wallet" class="w-4 h-4 text-red-400 shrink-0"></i>
-                  <span>Florist & Farmer Working Capital Lock</span>
+                  <i data-lucide="clock" class="w-4 h-4 text-red-400 shrink-0"></i>
+                  <span>Unpredictable Delivery Times & Zero Trust</span>
                 </div>
                 <p class="text-slate-300 leading-relaxed">
-                  <strong>Florists Need Instant Cash:</strong> Artisan florists at City Market and farm gate growers work on thin margins. They refuse to release expensive roses if delivery platforms delay payouts for 48+ hours.
+                  <strong>No guaranteed SLAs or escrow:</strong> Without an automated delivery system, delivery times fluctuate wildly between 2 hours and 2 days. Merchants fear losing stock without payment, and consumers fear sending money on M-Pesa without guaranteed delivery.
                 </p>
               </div>
             </div>
@@ -3933,26 +3934,26 @@ val Background = Color(0xFF080D1A)</pre>
           <div class="space-y-5 sm:space-y-6">
             <span class="text-xs uppercase tracking-wider text-brand-400 font-mono">How CitiMarket Solves It Across Kenya</span>
             <h2 class="text-xl sm:text-3xl font-extrabold text-white leading-tight">
-              Nationwide Hub-and-Spoke cold chain: Farm-gate sourcing, upright motorbike phials, and instant M-Pesa escrow.
+              An automated delivery network pairing dedicated couriers with local shops to deliver to consumers in 15 to 45 minutes.
             </h2>
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 max-w-4xl text-xs font-sans">
               <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
-                <div class="font-bold text-brand-400 text-sm">1. Upright Cold Carriers & Shuttles</div>
+                <div class="font-bold text-brand-400 text-sm">1. Automated Merchant Connection</div>
                 <p class="text-slate-300 leading-relaxed">
-                  Motorbikes carry custom-built upright boxes with 15ml water phials on each stem. Inter-city corridors (Naivasha ➔ Nairobi ➔ Mombasa ➔ Nakuru) use refrigerated batch shuttles and SGR cold cargo.
+                  When a consumer places an order online, the system automatically alerts the shop's tablet, prints the fulfillment docket, and dispatches the nearest dedicated courier in under 30 seconds. The shop never has to search for a rider.
                 </p>
               </div>
               <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
-                <div class="font-bold text-cyan-400 text-sm">2. Smart Phone Sensors</div>
+                <div class="font-bold text-cyan-400 text-sm">2. Dedicated Courier Fleet (15–45 Mins)</div>
                 <p class="text-slate-300 leading-relaxed">
-                  The rider's mobile phone continuously monitors if the flower box tilts past 45° or hits a violent pothole (>2.5G), alerting the courier to prevent damage and logging photo proof.
+                  Our couriers are equipped with standardized, specialized cargo carriers. They pick up orders immediately and deliver in 15 to 45 minutes locally (15 mins for nearby zones, max 45 mins citywide), with scheduled shuttles for cross-country routes.
                 </p>
               </div>
               <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
-                <div class="font-bold text-amber-400 text-sm">3. Automated M-Pesa Escrow</div>
+                <div class="font-bold text-amber-400 text-sm">3. Universal & Cross-Country Logistics</div>
                 <p class="text-slate-300 leading-relaxed">
-                  When a customer orders, M-Pesa holds the money in a safe digital lockbox. Upon secret delivery code verification, the money splits automatically: florist, rider, and platform get paid in seconds.
+                  Starting with delicate perishables (cut flowers) as our highest-difficulty benchmark, the same automated courier system easily transfers any specialty goods, gifts, or parcels across Nairobi, Nakuru, Naivasha, and Mombasa.
                 </p>
               </div>
             </div>
@@ -3971,8 +3972,8 @@ val Background = Color(0xFF080D1A)</pre>
             </h2>
 
             <div class="p-4 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-xs sm:text-sm text-cyan-200 leading-relaxed font-sans">
-              <strong class="text-cyan-400 font-mono uppercase block mb-1">Where is the untapped niche?</strong>
-              Kenya is the world's 3rd largest exporter of cut roses, but over 90% of domestic flower sales inside Kenya happen through informal roadside kiosks or manual WhatsApp chats with zero cold-chain guarantees. Urban Kenyans in Nairobi, Mombasa, Nakuru, and diaspora senders want reliable, one-click gifting.
+              <strong class="text-cyan-400 font-mono uppercase block mb-1">Where is the untapped opportunity?</strong>
+              Across Kenya, thousands of independent flower shops, gift boutiques, and specialty merchants generate over KSh 156 Billion in commerce, but over 90% of their sales are restricted to walk-in foot traffic because they have no delivery network to connect with consumers. Starting with flower shops as our high-difficulty proof of concept, CitiMarket provides the automated delivery infrastructure connecting merchants to consumers across Nairobi, Nakuru, Mombasa, and nationwide.
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-4xl font-mono">
