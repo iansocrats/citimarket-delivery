@@ -2,8 +2,8 @@
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CitiMarket Delivery — Executive Technical Pitch & Architecture Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>CitiMarket Delivery — Kenya Cold-Chain Logistics & Fintech Escrow</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Lucide Icons -->
@@ -17,6 +17,7 @@
             brand: {
               50: '#ecfdf5',
               100: '#d1fae5',
+              400: '#34d399',
               500: '#10b981',
               600: '#059669',
               700: '#047857',
@@ -31,7 +32,7 @@
           },
           fontFamily: {
             mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
-            sans: ['Inter', 'system-ui', 'sans-serif']
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif']
           }
         }
       }
@@ -39,52 +40,69 @@
   </script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
-    body { font-family: 'Inter', sans-serif; background-color: #080d1a; color: #f8fafc; }
+    body { font-family: 'Inter', sans-serif; background-color: #080d1a; color: #f8fafc; -webkit-tap-highlight-color: transparent; }
     .code-font { font-family: 'JetBrains Mono', monospace; }
-    .glass-card { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
-    .glass-card-active { background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(16, 185, 129, 0.4); box-shadow: 0 0 25px rgba(16, 185, 129, 0.15); }
+    .glass-card { background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    .glass-card-active { background: rgba(15, 23, 42, 0.96); border: 1px solid rgba(16, 185, 129, 0.4); box-shadow: 0 0 25px rgba(16, 185, 129, 0.12); }
+    
+    /* Touch target optimizations */
+    .touch-target { min-height: 44px; min-width: 44px; touch-action: manipulation; }
+    
+    /* Smooth horizontal mobile touch scroll */
+    .scroll-touch { -webkit-overflow-scrolling: touch; scroll-behavior: smooth; }
+    
     /* Custom scrollbars */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
     ::-webkit-scrollbar-track { background: #080d1a; }
     ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: #334155; }
+    
+    /* Mobile slider handle */
+    input[type=range]::-webkit-slider-thumb {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #10b981;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+    }
   </style>
 </head>
-<body class="min-h-screen flex flex-col selection:bg-brand-500 selection:text-black">
+<body class="min-h-screen flex flex-col selection:bg-brand-500 selection:text-black antialiased">
 
   <!-- TOP STATUS BANNER -->
-  <header class="border-b border-dark-border bg-dark-card/90 backdrop-blur sticky top-0 z-50">
+  <header class="border-b border-dark-border bg-dark-card/95 backdrop-blur sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center shadow-lg shadow-brand-500/20">
+        <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center shadow-lg shadow-brand-500/20 shrink-0">
           <i data-lucide="flower-2" class="w-5 h-5 text-black font-bold"></i>
         </div>
-        <div>
+        <div class="overflow-hidden">
           <div class="flex items-center space-x-2">
-            <span class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">CitiMarket Delivery</span>
-            <span class="text-xs px-2 py-0.5 rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20 font-medium">Production Spec</span>
+            <span class="font-extrabold text-base sm:text-lg tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent truncate">CitiMarket Delivery</span>
+            <span class="hidden sm:inline-block text-[11px] px-2 py-0.5 rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20 font-medium font-mono">Kenya Nationwide</span>
           </div>
-          <p class="text-[11px] text-slate-400 font-mono">Nairobi Cold-Chain Logistics & Zero-Trust Escrow</p>
+          <p class="text-[11px] text-slate-400 font-mono truncate">Cold-Chain Network & M-Pesa Escrow</p>
         </div>
       </div>
 
-      <!-- Real-time Invariant Pulse -->
-      <div class="hidden md:flex items-center space-x-6 text-xs font-mono">
+      <!-- Real-time Invariant Pulse (Desktop) -->
+      <div class="hidden lg:flex items-center space-x-4 text-xs font-mono">
         <div class="flex items-center space-x-2 bg-slate-900/80 px-3 py-1.5 rounded-md border border-dark-border">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
           <span class="text-slate-400">LEDGER INVARIANT:</span>
           <span class="text-brand-400 font-bold">Δ = KSh 0.00</span>
         </div>
         <div class="flex items-center space-x-2 bg-slate-900/80 px-3 py-1.5 rounded-md border border-dark-border">
-          <i data-lucide="cpu" class="w-3.5 h-3.5 text-cyan-400"></i>
-          <span class="text-slate-400">BACKEND:</span>
-          <span class="text-cyan-400">GCP Cloud Run + PostGIS</span>
+          <i data-lucide="map" class="w-3.5 h-3.5 text-cyan-400"></i>
+          <span class="text-slate-400">HUBS:</span>
+          <span class="text-cyan-400">Naivasha ➔ Nairobi ➔ Coast</span>
         </div>
       </div>
 
       <!-- Action Button -->
-      <div class="flex items-center space-x-3">
-        <a href="#deck" onclick="switchTab('deck')" class="px-3.5 py-1.5 text-xs font-medium rounded-lg bg-brand-500 text-slate-950 font-semibold hover:bg-brand-400 transition flex items-center space-x-1.5 shadow-md shadow-brand-500/20">
+      <div class="flex items-center space-x-2">
+        <a href="#deck" onclick="switchTab('deck')" class="px-3.5 py-2 text-xs font-semibold rounded-lg bg-brand-500 text-slate-950 hover:bg-brand-400 transition flex items-center space-x-1.5 shadow-md shadow-brand-500/20 touch-target justify-center">
           <i data-lucide="presentation" class="w-4 h-4"></i>
           <span>Pitch Deck</span>
         </a>
@@ -93,67 +111,71 @@
   </header>
 
   <!-- NAVIGATION TABS -->
-  <nav class="border-b border-dark-border bg-slate-950/60 sticky top-16 z-40">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex space-x-1 overflow-x-auto py-2 scrollbar-none text-xs font-medium">
-        <button onclick="switchTab('deck')" id="tab-deck" class="tab-btn active px-3.5 py-2 rounded-md flex items-center space-x-2 transition bg-brand-500/10 text-brand-400 border border-brand-500/30">
+  <nav class="border-b border-dark-border bg-slate-950/80 sticky top-16 z-40 backdrop-blur">
+    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+      <div class="flex space-x-1 overflow-x-auto py-2 scroll-touch text-xs font-medium no-scrollbar">
+        <button onclick="switchTab('deck')" id="tab-deck" class="tab-btn active shrink-0 px-3.5 py-2.5 rounded-lg flex items-center space-x-2 transition bg-brand-500/10 text-brand-400 border border-brand-500/30 touch-target">
           <i data-lucide="presentation" class="w-4 h-4"></i>
           <span>10-Slide Investor Deck</span>
         </button>
-        <button onclick="switchTab('arch')" id="tab-arch" class="tab-btn px-3.5 py-2 rounded-md flex items-center space-x-2 transition text-slate-400 hover:text-white hover:bg-slate-800/50">
+        <button onclick="switchTab('arch')" id="tab-arch" class="tab-btn shrink-0 px-3.5 py-2.5 rounded-lg flex items-center space-x-2 transition text-slate-400 hover:text-white hover:bg-slate-800/50 touch-target">
           <i data-lucide="layers" class="w-4 h-4"></i>
           <span>System Architecture</span>
         </button>
-        <button onclick="switchTab('location')" id="tab-location" class="tab-btn px-3.5 py-2 rounded-md flex items-center space-x-2 transition text-slate-400 hover:text-white hover:bg-slate-800/50">
+        <button onclick="switchTab('location')" id="tab-location" class="tab-btn shrink-0 px-3.5 py-2.5 rounded-lg flex items-center space-x-2 transition text-slate-400 hover:text-white hover:bg-slate-800/50 touch-target">
           <i data-lucide="map-pin" class="w-4 h-4"></i>
-          <span>Nairobi Location Engine</span>
+          <span>Kenya Location Engine</span>
         </button>
-        <button onclick="switchTab('sensors')" id="tab-sensors" class="tab-btn px-3.5 py-2 rounded-md flex items-center space-x-2 transition text-slate-400 hover:text-white hover:bg-slate-800/50">
+        <button onclick="switchTab('sensors')" id="tab-sensors" class="tab-btn shrink-0 px-3.5 py-2.5 rounded-lg flex items-center space-x-2 transition text-slate-400 hover:text-white hover:bg-slate-800/50 touch-target">
           <i data-lucide="activity" class="w-4 h-4"></i>
-          <span>Courier Sensor Telemetry</span>
+          <span>Courier Telemetry</span>
         </button>
-        <button onclick="switchTab('ledger')" id="tab-ledger" class="tab-btn px-3.5 py-2 rounded-md flex items-center space-x-2 transition text-slate-400 hover:text-white hover:bg-slate-800/50">
+        <button onclick="switchTab('ledger')" id="tab-ledger" class="tab-btn shrink-0 px-3.5 py-2.5 rounded-lg flex items-center space-x-2 transition text-slate-400 hover:text-white hover:bg-slate-800/50 touch-target">
           <i data-lucide="receipt" class="w-4 h-4"></i>
-          <span>Double-Entry Fintech Escrow</span>
+          <span>Double-Entry Escrow</span>
         </button>
-        <button onclick="switchTab('founder')" id="tab-founder" class="tab-btn px-3.5 py-2 rounded-md flex items-center space-x-2 transition text-slate-400 hover:text-white hover:bg-slate-800/50">
+        <button onclick="switchTab('founder')" id="tab-founder" class="tab-btn shrink-0 px-3.5 py-2.5 rounded-lg flex items-center space-x-2 transition text-slate-400 hover:text-white hover:bg-slate-800/50 touch-target">
           <i data-lucide="sparkles" class="w-4 h-4 text-amber-400"></i>
-          <span>Solo Founder AI Model</span>
+          <span>Solo Founder & Cloud Costs</span>
         </button>
       </div>
     </div>
   </nav>
 
   <!-- MAIN VIEW CONTAINER -->
-  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8">
 
     <!-- ========================================== -->
     <!-- SECTION 1: 10-SLIDE INVESTOR PITCH DECK   -->
     <!-- ========================================== -->
-    <section id="view-deck" class="view-panel space-y-6">
+    <section id="view-deck" class="view-panel space-y-5">
       
       <!-- Slide Navigator Controls -->
-      <div class="glass-card rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div class="flex items-center space-x-3">
-          <span class="text-xs uppercase tracking-wider text-slate-400 font-mono">Executive Pitch:</span>
-          <span id="slide-indicator" class="text-sm font-bold text-brand-400 font-mono bg-brand-500/10 px-2.5 py-1 rounded border border-brand-500/20">Slide 1 of 10</span>
-          <h2 id="slide-header-title" class="text-sm font-semibold text-white">Vision & Purpose</h2>
+      <div class="glass-card rounded-xl p-3 sm:p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div class="flex items-center space-x-3 w-full sm:w-auto justify-between sm:justify-start">
+          <div class="flex items-center space-x-2">
+            <span class="text-xs uppercase tracking-wider text-slate-400 font-mono hidden sm:inline">Executive Pitch:</span>
+            <span id="slide-indicator" class="text-xs sm:text-sm font-bold text-brand-400 font-mono bg-brand-500/10 px-2.5 py-1 rounded border border-brand-500/20">Slide 1 of 10</span>
+          </div>
+          <h2 id="slide-header-title" class="text-xs sm:text-sm font-semibold text-white truncate max-w-[200px] sm:max-w-none">Vision & Purpose</h2>
         </div>
-        <div class="flex items-center space-x-2">
-          <button onclick="prevSlide()" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition disabled:opacity-30" id="btn-prev-slide">
+        <div class="flex items-center space-x-2 w-full sm:w-auto justify-between sm:justify-end">
+          <button onclick="prevSlide()" class="px-4 py-2 sm:p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition disabled:opacity-30 flex items-center space-x-1 touch-target justify-center" id="btn-prev-slide">
             <i data-lucide="chevron-left" class="w-4 h-4"></i>
+            <span class="sm:hidden text-xs">Prev</span>
           </button>
-          <div class="flex space-x-1" id="slide-dots">
+          <div class="flex space-x-1 overflow-x-auto py-1" id="slide-dots">
             <!-- Dynamic dots generated via JS -->
           </div>
-          <button onclick="nextSlide()" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition disabled:opacity-30" id="btn-next-slide">
+          <button onclick="nextSlide()" class="px-4 py-2 sm:p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition disabled:opacity-30 flex items-center space-x-1 touch-target justify-center" id="btn-next-slide">
+            <span class="sm:hidden text-xs">Next</span>
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
           </button>
         </div>
       </div>
 
       <!-- Slide Viewport -->
-      <div class="glass-card-active rounded-2xl p-6 sm:p-10 min-h-[520px] flex flex-col justify-between relative overflow-hidden">
+      <div class="glass-card-active rounded-2xl p-5 sm:p-10 min-h-[480px] sm:min-h-[520px] flex flex-col justify-between relative overflow-hidden">
         <!-- Ambient Glow -->
         <div class="absolute -right-20 -top-20 w-80 h-80 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -162,57 +184,57 @@
         </div>
 
         <!-- Slide Footer Meta -->
-        <div class="border-t border-dark-border pt-6 mt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 font-mono gap-3">
+        <div class="border-t border-dark-border pt-4 sm:pt-6 mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 font-mono gap-2 text-center sm:text-left">
           <div>Sequoia Capital + Y Combinator Technical Moat Framework</div>
-          <div class="flex items-center space-x-3">
-            <span>Target: Nairobi, Kenya</span>
+          <div class="flex items-center space-x-2">
+            <span>Kenya Cross-Country Cold-Chain</span>
             <span>•</span>
-            <span class="text-brand-400">Safaricom Daraja + GCP Native</span>
+            <span class="text-brand-400">Safaricom Daraja + GCP</span>
           </div>
         </div>
       </div>
 
       <!-- Quick Jump Slide Directory Grid -->
-      <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 text-xs font-mono">
-        <button onclick="goToSlide(1)" class="p-2.5 rounded-lg glass-card hover:border-brand-500/40 text-left transition flex flex-col">
-          <span class="text-slate-500">01. Purpose</span>
-          <span class="text-slate-200 font-medium truncate">Vision & Hook</span>
+      <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 text-[11px] sm:text-xs font-mono">
+        <button onclick="goToSlide(1)" class="p-2.5 rounded-lg glass-card hover:border-brand-500/40 text-left transition flex flex-col touch-target justify-center">
+          <span class="text-slate-500 text-[10px]">01. Purpose</span>
+          <span class="text-slate-200 font-medium truncate">Nationwide Vision</span>
         </button>
-        <button onclick="goToSlide(2)" class="p-2.5 rounded-lg glass-card hover:border-brand-500/40 text-left transition flex flex-col">
-          <span class="text-slate-500">02. Problem</span>
-          <span class="text-slate-200 font-medium truncate">Perishable Friction</span>
+        <button onclick="goToSlide(2)" class="p-2.5 rounded-lg glass-card hover:border-brand-500/40 text-left transition flex flex-col touch-target justify-center">
+          <span class="text-slate-500 text-[10px]">02. Problem</span>
+          <span class="text-slate-200 font-medium truncate">Transit Decay</span>
         </button>
-        <button onclick="goToSlide(3)" class="p-2.5 rounded-lg glass-card hover:border-brand-500/40 text-left transition flex flex-col">
-          <span class="text-slate-500">03. Solution</span>
-          <span class="text-slate-200 font-medium truncate">Cold-Chain + Escrow</span>
+        <button onclick="goToSlide(3)" class="p-2.5 rounded-lg glass-card hover:border-brand-500/40 text-left transition flex flex-col touch-target justify-center">
+          <span class="text-slate-500 text-[10px]">03. Solution</span>
+          <span class="text-slate-200 font-medium truncate">Hub-and-Spoke</span>
         </button>
-        <button onclick="goToSlide(4)" class="p-2.5 rounded-lg glass-card hover:border-brand-500/40 text-left transition flex flex-col">
-          <span class="text-slate-500">04. Market</span>
-          <span class="text-slate-200 font-medium truncate">$1.2B TAM / SAM</span>
+        <button onclick="goToSlide(4)" class="p-2.5 rounded-lg glass-card hover:border-brand-500/40 text-left transition flex flex-col touch-target justify-center">
+          <span class="text-slate-500 text-[10px]">04. Market</span>
+          <span class="text-slate-200 font-medium truncate">KSh 156B TAM</span>
         </button>
-        <button onclick="goToSlide(5)" class="p-2.5 rounded-lg glass-card hover:border-brand-500/40 text-left transition flex flex-col">
-          <span class="text-slate-500">05. Moats</span>
+        <button onclick="goToSlide(5)" class="p-2.5 rounded-lg glass-card hover:border-brand-500/40 text-left transition flex flex-col touch-target justify-center">
+          <span class="text-slate-500 text-[10px]">05. Moats</span>
           <span class="text-slate-200 font-medium truncate">Sensors & 0G PIN</span>
         </button>
-        <button onclick="goToSlide(6)" class="p-2.5 rounded-lg glass-card hover:border-brand-500/40 text-left transition flex flex-col">
-          <span class="text-slate-500">06. Systems</span>
+        <button onclick="goToSlide(6)" class="p-2.5 rounded-lg glass-card hover:border-brand-500/40 text-left transition flex flex-col touch-target justify-center">
+          <span class="text-slate-500 text-[10px]">06. Systems</span>
           <span class="text-slate-200 font-medium truncate">App vs Web vs Cloud</span>
         </button>
-        <button onclick="goToSlide(7)" class="p-2.5 rounded-lg glass-card hover:border-brand-500/40 text-left transition flex flex-col">
-          <span class="text-slate-500">07. Economics</span>
+        <button onclick="goToSlide(7)" class="p-2.5 rounded-lg glass-card hover:border-brand-500/40 text-left transition flex flex-col touch-target justify-center">
+          <span class="text-slate-500 text-[10px]">07. Economics</span>
           <span class="text-slate-200 font-medium truncate">35% Take / Unit P&L</span>
         </button>
-        <button onclick="goToSlide(8)" class="p-2.5 rounded-lg glass-card hover:border-brand-500/40 text-left transition flex flex-col">
-          <span class="text-slate-500">08. Solo SDLC</span>
+        <button onclick="goToSlide(8)" class="p-2.5 rounded-lg glass-card hover:border-brand-500/40 text-left transition flex flex-col touch-target justify-center">
+          <span class="text-slate-500 text-[10px]">08. Solo SDLC</span>
           <span class="text-slate-200 font-medium truncate">Gemini Pro Build</span>
         </button>
-        <button onclick="goToSlide(9)" class="p-2.5 rounded-lg glass-card hover:border-brand-500/40 text-left transition flex flex-col">
-          <span class="text-slate-500">09. Traction</span>
-          <span class="text-slate-200 font-medium truncate">Stalls 42 & 43 SLA</span>
+        <button onclick="goToSlide(9)" class="p-2.5 rounded-lg glass-card hover:border-brand-500/40 text-left transition flex flex-col touch-target justify-center">
+          <span class="text-slate-500 text-[10px]">09. Traction</span>
+          <span class="text-slate-200 font-medium truncate">Kenya Expansion</span>
         </button>
-        <button onclick="goToSlide(10)" class="p-2.5 rounded-lg glass-card hover:border-brand-500/40 text-left transition flex flex-col">
-          <span class="text-slate-500">10. The Ask</span>
-          <span class="text-slate-200 font-medium truncate">KSh 5M Seed Round</span>
+        <button onclick="goToSlide(10)" class="p-2.5 rounded-lg glass-card hover:border-brand-500/40 text-left transition flex flex-col touch-target justify-center">
+          <span class="text-slate-500 text-[10px]">10. The Ask</span>
+          <span class="text-slate-200 font-medium truncate">Starting vs Seed</span>
         </button>
       </div>
     </section>
@@ -220,30 +242,30 @@
     <!-- ========================================== -->
     <!-- SECTION 2: SYSTEM ARCHITECTURE VISUALIZER  -->
     <!-- ========================================== -->
-    <section id="view-arch" class="view-panel hidden space-y-8">
+    <section id="view-arch" class="view-panel hidden space-y-6 sm:space-y-8">
       <div>
         <div class="flex items-center space-x-2 text-brand-400 text-xs font-mono uppercase tracking-wider">
           <i data-lucide="layers" class="w-4 h-4"></i>
-          <span>Architecture & Separation of Concerns</span>
+          <span>Architecture & Domain Separation</span>
         </div>
-        <h1 class="text-2xl font-bold text-white mt-1">Tri-Tier Ecosystem: App vs Web vs Cloud</h1>
-        <p class="text-slate-400 text-sm mt-1 max-w-3xl">
-          Physical deliveries require low-level phone sensors, customers need zero install friction, and financial transactions require strict ACID isolation. Here is how responsibilities are cleanly separated.
+        <h1 class="text-xl sm:text-2xl font-bold text-white mt-1">Tri-Tier Ecosystem: App vs Web vs Cloud</h1>
+        <p class="text-slate-400 text-xs sm:text-sm mt-1 max-w-3xl leading-relaxed">
+          Physical deliveries require low-level phone sensors, customers demand zero install friction, and financial transactions require strict ACID isolation. Here is how responsibilities are cleanly separated.
         </p>
       </div>
 
       <!-- 3 Tier Cards -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
         
         <!-- TIER 1: NATIVE ANDROID APPS -->
-        <div class="glass-card rounded-2xl p-6 border-t-4 border-t-amber-500 flex flex-col justify-between">
+        <div class="glass-card rounded-2xl p-5 sm:p-6 border-t-4 border-t-amber-500 flex flex-col justify-between">
           <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="px-2.5 py-1 rounded bg-amber-500/10 text-amber-400 font-mono text-xs font-semibold border border-amber-500/20">Client: Physical Field Ops</span>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-1 rounded bg-amber-500/10 text-amber-400 font-mono text-[11px] font-semibold border border-amber-500/20">Client: Physical Field Ops</span>
               <i data-lucide="smartphone" class="w-5 h-5 text-amber-400"></i>
             </div>
-            <h3 class="text-lg font-bold text-white">Native Android Mobile Apps</h3>
-            <p class="text-xs text-slate-400 mt-1 mb-4">Dedicated Kotlin APKs for Motorbike Couriers & City Market Florists</p>
+            <h3 class="text-base sm:text-lg font-bold text-white">Native Android Mobile Apps</h3>
+            <p class="text-xs text-slate-400 mt-1 mb-4">Dedicated Kotlin APKs for Motorbike Couriers & Florist Tablets</p>
 
             <ul class="space-y-3 text-xs text-slate-300">
               <li class="flex items-start space-x-2">
@@ -270,13 +292,13 @@
         </div>
 
         <!-- TIER 2: PUBLIC WEB PORTAL -->
-        <div class="glass-card rounded-2xl p-6 border-t-4 border-t-blue-500 flex flex-col justify-between">
+        <div class="glass-card rounded-2xl p-5 sm:p-6 border-t-4 border-t-blue-500 flex flex-col justify-between">
           <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="px-2.5 py-1 rounded bg-blue-500/10 text-blue-400 font-mono text-xs font-semibold border border-blue-500/20">Client: Public Web & Hub</span>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-1 rounded bg-blue-500/10 text-blue-400 font-mono text-[11px] font-semibold border border-blue-500/20">Client: Public Web & Hub</span>
               <i data-lucide="globe" class="w-5 h-5 text-blue-400"></i>
             </div>
-            <h3 class="text-lg font-bold text-white">Public Web Portal (Next.js)</h3>
+            <h3 class="text-base sm:text-lg font-bold text-white">Public Web Portal (Next.js)</h3>
             <p class="text-xs text-slate-400 mt-1 mb-4">Zero-Install Viral Gifting, Partner Portals, and SMS Tracking Links</p>
 
             <ul class="space-y-3 text-xs text-slate-300">
@@ -286,7 +308,7 @@
               </li>
               <li class="flex items-start space-x-2">
                 <i data-lucide="check-circle-2" class="w-4 h-4 text-blue-400 shrink-0 mt-0.5"></i>
-                <span><strong>Interactive Location & Fee Picker:</strong> Live PostGIS Nairobi zone check and dynamic KSh fee calculator.</span>
+                <span><strong>Multi-City Location & Fee Picker:</strong> Live PostGIS zone checks across Nairobi, Mombasa, and Nakuru.</span>
               </li>
               <li class="flex items-start space-x-2">
                 <i data-lucide="check-circle-2" class="w-4 h-4 text-blue-400 shrink-0 mt-0.5"></i>
@@ -304,13 +326,13 @@
         </div>
 
         <!-- TIER 3: CENTRAL CLOUD BACKEND -->
-        <div class="glass-card-active rounded-2xl p-6 border-t-4 border-t-brand-500 flex flex-col justify-between">
+        <div class="glass-card-active rounded-2xl p-5 sm:p-6 border-t-4 border-t-brand-500 flex flex-col justify-between">
           <div>
-            <div class="flex items-center justify-between mb-4">
-              <span class="px-2.5 py-1 rounded bg-brand-500/10 text-brand-400 font-mono text-xs font-semibold border border-brand-500/20">The Core Brain & Vault</span>
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-2.5 py-1 rounded bg-brand-500/10 text-brand-400 font-mono text-[11px] font-semibold border border-brand-500/20">The Core Brain & Vault</span>
               <i data-lucide="server" class="w-5 h-5 text-brand-400"></i>
             </div>
-            <h3 class="text-lg font-bold text-white">Central Cloud Backend (GCP)</h3>
+            <h3 class="text-base sm:text-lg font-bold text-white">Central Cloud Backend (GCP)</h3>
             <p class="text-xs text-slate-400 mt-1 mb-4">The Authoritative Ledger, Escrow Engine, and Spatial Dispatcher</p>
 
             <ul class="space-y-3 text-xs text-slate-300">
@@ -338,40 +360,52 @@
         </div>
       </div>
 
+      <!-- Nationwide Kenya Hub-and-Spoke Callout -->
+      <div class="glass-card rounded-2xl p-5 sm:p-6 border-l-4 border-l-cyan-500">
+        <div class="flex items-center space-x-2 text-cyan-400 text-xs font-mono uppercase mb-2">
+          <i data-lucide="route" class="w-4 h-4"></i>
+          <span>Nationwide Kenya Hub-and-Spoke Cold-Chain Route</span>
+        </div>
+        <h4 class="text-base font-bold text-white mb-2">Connecting Lake Naivasha Farms to Kenya's Major Cities</h4>
+        <p class="text-xs text-slate-300 leading-relaxed font-sans max-w-4xl">
+          Kenya produces world-class flowers in Lake Naivasha, but domestic distribution has been completely neglected. CitiMarket aggregates farm-gate cuts directly from Naivasha growers, brings them to the Central Nairobi City Market hub, and distributes them via temperature-controlled inter-city corridors to Mombasa (Nyali, Bamburi, Diani) and Nakuru (Milimani, Section 58).
+        </p>
+      </div>
+
       <!-- End-to-End Order Flow Interactive Sequence -->
-      <div class="glass-card rounded-2xl p-6">
-        <h3 class="text-base font-bold text-white mb-4 flex items-center space-x-2">
+      <div class="glass-card rounded-2xl p-5 sm:p-6">
+        <h3 class="text-sm sm:text-base font-bold text-white mb-4 flex items-center space-x-2">
           <i data-lucide="git-merge" class="w-4 h-4 text-brand-400"></i>
           <span>End-to-End Order Lifecycle Flow (Client $\leftrightarrow$ Backend $\leftrightarrow$ Field)</span>
         </h3>
         
-        <div class="grid grid-cols-1 md:grid-cols-6 gap-3 text-xs">
-          <div class="p-3 rounded-lg bg-slate-900 border border-dark-border relative">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 text-xs">
+          <div class="p-3.5 rounded-xl bg-slate-900 border border-dark-border relative">
             <span class="font-mono text-slate-500 block mb-1">STEP 1</span>
             <div class="font-bold text-white">Zone Check</div>
-            <p class="text-slate-400 text-[11px] mt-1">Web customer selects Westlands; backend PostGIS verifies boundary in &lt;1ms.</p>
+            <p class="text-slate-400 text-[11px] mt-1">Web customer selects destination; backend PostGIS verifies boundary in &lt;1ms.</p>
           </div>
-          <div class="p-3 rounded-lg bg-slate-900 border border-dark-border relative">
+          <div class="p-3.5 rounded-xl bg-slate-900 border border-dark-border relative">
             <span class="font-mono text-slate-500 block mb-1">STEP 2</span>
             <div class="font-bold text-brand-400">M-Pesa STK</div>
             <p class="text-slate-400 text-[11px] mt-1">Customer enters PIN; Daraja fires webhook; Ledger locks KSh 3,850 in escrow.</p>
           </div>
-          <div class="p-3 rounded-lg bg-slate-900 border border-dark-border relative">
+          <div class="p-3.5 rounded-xl bg-slate-900 border border-dark-border relative">
             <span class="font-mono text-slate-500 block mb-1">STEP 3</span>
             <div class="font-bold text-amber-400">Docket Auto-Print</div>
-            <p class="text-slate-400 text-[11px] mt-1">Stall #42 Android tablet receives push and Bluetooth prints 58mm prep ticket.</p>
+            <p class="text-slate-400 text-[11px] mt-1">Hub florist tablet receives push and Bluetooth prints 58mm prep ticket.</p>
           </div>
-          <div class="p-3 rounded-lg bg-slate-900 border border-dark-border relative">
+          <div class="p-3.5 rounded-xl bg-slate-900 border border-dark-border relative">
             <span class="font-mono text-slate-500 block mb-1">STEP 4</span>
             <div class="font-bold text-cyan-400">Sensor Dispatch</div>
             <p class="text-slate-400 text-[11px] mt-1">Rider accepts; Foreground GPS streams bike; Accelerometer monitors box tilt.</p>
           </div>
-          <div class="p-3 rounded-lg bg-slate-900 border border-dark-border relative">
+          <div class="p-3.5 rounded-xl bg-slate-900 border border-dark-border relative">
             <span class="font-mono text-slate-500 block mb-1">STEP 5</span>
             <div class="font-bold text-purple-400">0G PIN Handshake</div>
             <p class="text-slate-400 text-[11px] mt-1">In basement garage (0G), rider app validates salted HMAC PIN locally with 0ms lag.</p>
           </div>
-          <div class="p-3 rounded-lg bg-slate-900 border border-brand-500/40 bg-brand-500/5 relative">
+          <div class="p-3.5 rounded-xl bg-slate-900 border border-brand-500/40 bg-brand-500/5 relative">
             <span class="font-mono text-brand-400 block mb-1">STEP 6</span>
             <div class="font-bold text-white">Ledger Settlement</div>
             <p class="text-slate-400 text-[11px] mt-1">Proof syncs; Ledger debits Escrow and credits Florist, Courier, and Platform.</p>
@@ -381,105 +415,71 @@
     </section>
 
     <!-- ========================================== -->
-    <!-- SECTION 3: NAIROBI LOCATION ENGINE         -->
+    <!-- SECTION 3: KENYA LOCATION ENGINE           -->
     <!-- ========================================== -->
-    <section id="view-location" class="view-panel hidden space-y-8">
+    <section id="view-location" class="view-panel hidden space-y-6 sm:space-y-8">
       <div>
         <div class="flex items-center space-x-2 text-brand-400 text-xs font-mono uppercase tracking-wider">
           <i data-lucide="map-pin" class="w-4 h-4"></i>
-          <span>Sub-Millisecond Geofencing Engine</span>
+          <span>Nationwide Geofencing & Routing Engine</span>
         </div>
-        <h1 class="text-2xl font-bold text-white mt-1">Nairobi Serviceability & Dynamic Pricing</h1>
-        <p class="text-slate-400 text-sm mt-1 max-w-3xl">
-          Location is the central thesis. Test how the backend evaluates GPS coordinates against operational PostGIS polygons and Uber H3 hexagonal indices.
+        <h1 class="text-xl sm:text-2xl font-bold text-white mt-1">Kenya Multi-City Serviceability & Dynamic Pricing</h1>
+        <p class="text-slate-400 text-xs sm:text-sm mt-1 max-w-3xl leading-relaxed">
+          Location is the central thesis. Select a Kenyan city and zone below to test how the backend evaluates GPS coordinates against operational PostGIS polygons and cold-chain constraints.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <!-- City Switcher Pills -->
+      <div class="flex items-center space-x-2 overflow-x-auto pb-1 scroll-touch">
+        <span class="text-xs font-mono text-slate-400 uppercase mr-1 shrink-0">Select City:</span>
+        <button onclick="switchCity('nairobi')" id="city-btn-nairobi" class="city-btn active px-4 py-2 rounded-xl text-xs font-mono font-bold transition bg-brand-500 text-slate-950 shrink-0 touch-target">
+          Nairobi Metro Hub
+        </button>
+        <button onclick="switchCity('mombasa')" id="city-btn-mombasa" class="city-btn px-4 py-2 rounded-xl text-xs font-mono font-bold transition bg-slate-800 text-slate-300 hover:text-white shrink-0 touch-target">
+          Mombasa Coastal Hub
+        </button>
+        <button onclick="switchCity('nakuru')" id="city-btn-nakuru" class="city-btn px-4 py-2 rounded-xl text-xs font-mono font-bold transition bg-slate-800 text-slate-300 hover:text-white shrink-0 touch-target">
+          Nakuru Rift Hub
+        </button>
+        <button onclick="switchCity('naivasha')" id="city-btn-naivasha" class="city-btn px-4 py-2 rounded-xl text-xs font-mono font-bold transition bg-slate-800 text-slate-300 hover:text-white shrink-0 touch-target">
+          Lake Naivasha Farm Gate
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <!-- Interactive Map Selector Panel -->
-        <div class="lg:col-span-7 glass-card rounded-2xl p-6">
+        <div class="lg:col-span-7 glass-card rounded-2xl p-5 sm:p-6">
           <div class="flex items-center justify-between mb-4">
-            <h3 class="text-sm font-bold text-white flex items-center space-x-2">
+            <h3 class="text-xs sm:text-sm font-bold text-white flex items-center space-x-2">
               <i data-lucide="compass" class="w-4 h-4 text-brand-400"></i>
-              <span>Select a Nairobi Delivery Zone</span>
+              <span id="zone-selector-heading">Select a Nairobi Delivery Zone</span>
             </h3>
-            <span class="text-[11px] font-mono text-slate-400">PostGIS Coordinates: City Market (-1.2841, 36.8219)</span>
+            <span id="zone-coords-info" class="text-[10px] sm:text-[11px] font-mono text-slate-400 truncate">Hub: City Market (-1.2841, 36.8219)</span>
           </div>
 
-          <!-- Interactive Zone Grid -->
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            <button onclick="selectZone('CBD')" id="zone-btn-CBD" class="zone-btn p-3 rounded-xl border border-brand-500/50 bg-brand-500/10 text-left transition hover:border-brand-400">
-              <div class="flex items-center justify-between">
-                <span class="font-bold text-white text-xs">Nairobi CBD</span>
-                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-              </div>
-              <p class="text-[11px] text-slate-400 mt-1">Core Zone 1 (0–2 km)</p>
-              <div class="mt-2 text-xs font-mono font-bold text-brand-400">Fee: KSh 200.00</div>
-            </button>
-
-            <button onclick="selectZone('WESTLANDS')" id="zone-btn-WESTLANDS" class="zone-btn p-3 rounded-xl border border-dark-border bg-slate-900/60 text-left transition hover:border-brand-400">
-              <div class="flex items-center justify-between">
-                <span class="font-bold text-white text-xs">Westlands</span>
-                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-              </div>
-              <p class="text-[11px] text-slate-400 mt-1">Zone 2 (3–5 km)</p>
-              <div class="mt-2 text-xs font-mono font-bold text-brand-400">Fee: KSh 350.00</div>
-            </button>
-
-            <button onclick="selectZone('KILIMANI')" id="zone-btn-KILIMANI" class="zone-btn p-3 rounded-xl border border-dark-border bg-slate-900/60 text-left transition hover:border-brand-400">
-              <div class="flex items-center justify-between">
-                <span class="font-bold text-white text-xs">Kilimani / Kileleshwa</span>
-                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-              </div>
-              <p class="text-[11px] text-slate-400 mt-1">Zone 2 (4–6 km)</p>
-              <div class="mt-2 text-xs font-mono font-bold text-brand-400">Fee: KSh 380.00</div>
-            </button>
-
-            <button onclick="selectZone('UPPERHILL')" id="zone-btn-UPPERHILL" class="zone-btn p-3 rounded-xl border border-dark-border bg-slate-900/60 text-left transition hover:border-brand-400">
-              <div class="flex items-center justify-between">
-                <span class="font-bold text-white text-xs">Upper Hill</span>
-                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-              </div>
-              <p class="text-[11px] text-slate-400 mt-1">Zone 1 Extended (2–3 km)</p>
-              <div class="mt-2 text-xs font-mono font-bold text-brand-400">Fee: KSh 280.00</div>
-            </button>
-
-            <button onclick="selectZone('KAREN')" id="zone-btn-KAREN" class="zone-btn p-3 rounded-xl border border-dark-border bg-slate-900/60 text-left transition hover:border-brand-400">
-              <div class="flex items-center justify-between">
-                <span class="font-bold text-white text-xs">Karen & Lang'ata</span>
-                <span class="w-2 h-2 rounded-full bg-amber-400"></span>
-              </div>
-              <p class="text-[11px] text-slate-400 mt-1">Zone 3 Corridor (14–18 km)</p>
-              <div class="mt-2 text-xs font-mono font-bold text-brand-400">Fee: KSh 650.00</div>
-            </button>
-
-            <button onclick="selectZone('OUT_OF_SERVICE')" id="zone-btn-OUT_OF_SERVICE" class="zone-btn p-3 rounded-xl border border-red-500/20 bg-red-500/5 text-left transition hover:border-red-400">
-              <div class="flex items-center justify-between">
-                <span class="font-bold text-red-400 text-xs">Rongai / Thika</span>
-                <span class="w-2 h-2 rounded-full bg-red-500"></span>
-              </div>
-              <p class="text-[11px] text-slate-400 mt-1">Outside Boundary (&gt;25 km)</p>
-              <div class="mt-2 text-xs font-mono font-bold text-red-400">UNSERVICEABLE</div>
-            </button>
+          <!-- Dynamic Zone Grid Container -->
+          <div id="city-zones-container" class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3">
+            <!-- Dynamically populated via JS -->
           </div>
 
           <!-- Dynamic Zone Details Display -->
-          <div class="mt-6 p-4 rounded-xl bg-slate-950/80 border border-dark-border font-mono text-xs">
+          <div class="mt-5 p-4 rounded-xl bg-slate-950/80 border border-dark-border font-mono text-xs">
             <div class="flex items-center justify-between text-slate-400 border-b border-dark-border pb-2 mb-3">
               <span>SQL QUERY EXECUTION:</span>
-              <span class="text-cyan-400">ST_Contains(boundary, ST_SetSRID(Point, 4326))</span>
+              <span class="text-cyan-400 text-[11px] truncate">ST_Contains(boundary, ST_SetSRID(Point, 4326))</span>
             </div>
-            <div class="space-y-1.5 text-slate-300">
+            <div class="space-y-1.5 text-slate-300 text-xs">
               <div>Zone Code: <span id="loc-code" class="text-brand-400 font-bold">ZONE_1_CBD</span></div>
               <div>Estimated Transit ETA: <span id="loc-eta" class="text-white font-bold">18 – 25 Minutes</span></div>
-              <div>Road Distance from Stall #42: <span id="loc-dist" class="text-white">1.8 km</span></div>
+              <div>Transit Mode: <span id="loc-mode" class="text-cyan-400 font-bold">Upright Electric Boda Boda</span></div>
+              <div>Distance from Origin Hub: <span id="loc-dist" class="text-white">1.8 km</span></div>
               <div>H3 Hexagon Resolution 8: <span id="loc-h3" class="text-slate-400">887a469619fffff</span></div>
             </div>
           </div>
         </div>
 
         <!-- Live Price & Serviceability Calculation Output -->
-        <div class="lg:col-span-5 glass-card-active rounded-2xl p-6 flex flex-col justify-between">
+        <div class="lg:col-span-5 glass-card-active rounded-2xl p-5 sm:p-6 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-4">
               <span class="text-xs font-mono uppercase tracking-wider text-slate-400">Serviceability Result</span>
@@ -489,7 +489,7 @@
             <div class="space-y-4">
               <div>
                 <span class="text-xs text-slate-400">Selected Destination</span>
-                <h2 id="service-title" class="text-xl font-bold text-white">Nairobi Central Business District</h2>
+                <h2 id="service-title" class="text-lg sm:text-xl font-bold text-white">Nairobi Central Business District</h2>
                 <p id="service-desc" class="text-xs text-slate-300 mt-1">Immediate dispatch corridor servicing City Market, Kenyatta Ave, and Mama Ngina St.</p>
               </div>
 
@@ -504,8 +504,8 @@
                   <span id="calc-dist" class="text-white">KSh 50.00</span>
                 </div>
                 <div class="flex justify-between text-slate-400">
-                  <span>Rush Hour / Traffic Multiplier:</span>
-                  <span id="calc-traffic" class="text-white">1.00x</span>
+                  <span>Cold-Chain Packaging / Surcharge:</span>
+                  <span id="calc-traffic" class="text-white">KSh 0.00</span>
                 </div>
                 <div class="border-t border-dark-border pt-2 flex justify-between font-bold text-sm">
                   <span class="text-brand-400">Total Delivery Fee:</span>
@@ -520,13 +520,13 @@
                   <span>Location Outside Cold-Chain Coverage</span>
                 </div>
                 <p class="text-[11px] leading-relaxed">
-                  Cut flowers dehydrate in equatorial ambient temperatures beyond our 75-minute cold-chain radius. Senders can pick an alternative CBD/Westlands office address or join our expansion waitlist.
+                  Cut flowers dehydrate in equatorial ambient temperatures beyond our maximum cold-chain transit radius. Senders can pick an alternative supported hub address or register for our next expansion batch.
                 </p>
               </div>
             </div>
           </div>
 
-          <div class="pt-6 border-t border-dark-border flex items-center justify-between text-[11px] font-mono text-slate-400">
+          <div class="pt-5 mt-4 border-t border-dark-border flex items-center justify-between text-[11px] font-mono text-slate-400">
             <span>Spatial Query Latency: &lt;0.4ms</span>
             <span class="text-brand-400">In-Memory Redis Cache</span>
           </div>
@@ -537,24 +537,24 @@
     <!-- ========================================== -->
     <!-- SECTION 4: COURIER SENSOR TELEMETRY        -->
     <!-- ========================================== -->
-    <section id="view-sensors" class="view-panel hidden space-y-8">
+    <section id="view-sensors" class="view-panel hidden space-y-6 sm:space-y-8">
       <div>
         <div class="flex items-center space-x-2 text-brand-400 text-xs font-mono uppercase tracking-wider">
           <i data-lucide="activity" class="w-4 h-4"></i>
           <span>Native Android Physical Intelligence</span>
         </div>
-        <h1 class="text-2xl font-bold text-white mt-1">Courier Telemetry: Tilt, Drop & 0G PIN</h1>
-        <p class="text-slate-400 text-sm mt-1 max-w-3xl">
+        <h1 class="text-xl sm:text-2xl font-bold text-white mt-1">Courier Telemetry: Tilt, Drop & 0G PIN</h1>
+        <p class="text-slate-400 text-xs sm:text-sm mt-1 max-w-3xl leading-relaxed">
           Delivery execution is app-based because smartphones track physical reality. Test how our native courier app uses the accelerometer, gyroscope, and offline cryptographic proofs.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
         
         <!-- SENSOR 1: 3-AXIS ACCELEROMETER TILT -->
-        <div class="glass-card rounded-2xl p-6 flex flex-col justify-between">
+        <div class="glass-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between">
           <div>
-            <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center justify-between mb-3">
               <span class="text-xs font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">Gyro & Tilt Sensor</span>
               <i data-lucide="compass" class="w-5 h-5 text-amber-400"></i>
             </div>
@@ -568,7 +568,7 @@
                   <span class="text-slate-400">Simulate Box Tilt:</span>
                   <span id="tilt-value" class="text-brand-400 font-bold">12° (SAFE)</span>
                 </div>
-                <input type="range" min="0" max="90" value="12" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-brand-500" id="tilt-slider" oninput="updateTilt(this.value)">
+                <input type="range" min="0" max="90" value="12" class="w-full h-3 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-brand-500 touch-target" id="tilt-slider" oninput="updateTilt(this.value)">
               </div>
 
               <!-- Visual Tilt Gauge Box -->
@@ -586,14 +586,14 @@
         </div>
 
         <!-- SENSOR 2: POTHOLE DROP IMPACT -->
-        <div class="glass-card rounded-2xl p-6 flex flex-col justify-between">
+        <div class="glass-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between">
           <div>
-            <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center justify-between mb-3">
               <span class="text-xs font-mono text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">Accelerometer G-Force</span>
               <i data-lucide="zap" class="w-5 h-5 text-cyan-400"></i>
             </div>
             <h3 class="text-base font-bold text-white">Pothole Impact Detection</h3>
-            <p class="text-xs text-slate-400 mt-1 mb-4">Nairobi roads have sudden potholes. Sharp impacts &gt;2.5G trigger an automated quality re-check.</p>
+            <p class="text-xs text-slate-400 mt-1 mb-4">Roads have sudden potholes. Sharp impacts &gt;2.5G trigger an automated quality camera re-check.</p>
 
             <div class="space-y-4">
               <div class="p-4 rounded-xl bg-slate-900 border border-dark-border text-center">
@@ -603,8 +603,8 @@
               </div>
 
               <div class="grid grid-cols-2 gap-2 text-xs font-mono">
-                <button onclick="simulateBump('smooth')" class="p-2 rounded bg-slate-800 hover:bg-slate-700 text-slate-300">Smooth Road (1.1G)</button>
-                <button onclick="simulateBump('pothole')" class="p-2 rounded bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30">Pothole Bump (3.4G)</button>
+                <button onclick="simulateBump('smooth')" class="p-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 touch-target flex items-center justify-center">Smooth Road (1.1G)</button>
+                <button onclick="simulateBump('pothole')" class="p-3 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 touch-target flex items-center justify-center">Pothole Bump (3.4G)</button>
               </div>
             </div>
           </div>
@@ -614,9 +614,9 @@
         </div>
 
         <!-- SENSOR 3: 0G OFFLINE PIN HANDSHAKE -->
-        <div class="glass-card-active rounded-2xl p-6 flex flex-col justify-between">
+        <div class="glass-card-active rounded-2xl p-5 sm:p-6 flex flex-col justify-between">
           <div>
-            <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center justify-between mb-3">
               <span class="text-xs font-mono text-brand-400 bg-brand-500/10 px-2 py-0.5 rounded border border-brand-500/20">0G Offline Crypto</span>
               <i data-lucide="shield" class="w-5 h-5 text-brand-400"></i>
             </div>
@@ -631,8 +631,8 @@
               </div>
 
               <div class="flex space-x-2">
-                <input type="text" id="offline-pin-input" placeholder="Enter PIN (4821)" class="w-full px-3 py-2 bg-slate-900 border border-dark-border rounded text-white text-xs font-mono focus:outline-none focus:border-brand-500" value="4821">
-                <button onclick="verifyOfflinePin()" class="px-3 py-2 bg-brand-500 text-slate-950 font-bold rounded hover:bg-brand-400 transition">Verify</button>
+                <input type="text" id="offline-pin-input" placeholder="PIN (4821)" class="w-full px-3 py-2.5 bg-slate-900 border border-dark-border rounded-lg text-white text-xs font-mono focus:outline-none focus:border-brand-500 touch-target" value="4821">
+                <button onclick="verifyOfflinePin()" class="px-4 py-2.5 bg-brand-500 text-slate-950 font-bold rounded-lg hover:bg-brand-400 transition touch-target shrink-0">Verify</button>
               </div>
 
               <div id="offline-result" class="p-2.5 rounded bg-brand-500/10 border border-brand-500/20 text-brand-400 text-[11px] font-mono">
@@ -650,28 +650,28 @@
     <!-- ========================================== -->
     <!-- SECTION 5: DOUBLE-ENTRY FINTECH ESCROW     -->
     <!-- ========================================== -->
-    <section id="view-ledger" class="view-panel hidden space-y-8">
+    <section id="view-ledger" class="view-panel hidden space-y-6 sm:space-y-8">
       <div>
         <div class="flex items-center space-x-2 text-brand-400 text-xs font-mono uppercase tracking-wider">
           <i data-lucide="receipt" class="w-4 h-4"></i>
           <span>Immutable Financial State Machine</span>
         </div>
-        <h1 class="text-2xl font-bold text-white mt-1">Double-Entry Ledger & Escrow Simulation</h1>
-        <p class="text-slate-400 text-sm mt-1 max-w-3xl">
+        <h1 class="text-xl sm:text-2xl font-bold text-white mt-1">Double-Entry Ledger & Escrow Simulation</h1>
+        <p class="text-slate-400 text-xs sm:text-sm mt-1 max-w-3xl leading-relaxed">
           The authoritative ledger lives strictly in the central PostgreSQL database. Every transaction enforces the mathematical zero-sum invariant: $\sum \text{Debits} - \sum \text{Credits} \equiv \text{KSh } 0.00$.
         </p>
       </div>
 
       <!-- Live Transaction Simulator -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
         <!-- Control Trigger Panel -->
-        <div class="lg:col-span-5 glass-card rounded-2xl p-6 flex flex-col justify-between">
+        <div class="lg:col-span-5 glass-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between">
           <div>
             <h3 class="text-base font-bold text-white mb-2">Simulate an M-Pesa Order Transaction</h3>
-            <p class="text-xs text-slate-400 mb-6">Click the lifecycle stages to watch the ledger post balanced journal entries across Escrow, Florist, Courier, and Platform accounts.</p>
+            <p class="text-xs text-slate-400 mb-5">Click the lifecycle stages to watch the ledger post balanced journal entries across Escrow, Florist, Courier, and Platform accounts.</p>
 
             <div class="space-y-3 font-mono text-xs">
-              <button onclick="stepLedger(1)" id="btn-ledger-1" class="w-full p-3 rounded-xl border border-brand-500/40 bg-brand-500/10 text-left transition flex items-center justify-between">
+              <button onclick="stepLedger(1)" id="btn-ledger-1" class="w-full p-3.5 rounded-xl border border-brand-500/40 bg-brand-500/10 text-left transition flex items-center justify-between touch-target">
                 <div>
                   <div class="font-bold text-white">1. Customer Pays via Lipa na M-Pesa</div>
                   <div class="text-[11px] text-slate-400 mt-0.5">Locks KSh 3,850 in Escrow Account</div>
@@ -679,7 +679,7 @@
                 <i data-lucide="arrow-right" class="w-4 h-4 text-brand-400"></i>
               </button>
 
-              <button onclick="stepLedger(2)" id="btn-ledger-2" class="w-full p-3 rounded-xl border border-dark-border bg-slate-900/60 text-left transition flex items-center justify-between">
+              <button onclick="stepLedger(2)" id="btn-ledger-2" class="w-full p-3.5 rounded-xl border border-dark-border bg-slate-900/60 text-left transition flex items-center justify-between touch-target">
                 <div>
                   <div class="font-bold text-white">2. Delivery Complete & Handshake Verified</div>
                   <div class="text-[11px] text-slate-400 mt-0.5">PIN authenticated; Escrow unlocked</div>
@@ -687,7 +687,7 @@
                 <i data-lucide="lock" class="w-4 h-4 text-slate-500"></i>
               </button>
 
-              <button onclick="stepLedger(3)" id="btn-ledger-3" class="w-full p-3 rounded-xl border border-dark-border bg-slate-900/60 text-left transition flex items-center justify-between">
+              <button onclick="stepLedger(3)" id="btn-ledger-3" class="w-full p-3.5 rounded-xl border border-dark-border bg-slate-900/60 text-left transition flex items-center justify-between touch-target">
                 <div>
                   <div class="font-bold text-white">3. Automated Split Disbursements</div>
                   <div class="text-[11px] text-slate-400 mt-0.5">Safaricom B2C pushes to Florist & Courier</div>
@@ -703,22 +703,28 @@
               <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
               <span class="text-slate-300">Invariant Check:</span>
             </div>
-            <span class="font-bold text-brand-400 text-sm">Δ = KSh 0.00 (BALANCED)</span>
+            <span class="font-bold text-brand-400 text-xs sm:text-sm">Δ = KSh 0.00 (BALANCED)</span>
           </div>
         </div>
 
         <!-- Live Journal Ledger Table -->
-        <div class="lg:col-span-7 glass-card-active rounded-2xl p-6">
+        <div class="lg:col-span-7 glass-card-active rounded-2xl p-5 sm:p-6">
           <div class="flex items-center justify-between mb-4">
-            <h3 class="text-sm font-bold text-white font-mono flex items-center space-x-2">
+            <h3 class="text-xs sm:text-sm font-bold text-white font-mono flex items-center space-x-2">
               <i data-lucide="table" class="w-4 h-4 text-brand-400"></i>
               <span>Live Journal Entries (Cloud SQL PostgreSQL 16)</span>
             </h3>
-            <span class="text-xs font-mono text-slate-400">Table: ledger_journal_entries</span>
+            <span class="text-[11px] font-mono text-slate-400 hidden sm:inline">Table: ledger_journal_entries</span>
           </div>
 
-          <div class="overflow-x-auto">
-            <table class="w-full text-left font-mono text-xs">
+          <!-- Mobile swipe indicator -->
+          <div class="sm:hidden text-[10px] text-slate-400 font-mono mb-2 flex items-center space-x-1">
+            <i data-lucide="chevrons-right" class="w-3.5 h-3.5 text-brand-400"></i>
+            <span>Swipe horizontally on table to view full entries</span>
+          </div>
+
+          <div class="overflow-x-auto scroll-touch -mx-2 sm:mx-0 px-2 sm:px-0">
+            <table class="w-full text-left font-mono text-xs min-w-[500px]">
               <thead class="border-b border-dark-border text-slate-400 pb-2">
                 <tr>
                   <th class="py-2">Account Name</th>
@@ -733,9 +739,9 @@
             </table>
           </div>
 
-          <div class="mt-4 pt-3 border-t border-dark-border flex justify-between text-xs font-mono font-bold">
-            <span class="text-slate-400">TOTAL SUMS:</span>
-            <div class="space-x-6 text-brand-400">
+          <div class="mt-4 pt-3 border-t border-dark-border flex flex-col sm:flex-row justify-between text-xs font-mono font-bold gap-2">
+            <span class="text-slate-400">TOTAL JOURNAL BALANCE:</span>
+            <div class="flex space-x-4 text-brand-400">
               <span id="sum-debits">Debits: KSh 3,850.00</span>
               <span id="sum-credits">Credits: KSh 3,850.00</span>
             </div>
@@ -745,172 +751,337 @@
     </section>
 
     <!-- ========================================== -->
-    <!-- SECTION 6: SOLO FOUNDER (ME) AI MODEL      -->
+    <!-- SECTION 6: SOLO FOUNDER & CLOUD OPEX MODEL -->
     <!-- ========================================== -->
-    <section id="view-founder" class="view-panel hidden space-y-8">
+    <section id="view-founder" class="view-panel hidden space-y-6 sm:space-y-8">
       <div>
         <div class="flex items-center space-x-2 text-amber-400 text-xs font-mono uppercase tracking-wider">
           <i data-lucide="sparkles" class="w-4 h-4"></i>
-          <span>Hyper-Lean Capital Efficiency</span>
+          <span>Hyper-Lean Capital Efficiency & Infrastructure Reality</span>
         </div>
-        <h1 class="text-2xl font-bold text-white mt-1">Solo Founder (Me) + Multi-AI Subscription Model</h1>
-        <p class="text-slate-400 text-sm mt-1 max-w-3xl">
-          Building as a solo founder (Me) with active AI subscriptions eliminates 100% of human contractor coordination tax, compressing software build costs by 99.2% to 99.6%.
+        <h1 class="text-xl sm:text-2xl font-bold text-white mt-1">Solo Founder (Me) + Real-World Cloud & API Model</h1>
+        <p class="text-slate-400 text-xs sm:text-sm mt-1 max-w-3xl leading-relaxed">
+          Building as a solo founder (Me) with active AI subscriptions eliminates 100% of human contractor coordination tax. However, running a live 24/7 central cloud backend and third-party telecom APIs incurs real costs. Here is the transparent breakdown.
         </p>
       </div>
 
-      <!-- 4-Way Comparison Table -->
-      <div class="glass-card rounded-2xl overflow-hidden border border-dark-border">
-        <div class="p-6 border-b border-dark-border bg-slate-900/60">
-          <h3 class="text-base font-bold text-white">Software Engineering Capital Comparison</h3>
-          <p class="text-xs text-slate-400 mt-1">Traditional 5-Contractor Agency vs 2-Person AI Team vs Solo Founder (Me) AI Options</p>
+      <!-- PART A: STARTING CAPITAL VS SEED ROUND CARD -->
+      <div class="glass-card rounded-2xl p-5 sm:p-6 border-l-4 border-l-amber-500">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
+          <div>
+            <span class="text-xs font-mono text-amber-400 uppercase">Pre-Seed Bootstrapping Reserve</span>
+            <h3 class="text-lg font-bold text-white mt-0.5">Starting Capital (KSh 285,000) vs Seed Round (KSh 5,000,000)</h3>
+          </div>
+          <span class="px-3 py-1 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20 text-xs font-mono font-bold">
+            Phase 1 Pilot Float
+          </span>
+        </div>
+        <p class="text-xs text-slate-300 leading-relaxed font-sans mb-4">
+          We do not start by spending venture capital. The solo founder (Me) funds the <strong>KSh 285,000 (~$2,200 USD) Starting Capital</strong> to launch the initial live pilot with City Market Stalls #42 and #43 before raising the KSh 5M institutional seed round:
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-5 gap-3 text-xs font-mono">
+          <div class="p-3.5 rounded-xl bg-slate-900 border border-dark-border">
+            <span class="text-slate-400 block text-[10px]">BOX PROTOTYPES</span>
+            <div class="text-base font-bold text-amber-400 mt-1">KSh 95,000</div>
+            <p class="text-slate-400 font-sans text-[11px] mt-1">5 Upright cold motorbike boxes with water tube racks.</p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-900 border border-dark-border">
+            <span class="text-slate-400 block text-[10px]">FLORIST HARDWARE</span>
+            <div class="text-base font-bold text-white mt-1">KSh 60,000</div>
+            <p class="text-slate-400 font-sans text-[11px] mt-1">2 Android tablets & 58mm thermal printers for Stalls #42 & #43.</p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-900 border border-dark-border">
+            <span class="text-slate-400 block text-[10px]">DARAJA FLOAT</span>
+            <div class="text-base font-bold text-brand-400 mt-1">KSh 50,000</div>
+            <p class="text-slate-400 font-sans text-[11px] mt-1">Safaricom B2C escrow float & production Paybill activation.</p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-900 border border-dark-border">
+            <span class="text-slate-400 block text-[10px]">LEGAL & LICENSES</span>
+            <div class="text-base font-bold text-white mt-1">KSh 45,000</div>
+            <p class="text-slate-400 font-sans text-[11px] mt-1">Business registration, county trade permits, packaging samples.</p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-brand-500/10 border border-brand-500/40">
+            <span class="text-brand-400 block text-[10px] font-bold">CLOUD & APIS</span>
+            <div class="text-base font-bold text-brand-400 mt-1">KSh 35,000</div>
+            <p class="text-slate-300 font-sans text-[11px] mt-1">3-Month net GCP server & API reserve after trial credits.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PART B: REAL-WORLD CLOUD & THIRD-PARTY API OPERATIONAL COSTS -->
+      <div class="glass-card-active rounded-2xl p-5 sm:p-6">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
+          <div>
+            <div class="flex items-center space-x-2 text-cyan-400 text-xs font-mono uppercase">
+              <i data-lucide="server" class="w-4 h-4"></i>
+              <span>Production Reality</span>
+            </div>
+            <h3 class="text-base sm:text-lg font-bold text-white mt-0.5">Real-World Cloud & API Operational Cost Matrix</h3>
+            <p class="text-xs text-slate-400 mt-0.5">Itemized monthly running costs for central cloud backend and third-party APIs (at ~1,500 – 3,000 orders/mo)</p>
+          </div>
+          <div class="bg-cyan-500/10 border border-cyan-500/30 px-3 py-1.5 rounded-xl text-cyan-300 text-xs font-mono">
+            First 90 Days: Covered by $300 GCP Credit
+          </div>
         </div>
 
-        <div class="overflow-x-auto">
-          <table class="w-full text-left font-mono text-xs">
+        <!-- Mobile swipe indicator -->
+        <div class="sm:hidden text-[10px] text-slate-400 font-mono mb-2 flex items-center space-x-1">
+          <i data-lucide="chevrons-right" class="w-3.5 h-3.5 text-cyan-400"></i>
+          <span>Swipe horizontally to view full cost breakdown</span>
+        </div>
+
+        <div class="overflow-x-auto scroll-touch -mx-2 sm:mx-0 px-2 sm:px-0">
+          <table class="w-full text-left font-mono text-xs min-w-[560px]">
             <thead class="bg-slate-950/80 text-slate-400 border-b border-dark-border">
               <tr>
-                <th class="p-4">Cost Dimension</th>
-                <th class="p-4">Traditional Agency</th>
-                <th class="p-4">2-Person AI Team</th>
-                <th class="p-4 bg-brand-500/10 text-brand-400 font-bold">Solo (Me) + Gemini Pro</th>
-                <th class="p-4 bg-cyan-500/10 text-cyan-400 font-bold">Solo (Me) + Dual/All-Star AI</th>
+                <th class="p-3">Infrastructure Service</th>
+                <th class="p-3">Provider / Specification</th>
+                <th class="p-3 text-right">USD ($)</th>
+                <th class="p-3 text-right">KES (KSh)</th>
+                <th class="p-3">Cost Recovery Model</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-dark-border text-slate-300">
               <tr>
-                <td class="p-4 font-sans font-medium text-white">Engineering Labor</td>
-                <td class="p-4 text-slate-400">KSh 1,660,000 (~$12.8k)</td>
-                <td class="p-4 text-slate-400">KSh 580,000 (~$4.5k)</td>
-                <td class="p-4 bg-brand-500/5 font-bold text-brand-400">KSh 0.00 (Equity)</td>
-                <td class="p-4 bg-cyan-500/5 font-bold text-cyan-400">KSh 0.00 (Equity)</td>
+                <td class="p-3 font-sans font-medium text-white flex items-center space-x-2">
+                  <i data-lucide="database" class="w-4 h-4 text-cyan-400 shrink-0"></i>
+                  <span>Cloud SQL PostgreSQL 16</span>
+                </td>
+                <td class="p-3 text-slate-400">1 vCPU, 3.75GB RAM, 20GB SSD, HA backups</td>
+                <td class="p-3 text-right text-slate-300">$62.00</td>
+                <td class="p-3 text-right font-bold text-cyan-400">KSh 8,060</td>
+                <td class="p-3 text-slate-400 font-sans text-[11px]">Core ledger & PostGIS boundary store</td>
               </tr>
               <tr>
-                <td class="p-4 font-sans font-medium text-white">AI Subscriptions (2 Mo)</td>
-                <td class="p-4 text-slate-400">KSh 0.00</td>
-                <td class="p-4 text-slate-400">KSh 5,200 ($40)</td>
-                <td class="p-4 bg-brand-500/5 font-bold text-white">KSh 5,200 ($19.99/mo)</td>
-                <td class="p-4 bg-cyan-500/5 font-bold text-white">KSh 10,400 – 13,000 ($80-$100)</td>
+                <td class="p-3 font-sans font-medium text-white flex items-center space-x-2">
+                  <i data-lucide="cpu" class="w-4 h-4 text-cyan-400 shrink-0"></i>
+                  <span>Memorystore Redis 7</span>
+                </td>
+                <td class="p-3 text-slate-400">1 GB In-memory cache & Pub/Sub cluster</td>
+                <td class="p-3 text-right text-slate-300">$30.00</td>
+                <td class="p-3 text-right font-bold text-cyan-400">KSh 3,900</td>
+                <td class="p-3 text-slate-400 font-sans text-[11px]">Sub-ms bike geohash & token rate limiting</td>
               </tr>
               <tr>
-                <td class="p-4 font-sans font-medium text-white">Cloud Dev & Testing</td>
-                <td class="p-4 text-slate-400">KSh 60,000</td>
-                <td class="p-4 text-slate-400">KSh 0 (GCP Trial)</td>
-                <td class="p-4 bg-brand-500/5 font-bold text-white">KSh 0 (Docker + GCP Trial)</td>
-                <td class="p-4 bg-cyan-500/5 font-bold text-white">KSh 0 (Docker + GCP Trial)</td>
+                <td class="p-3 font-sans font-medium text-white flex items-center space-x-2">
+                  <i data-lucide="box" class="w-4 h-4 text-cyan-400 shrink-0"></i>
+                  <span>Cloud Run (Serverless API)</span>
+                </td>
+                <td class="p-3 text-slate-400">Fastify Node.js monolith, scales to 0-10 instances</td>
+                <td class="p-3 text-right text-slate-300">$12.00</td>
+                <td class="p-3 text-right font-bold text-cyan-400">KSh 1,560</td>
+                <td class="p-3 text-slate-400 font-sans text-[11px]">Autoscaling compute (pay-per-request)</td>
               </tr>
               <tr>
-                <td class="p-4 font-sans font-medium text-white">Telecom Sandboxes</td>
-                <td class="p-4 text-slate-400">KSh 0 (Free)</td>
-                <td class="p-4 text-slate-400">KSh 0 (Free)</td>
-                <td class="p-4 bg-brand-500/5 font-bold text-white">KSh 0 (Free Portals)</td>
-                <td class="p-4 bg-cyan-500/5 font-bold text-white">KSh 0 (Free Portals)</td>
+                <td class="p-3 font-sans font-medium text-white flex items-center space-x-2">
+                  <i data-lucide="shield" class="w-4 h-4 text-cyan-400 shrink-0"></i>
+                  <span>Cloud Armor & Load Balancer</span>
+                </td>
+                <td class="p-3 text-slate-400">Global SSL termination, Anti-DDoS, WAF</td>
+                <td class="p-3 text-right text-slate-300">$18.00</td>
+                <td class="p-3 text-right font-bold text-cyan-400">KSh 2,340</td>
+                <td class="p-3 text-slate-400 font-sans text-[11px]">Protects Safaricom webhook endpoints</td>
               </tr>
               <tr>
-                <td class="p-4 font-sans font-medium text-white">Domain & TLS Cert</td>
-                <td class="p-4 text-slate-400">KSh 1,500</td>
-                <td class="p-4 text-slate-400">KSh 1,500</td>
-                <td class="p-4 bg-brand-500/5 font-bold text-white">KSh 1,500</td>
-                <td class="p-4 bg-cyan-500/5 font-bold text-white">KSh 1,500</td>
+                <td class="p-3 font-sans font-medium text-white flex items-center space-x-2">
+                  <i data-lucide="map" class="w-4 h-4 text-amber-400 shrink-0"></i>
+                  <span>Mapbox / Google Maps API</span>
+                </td>
+                <td class="p-3 text-slate-400">Geocoding & Matrix transit duration (100k free tier)</td>
+                <td class="p-3 text-right text-slate-300">$25.00</td>
+                <td class="p-3 text-right font-bold text-amber-400">KSh 3,250</td>
+                <td class="p-3 text-slate-400 font-sans text-[11px]">Traffic-aware rider dispatch calculations</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-sans font-medium text-white flex items-center space-x-2">
+                  <i data-lucide="message-square" class="w-4 h-4 text-amber-400 shrink-0"></i>
+                  <span>Africa's Talking SMS API</span>
+                </td>
+                <td class="p-3 text-slate-400">6,000 SMS @ KSh 0.80 (2 SMS per order)</td>
+                <td class="p-3 text-right text-slate-300">$37.00</td>
+                <td class="p-3 text-right font-bold text-amber-400">KSh 4,800</td>
+                <td class="p-3 text-slate-400 font-sans text-[11px]">Absorbed in KSh 35 gateway fee per order</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-sans font-medium text-white flex items-center space-x-2">
+                  <i data-lucide="phone-call" class="w-4 h-4 text-amber-400 shrink-0"></i>
+                  <span>Masked Voice VoIP Proxy</span>
+                </td>
+                <td class="p-3 text-slate-400">Africa's Talking SIP Proxy (courier-recipient privacy)</td>
+                <td class="p-3 text-right text-slate-300">$15.00</td>
+                <td class="p-3 text-right font-bold text-amber-400">KSh 1,950</td>
+                <td class="p-3 text-slate-400 font-sans text-[11px]">Preserves surprise gifting anonymity</td>
+              </tr>
+              <tr class="bg-slate-900/90 font-bold">
+                <td class="p-3 text-white font-sans">TOTAL FIXED RUN-RATE OPEX</td>
+                <td class="p-3 text-slate-400">Baseline Production Suite</td>
+                <td class="p-3 text-right text-brand-400 text-sm">$199.00 / mo</td>
+                <td class="p-3 text-right text-brand-400 text-sm font-extrabold">KSh 25,860 / mo</td>
+                <td class="p-3 text-brand-300 font-sans text-[11px]">Funded by pilot reserve / order profit</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Dynamic Delivery Volume Interactive Calculator -->
+        <div class="mt-6 pt-5 border-t border-dark-border">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+            <span class="text-xs font-mono font-bold text-white uppercase">Simulate Cloud & API Cost at Monthly Delivery Volume:</span>
+            <span id="vol-display" class="text-xs font-mono font-bold text-brand-400 bg-brand-500/10 px-3 py-1 rounded border border-brand-500/20">2,000 Deliveries / Month</span>
+          </div>
+          <input type="range" min="500" max="10000" step="500" value="2000" class="w-full h-3 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-brand-500 touch-target" id="vol-slider" oninput="updateCloudVolume(this.value)">
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4 text-xs font-mono">
+            <div class="p-3 rounded-xl bg-slate-900 border border-dark-border">
+              <span class="text-slate-400 text-[10px] block">TOTAL MONTHLY OPEX</span>
+              <span id="dyn-cost" class="text-base font-bold text-white mt-0.5 block">KSh 25,860</span>
+              <span class="text-[10px] text-slate-500">Cloud + Telecom APIs</span>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900 border border-dark-border">
+              <span class="text-slate-400 text-[10px] block">TECH OPEX PER ORDER</span>
+              <span id="dyn-per-order" class="text-base font-bold text-brand-400 mt-0.5 block">KSh 12.93</span>
+              <span class="text-[10px] text-slate-500">vs KSh 35 gateway fee</span>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900 border border-dark-border">
+              <span class="text-slate-400 text-[10px] block">DARAJA B2C PAYOUTS</span>
+              <span id="dyn-b2c" class="text-base font-bold text-cyan-400 mt-0.5 block">Self-Funded</span>
+              <span class="text-[10px] text-slate-500">KSh 15.30 fee absorbed</span>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900 border border-dark-border">
+              <span class="text-slate-400 text-[10px] block">NET PLATFORM GROSS PROFIT</span>
+              <span id="dyn-profit" class="text-base font-bold text-emerald-400 mt-0.5 block">KSh 1,190,000</span>
+              <span class="text-[10px] text-slate-500">@ KSh 595.00 / order</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PART C: 4-WAY ENGINEERING CAPITAL COMPARISON TABLE -->
+      <div class="glass-card rounded-2xl overflow-hidden border border-dark-border">
+        <div class="p-5 sm:p-6 border-b border-dark-border bg-slate-900/60">
+          <h3 class="text-base font-bold text-white">Software Engineering Capital Comparison</h3>
+          <p class="text-xs text-slate-400 mt-1">Traditional 5-Contractor Agency vs 2-Person AI Team vs Solo Founder (Me) AI Options</p>
+        </div>
+
+        <!-- Mobile swipe indicator -->
+        <div class="sm:hidden px-4 pt-2 text-[10px] text-slate-400 font-mono flex items-center space-x-1">
+          <i data-lucide="chevrons-right" class="w-3.5 h-3.5 text-brand-400"></i>
+          <span>Swipe horizontally to view full engineering matrix</span>
+        </div>
+
+        <div class="overflow-x-auto scroll-touch -mx-2 sm:mx-0 px-2 sm:px-0">
+          <table class="w-full text-left font-mono text-xs min-w-[640px]">
+            <thead class="bg-slate-950/80 text-slate-400 border-b border-dark-border">
+              <tr>
+                <th class="p-3.5">Cost Dimension</th>
+                <th class="p-3.5">Traditional Agency</th>
+                <th class="p-3.5">2-Person AI Team</th>
+                <th class="p-3.5 bg-brand-500/10 text-brand-400 font-bold">Solo (Me) + Gemini Pro</th>
+                <th class="p-3.5 bg-cyan-500/10 text-cyan-400 font-bold">Solo (Me) + Dual/All-Star AI</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-dark-border text-slate-300">
+              <tr>
+                <td class="p-3.5 font-sans font-medium text-white">Engineering Labor</td>
+                <td class="p-3.5 text-slate-400">KSh 1,660,000 (~$12.8k)</td>
+                <td class="p-3.5 text-slate-400">KSh 580,000 (~$4.5k)</td>
+                <td class="p-3.5 bg-brand-500/5 font-bold text-brand-400">KSh 0.00 (Equity)</td>
+                <td class="p-3.5 bg-cyan-500/5 font-bold text-cyan-400">KSh 0.00 (Equity)</td>
+              </tr>
+              <tr>
+                <td class="p-3.5 font-sans font-medium text-white">AI Subscriptions (2 Mo)</td>
+                <td class="p-3.5 text-slate-400">KSh 0.00</td>
+                <td class="p-3.5 text-slate-400">KSh 5,200 ($40)</td>
+                <td class="p-3.5 bg-brand-500/5 font-bold text-white">KSh 5,200 ($19.99/mo)</td>
+                <td class="p-3.5 bg-cyan-500/5 font-bold text-white">KSh 10,400 – 13,000 ($80-$100)</td>
+              </tr>
+              <tr>
+                <td class="p-3.5 font-sans font-medium text-white">Cloud Dev & Testing</td>
+                <td class="p-3.5 text-slate-400">KSh 60,000</td>
+                <td class="p-3.5 text-slate-400">KSh 0 (GCP Trial)</td>
+                <td class="p-3.5 bg-brand-500/5 font-bold text-white">KSh 0 (Docker + GCP Trial)</td>
+                <td class="p-3.5 bg-cyan-500/5 font-bold text-white">KSh 0 (Docker + GCP Trial)</td>
+              </tr>
+              <tr>
+                <td class="p-3.5 font-sans font-medium text-white">Telecom Sandboxes</td>
+                <td class="p-3.5 text-slate-400">KSh 0 (Free)</td>
+                <td class="p-3.5 text-slate-400">KSh 0 (Free)</td>
+                <td class="p-3.5 bg-brand-500/5 font-bold text-white">KSh 0 (Free Portals)</td>
+                <td class="p-3.5 bg-cyan-500/5 font-bold text-white">KSh 0 (Free Portals)</td>
+              </tr>
+              <tr>
+                <td class="p-3.5 font-sans font-medium text-white">Domain & TLS Cert</td>
+                <td class="p-3.5 text-slate-400">KSh 1,500</td>
+                <td class="p-3.5 text-slate-400">KSh 1,500</td>
+                <td class="p-3.5 bg-brand-500/5 font-bold text-white">KSh 1,500</td>
+                <td class="p-3.5 bg-cyan-500/5 font-bold text-white">KSh 1,500</td>
               </tr>
               <tr class="bg-slate-900/80 font-bold">
-                <td class="p-4 text-white font-sans">TOTAL CASH OUT-OF-POCKET</td>
-                <td class="p-4 text-red-400">KSh 1,721,500 (~$13.2k)</td>
-                <td class="p-4 text-amber-400">KSh 586,700 (~$4.5k)</td>
-                <td class="p-4 bg-brand-500/20 text-brand-400 text-sm font-extrabold">KSh 6,700 (~$50 USD)</td>
-                <td class="p-4 bg-cyan-500/20 text-cyan-400 text-sm font-extrabold">KSh 11,900 – 14,500 ($90-$110)</td>
+                <td class="p-3.5 text-white font-sans">TOTAL CASH OUT-OF-POCKET</td>
+                <td class="p-3.5 text-red-400">KSh 1,721,500 (~$13.2k)</td>
+                <td class="p-3.5 text-amber-400">KSh 586,700 (~$4.5k)</td>
+                <td class="p-3.5 bg-brand-500/20 text-brand-400 text-sm font-extrabold">KSh 6,700 (~$50 USD)</td>
+                <td class="p-3.5 bg-cyan-500/20 text-cyan-400 text-sm font-extrabold">KSh 11,900 – 14,500 ($90-$110)</td>
               </tr>
               <tr class="font-bold">
-                <td class="p-4 text-white font-sans">CAPITAL SAVINGS</td>
-                <td class="p-4 text-slate-500">Baseline (0%)</td>
-                <td class="p-4 text-slate-300">-65.9% Savings</td>
-                <td class="p-4 bg-brand-500/10 text-brand-400 text-sm font-extrabold">-99.6% Cash Savings</td>
-                <td class="p-4 bg-cyan-500/10 text-cyan-400 text-sm font-extrabold">-99.2% Cash Savings</td>
+                <td class="p-3.5 text-white font-sans">CAPITAL SAVINGS</td>
+                <td class="p-3.5 text-slate-500">Baseline (0%)</td>
+                <td class="p-3.5 text-slate-300">-65.9% Savings</td>
+                <td class="p-3.5 bg-brand-500/10 text-brand-400 text-sm font-extrabold">-99.6% Cash Savings</td>
+                <td class="p-3.5 bg-cyan-500/10 text-cyan-400 text-sm font-extrabold">-99.2% Cash Savings</td>
               </tr>
               <tr class="font-bold">
-                <td class="p-4 text-white font-sans">DELIVERY TIMELINE</td>
-                <td class="p-4 text-slate-400">56 Working Days</td>
-                <td class="p-4 text-slate-400">18 Working Days</td>
-                <td class="p-4 bg-brand-500/10 text-white font-extrabold">21 Working Days</td>
-                <td class="p-4 bg-cyan-500/10 text-white font-extrabold">18 Working Days</td>
+                <td class="p-3.5 text-white font-sans">DELIVERY TIMELINE</td>
+                <td class="p-3.5 text-slate-400">56 Working Days</td>
+                <td class="p-3.5 text-slate-400">18 Working Days</td>
+                <td class="p-3.5 bg-brand-500/10 text-white font-extrabold">21 Working Days</td>
+                <td class="p-3.5 bg-cyan-500/10 text-white font-extrabold">18 Working Days</td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <!-- Multi-Subscription Toolchain Breakdown -->
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs font-mono">
-        <div class="glass-card rounded-2xl p-5 border-t-2 border-t-brand-500">
+      <!-- PART D: MULTI-AI TOOLCHAIN FOR ME -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs font-mono">
+        <div class="glass-card rounded-2xl p-4 sm:p-5 border-t-2 border-t-brand-500">
           <div class="flex items-center justify-between mb-2">
             <span class="text-brand-400 font-bold">Google Gemini Pro</span>
             <span class="text-[11px] text-slate-400">$19.99/mo (KSh 2,600)</span>
           </div>
-          <p class="text-slate-300 font-sans text-xs">
-            <strong>Role:</strong> Principal Architect & DBA. 2M-token context ingests entire databases, PostGIS queries, and full pitch deck specs in a single prompt.
+          <p class="text-slate-300 font-sans text-xs leading-relaxed">
+            <strong>Role:</strong> Principal Architect & DBA. 2M-token context ingests entire schemas, PostGIS queries, and pitch specs in one prompt.
           </p>
         </div>
 
-        <div class="glass-card rounded-2xl p-5 border-t-2 border-t-cyan-500">
+        <div class="glass-card rounded-2xl p-4 sm:p-5 border-t-2 border-t-cyan-500">
           <div class="flex items-center justify-between mb-2">
             <span class="text-cyan-400 font-bold">Claude 3.5 Sonnet / Cursor</span>
             <span class="text-[11px] text-slate-400">$20.00/mo (KSh 2,600)</span>
           </div>
-          <p class="text-slate-300 font-sans text-xs">
-            <strong>Role:</strong> Rapid Code Synthesizer. Writes Fastify TypeScript routes, Next.js components, and Android Kotlin UI with surgical precision.
+          <p class="text-slate-300 font-sans text-xs leading-relaxed">
+            <strong>Role:</strong> Rapid Code Synthesizer. Writes Fastify TypeScript routes, Next.js components, and Kotlin Android UI with surgical precision.
           </p>
         </div>
 
-        <div class="glass-card rounded-2xl p-5 border-t-2 border-t-purple-500">
+        <div class="glass-card rounded-2xl p-4 sm:p-5 border-t-2 border-t-purple-500">
           <div class="flex items-center justify-between mb-2">
             <span class="text-purple-400 font-bold">GitHub Copilot</span>
             <span class="text-[11px] text-slate-400">$10.00/mo (KSh 1,300)</span>
           </div>
-          <p class="text-slate-300 font-sans text-xs">
+          <p class="text-slate-300 font-sans text-xs leading-relaxed">
             <strong>Role:</strong> In-IDE Autocomplete. Completes boilerplate syntax, TypeScript types, and test stubs directly inside VS Code.
           </p>
         </div>
 
-        <div class="glass-card rounded-2xl p-5 border-t-2 border-t-emerald-500">
+        <div class="glass-card rounded-2xl p-4 sm:p-5 border-t-2 border-t-emerald-500">
           <div class="flex items-center justify-between mb-2">
             <span class="text-emerald-400 font-bold">OpenAI ChatGPT Plus</span>
             <span class="text-[11px] text-slate-400">$20.00/mo (KSh 2,600)</span>
           </div>
-          <p class="text-slate-300 font-sans text-xs">
-            <strong>Role:</strong> Alternative Architecture Critic. Cross-checks security threat models, edge cases, and Swahili/Sheng language nuances.
-          </p>
-        </div>
-      </div>
-
-      <!-- Why It Works (The 3 Superpowers) -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="glass-card rounded-2xl p-6">
-          <div class="w-10 h-10 rounded-lg bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400 mb-4 font-bold">
-            1
-          </div>
-          <h4 class="text-base font-bold text-white mb-2">Zero Coordination Tax</h4>
-          <p class="text-xs text-slate-400 leading-relaxed font-sans">
-            According to Brooks' Law, adding headcount increases communication links quadratically ($n(n-1)/2$). A solo founder (Me) with AI subscriptions has 100% architectural coherence, zero PR delays, and zero merge conflicts.
-          </p>
-        </div>
-
-        <div class="glass-card rounded-2xl p-6">
-          <div class="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-4 font-bold">
-            2
-          </div>
-          <h4 class="text-base font-bold text-white mb-2">Multi-Role AI Guild</h4>
-          <p class="text-xs text-slate-400 leading-relaxed font-sans">
-            AI acts as my personal engineering guild: Senior DBA (writing triggers & schema), Senior Systems Architect (defining state machines), and Full-Stack Pair Programmer (generating Fastify, Room, and Next.js).
-          </p>
-        </div>
-
-        <div class="glass-card rounded-2xl p-6">
-          <div class="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 mb-4 font-bold">
-            3
-          </div>
-          <h4 class="text-base font-bold text-white mb-2">Maximized Investor Seed Runway</h4>
-          <p class="text-xs text-slate-400 leading-relaxed font-sans">
-            Because $0 of seed funding is wasted on agency contractors, the full KSh 5,000,000 ($38k) seed round goes directly into physical cold-chain bike carriers and merchant acquisition, extending runway to 14 months.
+          <p class="text-slate-300 font-sans text-xs leading-relaxed">
+            <strong>Role:</strong> Architecture Critic. Cross-checks security threat models, edge cases, and Swahili/Sheng language nuances.
           </p>
         </div>
       </div>
@@ -919,23 +1090,23 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="border-t border-dark-border bg-slate-950/80 py-8 text-xs text-slate-400">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+  <footer class="border-t border-dark-border bg-slate-950/80 py-6 sm:py-8 text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
       <div class="flex items-center space-x-2">
         <span class="w-2 h-2 rounded-full bg-brand-500"></span>
         <span class="font-bold text-white">CitiMarket Delivery</span>
-        <span>— Enterprise Cold-Chain Logistics & Fintech Escrow</span>
+        <span>— Kenya Cold-Chain Logistics & Fintech Escrow</span>
       </div>
-      <div class="font-mono text-slate-500">
-        Nairobi, Kenya • Muindi Mbingu St • Master Pitch Deck Spec
+      <div class="font-mono text-slate-500 text-[11px]">
+        Naivasha Farm Gate ➔ Nairobi City Market ➔ Mombasa & Nakuru
       </div>
     </div>
   </footer>
 
-  <!-- APPLICATION STATE & LOGIC -->
+  <!-- APPLICATION JAVASCRIPT STATE & LOGIC -->
   <script>
     // ==========================================
-    // 10-SLIDE INVESTOR PRESENTATION DATA (LAYMAN-ACCESSIBLE)
+    // 10-SLIDE INVESTOR PRESENTATION DATA (LAYMAN-ACCESSIBLE & NATIONWIDE)
     // ==========================================
     const SLIDES = [
       {
@@ -943,33 +1114,33 @@
         title: "Company Purpose & One-Liner",
         badge: "Slide 01 // Vision",
         content: `
-          <div class="space-y-6">
+          <div class="space-y-5 sm:space-y-6">
             <span class="text-xs uppercase tracking-wider text-brand-400 font-mono">The Hook (In Plain Words)</span>
-            <h1 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-white leading-tight">
               The precision cold-chain logistics & escrow backbone powering Africa's high-stakes gifting economy.
             </h1>
             
             <!-- Layman Explanation Box -->
-            <div class="p-4 rounded-xl bg-brand-500/10 border border-brand-500/20 text-xs text-brand-200 leading-relaxed font-sans">
+            <div class="p-4 rounded-xl bg-brand-500/10 border border-brand-500/20 text-xs sm:text-sm text-brand-200 leading-relaxed font-sans">
               <strong class="text-brand-400 font-mono uppercase block mb-1">What does this mean in simple words?</strong>
-              When someone sends fresh flowers or a special surprise gift in Nairobi, it cannot travel like a cold box of pizza. CitiMarket Delivery keeps fresh flowers upright in water tubes and cool inside specialized motorbike carriers, delivering them across Nairobi traffic in 45 minutes while holding the buyer's money safely in M-Pesa escrow until the recipient smiles and confirms delivery.
+              When someone sends fresh flowers or a special surprise gift in Kenya, it cannot travel like a cold box of pizza. CitiMarket Delivery connects Lake Naivasha farm gates directly to Nairobi City Market, and shuttles fresh blooms to Nakuru and Mombasa in refrigerated corridors—delivering within 45 minutes locally in Nairobi and same-day across inter-city hubs, while holding money safely in Safaricom M-Pesa escrow until verified.
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 max-w-3xl font-mono text-xs">
-              <div class="p-4 rounded-xl bg-slate-900 border border-dark-border">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 pt-2 max-w-3xl font-mono text-xs">
+              <div class="p-3.5 sm:p-4 rounded-xl bg-slate-900 border border-dark-border">
                 <div class="text-slate-400">Guaranteed Speed</div>
-                <div class="text-2xl font-bold text-brand-400 mt-1">45 Mins</div>
-                <div class="text-[11px] text-slate-500 mt-1">City Market to Westlands & Kilimani</div>
+                <div class="text-xl sm:text-2xl font-bold text-brand-400 mt-1">45 Mins</div>
+                <div class="text-[11px] text-slate-500 mt-1">Local Nairobi SLA; Same-Day Inter-City</div>
               </div>
-              <div class="p-4 rounded-xl bg-slate-900 border border-dark-border">
+              <div class="p-3.5 sm:p-4 rounded-xl bg-slate-900 border border-dark-border">
                 <div class="text-slate-400">Platform Take-Rate</div>
-                <div class="text-2xl font-bold text-white mt-1">35.0%</div>
-                <div class="text-[11px] text-slate-500 mt-1">Wholesale margin + Delivery fee</div>
+                <div class="text-xl sm:text-2xl font-bold text-white mt-1">35.0%</div>
+                <div class="text-[11px] text-slate-500 mt-1">Wholesale margin + Delivery markup</div>
               </div>
-              <div class="p-4 rounded-xl bg-slate-900 border border-dark-border">
+              <div class="p-3.5 sm:p-4 rounded-xl bg-slate-900 border border-dark-border">
                 <div class="text-slate-400">Ledger Balance</div>
-                <div class="text-2xl font-bold text-cyan-400 mt-1">Δ = KSh 0.00</div>
-                <div class="text-[11px] text-slate-500 mt-1">Zero money leaks or loss</div>
+                <div class="text-xl sm:text-2xl font-bold text-cyan-400 mt-1">Δ = KSh 0.00</div>
+                <div class="text-[11px] text-slate-500 mt-1">Mathematical zero-loss escrow</div>
               </div>
             </div>
           </div>
@@ -977,29 +1148,29 @@
       },
       {
         num: 2,
-        title: "The Market Problem",
+        title: "The Market Problem Across Kenya",
         badge: "Slide 02 // Problem",
         content: `
-          <div class="space-y-6">
-            <span class="text-xs uppercase tracking-wider text-red-400 font-mono">What is Broken Today in Nairobi?</span>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
-              Generic on-demand delivery apps ruin 40% of fresh bouquets and destroy the surprise factor.
+          <div class="space-y-5 sm:space-y-6">
+            <span class="text-xs uppercase tracking-wider text-red-400 font-mono">What is Broken Today Across Kenya?</span>
+            <h2 class="text-xl sm:text-3xl font-extrabold text-white leading-tight">
+              Generic on-demand delivery apps ruin 40% of fresh bouquets, and long-distance buses destroy flower stems.
             </h2>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl text-xs font-sans">
-              <div class="p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 max-w-4xl text-xs font-sans">
+              <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
                 <div class="font-bold text-white text-sm flex items-center space-x-2">
-                  <i data-lucide="alert-octagon" class="w-4 h-4 text-red-400"></i>
-                  <span>40% Physical Spoilage in Transit</span>
+                  <i data-lucide="alert-octagon" class="w-4 h-4 text-red-400 shrink-0"></i>
+                  <span>40% Transit Spoilage & Bus Damage</span>
                 </div>
                 <p class="text-slate-300 leading-relaxed">
-                  <strong>Why generic apps fail flowers:</strong> Standard delivery apps (Uber, Glovo, Bolt) were built for food and parcels. Riders squeeze bouquets flat inside dirty food boxes. Water leaks out, petals get crushed, and stems snap before reaching Westlands or Upper Hill.
+                  <strong>Why generic transit fails flowers:</strong> Standard apps (Uber, Glovo, Bolt) stuff bouquets into uninsulated food boxes. On inter-city routes (Naivasha to Mombasa or Nairobi to Nakuru), flowers travel in hot bus cargo holds without water. Stems snap, petals rot, and arrangements arrive ruined.
                 </p>
               </div>
 
-              <div class="p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
+              <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
                 <div class="font-bold text-white text-sm flex items-center space-x-2">
-                  <i data-lucide="phone-off" class="w-4 h-4 text-red-400"></i>
+                  <i data-lucide="phone-off" class="w-4 h-4 text-red-400 shrink-0"></i>
                   <span>70% Surprise Ruin Rate</span>
                 </div>
                 <p class="text-slate-300 leading-relaxed">
@@ -1007,23 +1178,23 @@
                 </p>
               </div>
 
-              <div class="p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
+              <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
                 <div class="font-bold text-white text-sm flex items-center space-x-2">
-                  <i data-lucide="wifi-off" class="w-4 h-4 text-red-400"></i>
+                  <i data-lucide="wifi-off" class="w-4 h-4 text-red-400 shrink-0"></i>
                   <span>Underground Parking Dead Zones (0G)</span>
                 </div>
                 <p class="text-slate-300 leading-relaxed">
-                  <strong>The Basement Signal Blackout:</strong> Corporate towers in Westlands and Upper Hill have deep 3-story underground basements where cell networks drop completely. Standard apps freeze and cannot confirm delivery codes.
+                  <strong>The Basement Signal Blackout:</strong> Corporate towers in Westlands and Upper Hill (and coastal beach resorts) have deep basements where cellular networks drop to zero bars. Standard apps freeze and cannot confirm delivery codes.
                 </p>
               </div>
 
-              <div class="p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
+              <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
                 <div class="font-bold text-white text-sm flex items-center space-x-2">
-                  <i data-lucide="wallet" class="w-4 h-4 text-red-400"></i>
-                  <span>Florist Working Capital Lock</span>
+                  <i data-lucide="wallet" class="w-4 h-4 text-red-400 shrink-0"></i>
+                  <span>Florist & Farmer Working Capital Lock</span>
                 </div>
                 <p class="text-slate-300 leading-relaxed">
-                  <strong>Florists Need Instant Cash:</strong> Artisan florists at City Market work on daily cash flow. They refuse to release expensive roses if delivery platforms delay merchant payouts for 48+ hours.
+                  <strong>Florists Need Instant Cash:</strong> Artisan florists at City Market and farm gate growers work on thin margins. They refuse to release expensive roses if delivery platforms delay payouts for 48+ hours.
                 </p>
               </div>
             </div>
@@ -1032,32 +1203,32 @@
       },
       {
         num: 3,
-        title: "The Precision Solution",
+        title: "The Precision Hub-and-Spoke Solution",
         badge: "Slide 03 // Solution",
         content: `
-          <div class="space-y-6">
-            <span class="text-xs uppercase tracking-wider text-brand-400 font-mono">How CitiMarket Solves It</span>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
-              Upright cold-chain motorbike boxes paired with phone sensor intelligence and instant M-Pesa escrow.
+          <div class="space-y-5 sm:space-y-6">
+            <span class="text-xs uppercase tracking-wider text-brand-400 font-mono">How CitiMarket Solves It Across Kenya</span>
+            <h2 class="text-xl sm:text-3xl font-extrabold text-white leading-tight">
+              Nationwide Hub-and-Spoke cold chain: Farm-gate sourcing, upright motorbike phials, and instant M-Pesa escrow.
             </h2>
 
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl text-xs font-sans">
-              <div class="p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
-                <div class="font-bold text-brand-400 text-sm">1. Upright Cold Carriers</div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 max-w-4xl text-xs font-sans">
+              <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
+                <div class="font-bold text-brand-400 text-sm">1. Upright Cold Carriers & Shuttles</div>
                 <p class="text-slate-300 leading-relaxed">
-                  Our motorbikes carry custom-built upright carriers fitted with individual 15ml water tubes (phials) on each flower stem, keeping roses fully hydrated and vibration-damped in Nairobi heat.
+                  Motorbikes carry custom-built upright boxes with 15ml water phials on each stem. Inter-city corridors (Naivasha ➔ Nairobi ➔ Mombasa ➔ Nakuru) use refrigerated batch shuttles and SGR cold cargo.
                 </p>
               </div>
-              <div class="p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
+              <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
                 <div class="font-bold text-cyan-400 text-sm">2. Smart Phone Sensors</div>
                 <p class="text-slate-300 leading-relaxed">
-                  The rider's mobile phone continuously monitors if the flower box tilts or hits a violent pothole, immediately warning the rider to protect the arrangement and logging photo proof.
+                  The rider's mobile phone continuously monitors if the flower box tilts past 45° or hits a violent pothole (>2.5G), alerting the courier to prevent damage and logging photo proof.
                 </p>
               </div>
-              <div class="p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
+              <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
                 <div class="font-bold text-amber-400 text-sm">3. Automated M-Pesa Escrow</div>
                 <p class="text-slate-300 leading-relaxed">
-                  When a customer orders, M-Pesa holds the money in a safe digital lockbox. The instant the recipient enters their secret delivery code, the money splits automatically: florist, rider, and platform get paid in seconds.
+                  When a customer orders, M-Pesa holds the money in a safe digital lockbox. Upon secret delivery code verification, the money splits automatically: florist, rider, and platform get paid in seconds.
                 </p>
               </div>
             </div>
@@ -1069,35 +1240,35 @@
         title: "Market Opportunity (In Kenyan Shillings)",
         badge: "Slide 04 // Market Size",
         content: `
-          <div class="space-y-6">
+          <div class="space-y-5 sm:space-y-6">
             <span class="text-xs uppercase tracking-wider text-cyan-400 font-mono">Market Potential Across East Africa</span>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+            <h2 class="text-xl sm:text-3xl font-extrabold text-white leading-tight">
               An untapped KSh 156 Billion market running mostly on chaotic, manual offline street stalls.
             </h2>
 
-            <div class="p-4 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-xs text-cyan-200 leading-relaxed font-sans">
+            <div class="p-4 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-xs sm:text-sm text-cyan-200 leading-relaxed font-sans">
               <strong class="text-cyan-400 font-mono uppercase block mb-1">Where is the untapped niche?</strong>
-              Kenya is one of the world's top exporters of roses from Lake Naivasha, but over 90% of local flower sales inside Kenya happen through informal roadside kiosks or manual WhatsApp chats with zero cold-chain guarantees. Urban Kenyans and diaspora senders want reliable, one-click flower delivery, creating a massive, high-margin domestic market opportunity.
+              Kenya is the world's 3rd largest exporter of cut roses, but over 90% of domestic flower sales inside Kenya happen through informal roadside kiosks or manual WhatsApp chats with zero cold-chain guarantees. Urban Kenyans in Nairobi, Mombasa, Nakuru, and diaspora senders want reliable, one-click gifting.
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl font-mono">
-              <div class="p-6 rounded-2xl glass-card border-t-4 border-t-cyan-500">
-                <div class="text-xs text-slate-400 uppercase">Total Addressable Market (TAM)</div>
-                <div class="text-2xl sm:text-3xl font-extrabold text-white mt-2">KSh 156.0 Billion</div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-4xl font-mono">
+              <div class="p-5 sm:p-6 rounded-2xl glass-card border-t-4 border-t-cyan-500">
+                <div class="text-[11px] sm:text-xs text-slate-400 uppercase">Total Addressable Market (TAM)</div>
+                <div class="text-xl sm:text-3xl font-extrabold text-white mt-2">KSh 156.0 Billion</div>
                 <div class="text-[11px] text-slate-400 mt-1">($1.20 Billion USD)</div>
-                <p class="text-xs text-slate-400 font-sans mt-2">East African urban perishable gifting, floral domestic retail, anniversaries, and corporate celebrations.</p>
+                <p class="text-xs text-slate-400 font-sans mt-2">East African urban perishable gifting, floral domestic retail, weddings, anniversaries, and corporate events.</p>
               </div>
-              <div class="p-6 rounded-2xl glass-card border-t-4 border-t-brand-500">
-                <div class="text-xs text-slate-400 uppercase">Serviceable Available (SAM)</div>
-                <div class="text-2xl sm:text-3xl font-extrabold text-brand-400 mt-2">KSh 23.4 Billion</div>
+              <div class="p-5 sm:p-6 rounded-2xl glass-card border-t-4 border-t-brand-500">
+                <div class="text-[11px] sm:text-xs text-slate-400 uppercase">Serviceable Available (SAM)</div>
+                <div class="text-xl sm:text-3xl font-extrabold text-brand-400 mt-2">KSh 23.4 Billion</div>
                 <div class="text-[11px] text-brand-300 mt-1">($180 Million USD)</div>
-                <p class="text-xs text-slate-400 font-sans mt-2">High-income urban gifting across Nairobi and Mombasa, luxury hotels, weddings, and diaspora senders.</p>
+                <p class="text-xs text-slate-400 font-sans mt-2">Inter-city Kenyan gifting hubs across Nairobi, Mombasa, Nakuru, Kisumu, Eldoret, luxury hotels, and diaspora senders.</p>
               </div>
-              <div class="p-6 rounded-2xl glass-card border-t-4 border-t-amber-500">
-                <div class="text-xs text-slate-400 uppercase">Serviceable Obtainable (SOM)</div>
-                <div class="text-2xl sm:text-3xl font-extrabold text-amber-400 mt-2">KSh 1.85 Billion</div>
+              <div class="p-5 sm:p-6 rounded-2xl glass-card border-t-4 border-t-amber-500">
+                <div class="text-[11px] sm:text-xs text-slate-400 uppercase">Serviceable Obtainable (SOM)</div>
+                <div class="text-xl sm:text-3xl font-extrabold text-amber-400 mt-2">KSh 1.85 Billion</div>
                 <div class="text-[11px] text-amber-300 mt-1">($14.2 Million USD)</div>
-                <p class="text-xs text-slate-400 font-sans mt-2">350,000 annual deliveries across 4 key Nairobi corridors (Westlands, Kilimani, Upper Hill, Karen) by Year 3.</p>
+                <p class="text-xs text-slate-400 font-sans mt-2">350,000 annual deliveries across 4 key Nairobi corridors and Mombasa coastal routes by Year 3.</p>
               </div>
             </div>
           </div>
@@ -1108,27 +1279,27 @@
         title: "The Technical Moat",
         badge: "Slide 05 // Unfair Advantages",
         content: `
-          <div class="space-y-6">
+          <div class="space-y-5 sm:space-y-6">
             <span class="text-xs uppercase tracking-wider text-amber-400 font-mono">Our Unfair Technical Advantages</span>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+            <h2 class="text-xl sm:text-3xl font-extrabold text-white leading-tight">
               Hardware sensor physics, offline cryptography, and sub-30ms Nairobi edge networking.
             </h2>
 
-            <div class="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-200 leading-relaxed font-sans">
+            <div class="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs sm:text-sm text-amber-200 leading-relaxed font-sans">
               <strong class="text-amber-400 font-mono uppercase block mb-1">What is an "Engineering Moat"?</strong>
               It is a defensive barrier built directly into the technology that competitors cannot easily copy. While other apps merely connect riders to restaurants, CitiMarket uses phone motion sensors and encryption math to guarantee quality and security.
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl text-xs font-sans">
-              <div class="p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 max-w-4xl text-xs font-sans">
+              <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
                 <div class="font-bold text-amber-400 text-sm">1. Accelerometer Tilt & Drop Gate</div>
                 <p class="text-slate-300 leading-relaxed">The courier's Android phone uses its built-in hardware motion sensors. If the bike leans past 45° (water spillage risk) or hits a severe bump (>2.5G), the app rings an audible warning to protect the flowers.</p>
               </div>
-              <div class="p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
+              <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
                 <div class="font-bold text-cyan-400 text-sm">2. 0G Basement PIN Handshake</div>
                 <p class="text-slate-300 leading-relaxed">In underground parking basements with zero cell bars, the courier's phone validates the delivery PIN locally using a secret mathematical encryption key (HMAC-SHA256) with 0ms server lag.</p>
               </div>
-              <div class="p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
+              <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
                 <div class="font-bold text-brand-400 text-sm">3. Sub-30ms Nairobi Edge Routing</div>
                 <p class="text-slate-300 leading-relaxed">Direct private interconnect between Google's Nairobi Edge facility and Safaricom Daraja gateways guarantees that M-Pesa payment prompts appear on customer phones in milliseconds.</p>
               </div>
@@ -1138,30 +1309,30 @@
       },
       {
         num: 6,
-        title: "Architectural Separation",
+        title: "Clean Domain Separation",
         badge: "Slide 06 // System Design",
         content: `
-          <div class="space-y-6">
+          <div class="space-y-5 sm:space-y-6">
             <span class="text-xs uppercase tracking-wider text-blue-400 font-mono">Clean Domain Separation</span>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+            <h2 class="text-xl sm:text-3xl font-extrabold text-white leading-tight">
               The phone app handles the sensors, the website attracts customers, and the cloud secures the money.
             </h2>
 
-            <div class="p-4 rounded-xl bg-blue-500/10 border border-blue-500/20 text-xs text-blue-200 leading-relaxed font-sans">
+            <div class="p-4 rounded-xl bg-blue-500/10 border border-blue-500/20 text-xs sm:text-sm text-blue-200 leading-relaxed font-sans">
               <strong class="text-blue-400 font-mono uppercase block mb-1">Why separate these systems?</strong>
               You cannot run heavy delivery sensors inside a web browser, and you cannot ask a customer to download a heavy app just to send one surprise gift. We use the right tool for each job.
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl text-xs font-mono">
-              <div class="p-5 rounded-xl bg-slate-900 border-l-4 border-l-amber-500 space-y-2">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 max-w-4xl text-xs font-mono">
+              <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border-l-4 border-l-amber-500 space-y-2">
                 <div class="font-bold text-white text-sm">Native Android Mobile App</div>
                 <div class="text-slate-400 font-sans">For Couriers & Florists: Background GPS while locked in phone handlebar mounts, tilt/drop sensors, Bluetooth 58mm docket printing, and offline SQLite.</div>
               </div>
-              <div class="p-5 rounded-xl bg-slate-900 border-l-4 border-l-blue-500 space-y-2">
+              <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border-l-4 border-l-blue-500 space-y-2">
                 <div class="font-bold text-white text-sm">Public Web Portal (Next.js)</div>
-                <div class="text-slate-400 font-sans">For Customers & Partners: Zero app install friction. Anyone clicks a WhatsApp link, checks their Nairobi zone, and pays via M-Pesa in under 60 seconds.</div>
+                <div class="text-slate-400 font-sans">For Customers & Partners: Zero app install friction. Anyone clicks a WhatsApp link, checks their Kenya city zone, and pays via M-Pesa in under 60 seconds.</div>
               </div>
-              <div class="p-5 rounded-xl bg-slate-900 border-l-4 border-l-brand-500 space-y-2">
+              <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border-l-4 border-l-brand-500 space-y-2">
                 <div class="font-bold text-white text-sm">Central Cloud Backend (GCP)</div>
                 <div class="text-slate-400 font-sans">Cloud Run & PostgreSQL 16: The bank vault. Holds the double-entry financial ledger so not a single cent can be stolen, forged, or lost.</div>
               </div>
@@ -1174,19 +1345,19 @@
         title: "Business Model & Unit Economics",
         badge: "Slide 07 // Financial Model",
         content: `
-          <div class="space-y-6">
+          <div class="space-y-5 sm:space-y-6">
             <span class="text-xs uppercase tracking-wider text-brand-400 font-mono">Where Does the Money Go?</span>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+            <h2 class="text-xl sm:text-3xl font-extrabold text-white leading-tight">
               35.0% Blended Take-Rate delivering KSh 595.00 Platform Net Profit on every single bouquet.
             </h2>
 
-            <div class="p-4 rounded-xl bg-brand-500/10 border border-brand-500/20 text-xs text-brand-200 leading-relaxed font-sans">
+            <div class="p-4 rounded-xl bg-brand-500/10 border border-brand-500/20 text-xs sm:text-sm text-brand-200 leading-relaxed font-sans">
               <strong class="text-brand-400 font-mono uppercase block mb-1">Walkthrough of an average KSh 3,850.00 Flower Order:</strong>
-              When a customer in Westlands orders a KSh 3,850 rose arrangement, the money is held in escrow. When delivered, Stall #42 gets paid KSh 2,870 instantly for the flowers, the Boda rider gets KSh 280, KSh 70 goes to stem water tubes, KSh 35 covers telco SMS, and CitiMarket retains KSh 595.00 clean profit.
+              When a customer orders a KSh 3,850 rose arrangement, the money is held in escrow. When delivered, Stall #42 gets paid KSh 2,870 instantly for the flowers, the Boda rider gets KSh 280, KSh 70 goes to stem water tubes, KSh 35 covers telco SMS/B2C tariffs, and CitiMarket retains KSh 595.00 clean profit.
             </div>
 
-            <div class="max-w-3xl overflow-x-auto">
-              <table class="w-full text-left font-mono text-xs">
+            <div class="max-w-3xl overflow-x-auto scroll-touch -mx-2 sm:mx-0 px-2 sm:px-0">
+              <table class="w-full text-left font-mono text-xs min-w-[500px]">
                 <thead class="border-b border-dark-border text-slate-400">
                   <tr>
                     <th class="py-2">P&L Item (Per Order)</th>
@@ -1243,31 +1414,31 @@
         title: "SDLC & Solo Founder (Me) + AI Model",
         badge: "Slide 08 // Capital Efficiency",
         content: `
-          <div class="space-y-6">
+          <div class="space-y-5 sm:space-y-6">
             <span class="text-xs uppercase tracking-wider text-amber-400 font-mono">100% Capital Stewardship</span>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+            <h2 class="text-xl sm:text-3xl font-extrabold text-white leading-tight">
               Solo Founder (Me) paired with AI: Building enterprise software for under KSh 10,000.
             </h2>
 
-            <div class="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-200 leading-relaxed font-sans">
+            <div class="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs sm:text-sm text-amber-200 leading-relaxed font-sans">
               <strong class="text-amber-400 font-mono uppercase block mb-1">Why building solo (Me) is a massive competitive advantage:</strong>
               Traditional startups burn KSh 1,700,000+ hiring 5 contractors who spend weeks arguing in meetings. By building solo (Me) and using AI subscriptions (Gemini Pro, Claude, Cursor), I eliminate 100% of communication waste and build the entire platform in 18 to 21 working days for less than the cost of dinner.
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl text-xs font-mono">
-              <div class="p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 max-w-4xl text-xs font-mono">
+              <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
                 <div class="text-slate-400">5-Contractor Agency</div>
-                <div class="text-xl font-bold text-red-400">KSh 1,721,500</div>
+                <div class="text-lg sm:text-xl font-bold text-red-400">KSh 1,721,500</div>
                 <div class="text-[11px] text-slate-500">56 working days, high coordination overhead</div>
               </div>
-              <div class="p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
+              <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
                 <div class="text-slate-400">2-Person AI Team</div>
-                <div class="text-xl font-bold text-amber-400">KSh 586,700</div>
+                <div class="text-lg sm:text-xl font-bold text-amber-400">KSh 586,700</div>
                 <div class="text-[11px] text-slate-500">18 working days, 65% capital savings</div>
               </div>
-              <div class="p-5 rounded-xl bg-brand-500/10 border border-brand-500/40 space-y-2">
+              <div class="p-4 sm:p-5 rounded-xl bg-brand-500/10 border border-brand-500/40 space-y-2">
                 <div class="text-brand-400 font-bold">Solo Founder (Me) + AI</div>
-                <div class="text-2xl font-extrabold text-brand-400">KSh 6,700 – 11,900</div>
+                <div class="text-xl sm:text-2xl font-extrabold text-brand-400">KSh 6,700 – 11,900</div>
                 <div class="text-[11px] text-brand-300">-99.2% to -99.6% cash savings, 21 days</div>
               </div>
             </div>
@@ -1276,28 +1447,32 @@
       },
       {
         num: 9,
-        title: "Traction & Go-to-Market Milestones",
+        title: "Traction & Nationwide Kenya Expansion",
         badge: "Slide 09 // Execution",
         content: `
-          <div class="space-y-6">
-            <span class="text-xs uppercase tracking-wider text-brand-400 font-mono">Ground Traction at the Source</span>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
-              Anchored at Nairobi City Market: Stalls #42 & #43 signed for exclusive launch.
+          <div class="space-y-5 sm:space-y-6">
+            <span class="text-xs uppercase tracking-wider text-brand-400 font-mono">Ground Traction & Nationwide Roadmap</span>
+            <h2 class="text-xl sm:text-3xl font-extrabold text-white leading-tight">
+              Anchored at Nairobi City Market: Expanding to Naivasha, Nakuru, and Mombasa.
             </h2>
 
-            <div class="p-4 rounded-xl bg-brand-500/10 border border-brand-500/20 text-xs text-brand-200 leading-relaxed font-sans">
-              <strong class="text-brand-400 font-mono uppercase block mb-1">Why City Market on Muindi Mbingu Street?</strong>
-              City Market is the historic epicenter of Kenya's cut-flower retail trade. Stalls #42 & #43 have 20+ years of direct grower connections with Lake Naivasha farms, giving us immediate access to hundreds of fresh rose stems daily without owning a single acre of land.
+            <div class="p-4 rounded-xl bg-brand-500/10 border border-brand-500/20 text-xs sm:text-sm text-brand-200 leading-relaxed font-sans">
+              <strong class="text-brand-400 font-mono uppercase block mb-1">Our Nationwide Kenya Phased Plan:</strong>
+              We launch with Nairobi City Market Stalls #42 & #43 on Muindi Mbingu Street (the historic epicenter of Kenya's floral trade). Within 60 days, we establish the direct Lake Naivasha farm-gate procurement hub and launch refrigerated transit to Mombasa and Nakuru.
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl text-xs font-mono">
-              <div class="p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
-                <div class="font-bold text-white text-sm">Anchor Merchant Supply</div>
-                <p class="text-slate-300 font-sans">Stalls #42 & #43 provide guaranteed daily inventory of fresh red roses, lilies, and calligraphy packaging directly into our system.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 max-w-4xl text-xs font-mono">
+              <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
+                <div class="font-bold text-brand-400 text-sm">Phase 1: Nairobi Hub</div>
+                <p class="text-slate-300 font-sans text-xs">Stalls #42 & #43 signed for exclusive launch with guaranteed daily Naivasha rose supply and strict 45-minute SLA.</p>
               </div>
-              <div class="p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
-                <div class="font-bold text-white text-sm">45-Minute Delivery Corridors</div>
-                <p class="text-slate-300 font-sans">Phase 1 launch across CBD, Westlands, Kilimani, and Upper Hill with 45-minute strict SLA and automated refund guarantee.</p>
+              <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
+                <div class="font-bold text-cyan-400 text-sm">Phase 2: Naivasha & Nakuru</div>
+                <p class="text-slate-300 font-sans text-xs">Farm-gate direct procurement hub in Naivasha; cuts wholesale costs by 22% and opens Nakuru residential corridors.</p>
+              </div>
+              <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
+                <div class="font-bold text-amber-400 text-sm">Phase 3: Mombasa Corridor</div>
+                <p class="text-slate-300 font-sans text-xs">Nyali, Bamburi, and Diani luxury beach resort network via scheduled cold shuttles and SGR freight.</p>
               </div>
             </div>
           </div>
@@ -1305,39 +1480,53 @@
       },
       {
         num: 10,
-        title: "The Seed Ask & Capital Deployment",
-        badge: "Slide 10 // The Ask",
+        title: "Capital Structure: Starting Capital vs Seed Ask",
+        badge: "Slide 10 // Capital Structure",
         content: `
-          <div class="space-y-6">
-            <span class="text-xs uppercase tracking-wider text-emerald-400 font-mono">The Investment Proposition</span>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white leading-tight">
-              Seeking KSh 5,000,000 (~$38,000 USD) Seed Financing for a 14-Month Runway.
+          <div class="space-y-5 sm:space-y-6">
+            <span class="text-xs uppercase tracking-wider text-emerald-400 font-mono">Two Distinct Financing Milestones</span>
+            <h2 class="text-xl sm:text-3xl font-extrabold text-white leading-tight">
+              Pre-Seed Starting Capital (KSh 285k) for pilot; Seed Round (KSh 5M) for nationwide scale.
             </h2>
 
-            <div class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-200 leading-relaxed font-sans">
-              <strong class="text-emerald-400 font-mono uppercase block mb-1">Where does every shilling of the KSh 5,000,000 go?</strong>
-              Because software engineering was built hyper-efficiently by Me using AI, $0 is wasted on contractor burn. Every single shilling is deployed into physical motorbike carriers, merchant acquisition, and Safaricom float reserves.
+            <!-- 1. Starting Capital Breakdown -->
+            <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border border-amber-500/30 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-amber-400 text-sm font-mono uppercase">1. Starting Capital (Bootstrapping Pilot Reserve)</span>
+                <span class="font-bold text-amber-400 font-mono text-sm">KSh 285,000 (~$2,200 USD)</span>
+              </div>
+              <p class="text-slate-300 font-sans text-xs leading-relaxed">
+                Funded by the founder to achieve live operational proof before raising VC: KSh 95k (5 prototype bike boxes), KSh 60k (2 florist tablets & printers), KSh 50k (Daraja float), KSh 45k (permits & legal), and KSh 35k (3-month net cloud/API reserve).
+              </p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl text-xs font-mono">
-              <div class="p-5 rounded-xl bg-slate-900 border border-dark-border">
-                <div class="text-slate-400">45% Fleet Deployment</div>
-                <div class="text-xl font-bold text-white mt-1">KSh 2,250,000</div>
-                <p class="text-slate-400 font-sans text-[11px] mt-1">25 Upright cold-chain carriers, water tube racks, and phone handlebar docks.</p>
+            <!-- 2. Seed Ask Breakdown -->
+            <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border border-brand-500/30 space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-brand-400 text-sm font-mono uppercase">2. Institutional Seed Round Financing Ask</span>
+                <span class="font-bold text-brand-400 font-mono text-sm">KSh 5,000,000 (~$38,000 USD)</span>
               </div>
-              <div class="p-5 rounded-xl bg-slate-900 border border-dark-border">
-                <div class="text-slate-400">35% Merchant Acquisition</div>
-                <div class="text-xl font-bold text-white mt-1">KSh 1,750,000</div>
-                <p class="text-slate-400 font-sans text-[11px] mt-1">Onboarding 30 City Market florists with tablets & printers + corporate B2B contracts.</p>
-              </div>
-              <div class="p-5 rounded-xl bg-slate-900 border border-dark-border">
-                <div class="text-slate-400">20% Float & Working Capital</div>
-                <div class="text-xl font-bold text-brand-400 mt-1">KSh 1,000,000</div>
-                <p class="text-slate-400 font-sans text-[11px] mt-1">Safaricom Daraja B2C payout float reserve & regulatory county permits.</p>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono text-xs">
+                <div class="p-3 rounded-lg bg-slate-950 border border-dark-border">
+                  <div class="text-slate-400">45% Fleet Scale</div>
+                  <div class="text-base font-bold text-white mt-0.5">KSh 2,250,000</div>
+                  <div class="text-[10px] text-slate-500 font-sans">25 Upright cold carriers & bike docks</div>
+                </div>
+                <div class="p-3 rounded-lg bg-slate-950 border border-dark-border">
+                  <div class="text-slate-400">35% Merchant Growth</div>
+                  <div class="text-base font-bold text-white mt-0.5">KSh 1,750,000</div>
+                  <div class="text-[10px] text-slate-500 font-sans">Onboard 30 florists in Nairobi & Coast</div>
+                </div>
+                <div class="p-3 rounded-lg bg-slate-950 border border-dark-border">
+                  <div class="text-slate-400">20% Float & Mktg</div>
+                  <div class="text-base font-bold text-emerald-400 mt-0.5">KSh 1,000,000</div>
+                  <div class="text-[10px] text-slate-500 font-sans">Safaricom B2C escrow float reserve</div>
+                </div>
               </div>
             </div>
-            <div class="p-4 rounded-xl bg-brand-500/10 border border-brand-500/30 text-brand-300 text-xs font-mono max-w-4xl">
-              ✓ Breakeven achieved in Month 2.5 at just 65 deliveries/day (Annualized ARR: $560k+ USD by Month 12).
+
+            <div class="p-3.5 rounded-xl bg-brand-500/10 border border-brand-500/30 text-brand-300 text-xs font-mono">
+              ✓ 14-Month cash runway with platform breakeven achieved in Month 2.5 at just 65 deliveries/day.
             </div>
           </div>
         `
@@ -1364,7 +1553,7 @@
       dotsContainer.innerHTML = '';
       SLIDES.forEach((s) => {
         const dot = document.createElement('button');
-        dot.className = `w-2 h-2 rounded-full transition ${s.num === index ? 'bg-brand-400 w-6' : 'bg-slate-700 hover:bg-slate-600'}`;
+        dot.className = `w-2 h-2 rounded-full transition touch-target ${s.num === index ? 'bg-brand-400 w-5 sm:w-6' : 'bg-slate-700 hover:bg-slate-600'}`;
         dot.onclick = () => goToSlide(s.num);
         dotsContainer.appendChild(dot);
       });
@@ -1409,99 +1598,422 @@
         activeBtn.classList.add('bg-brand-500/10', 'text-brand-400', 'border', 'border-brand-500/30');
       }
 
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       lucide.createIcons();
     }
 
     // ==========================================
-    // LOCATION / GEOFENCING LOGIC
+    // KENYA MULTI-CITY GEOFENCING LOGIC
     // ==========================================
-    const ZONES = {
-      CBD: {
-        code: "ZONE_1_CBD",
-        title: "Nairobi Central Business District",
-        desc: "Immediate dispatch corridor servicing City Market, Kenyatta Ave, and Mama Ngina St.",
-        dist: "1.8 km",
-        eta: "18 – 25 Minutes",
-        h3: "887a469619fffff",
-        base: 150,
-        distanceCharge: 50,
-        traffic: 1.0,
-        total: 200,
-        serviceable: true
+    const CITIES_DATA = {
+      nairobi: {
+        heading: "Select a Nairobi Delivery Zone",
+        coordsInfo: "Hub: Nairobi City Market (-1.2841, 36.8219)",
+        defaultZone: "CBD",
+        zones: {
+          CBD: {
+            code: "ZONE_1_CBD",
+            name: "Nairobi CBD",
+            sub: "Core Zone 1 (0–2 km)",
+            title: "Nairobi Central Business District",
+            desc: "Immediate dispatch corridor servicing City Market, Kenyatta Ave, and Mama Ngina St.",
+            dist: "1.8 km",
+            eta: "18 – 25 Minutes",
+            mode: "Upright Electric Boda Boda",
+            h3: "887a469619fffff",
+            base: 150,
+            distanceCharge: 50,
+            surcharge: 0,
+            total: 200,
+            serviceable: true
+          },
+          WESTLANDS: {
+            code: "ZONE_2_WESTLANDS",
+            name: "Westlands",
+            sub: "Zone 2 (3–5 km)",
+            title: "Westlands & Parklands Commercial Zone",
+            desc: "High-density residential and corporate zone along Waiyaki Way, Rhapta Rd, and Mpaka Rd.",
+            dist: "4.2 km",
+            eta: "30 – 38 Minutes",
+            mode: "Upright Electric Boda Boda",
+            h3: "887a469611fffff",
+            base: 200,
+            distanceCharge: 150,
+            surcharge: 0,
+            total: 350,
+            serviceable: true
+          },
+          KILIMANI: {
+            code: "ZONE_2_KILIMANI",
+            name: "Kilimani / Kileleshwa",
+            sub: "Zone 2 (4–6 km)",
+            title: "Kilimani, Kileleshwa & Lavington Corridor",
+            desc: "High-AOV gifting corridor along Argwings Kodhek, Dennis Pritt, and James Gichuru.",
+            dist: "5.4 km",
+            eta: "35 – 45 Minutes",
+            mode: "Upright Electric Boda Boda",
+            h3: "887a469615fffff",
+            base: 200,
+            distanceCharge: 180,
+            surcharge: 0,
+            total: 380,
+            serviceable: true
+          },
+          UPPERHILL: {
+            code: "ZONE_1_UPPERHILL",
+            name: "Upper Hill",
+            sub: "Zone 1 Ext (2–3 km)",
+            title: "Upper Hill Financial District",
+            desc: "Corporate embassies, banking headquarters, and commercial towers on Mara Rd & Hospital Rd.",
+            dist: "2.8 km",
+            eta: "20 – 30 Minutes",
+            mode: "Upright Electric Boda Boda",
+            h3: "887a469617fffff",
+            base: 180,
+            distanceCharge: 100,
+            surcharge: 0,
+            total: 280,
+            serviceable: true
+          },
+          KAREN: {
+            code: "ZONE_3_KAREN",
+            name: "Karen & Lang'ata",
+            sub: "Zone 3 Corridor (14–18 km)",
+            title: "Karen & Lang'ata Suburban Corridor",
+            desc: "Extended delivery zone. Upright stem-hydration phials prevent dehydration over 16 km transit.",
+            dist: "16.5 km",
+            eta: "50 – 65 Minutes",
+            mode: "Upright Boda Boda + Thermal Shield",
+            h3: "887a469603fffff",
+            base: 300,
+            distanceCharge: 350,
+            surcharge: 0,
+            total: 650,
+            serviceable: true
+          },
+          OUT_OF_SERVICE: {
+            code: "ZONE_UNSERVICED",
+            name: "Rongai / Thika",
+            sub: "Outside Boundary (>25 km)",
+            title: "Rongai / Thika / Out of Service",
+            desc: "Outside current 75-minute cold-chain delivery boundary.",
+            dist: "28.5 km",
+            eta: "UNAVAILABLE",
+            mode: "Exceeds Thermal Safety SLA",
+            h3: "887a469247fffff",
+            base: 0,
+            distanceCharge: 0,
+            surcharge: 0,
+            total: 0,
+            serviceable: false
+          }
+        }
       },
-      WESTLANDS: {
-        code: "ZONE_2_WESTLANDS",
-        title: "Westlands & Parklands",
-        desc: "High-density residential and corporate zone along Waiyaki Way, Rhapta Rd, and Mpaka Rd.",
-        dist: "4.2 km",
-        eta: "30 – 38 Minutes",
-        h3: "887a469611fffff",
-        base: 200,
-        distanceCharge: 150,
-        traffic: 1.0,
-        total: 350,
-        serviceable: true
+      mombasa: {
+        heading: "Select a Mombasa Coastal Zone",
+        coordsInfo: "Hub: Nyali Links Road (-4.0435, 39.7042)",
+        defaultZone: "NYALI",
+        zones: {
+          NYALI: {
+            code: "ZONE_M1_NYALI",
+            name: "Nyali Beach",
+            sub: "Core Zone M1 (0–4 km)",
+            title: "Nyali Residential & Resort Corridor",
+            desc: "High-density residential estates, beachfront hotels, and boutique venues along Links Rd.",
+            dist: "2.4 km",
+            eta: "20 – 30 Minutes",
+            mode: "Chilled Boda Boda with Humidity Tube",
+            h3: "887a644265fffff",
+            base: 180,
+            distanceCharge: 120,
+            surcharge: 0,
+            total: 300,
+            serviceable: true
+          },
+          BAMBURI: {
+            code: "ZONE_M2_BAMBURI",
+            name: "Bamburi & Shanzu",
+            sub: "Zone M2 (5–9 km)",
+            title: "Bamburi Commercial & Hotel Strip",
+            desc: "North coast resort corridor along Malindi Highway with humidity-proof packaging.",
+            dist: "7.1 km",
+            eta: "35 – 45 Minutes",
+            mode: "Chilled Boda Boda with Humidity Tube",
+            h3: "887a644267fffff",
+            base: 220,
+            distanceCharge: 230,
+            surcharge: 0,
+            total: 450,
+            serviceable: true
+          },
+          CBD_OLD_TOWN: {
+            code: "ZONE_M1_ISLAND",
+            name: "Mombasa CBD & Old Town",
+            sub: "Island Zone (3–6 km via Nyali Bridge)",
+            title: "Mombasa Island & Docks Corridor",
+            desc: "Servicing corporate banks, government offices, and historic Old Town residences.",
+            dist: "4.8 km",
+            eta: "30 – 40 Minutes",
+            mode: "Upright Electric Boda Boda",
+            h3: "887a644243fffff",
+            base: 200,
+            distanceCharge: 150,
+            surcharge: 0,
+            total: 350,
+            serviceable: true
+          },
+          DIANI: {
+            code: "ZONE_M3_DIANI",
+            name: "Diani South Coast",
+            sub: "Corridor via Likoni (32 km)",
+            title: "Diani Beach Luxury Corridor",
+            desc: "Scheduled refrigerated courier connection to Diani luxury villas and wedding resorts.",
+            dist: "32.0 km",
+            eta: "75 – 90 Minutes",
+            mode: "Refrigerated Van Shuttle",
+            h3: "887a644057fffff",
+            base: 450,
+            distanceCharge: 400,
+            surcharge: 0,
+            total: 850,
+            serviceable: true
+          },
+          KILIFI_OUT: {
+            code: "ZONE_M_OUT",
+            name: "Kilifi / Malindi Inter-County",
+            sub: "Outside Direct Cold Route (>55 km)",
+            title: "Kilifi Inter-County Territory",
+            desc: "Beyond same-day cold-chain radius from Mombasa Hub.",
+            dist: "58.0 km",
+            eta: "UNAVAILABLE",
+            mode: "Requires Batch Scheduled SGR",
+            h3: "887a6445b3fffff",
+            base: 0,
+            distanceCharge: 0,
+            surcharge: 0,
+            total: 0,
+            serviceable: false
+          }
+        }
       },
-      KILIMANI: {
-        code: "ZONE_2_KILIMANI",
-        title: "Kilimani, Kileleshwa & Lavington",
-        desc: "High-AOV gifting corridor along Argwings Kodhek, Dennis Pritt, and James Gichuru.",
-        dist: "5.4 km",
-        eta: "35 – 45 Minutes",
-        h3: "887a469615fffff",
-        base: 200,
-        distanceCharge: 180,
-        traffic: 1.0,
-        total: 380,
-        serviceable: true
+      nakuru: {
+        heading: "Select a Nakuru Rift Zone",
+        coordsInfo: "Hub: Nakuru CBD / Kenyatta Ave (-0.2833, 36.0667)",
+        defaultZone: "NAKURU_CBD",
+        zones: {
+          NAKURU_CBD: {
+            code: "ZONE_N1_CBD",
+            name: "Nakuru CBD",
+            sub: "City Core (0–2 km)",
+            title: "Nakuru Central Commercial Center",
+            desc: "Immediate delivery zone around Kenyatta Avenue, Club Rd, and County Headquarters.",
+            dist: "1.2 km",
+            eta: "15 – 20 Minutes",
+            mode: "Upright Electric Boda Boda",
+            h3: "887a4192b1fffff",
+            base: 120,
+            distanceCharge: 60,
+            surcharge: 0,
+            total: 180,
+            serviceable: true
+          },
+          MILIMANI: {
+            code: "ZONE_N1_MILIMANI",
+            name: "Milimani Estate",
+            sub: "High-Income Zone (2–4 km)",
+            title: "Milimani Residential Corridor",
+            desc: "Premium residential hill corridor with high average gift basket sizes.",
+            dist: "3.1 km",
+            eta: "20 – 30 Minutes",
+            mode: "Upright Electric Boda Boda",
+            h3: "887a4192b3fffff",
+            base: 150,
+            distanceCharge: 100,
+            surcharge: 0,
+            total: 250,
+            serviceable: true
+          },
+          SEC_58: {
+            code: "ZONE_N2_SEC58",
+            name: "Section 58 & Naka",
+            sub: "Eastern Corridor (3–5 km)",
+            title: "Section 58, Naka & Free Area",
+            desc: "Eastward residential zone along Nairobi-Nakuru Highway.",
+            dist: "4.5 km",
+            eta: "25 – 35 Minutes",
+            mode: "Upright Electric Boda Boda",
+            h3: "887a4192a7fffff",
+            base: 160,
+            distanceCharge: 120,
+            surcharge: 0,
+            total: 280,
+            serviceable: true
+          },
+          NJORO_OUT: {
+            code: "ZONE_N3_NJORO",
+            name: "Njoro Agricultural Belt",
+            sub: "Suburban Zone (18 km)",
+            title: "Njoro / Egerton University Belt",
+            desc: "Suburban delivery route serviced with specialized insulated courier boxes.",
+            dist: "18.2 km",
+            eta: "45 – 60 Minutes",
+            mode: "Insulated Boda Boda",
+            h3: "887a419403fffff",
+            base: 250,
+            distanceCharge: 300,
+            surcharge: 0,
+            total: 550,
+            serviceable: true
+          },
+          SUBUKIA_OUT: {
+            code: "ZONE_N_OUT",
+            name: "Subukia / Solai Ridge",
+            sub: "Outside Operational Boundary",
+            title: "Subukia Valley Territory",
+            desc: "Outside operational boundary for same-day flower transit.",
+            dist: "42.0 km",
+            eta: "UNAVAILABLE",
+            mode: "Unserviced Rural Territory",
+            h3: "887a419b13fffff",
+            base: 0,
+            distanceCharge: 0,
+            surcharge: 0,
+            total: 0,
+            serviceable: false
+          }
+        }
       },
-      UPPERHILL: {
-        code: "ZONE_1_UPPERHILL",
-        title: "Upper Hill Financial District",
-        desc: "Corporate embassies, banking headquarters, and commercial towers on Mara Rd & Hospital Rd.",
-        dist: "2.8 km",
-        eta: "20 – 30 Minutes",
-        h3: "887a469617fffff",
-        base: 180,
-        distanceCharge: 100,
-        traffic: 1.0,
-        total: 280,
-        serviceable: true
-      },
-      KAREN: {
-        code: "ZONE_3_KAREN",
-        title: "Karen & Lang'ata Suburban Corridor",
-        desc: "Extended delivery zone. Upright stem-hydration phials prevent dehydration over 16 km transit.",
-        dist: "16.5 km",
-        eta: "50 – 65 Minutes",
-        h3: "887a469603fffff",
-        base: 300,
-        distanceCharge: 350,
-        traffic: 1.0,
-        total: 650,
-        serviceable: true
-      },
-      OUT_OF_SERVICE: {
-        code: "ZONE_UNSERVICED",
-        title: "Rongai / Thika / Out of Service",
-        desc: "Outside current cold-chain delivery boundary.",
-        dist: "28.5 km",
-        eta: "UNAVAILABLE",
-        h3: "887a469247fffff",
-        base: 0,
-        distanceCharge: 0,
-        traffic: 0,
-        total: 0,
-        serviceable: false
+      naivasha: {
+        heading: "Lake Naivasha Farm-Gate Sourcing & Inter-City Transit",
+        coordsInfo: "Hub: South Lake Flower Farms (-0.7300, 36.4300)",
+        defaultZone: "NAIVASHA_HUB",
+        zones: {
+          NAIVASHA_HUB: {
+            code: "HUB_GATE_0",
+            name: "Farm Gate Sourcing Hub",
+            sub: "South Lake Grower Gate",
+            title: "Lake Naivasha Primary Rose Farm Gate",
+            desc: "Direct procurement gate for fresh-cut roses, lilies, and carnations straight from grower greenhouses.",
+            dist: "0.0 km (Origin)",
+            eta: "Direct Harvest",
+            mode: "Cold Consolidation Staging",
+            h3: "887a413645fffff",
+            base: 0,
+            distanceCharge: 0,
+            surcharge: 0,
+            total: 0,
+            serviceable: true
+          },
+          NAIVASHA_TOWN: {
+            code: "ZONE_L1_TOWN",
+            name: "Naivasha Town",
+            sub: "Local Hub Delivery (5 km)",
+            title: "Naivasha Town Commercial Area",
+            desc: "Local deliveries within Naivasha CBD, Buffalo Mall, and nearby lake lodges.",
+            dist: "5.5 km",
+            eta: "20 – 30 Minutes",
+            mode: "Upright Electric Boda Boda",
+            h3: "887a413647fffff",
+            base: 120,
+            distanceCharge: 80,
+            surcharge: 0,
+            total: 200,
+            serviceable: true
+          },
+          NAIROBI_EXPRESS: {
+            code: "CORRIDOR_NAIV_NBO",
+            name: "Nairobi Express Cold Shuttle",
+            sub: "Naivasha ➔ City Market (88 km)",
+            title: "Naivasha to Nairobi City Market Hub Shuttle",
+            desc: "Scheduled twice-daily refrigerated van shuttle carrying harvested blooms directly to Stall #42 & #43.",
+            dist: "88.4 km",
+            eta: "90 Minutes (Batch)",
+            mode: "Scheduled Refrigerated Shuttle",
+            h3: "887a469619fffff",
+            base: 250,
+            distanceCharge: 200,
+            surcharge: 0,
+            total: 450,
+            serviceable: true
+          },
+          MOMBASA_SGR: {
+            code: "CORRIDOR_NAIV_MSA",
+            name: "Mombasa Cold Freight",
+            sub: "Naivasha ➔ Coast (540 km)",
+            title: "Inter-City Cold-Chain SGR Freight to Mombasa",
+            desc: "Direct temperature-controlled cargo container linking Naivasha growers directly to Nyali Hub.",
+            dist: "540 km",
+            eta: "Next-Day Scheduled",
+            mode: "SGR Cold Container Express",
+            h3: "887a644265fffff",
+            base: 500,
+            distanceCharge: 450,
+            surcharge: 0,
+            total: 950,
+            serviceable: true
+          }
+        }
       }
     };
 
+    let activeCityKey = 'nairobi';
+    let activeZoneKey = 'CBD';
+
+    function switchCity(cityKey) {
+      activeCityKey = cityKey;
+      document.querySelectorAll('.city-btn').forEach(btn => {
+        btn.className = "city-btn px-4 py-2 rounded-xl text-xs font-mono font-bold transition bg-slate-800 text-slate-300 hover:text-white shrink-0 touch-target";
+      });
+      const activeBtn = document.getElementById(`city-btn-${cityKey}`);
+      if (activeBtn) {
+        activeBtn.className = "city-btn active px-4 py-2 rounded-xl text-xs font-mono font-bold transition bg-brand-500 text-slate-950 shrink-0 touch-target";
+      }
+
+      const city = CITIES_DATA[cityKey];
+      document.getElementById('zone-selector-heading').innerText = city.heading;
+      document.getElementById('zone-coords-info').innerText = city.coordsInfo;
+
+      // Populate zone buttons
+      const container = document.getElementById('city-zones-container');
+      container.innerHTML = '';
+
+      const zoneKeys = Object.keys(city.zones);
+      zoneKeys.forEach(zKey => {
+        const z = city.zones[zKey];
+        const btn = document.createElement('button');
+        btn.id = `zone-btn-${zKey}`;
+        btn.className = `zone-btn p-3 rounded-xl border text-left transition touch-target flex flex-col justify-between ${z.serviceable ? 'border-dark-border bg-slate-900/60 hover:border-brand-400' : 'border-red-500/20 bg-red-500/5 hover:border-red-400'}`;
+        btn.onclick = () => selectZone(zKey);
+
+        btn.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-xs ${z.serviceable ? 'text-white' : 'text-red-400'} truncate">${z.name}</span>
+              <span class="w-2 h-2 rounded-full ${z.serviceable ? 'bg-emerald-400' : 'bg-red-500'} shrink-0 ml-1"></span>
+            </div>
+            <p class="text-[10px] text-slate-400 mt-0.5 truncate">${z.sub}</p>
+          </div>
+          <div class="mt-2 text-xs font-mono font-bold ${z.serviceable ? 'text-brand-400' : 'text-red-400'}">
+            ${z.serviceable ? (z.total === 0 ? 'SOURCE HUB' : `Fee: KSh ${z.total.toFixed(2)}`) : 'UNSERVICEABLE'}
+          </div>
+        `;
+        container.appendChild(btn);
+      });
+
+      // Select default zone
+      selectZone(city.defaultZone);
+    }
+
     function selectZone(zoneKey) {
-      const z = ZONES[zoneKey];
+      activeZoneKey = zoneKey;
+      const city = CITIES_DATA[activeCityKey];
+      const z = city.zones[zoneKey];
+
       document.querySelectorAll('.zone-btn').forEach(b => {
         b.classList.remove('border-brand-500/50', 'bg-brand-500/10');
         b.classList.add('border-dark-border', 'bg-slate-900/60');
       });
+
       const activeBtn = document.getElementById(`zone-btn-${zoneKey}`);
       if (activeBtn) {
         activeBtn.classList.add('border-brand-500/50', 'bg-brand-500/10');
@@ -1510,6 +2022,7 @@
 
       document.getElementById('loc-code').innerText = z.code;
       document.getElementById('loc-eta').innerText = z.eta;
+      document.getElementById('loc-mode').innerText = z.mode;
       document.getElementById('loc-dist').innerText = z.dist;
       document.getElementById('loc-h3').innerText = z.h3;
 
@@ -1525,8 +2038,8 @@
         outBox.classList.add('hidden');
         document.getElementById('calc-base').innerText = `KSh ${z.base.toFixed(2)}`;
         document.getElementById('calc-dist').innerText = `KSh ${z.distanceCharge.toFixed(2)}`;
-        document.getElementById('calc-traffic').innerText = `${z.traffic.toFixed(2)}x`;
-        document.getElementById('calc-total').innerText = `KSh ${z.total.toFixed(2)}`;
+        document.getElementById('calc-traffic').innerText = `KSh ${z.surcharge.toFixed(2)}`;
+        document.getElementById('calc-total').innerText = z.total === 0 ? "KSh 0.00 (Farm Staging)" : `KSh ${z.total.toFixed(2)}`;
       } else {
         badge.className = "px-2.5 py-0.5 rounded text-xs font-bold bg-red-500/20 text-red-400 border border-red-500/30";
         badge.innerText = "OUT OF SERVICE";
@@ -1643,9 +2156,9 @@
     function stepLedger(stageNum) {
       document.querySelectorAll('#btn-ledger-1, #btn-ledger-2, #btn-ledger-3').forEach((b, idx) => {
         if (idx + 1 === stageNum) {
-          b.className = "w-full p-3 rounded-xl border border-brand-500/40 bg-brand-500/10 text-left transition flex items-center justify-between";
+          b.className = "w-full p-3.5 rounded-xl border border-brand-500/40 bg-brand-500/10 text-left transition flex items-center justify-between touch-target";
         } else {
-          b.className = "w-full p-3 rounded-xl border border-dark-border bg-slate-900/60 text-left transition flex items-center justify-between";
+          b.className = "w-full p-3.5 rounded-xl border border-dark-border bg-slate-900/60 text-left transition flex items-center justify-between touch-target";
         }
       });
 
@@ -1670,11 +2183,38 @@
     }
 
     // ==========================================
+    // CLOUD VOLUME CALCULATOR
+    // ==========================================
+    function updateCloudVolume(val) {
+      const vol = parseInt(val);
+      document.getElementById('vol-display').innerText = `${vol.toLocaleString()} Deliveries / Month`;
+
+      // Fixed costs: PostgreSQL (8060) + Redis (3900) + Armor (2340) + VoIP (1950) = 16,250
+      // Variable costs:
+      // Cloud Run: KSh 1,560 base + KSh 0.30 per order above 1000
+      // Mapbox: KSh 3,250 base
+      // Africa's Talking SMS: vol * 2 * 0.80 = vol * 1.60
+      const fixedBase = 16250;
+      const cloudRun = 1560 + Math.max(0, (vol - 1000) * 0.35);
+      const mapbox = 3250 + Math.max(0, (vol - 2000) * 0.50);
+      const sms = vol * 1.60;
+      const totalCost = fixedBase + cloudRun + mapbox + sms;
+      const perOrder = totalCost / vol;
+      const netProfit = vol * 595;
+
+      document.getElementById('dyn-cost').innerText = `KSh ${Math.round(totalCost).toLocaleString()}`;
+      document.getElementById('dyn-per-order').innerText = `KSh ${perOrder.toFixed(2)}`;
+      document.getElementById('dyn-profit').innerText = `KSh ${Math.round(netProfit).toLocaleString()}`;
+    }
+
+    // ==========================================
     // INITIALIZATION ON LOAD
     // ==========================================
     window.addEventListener('DOMContentLoaded', () => {
       renderSlide(1);
+      switchCity('nairobi');
       stepLedger(1);
+      updateCloudVolume(2000);
       lucide.createIcons();
     });
   </script>
