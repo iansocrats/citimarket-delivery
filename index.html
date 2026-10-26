@@ -181,7 +181,7 @@
       <div class="flex space-x-1 overflow-x-auto py-2 scroll-touch text-xs font-medium no-scrollbar">
         <button onclick="switchTab('deck')" id="tab-deck" class="tab-btn active shrink-0 px-3.5 py-2.5 rounded-lg flex items-center space-x-2 transition bg-brand-500/10 text-brand-400 border border-brand-500/30 touch-target">
           <i data-lucide="presentation" class="w-4 h-4"></i>
-          <span>10-Slide Investor Deck</span>
+          <span>11-Slide Investor Deck</span>
         </button>
         <button onclick="switchTab('arch')" id="tab-arch" class="tab-btn shrink-0 px-3.5 py-2.5 rounded-lg flex items-center space-x-2 transition text-slate-400 hover:text-white hover:bg-slate-800/50 touch-target">
           <i data-lucide="layers" class="w-4 h-4"></i>
@@ -190,6 +190,10 @@
         <button onclick="switchTab('cs')" id="tab-cs" class="tab-btn shrink-0 px-3.5 py-2.5 rounded-lg flex items-center space-x-2 transition text-slate-400 hover:text-white hover:bg-slate-800/50 touch-target">
           <i data-lucide="boxes" class="w-4 h-4 text-cyan-400"></i>
           <span>Technologies to be Used</span>
+        </button>
+        <button onclick="switchTab('legal')" id="tab-legal" class="tab-btn shrink-0 px-3.5 py-2.5 rounded-lg flex items-center space-x-2 transition text-slate-400 hover:text-white hover:bg-slate-800/50 touch-target">
+          <i data-lucide="scale" class="w-4 h-4 text-emerald-400"></i>
+          <span>Legal & Field Pragmatism</span>
         </button>
         <button onclick="switchTab('design')" id="tab-design" class="tab-btn shrink-0 px-3.5 py-2.5 rounded-lg flex items-center space-x-2 transition text-slate-400 hover:text-white hover:bg-slate-800/50 touch-target">
           <i data-lucide="palette" class="w-4 h-4 text-brand-400"></i>
@@ -267,8 +271,8 @@
         </div>
       </div>
 
-      <!-- Quick Jump Slide Directory Grid -->
-      <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 text-[11px] sm:text-xs font-mono">
+      <!-- Quick Jump Slide Directory Grid (11 Slides) -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 text-[11px] sm:text-xs font-mono">
         <button onclick="goToSlide(1)" class="p-2.5 rounded-lg glass-card hover:border-brand-500/40 text-left transition flex flex-col touch-target justify-center">
           <span class="text-slate-500 text-[10px]">01. Purpose</span>
           <span class="text-slate-200 font-medium truncate">Nationwide Vision</span>
@@ -305,8 +309,12 @@
           <span class="text-slate-500 text-[10px]">09. Traction</span>
           <span class="text-slate-200 font-medium truncate">Kenya Expansion</span>
         </button>
-        <button onclick="goToSlide(10)" class="p-2.5 rounded-lg glass-card hover:border-brand-500/40 text-left transition flex flex-col touch-target justify-center">
-          <span class="text-slate-500 text-[10px]">10. The Ask</span>
+        <button onclick="goToSlide(10)" class="p-2.5 rounded-lg glass-card hover:border-emerald-500/40 border border-emerald-500/30 text-left transition flex flex-col touch-target justify-center">
+          <span class="text-emerald-400 text-[10px]">10. Pragmatism</span>
+          <span class="text-slate-200 font-medium truncate">Legal & Field Ops</span>
+        </button>
+        <button onclick="goToSlide(11)" class="p-2.5 rounded-lg glass-card hover:border-brand-500/40 text-left transition flex flex-col touch-target justify-center">
+          <span class="text-slate-500 text-[10px]">11. The Ask</span>
           <span class="text-slate-200 font-medium truncate">Starting vs Seed</span>
         </button>
       </div>
@@ -3566,6 +3574,240 @@ val Background = Color(0xFF080D1A)</pre>
 
     </section>
 
+      <!-- ======================================================= -->
+    <!-- SECTION 9: LEGAL COMPLIANCE & FIELD PRAGMATISM           -->
+    <!-- ======================================================= -->
+    <section id="view-legal" class="view-panel hidden space-y-6 sm:space-y-8">
+      <div>
+        <div class="flex items-center space-x-2 text-emerald-400 text-xs font-mono uppercase tracking-wider">
+          <i data-lucide="scale" class="w-4 h-4"></i>
+          <span>Statutory Compliance & Operational Risk Engineering</span>
+        </div>
+        <h1 class="text-xl sm:text-2xl font-bold text-white mt-1">Kenyan Legal Frameworks & Field Operations Pragmatism</h1>
+        <p class="text-slate-400 text-xs sm:text-sm mt-1 max-w-4xl leading-relaxed">
+          Logistics ventures in emerging markets do not fail because of software bugs; they fail when tax authorities freeze accounts, data regulators issue fines, boda riders get harassed at gates, or surprise deliveries spoil because recipients are unreachable. We have engineered legal, physical, and operational safeguards for every ground risk.
+        </p>
+      </div>
+
+      <!-- Overview 4-Metric Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 font-mono text-xs">
+        <div class="glass-card rounded-xl p-4 border border-dark-border">
+          <span class="text-slate-400 block text-[11px]">KRA eTIMS Status</span>
+          <span class="text-base sm:text-lg font-bold text-emerald-400 mt-1 block">Live API Ready</span>
+          <span class="text-[10px] text-slate-500">Automated QR on 15% Take</span>
+        </div>
+        <div class="glass-card rounded-xl p-4 border border-dark-border">
+          <span class="text-slate-400 block text-[11px]">Data Privacy (KDPA)</span>
+          <span class="text-base sm:text-lg font-bold text-cyan-400 mt-1 block">7-Day Shredding</span>
+          <span class="text-[10px] text-slate-500">ODPC Ephemeral Vault</span>
+        </div>
+        <div class="glass-card rounded-xl p-4 border border-dark-border">
+          <span class="text-slate-400 block text-[11px]">CBK Escrow Boundary</span>
+          <span class="text-base sm:text-lg font-bold text-amber-400 mt-1 block">Zero Custody Risk</span>
+          <span class="text-[10px] text-slate-500">Daraja Utility Account</span>
+        </div>
+        <div class="glass-card rounded-xl p-4 border border-dark-border">
+          <span class="text-slate-400 block text-[11px]">Flower Spoilage Shield</span>
+          <span class="text-base sm:text-lg font-bold text-purple-400 mt-1 block">Bio-PCM + Dampers</span>
+          <span class="text-[10px] text-slate-500">Anti-Vibration Silicone</span>
+        </div>
+      </div>
+
+      <!-- 8 Deep Operational & Legal Cards -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        
+        <!-- 1. KRA eTIMS Compliance -->
+        <div class="glass-card rounded-2xl p-5 sm:p-6 border border-emerald-500/30 space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2 text-emerald-400 text-xs font-mono font-bold">
+              <i data-lucide="file-check-2" class="w-4 h-4"></i>
+              <span>1. KRA eTIMS System-to-System Fiscalization</span>
+            </div>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/20 text-emerald-300">Statutory Tax</span>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed font-sans">
+            Under Kenya Revenue Authority (KRA) mandates, every electronic transaction must emit an eTIMS-compliant invoice with a cryptographic QR code:
+          </p>
+          <div class="space-y-2 text-xs">
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-1 font-mono text-[11px]">
+              <strong class="text-emerald-400 block text-[10px]">Asynchronous eTIMS Microservice:</strong>
+              <div class="text-slate-300">• Automatic webhook trigger upon M-Pesa escrow release.</div>
+              <div class="text-slate-300">• Emits JSON payload to KRA System-to-System eTIMS API.</div>
+              <div class="text-slate-300">• Returns signed fiscal verification number + official QR link on customer email/receipt.</div>
+              <div class="text-slate-400 text-[10px] mt-1 font-sans">Protects both CitiMarket and City Market stall merchants from informal market tax penalties and KRA ledger freezes.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. KDPA 2019 & ODPC Privacy -->
+        <div class="glass-card rounded-2xl p-5 sm:p-6 border border-cyan-500/30 space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2 text-cyan-400 text-xs font-mono font-bold">
+              <i data-lucide="shield-check" class="w-4 h-4"></i>
+              <span>2. Kenya Data Protection Act (KDPA 2019) & Privacy</span>
+            </div>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-cyan-500/20 text-cyan-300">ODPC Compliant</span>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed font-sans">
+            We handle sensitive PII: recipient phone numbers, residential home locations, and confidential handwritten romantic card love notes:
+          </p>
+          <div class="space-y-2 text-xs">
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
+              <strong class="text-cyan-400 block font-mono text-[11px]">7-Day Ephemeral Cryptographic Shredding:</strong>
+              <p class="text-slate-400 text-[11px] font-sans">
+                Recipient numbers and card messages are encrypted in transit and at rest with AES-256-GCM. 7 days post-delivery settlement, an automated cron worker cryptographically shreds the encryption key, permanently scrubbing PII while preserving anonymized double-entry accounting hashes ($\Delta = \text{KSh } 0.00$).
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. CBK Escrow Regulatory Safeguards -->
+        <div class="glass-card rounded-2xl p-5 sm:p-6 border border-amber-500/30 space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2 text-amber-400 text-xs font-mono font-bold">
+              <i data-lucide="landmark" class="w-4 h-4"></i>
+              <span>3. Central Bank of Kenya (CBK) Escrow Safeguards</span>
+            </div>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-amber-500/20 text-amber-300">No PSP License Trap</span>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed font-sans">
+            Holding third-party deposits for extended periods triggers Central Bank of Kenya (CBK) custodial wallet regulations:
+          </p>
+          <div class="space-y-2 text-xs">
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
+              <strong class="text-amber-400 block font-mono text-[11px]">Zero Deposit Custody Invariant:</strong>
+              <p class="text-slate-400 text-[11px] font-sans">
+                CitiMarket never holds deposits in proprietary bank accounts. Funds sit strictly inside a dedicated <strong>Safaricom Daraja Escrow Utility Account</strong> or a licensed partner bank trust account. The instant 0G delivery PIN verification triggers automated split disbursement, keeping float custody strictly off platform balance sheets.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Informal Addressing & Landmarking -->
+        <div class="glass-card rounded-2xl p-5 sm:p-6 border border-brand-500/30 space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2 text-brand-400 text-xs font-mono font-bold">
+              <i data-lucide="map-pinned" class="w-4 h-4"></i>
+              <span>4. The "Last-100m" Nairobi Addressing & Voice Notes</span>
+            </div>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-brand-500/20 text-brand-300">Vernacular Geocoding</span>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed font-sans">
+            Nairobi lacks uniform house numbering. GPS pins frequently land in the middle of estate walls or dead-end murram roads:
+          </p>
+          <div class="space-y-2 text-xs">
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
+              <strong class="text-brand-400 block font-mono text-[11px]">Three-Tier Vernacular Navigation:</strong>
+              <div class="text-slate-400 text-[11px] font-sans space-y-1">
+                <div>1. <strong>Landmark Anchors:</strong> Mandatory dropdowns (e.g., <em>"Opposite Quickmart, behind Total Energies"</em>).</div>
+                <div>2. <strong>Visual Gate Attributes:</strong> Gate color, floor, and apartment unit.</div>
+                <div>3. <strong>10s Opus Audio Cues:</strong> Senders record 10-second voice directions streamed to riders' Bluetooth headsets.</div>
+                <div>4. <strong>Automated Gate Fee Pool:</strong> KSh 50-100 commercial gate entry fee pre-authorized in rider wallet.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Surprise Gifting Protocol -->
+        <div class="glass-card rounded-2xl p-5 sm:p-6 border border-purple-500/30 space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2 text-purple-400 text-xs font-mono font-bold">
+              <i data-lucide="gift" class="w-4 h-4"></i>
+              <span>5. The Surprise Gifting Protocol & Perishable Logistics</span>
+            </div>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-purple-500/20 text-purple-300">Zero Spoilage Loss</span>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed font-sans">
+            60%+ of orders are surprises. If the recipient is absent, rejects the bouquet, or has an off-phone, perishable flowers cannot be restocked:
+          </p>
+          <div class="space-y-2 text-xs">
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
+              <strong class="text-purple-400 block font-mono text-[11px]">Graceful Surprise Escalation Workflow:</strong>
+              <div class="text-slate-400 text-[11px] font-sans space-y-1">
+                <div>• <strong>Mandatory Secondary Escrow:</strong> Colleague, receptionist, or trusted neighbor contact captured during checkout.</div>
+                <div>• <strong>Safe-Drop Photo Attestation:</strong> Rider uploads GPS-verified photo of bouquet at reception/gate; unlocks 80% florist payout.</div>
+                <div>• <strong>KSh 150 Dead-Loss Insurance Reserve:</strong> Built into surprise delivery pricing to absorb write-offs when bouquets are rejected.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Boda SACCO Alliance & Anti-Multi-Apping -->
+        <div class="glass-card rounded-2xl p-5 sm:p-6 border border-red-500/30 space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2 text-red-400 text-xs font-mono font-bold">
+              <i data-lucide="users" class="w-4 h-4"></i>
+              <span>6. Boda SACCO Alliance & Geofenced Route Locking</span>
+            </div>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-red-500/20 text-red-300">Ground Labor Safety</span>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed font-sans">
+            Downtown Nairobi stages are fiercely territorial, and riders running multiple apps simultaneously will let flowers wilt while delivering food:
+          </p>
+          <div class="space-y-2 text-xs">
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
+              <strong class="text-red-400 block font-mono text-[11px]">Field Operational Protections:</strong>
+              <div class="text-slate-400 text-[11px] font-sans space-y-1">
+                <div>• <strong>City Market Boda SACCO Agreement:</strong> Certified partnership with the 25 official stage riders, preventing marshal conflict.</div>
+                <div>• <strong>Anti-Multi-Apping Route Lock:</strong> App detects >400m detours outside optimal corridor; sounds alert and freezes bonus points.</div>
+                <div>• <strong>Audio-Only Bluetooth Nav:</strong> Eliminates handlebar phone mounts, preventing snatch-and-grab thefts on high-risk streets.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Multi-Rail Payment Redundancy -->
+        <div class="glass-card rounded-2xl p-5 sm:p-6 border border-blue-500/30 space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2 text-blue-400 text-xs font-mono font-bold">
+              <i data-lucide="credit-card" class="w-4 h-4"></i>
+              <span>7. Multi-Rail Payments & Diaspora Stripe Engine</span>
+            </div>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-blue-500/20 text-blue-300">Safaricom Failover</span>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed font-sans">
+            Safaricom Daraja experiences nationwide outages 2-4 times a year. Peak holidays (Valentine's, Mother's Day) cannot afford downtime:
+          </p>
+          <div class="space-y-2 text-xs">
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
+              <strong class="text-blue-400 block font-mono text-[11px]">Automated 3-Tier Payment Cascade:</strong>
+              <div class="text-slate-400 text-[11px] font-sans space-y-1">
+                <div>1. <strong>Primary Rail:</strong> Safaricom Lipa na M-Pesa STK Push.</div>
+                <div>2. <strong>Automated Failover:</strong> Airtel Money Paybill + Pesapal Visa/Mastercard debit processing.</div>
+                <div>3. <strong>Diaspora Gifting Rail:</strong> Stripe & Apple Pay integration for Kenyans in UK/US sending bouquets home ($45 AOV).</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Cold-Box Mechanical Vibration Dampers -->
+        <div class="glass-card rounded-2xl p-5 sm:p-6 border border-emerald-500/30 space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2 text-emerald-400 text-xs font-mono font-bold">
+              <i data-lucide="disc" class="w-4 h-4"></i>
+              <span>8. Cold-Box Mechanical Dampers & Bio-PCM Packs</span>
+            </div>
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/20 text-emerald-300">Hardware Engineering</span>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed font-sans">
+            Software Kalman filters track shocks, but continuous 30-60 Hz road vibrations on murram roads snap rose flower heads ("bent-neck" vascular collapse):
+          </p>
+          <div class="space-y-2 text-xs">
+            <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
+              <strong class="text-emerald-400 block font-mono text-[11px]">Physical Hardware Invariants:</strong>
+              <div class="text-slate-400 text-[11px] font-sans space-y-1">
+                <div>• <strong>4x 60A Silicone Bushings:</strong> Elastomer bracket mounts isolate high-frequency road vibration harmonics (>20 Hz).</div>
+                <div>• <strong>Passive Bio-PCM (+8°C) Thermal Packs:</strong> Phase Change Material maintains steady 8-12°C for 6 hours with zero battery drain.</div>
+                <div>• <strong>Anti-Slosh Gyroscopic Stem Phials:</strong> Individual rubber membrane collars seal water, preventing leaks during 40 km/h banking.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
   </main>
 
   <!-- FOOTER -->
@@ -3965,8 +4207,69 @@ val Background = Color(0xFF080D1A)</pre>
       },
       {
         num: 10,
+        title: "Kenyan Legal Frameworks & Field Operations Pragmatism",
+        badge: "Slide 10 // Risk & Compliance",
+        content: 
+          <div class="space-y-5 sm:space-y-6">
+            <span class="text-xs uppercase tracking-wider text-emerald-400 font-mono">De-Risking the Last Mile</span>
+            <h2 class="text-xl sm:text-3xl font-extrabold text-white leading-tight">
+              KRA eTIMS fiscalization, KDPA 2019 privacy, CBK escrow safety, and Nairobi ground reality.
+            </h2>
+
+            <!-- Layman Explanation Box -->
+            <div class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs sm:text-sm text-emerald-200 leading-relaxed font-sans">
+              <strong class="text-emerald-400 font-mono uppercase block mb-1">Why does this matter to investors?</strong>
+              Logistics startups in Africa rarely fail from software bugs; they fail when tax authorities freeze accounts, data regulators issue fines, boda riders get harassed at gates, or surprise deliveries spoil because recipients are unreachable. We have engineered physical, legal, and operational safeguards for every ground risk.
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 max-w-4xl text-xs font-sans">
+              <div class="p-4 rounded-xl bg-slate-900 border border-emerald-500/30 space-y-1.5">
+                <div class="font-bold text-white text-sm flex items-center space-x-2">
+                  <i data-lucide="file-check-2" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+                  <span>KRA eTIMS & KDPA Privacy Compliance</span>
+                </div>
+                <p class="text-slate-300 leading-relaxed">
+                  Real-time System-to-System integration with KRA eTIMS API automatically emits signed fiscal QR codes on our 15% platform take. Registered with ODPC as Data Controller; automated 7-day cryptographic shredding purges recipient phone numbers and card love notes permanently.
+                </p>
+              </div>
+
+              <div class="p-4 rounded-xl bg-slate-900 border border-amber-500/30 space-y-1.5">
+                <div class="font-bold text-white text-sm flex items-center space-x-2">
+                  <i data-lucide="landmark" class="w-4 h-4 text-amber-400 shrink-0"></i>
+                  <span>CBK Escrow Boundary & Multi-Rail Payments</span>
+                </div>
+                <p class="text-slate-300 leading-relaxed">
+                  Avoids unlicensed PSP deposit-taker classification by anchoring escrow inside official Safaricom Daraja utility accounts. Multi-rail automated failover (Airtel Money, Pesapal, and Stripe for US/UK diaspora gifting) guarantees 100% uptime during M-Pesa maintenance.
+                </p>
+              </div>
+
+              <div class="p-4 rounded-xl bg-slate-900 border border-cyan-500/30 space-y-1.5">
+                <div class="font-bold text-white text-sm flex items-center space-x-2">
+                  <i data-lucide="map-pin" class="w-4 h-4 text-cyan-400 shrink-0"></i>
+                  <span>Last-100m Addressing & Surprise Gifts</span>
+                </div>
+                <p class="text-slate-300 leading-relaxed">
+                  Solves informal Nairobi addresses via vernacular landmarks ("Behind Total"), gate color, and 10s audio voice notes. Handles surprise recipient no-shows via secondary escrow, Safe-Drop photo attestation, and a KSh 150 dead-loss insurance reserve pool.
+                </p>
+              </div>
+
+              <div class="p-4 rounded-xl bg-slate-900 border border-purple-500/30 space-y-1.5">
+                <div class="font-bold text-white text-sm flex items-center space-x-2">
+                  <i data-lucide="shield" class="w-4 h-4 text-purple-400 shrink-0"></i>
+                  <span>Boda SACCO Alliance & Cold-Box Dampers</span>
+                </div>
+                <p class="text-slate-300 leading-relaxed">
+                  City Market Boda SACCO partnership eliminates CBD stage friction. Geofenced route locking prevents multi-apping delays. 60A silicone elastomer bracket bushings absorb 30-60 Hz road vibrations to prevent rose neck snapping on murram roads.
+                </p>
+              </div>
+            </div>
+          </div>
+        
+      },
+      {
+        num: 11,
         title: "Capital Structure: Starting Capital vs Seed Ask",
-        badge: "Slide 10 // Capital Structure",
+        badge: "Slide 11 // Capital Structure",
         content: `
           <div class="space-y-5 sm:space-y-6">
             <span class="text-xs uppercase tracking-wider text-emerald-400 font-mono">Two Distinct Financing Milestones</span>
