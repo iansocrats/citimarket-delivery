@@ -1,59 +1,43 @@
-# 🌸 CitiMarket Delivery (Nairobi, Kenya)
+# CitiMarket Delivery — Executive Technical Pitch & Architecture Portal
 
-> **On-Demand & Scheduled Fresh Flower Logistics Platform with Double-Entry Accounting Engine**
-
-CitiMarket Delivery digitizes the historic flower stalls at City Market (Muindi Mbingu St, Nairobi CBD), connecting them to consumers across Nairobi (Kilimani, Westlands, Karen, Upper Hill) via an insulated Boda Boda flower courier network.
-
----
-
-## 🚀 Key System Features
-
-1. **Consumer Gifting Workflow**:
-   - Fresh Naivasha rose arrangements.
-   - Handwritten calligraphy greeting card inscription preview.
-   - Secret surprise delivery mode (*"Call sender, do not spoil surprise to recipient"*).
-   - **Simulated Lipa na M-Pesa STK Push** with instant payment verification.
-
-2. **City Market Florist Portal**:
-   - Live order dispatch notifications.
-   - Stem trimming and hydration in transport water vials.
-   - Quality control pre-dispatch photo checkpoint (`#QC-8842`).
-
-3. **Flower Courier App (Insulated Boda Boda)**:
-   - Proximity gig matching.
-   - Insulated humidity-controlled container verification.
-   - Nairobi corridor route navigation and surprise handoff.
-
-4. **Double-Entry General Ledger (Zero Leakage)**:
-   - Cryptographically verifiable T-Accounts (Assets, Liabilities, Accounts Payable, Net Platform Take Rate).
-   - Strict audit invariant: $\sum \text{Debits} \equiv \sum \text{Credits}$ ($\Delta = 0.00$).
-
-5. **Superapp Feature Suite (On-Demand Logistics & Safety Engine)**:
-   - **CitiExpress™ Multi-Tier Fleets**: Express Boda Boda (35-45m), Climate-Controlled Cool-Van (AC 18°C for delicate hydrangeas/lilies), and Saver Batch Delivery (-35% discount).
-   - **Multi-Stop Drop-Off**: Multi-destination routing (e.g. Kilimani + Westlands in a single dispatch).
-   - **Stored Wallet & FlowerPoints**: 10 FlowerPoints earned per KSh 1,000 spent, stored value balance.
-   - **Safety Shield & Privacy**: Masked VoIP proxy calling (`+254 20 790 4821`), in-app quick chat, 4-digit recipient PIN proof-of-delivery (`8842`), and CitiFresh™ freshness guarantee.
-   - **Driver Instant M-Pesa Cash-Out**: 1-click B2C liquidity payout for couriers immediately upon PIN escrow release.
-   - **Merchant Prep Pacing**: JIT courier dispatch synchronization to minimize flower exposure.
-
-6. **Engineering Architecture**:
-   - **Spatial Indexing**: Uber H3 Resolution 8 Hexagons (`0x887a40660ffffff`).
-   - **Operations Research**: Maximum-Weight Bipartite Dispatch Matching.
-   - **Concurrency Control**: Atomic Redis distributed locks (`NX, EX=15s`) and Optimistic Concurrency Control (`version_id`).
-   - **Distributed Transactions**: Saga Orchestration with automated M-Pesa compensating refunds.
+> **Nairobi Cold-Chain Logistics & Zero-Trust Fintech Escrow**  
+> Based on the Master Technical Pitch Deck: `MASTER_TECHNICAL_PITCH_DECK.md`  
+> Live Portal: [https://iansocrats.github.io/citimarket-delivery/](https://iansocrats.github.io/citimarket-delivery/)
 
 ---
 
-## 🛠️ Local Development
+## 🌟 Overview
 
-Open `index.html` directly in your browser, or run a local static server:
-
-```bash
-npx serve .
-```
+CitiMarket Delivery is an enterprise spatial logistics and fintech escrow platform designed for high-AOV perishable gifting in Nairobi, Kenya. It connects City Market's artisan florists with diaspora and corporate senders via an upright cold-chain motorbike fleet, native sensor apps, and automated Lipa na M-Pesa escrow settlements.
 
 ---
 
-## 🌐 Deployment
+## 🏗️ Core Architectural Separation
 
-Deployed via Vercel and GitHub.
+| Tier | Technology | Key Responsibility |
+| :--- | :--- | :--- |
+| **Native Android Apps** | Kotlin, CameraX, Room SQLite, Bluetooth LE | Physical field execution: continuous background GPS, 3-axis accelerometer tilt/drop detection, Bluetooth 58mm thermal ticket printing, and 0G offline PIN proofs. |
+| **Public Web Portal** | Next.js 14, Tailwind CSS, Mapbox | Customer & partner acquisition: zero-install viral WhatsApp gifting, interactive Nairobi zone/fee picker, instant SMS web tracking. |
+| **Central Cloud Backend** | GCP Cloud Run, Cloud SQL PostGIS, Memorystore Redis | Authoritative double-entry ledger ($\Delta = 0.00$), Safaricom Daraja STK engine, and spatial dispatch state machine. |
+
+---
+
+## 🏛️ The 10-Slide Investor Deck Structure
+
+1. **Slide 1: Vision & Purpose** — The precision cold-chain logistics & escrow backbone powering Africa's high-stakes gifting economy.
+2. **Slide 2: The Nairobi Perishable Problem** — 40% floral spoilage, 70% surprise ruined, CBD 0G basements, merchant capital lock.
+3. **Slide 3: The Solution** — Upright 15ml stem-hydration carriers, Cloud Run backend, Android sensor apps.
+4. **Slide 4: Market Opportunity** — TAM: $1.2B / SAM: $180M / SOM: $14.2M.
+5. **Slide 5: The Technical Moat** — Accelerometer tilt/drop physics, 0G offline PIN cryptographic handshake, sub-30ms Safaricom edge.
+6. **Slide 6: Architectural Separation** — Native Android Mobile Apps vs Public Web Portal vs Cloud Run Central Backend.
+7. **Slide 7: Business Model & Unit Economics** — KSh 3,850 AOV, 35% take-rate, KSh 595 platform gross profit.
+8. **Slide 8: SDLC & Solo Founder AI Multiplier** — Gemini Pro capital efficiency: KSh 6,700 out-of-pocket vs KSh 1.72M agency.
+9. **Slide 9: Traction & Go-to-Market Milestones** — City Market Stalls #42 & #43 signed as anchor merchants; 45-min SLA.
+10. **Slide 10: The Ask & Capital Allocation** — KSh 5,000,000 ($38k USD) Seed Round for 14-month runway.
+
+---
+
+## ⚡ Solo Founder + Gemini Pro Capital Model
+
+* **Traditional 5-Contractor Agency**: KSh 1,721,500 (~$13.2k USD) / 56 working days.
+* **Solo Founder + Gemini Pro**: **KSh 6,700 (~$50 USD)** out-of-pocket / 21 working days (**-99.6% cash savings**).
