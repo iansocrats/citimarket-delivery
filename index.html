@@ -809,6 +809,49 @@
         </div>
       </div>
 
+      <!-- PART A2: GOOGLE CLOUD RAM & SSD ZERO-WASTE EXPLAINER -->
+      <div class="glass-card rounded-2xl p-5 sm:p-6 border-l-4 border-l-cyan-500 space-y-4">
+        <div class="flex items-center space-x-2 text-cyan-400 text-xs font-mono uppercase">
+          <i data-lucide="cpu" class="w-4 h-4"></i>
+          <span>Google Cloud Efficiency Thesis: Why Pay for Cloud Memorystore Redis?</span>
+        </div>
+        <h3 class="text-base sm:text-lg font-bold text-white">
+          "If I'm using Google Cloud, isn't the RAM and SSD enough? What wouldn't I spend?"
+        </h3>
+        <p class="text-xs text-slate-300 leading-relaxed font-sans">
+          Cloud providers upsell managed services like Memorystore Redis ($30–$50/mo), Cloud SQL ($62/mo), and Cloud Load Balancers ($18/mo) as separate billable line items. But when you rent a single Linux VM (e.g. GCP <code class="text-brand-300">e2-small</code> or a Hetzner/DO VPS), you are <em>already paying for dedicated RAM, vCPU, and NVMe SSD</em>.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono">
+          <div class="p-3.5 rounded-xl bg-slate-900 border border-dark-border">
+            <div class="flex items-center justify-between text-cyan-400 font-bold mb-1">
+              <span>Redis in RAM</span>
+              <span class="text-[10px] bg-cyan-500/20 px-1.5 py-0.5 rounded text-cyan-300">Saves $30-$50/mo</span>
+            </div>
+            <p class="text-slate-400 font-sans text-[11px] mt-1">
+              Redis is an open-source in-memory store. 100,000 active delivery keys consume &lt;35MB of RAM (0.8% of a 4GB VM). Running <code class="text-slate-300">docker run redis:7-alpine</code> in local RAM delivers <strong>0.05ms localhost latency</strong> vs 1.5ms network-hopped Memorystore for <strong>$0.00</strong>.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-900 border border-dark-border">
+            <div class="flex items-center justify-between text-brand-400 font-bold mb-1">
+              <span>PostGIS on NVMe SSD</span>
+              <span class="text-[10px] bg-brand-500/20 px-1.5 py-0.5 rounded text-brand-300">Saves $62/mo</span>
+            </div>
+            <p class="text-slate-400 font-sans text-[11px] mt-1">
+              PostgreSQL 16 + PostGIS running in a Docker container on the VM's local SSD processes spatial polygon lookups in &lt;1ms. Nightly encrypted GPG database dumps stream to Cloudflare R2 ($0 egress) for zero-loss recovery.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-900 border border-dark-border">
+            <div class="flex items-center justify-between text-amber-400 font-bold mb-1">
+              <span>Caddy Auto-TLS/SSL</span>
+              <span class="text-[10px] bg-amber-500/20 px-1.5 py-0.5 rounded text-amber-300">Saves $18/mo</span>
+            </div>
+            <p class="text-slate-400 font-sans text-[11px] mt-1">
+              Caddy Web Server automatically provisions and renews free Let's Encrypt SSL/TLS certificates and reverse-proxies Safaricom M-Pesa webhooks in local memory, eliminating Google Cloud Load Balancer markups entirely.
+            </p>
+          </div>
+        </div>
+      </div>
+
       <!-- PART B: REAL-WORLD CLOUD & THIRD-PARTY API OPERATIONAL COSTS -->
       <div class="glass-card-active rounded-2xl p-5 sm:p-6 space-y-6">
         <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
@@ -913,17 +956,33 @@
             <span class="text-xs font-mono font-bold text-white uppercase">Simulate Monthly Delivery Volume:</span>
             <span id="vol-display" class="text-xs font-mono font-bold text-brand-400 bg-brand-500/10 px-3 py-1 rounded border border-brand-500/20">2,000 Deliveries / Month</span>
           </div>
-          <input type="range" min="500" max="10000" step="500" value="2000" class="w-full h-3 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-brand-500 touch-target" id="vol-slider" oninput="updateCloudVolume(this.value)">
+
+          <!-- Quick Preset Buttons & Breakeven Badge -->
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+            <div class="flex items-center space-x-1.5 overflow-x-auto pb-1 scroll-touch">
+              <span class="text-[11px] font-mono text-slate-400 uppercase mr-1 shrink-0">Presets:</span>
+              <button onclick="setVolume(150)" class="px-2.5 py-1 rounded-lg text-xs font-mono font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-dark-border touch-target shrink-0">150 (Pilot)</button>
+              <button onclick="setVolume(1000)" class="px-2.5 py-1 rounded-lg text-xs font-mono font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-dark-border touch-target shrink-0">1,000 (Growth)</button>
+              <button onclick="setVolume(2000)" class="px-2.5 py-1 rounded-lg text-xs font-mono font-bold bg-brand-500/20 text-brand-400 border border-brand-500/30 touch-target shrink-0">2,000 (Nairobi Core)</button>
+              <button onclick="setVolume(5000)" class="px-2.5 py-1 rounded-lg text-xs font-mono font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 touch-target shrink-0">5,000 (Nationwide)</button>
+            </div>
+            <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[11px] font-mono font-bold flex items-center space-x-1 shrink-0">
+              <i data-lucide="check-circle" class="w-3.5 h-3.5"></i>
+              <span>Breakeven: 65 Orders/Month (~2 orders/day)</span>
+            </span>
+          </div>
+
+          <input type="range" min="50" max="10000" step="25" value="2000" class="w-full h-3 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-brand-500 touch-target" id="vol-slider" oninput="updateCloudVolume(this.value)">
 
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4 text-xs font-mono">
             <div class="p-3 rounded-xl bg-slate-900 border border-dark-border">
               <span class="text-slate-400 text-[10px] block">TOTAL MONTHLY OPEX</span>
-              <span id="dyn-cost" class="text-base font-bold text-white mt-0.5 block">KSh 1,660</span>
+              <span id="dyn-cost" class="text-base font-bold text-white mt-0.5 block">KSh 1,960</span>
               <span id="dyn-cost-sub" class="text-[10px] text-slate-500">Ultra-Lean VPS + WhatsApp</span>
             </div>
             <div class="p-3 rounded-xl bg-slate-900 border border-dark-border">
               <span class="text-slate-400 text-[10px] block">TECH OPEX PER ORDER</span>
-              <span id="dyn-per-order" class="text-base font-bold text-brand-400 mt-0.5 block">KSh 0.83</span>
+              <span id="dyn-per-order" class="text-base font-bold text-brand-400 mt-0.5 block">KSh 0.98</span>
               <span class="text-[10px] text-slate-500">vs KSh 35 gateway fee</span>
             </div>
             <div class="p-3 rounded-xl bg-slate-900 border border-dark-border">
@@ -932,9 +991,9 @@
               <span class="text-[10px] text-slate-500">KSh 15.30 per batch</span>
             </div>
             <div class="p-3 rounded-xl bg-slate-900 border border-dark-border">
-              <span class="text-slate-400 text-[10px] block">NET PLATFORM GROSS PROFIT</span>
-              <span id="dyn-profit" class="text-base font-bold text-emerald-400 mt-0.5 block">KSh 1,190,000</span>
-              <span class="text-[10px] text-slate-500">@ KSh 595.00 / order</span>
+              <span class="text-slate-400 text-[10px] block">NET PLATFORM PROFIT</span>
+              <span id="dyn-profit" class="text-base font-bold text-emerald-400 mt-0.5 block">KSh 1,188,040</span>
+              <span id="dyn-profit-sub" class="text-[10px] text-slate-500">@ KSh 595.00 / order</span>
             </div>
           </div>
         </div>
@@ -1066,6 +1125,184 @@
           <p class="text-slate-300 font-sans text-xs leading-relaxed">
             <strong>Role:</strong> Architecture Critic. Cross-checks security threat models, edge cases, and Swahili/Sheng language nuances.
           </p>
+        </div>
+      </div>
+
+      <!-- PART E: CUSTOMER ACQUISITION & ADVERTISING STRATEGY -->
+      <div class="glass-card rounded-2xl p-5 sm:p-6 border-l-4 border-l-brand-500 space-y-4">
+        <div class="flex items-center space-x-2 text-brand-400 text-xs font-mono uppercase">
+          <i data-lucide="megaphone" class="w-4 h-4"></i>
+          <span>GTM & Unit Economics: Customer Acquisition Strategy & Budget</span>
+        </div>
+        <h3 class="text-base sm:text-lg font-bold text-white">
+          How We Advertise & Acquire Gifting Customers: Payback on Order #1
+        </h3>
+        <p class="text-xs text-slate-300 leading-relaxed font-sans">
+          Unlike general food delivery apps with high customer acquisition cash burn, floral and surprise gifting has an organic physical epicenter and viral word-of-mouth loops. We deploy three laser-focused customer acquisition channels:
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono">
+          <div class="p-3.5 rounded-xl bg-slate-900 border border-dark-border">
+            <div class="flex items-center justify-between text-brand-400 font-bold mb-1">
+              <span>1. Hub Counter QR Stands</span>
+              <span class="text-[10px] bg-brand-500/20 px-1.5 py-0.5 rounded text-brand-300">KSh 2,500 One-off</span>
+            </div>
+            <p class="text-slate-400 font-sans text-[11px] mt-1">
+              Physical QR counter talkers placed at City Market Stalls #42 & #43 on Muindi Mbingu St. Walk-in shoppers scan to send bouquets to Westlands/Kilimani in 45 mins. <strong>Acquisition Cost: ~KSh 0</strong> after printing.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-900 border border-dark-border">
+            <div class="flex items-center justify-between text-cyan-400 font-bold mb-1">
+              <span>2. Targeted Meta Ads</span>
+              <span class="text-[10px] bg-cyan-500/20 px-1.5 py-0.5 rounded text-cyan-300">KSh 400/day (KSh 12k/mo)</span>
+            </div>
+            <p class="text-slate-400 font-sans text-[11px] mt-1">
+              Instagram/Facebook video ads hyper-targeted within 8 km of Nairobi CBD to users celebrating birthdays/anniversaries. <strong>CAC: KSh 200 per order</strong>. With platform margin of KSh 595, CAC is 100% paid back on Order 1 (+KSh 395 net cash profit).
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-900 border border-dark-border">
+            <div class="flex items-center justify-between text-amber-400 font-bold mb-1">
+              <span>3. Diaspora Gifting Portal</span>
+              <span class="text-[10px] bg-amber-500/20 px-1.5 py-0.5 rounded text-amber-300">Diaspora Ad Pool</span>
+            </div>
+            <p class="text-slate-400 font-sans text-[11px] mt-1">
+              Targeted campaigns to Kenyans living in the UK, US, and UAE sending luxury surprise bouquets home to Nairobi, Mombasa, and Nakuru. High basket value (AOV &gt; KSh 6,500) paid via Stripe/PayPal with 0% chargebacks.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PART F: KSH 5,000,000 SEED ROUND ITEMIZED ACCOUNTING -->
+      <div class="glass-card-active rounded-2xl p-5 sm:p-6 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <div class="flex items-center space-x-2 text-emerald-400 text-xs font-mono uppercase">
+              <i data-lucide="file-spreadsheet" class="w-4 h-4"></i>
+              <span>Nationwide Scale: Full Capital Accounting</span>
+            </div>
+            <h3 class="text-base sm:text-lg font-bold text-white mt-0.5">
+              KSh 5,000,000 (~$38,460 USD) Seed Round Itemized Accounting
+            </h3>
+          </div>
+          <span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-mono font-bold self-start sm:self-auto">
+            14-Month Operational Runway
+          </span>
+        </div>
+        <p class="text-xs text-slate-300 font-sans leading-relaxed">
+          Every single shilling of the KSh 5,000,000 cross-country expansion round is accounted for across physical cold fleet assets, merchant enablement hardware, and escrow liquidity reserves:
+        </p>
+
+        <!-- Mobile swipe indicator -->
+        <div class="sm:hidden text-[10px] text-slate-400 font-mono flex items-center space-x-1">
+          <i data-lucide="chevrons-right" class="w-3.5 h-3.5 text-brand-400"></i>
+          <span>Swipe horizontally to view full seed accounting</span>
+        </div>
+
+        <div class="overflow-x-auto scroll-touch -mx-2 sm:mx-0 px-2 sm:px-0">
+          <table class="w-full text-left font-mono text-xs min-w-[620px]">
+            <thead class="bg-slate-950/80 text-slate-400 border-b border-dark-border">
+              <tr>
+                <th class="p-3">Category & Line Item</th>
+                <th class="p-3">Quantity & Specification</th>
+                <th class="p-3 text-right">KES (KSh)</th>
+                <th class="p-3 text-right">USD ($)</th>
+                <th class="p-3 text-right">% Share</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-dark-border text-slate-300">
+              <!-- Category 1: Fleet -->
+              <tr class="bg-slate-900/40 font-bold text-brand-400">
+                <td colspan="5" class="p-2.5 font-sans uppercase tracking-wider text-[11px]">1. Fleet Assets & Inter-City Cold Corridors (45.0% · KSh 2,250,000)</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-sans text-white">Upright Cold Motorbike Boxes</td>
+                <td class="p-3 text-slate-400 font-mono text-[11px]">25 Custom fiberglass boxes with stem-water phial racks</td>
+                <td class="p-3 text-right font-bold text-white">KSh 450,000</td>
+                <td class="p-3 text-right text-slate-400">$3,460</td>
+                <td class="p-3 text-right text-slate-400">9.0%</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-sans text-white">Rider Hardware Kits & Gear</td>
+                <td class="p-3 text-slate-400 font-mono text-[11px]">25 Anti-vibration phone mounts, powerbanks, thermal jackets</td>
+                <td class="p-3 text-right font-bold text-white">KSh 200,000</td>
+                <td class="p-3 text-right text-slate-400">$1,540</td>
+                <td class="p-3 text-right text-slate-400">4.0%</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-sans text-white">Naivasha-Nairobi Chilled Transit Van</td>
+                <td class="p-3 text-slate-400 font-mono text-[11px]">12-Month lease + active refrigeration unit retrofit</td>
+                <td class="p-3 text-right font-bold text-white">KSh 900,000</td>
+                <td class="p-3 text-right text-slate-400">$6,920</td>
+                <td class="p-3 text-right text-slate-400">18.0%</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-sans text-white">Intermediate Hub Cold Staging Chillers</td>
+                <td class="p-3 text-slate-400 font-mono text-[11px]">2 Commercial display chillers (Mombasa Nyali & Nakuru CBD)</td>
+                <td class="p-3 text-right font-bold text-white">KSh 700,000</td>
+                <td class="p-3 text-right text-slate-400">$5,385</td>
+                <td class="p-3 text-right text-slate-400">14.0%</td>
+              </tr>
+
+              <!-- Category 2: Merchants -->
+              <tr class="bg-slate-900/40 font-bold text-cyan-400">
+                <td colspan="5" class="p-2.5 font-sans uppercase tracking-wider text-[11px]">2. Merchant Enablement & Farm Hubs (35.0% · KSh 1,750,000)</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-sans text-white">Artisan Florist Hardware Kits</td>
+                <td class="p-3 text-slate-400 font-mono text-[11px]">30 Samsung Galaxy Tab A9 4G LTE + 58mm Bluetooth Printers</td>
+                <td class="p-3 text-right font-bold text-white">KSh 840,000</td>
+                <td class="p-3 text-right text-slate-400">$6,460</td>
+                <td class="p-3 text-right text-slate-400">16.8%</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-sans text-white">Naivasha Farm Gate Barcode Integration</td>
+                <td class="p-3 text-slate-400 font-mono text-[11px]">Farm terminal hardware, 2D barcode thermal label printers</td>
+                <td class="p-3 text-right font-bold text-white">KSh 260,000</td>
+                <td class="p-3 text-right text-slate-400">$2,000</td>
+                <td class="p-3 text-right text-slate-400">5.2%</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-sans text-white">Point-of-Sale Branding & Displays</td>
+                <td class="p-3 text-slate-400 font-mono text-[11px]">Counter talkers, premium packaging boxes & branded cards</td>
+                <td class="p-3 text-right font-bold text-white">KSh 650,000</td>
+                <td class="p-3 text-right text-slate-400">$5,000</td>
+                <td class="p-3 text-right text-slate-400">13.0%</td>
+              </tr>
+
+              <!-- Category 3: Working Capital & Marketing -->
+              <tr class="bg-slate-900/40 font-bold text-emerald-400">
+                <td colspan="5" class="p-2.5 font-sans uppercase tracking-wider text-[11px]">3. Working Capital, Float & Growth Marketing (20.0% · KSh 1,000,000)</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-sans text-white">Safaricom Daraja B2C Escrow Float</td>
+                <td class="p-3 text-slate-400 font-mono text-[11px]">Expanded liquidity reserve for daily multi-city vendor disbursements</td>
+                <td class="p-3 text-right font-bold text-white">KSh 400,000</td>
+                <td class="p-3 text-right text-slate-400">$3,075</td>
+                <td class="p-3 text-right text-slate-400">8.0%</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-sans text-white">Multi-City Performance Marketing</td>
+                <td class="p-3 text-slate-400 font-mono text-[11px]">Targeted Meta ads (Nairobi/Mombasa/Nakuru) + UK/US diaspora</td>
+                <td class="p-3 text-right font-bold text-white">KSh 450,000</td>
+                <td class="p-3 text-right text-slate-400">$3,460</td>
+                <td class="p-3 text-right text-slate-400">9.0%</td>
+              </tr>
+              <tr>
+                <td class="p-3 font-sans text-white">Regulatory, Insurance & Permits</td>
+                <td class="p-3 text-slate-400 font-mono text-[11px]">County single business permits, transit goods-in-transit insurance</td>
+                <td class="p-3 text-right font-bold text-white">KSh 150,000</td>
+                <td class="p-3 text-right text-slate-400">$1,155</td>
+                <td class="p-3 text-right text-slate-400">3.0%</td>
+              </tr>
+
+              <!-- Total Row -->
+              <tr class="bg-slate-950 font-bold border-t-2 border-brand-500 text-sm">
+                <td colspan="2" class="p-3.5 text-white font-sans uppercase">Total Seed Capital Deployment</td>
+                <td class="p-3.5 text-right text-brand-400 font-extrabold font-mono">KSh 5,000,000</td>
+                <td class="p-3.5 text-right text-brand-400 font-extrabold font-mono">$38,460</td>
+                <td class="p-3.5 text-right text-brand-400 font-extrabold font-mono">100.0%</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
@@ -1308,16 +1545,16 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 max-w-4xl text-xs font-mono">
               <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border-l-4 border-l-amber-500 space-y-2">
-                <div class="font-bold text-white text-sm">Native Android Mobile App</div>
-                <div class="text-slate-400 font-sans">For Couriers & Florists: Background GPS while locked in phone handlebar mounts, tilt/drop sensors, Bluetooth 58mm docket printing, and offline SQLite.</div>
+                <div class="font-bold text-white text-sm">Native Android App (Kotlin 2.0 & Compose)</div>
+                <div class="text-slate-400 font-sans">For Couriers & Florists: Built in Kotlin 2.0 + Jetpack Compose. Continuous 3s background GPS via ForegroundService, SensorManager tilt/pothole monitoring, CameraX quality gate, 58mm Bluetooth docket printing, and 0G offline Room SQLite.</div>
               </div>
               <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border-l-4 border-l-blue-500 space-y-2">
-                <div class="font-bold text-white text-sm">Public Web Portal (Next.js)</div>
-                <div class="text-slate-400 font-sans">For Customers & Partners: Zero app install friction. Anyone clicks a WhatsApp link, checks their Kenya city zone, and pays via M-Pesa in under 60 seconds.</div>
+                <div class="font-bold text-white text-sm">Public Web Portal (Next.js 14)</div>
+                <div class="text-slate-400 font-sans">For Customers & Partners: Zero app install friction. Anyone clicks a WhatsApp link, checks their Kenya city zone, and pays via M-Pesa in under 60 seconds with zero app store download drop-off.</div>
               </div>
               <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border-l-4 border-l-brand-500 space-y-2">
-                <div class="font-bold text-white text-sm">Central Cloud Backend (GCP)</div>
-                <div class="text-slate-400 font-sans">Cloud Run & PostgreSQL 16: The bank vault. Holds the double-entry financial ledger so not a single cent can be stolen, forged, or lost.</div>
+                <div class="font-bold text-white text-sm">Central Cloud Backend (GCP Docker VM)</div>
+                <div class="text-slate-400 font-sans">Runs on a single Google Cloud VM. Uses existing RAM for Redis and SSD for PostgreSQL 16 + PostGIS double-entry ledger, cutting $122/mo of managed cloud bloat.</div>
               </div>
             </div>
           </div>
@@ -1408,6 +1645,12 @@
               Traditional startups burn KSh 1,700,000+ hiring 5 contractors who spend weeks arguing in meetings. By building solo (Me) and using AI subscriptions (Gemini Pro, Claude, Cursor), I eliminate 100% of communication waste and build the entire platform in 18 to 21 working days for less than the cost of dinner.
             </div>
 
+            <!-- Customer Acquisition Box -->
+            <div class="p-4 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-xs sm:text-sm text-cyan-200 leading-relaxed font-sans">
+              <strong class="text-cyan-400 font-mono uppercase block mb-1">Customer Acquisition Strategy (Paid Back on Order 1):</strong>
+              We acquire gift senders profitably through 3 core channels: 1) City Market stall counter QR stands (KSh 3k one-time); 2) Targeted Meta/Instagram Ads for Nairobi gifting keywords @ KSh 400/day (CAC: KSh 200, paid back immediately on Order 1 from KSh 595 profit); and 3) UK/US diaspora campaigns for Mother's Day & birthdays.
+            </div>
+
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 max-w-4xl text-xs font-mono">
               <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border border-dark-border space-y-2">
                 <div class="text-slate-400">5-Contractor Agency</div>
@@ -1486,30 +1729,30 @@
             <!-- 2. Seed Ask Breakdown -->
             <div class="p-4 sm:p-5 rounded-xl bg-slate-900 border border-brand-500/30 space-y-3">
               <div class="flex items-center justify-between">
-                <span class="font-bold text-brand-400 text-sm font-mono uppercase">2. Institutional Seed Round Financing Ask</span>
+                <span class="font-bold text-brand-400 text-sm font-mono uppercase">2. Nationwide Seed Financing Round Accounting</span>
                 <span class="font-bold text-brand-400 font-mono text-sm">KSh 5,000,000 (~$38,000 USD)</span>
               </div>
               <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono text-xs">
                 <div class="p-3 rounded-lg bg-slate-950 border border-dark-border">
-                  <div class="text-slate-400">45% Fleet Scale</div>
+                  <div class="text-slate-400 font-bold">45% Fleet & Corridors</div>
                   <div class="text-base font-bold text-white mt-0.5">KSh 2,250,000</div>
-                  <div class="text-[10px] text-slate-500 font-sans">25 Upright cold carriers & bike docks</div>
+                  <div class="text-[10px] text-slate-400 font-sans mt-1">25 bike boxes (KSh 450k), 25 rider kits (KSh 200k), Naivasha van lease & chiller retrofit (KSh 900k), Mombasa/Nakuru hub chillers (KSh 700k).</div>
                 </div>
                 <div class="p-3 rounded-lg bg-slate-950 border border-dark-border">
-                  <div class="text-slate-400">35% Merchant Growth</div>
+                  <div class="text-slate-400 font-bold">35% Merchant Rollout</div>
                   <div class="text-base font-bold text-white mt-0.5">KSh 1,750,000</div>
-                  <div class="text-[10px] text-slate-500 font-sans">Onboard 30 florists in Nairobi & Coast</div>
+                  <div class="text-[10px] text-slate-400 font-sans mt-1">Onboarding 30 florists across Nairobi & Coast with Samsung Tab A9s & thermal printers (KSh 840k), Naivasha grower barcode integration (KSh 260k), counter POS displays (KSh 650k).</div>
                 </div>
                 <div class="p-3 rounded-lg bg-slate-950 border border-dark-border">
-                  <div class="text-slate-400">20% Float & Mktg</div>
+                  <div class="text-slate-400 font-bold">20% Float & Marketing</div>
                   <div class="text-base font-bold text-emerald-400 mt-0.5">KSh 1,000,000</div>
-                  <div class="text-[10px] text-slate-500 font-sans">Safaricom B2C escrow float reserve</div>
+                  <div class="text-[10px] text-slate-400 font-sans mt-1">Safaricom Daraja B2C float expansion (KSh 400k), multi-city performance ads & diaspora campaigns (KSh 450k), county regulatory compliance (KSh 150k).</div>
                 </div>
               </div>
             </div>
 
             <div class="p-3.5 rounded-xl bg-brand-500/10 border border-brand-500/30 text-brand-300 text-xs font-mono">
-              ✓ 14-Month cash runway with platform breakeven achieved in Month 2.5 at just 65 deliveries/day.
+              ✓ 14-Month cash runway with operational breakeven achieved at just 65 orders/month (~2 orders/day).
             </div>
           </div>
         `
@@ -2201,7 +2444,7 @@
         badge: "First 90 Days: Covered by $300 GCP Credit",
         badgeClass: "px-3 py-1 rounded-xl text-xs font-mono font-bold bg-cyan-500/10 border border-cyan-500/30 text-cyan-300",
         costSub: "Cloud Run + Cloud SQL + Managed Redis",
-        b2cText: "Per-Order Instant ($15.30)",
+        b2cText: "Per-Order Instant (KSh 15.30)",
         rows: [
           { name: "Cloud SQL PostgreSQL 16", spec: "1 vCPU, 3.75GB RAM, 20GB SSD, HA backups", usd: "$62.00", kes: "KSh 8,060", recovery: "Core ledger & PostGIS boundary store" },
           { name: "Memorystore Redis 7", spec: "1 GB In-memory cache & Pub/Sub cluster", usd: "$30.00", kes: "KSh 3,900", recovery: "Sub-ms bike geohash & token rate limiting" },
@@ -2282,17 +2525,35 @@
       lucide.createIcons();
     }
 
+    function setVolume(vol) {
+      document.getElementById('vol-slider').value = vol;
+      updateCloudVolume(vol);
+    }
+
     function updateCloudVolume(val) {
       const vol = parseInt(val);
       document.getElementById('vol-display').innerText = `${vol.toLocaleString()} Deliveries / Month`;
 
       const t = CLOUD_TIERS[currentCloudTier];
       const res = t.calc(vol);
-      const netProfit = vol * 595;
+      const grossMargin = vol * 595;
+      const netProfit = grossMargin - res.total;
 
       document.getElementById('dyn-cost').innerText = `KSh ${Math.round(res.total).toLocaleString()}`;
       document.getElementById('dyn-per-order').innerText = `KSh ${res.perOrder.toFixed(2)}`;
-      document.getElementById('dyn-profit').innerText = `KSh ${Math.round(netProfit).toLocaleString()}`;
+      
+      const profitEl = document.getElementById('dyn-profit');
+      const profitSubEl = document.getElementById('dyn-profit-sub');
+      
+      if (netProfit >= 0) {
+        profitEl.innerText = `+KSh ${Math.round(netProfit).toLocaleString()}`;
+        profitEl.className = "text-base font-bold text-emerald-400 mt-0.5 block";
+        if (profitSubEl) profitSubEl.innerText = vol >= 65 ? `@ KSh 595.00/order (Profitable)` : `@ KSh 595.00/order`;
+      } else {
+        profitEl.innerText = `-KSh ${Math.round(Math.abs(netProfit)).toLocaleString()}`;
+        profitEl.className = "text-base font-bold text-red-400 mt-0.5 block";
+        if (profitSubEl) profitSubEl.innerText = `Below 65 orders/mo breakeven`;
+      }
     }
 
     // ==========================================
