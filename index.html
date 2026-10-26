@@ -15,13 +15,13 @@
         extend: {
           colors: {
             brand: {
-              50: '#ecfdf5',
-              100: '#d1fae5',
-              400: '#34d399',
-              500: '#10b981',
-              600: '#059669',
-              700: '#047857',
-              900: '#064e3b',
+              50: 'var(--brand-50, #ecfdf5)',
+              100: 'var(--brand-100, #d1fae5)',
+              400: 'rgb(var(--brand-400-rgb, 52 211 153) / <alpha-value>)',
+              500: 'rgb(var(--brand-500-rgb, 16 185 129) / <alpha-value>)',
+              600: 'rgb(var(--brand-600-rgb, 5 150 105) / <alpha-value>)',
+              700: 'var(--brand-700, #047857)',
+              900: 'var(--brand-900, #064e3b)',
             },
             dark: {
               bg: '#080d1a',
@@ -40,10 +40,23 @@
   </script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+    :root {
+      --brand-50: #ecfdf5;
+      --brand-100: #d1fae5;
+      --brand-400: #34d399;
+      --brand-500: #10b981;
+      --brand-600: #059669;
+      --brand-700: #047857;
+      --brand-900: #064e3b;
+      --brand-400-rgb: 52 211 153;
+      --brand-500-rgb: 16 185 129;
+      --brand-600-rgb: 5 150 105;
+      --brand-glow: rgba(16, 185, 129, 0.25);
+    }
     body { font-family: 'Inter', sans-serif; background-color: #080d1a; color: #f8fafc; -webkit-tap-highlight-color: transparent; }
     .code-font { font-family: 'JetBrains Mono', monospace; }
     .glass-card { background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
-    .glass-card-active { background: rgba(15, 23, 42, 0.96); border: 1px solid rgba(16, 185, 129, 0.4); box-shadow: 0 0 25px rgba(16, 185, 129, 0.12); }
+    .glass-card-active { background: rgba(15, 23, 42, 0.96); border: 1px solid rgb(var(--brand-500-rgb) / 0.4); box-shadow: 0 0 25px rgb(var(--brand-500-rgb) / 0.15); }
     
     /* Touch target optimizations */
     .touch-target { min-height: 44px; min-width: 44px; touch-action: manipulation; }
@@ -62,9 +75,9 @@
       width: 22px;
       height: 22px;
       border-radius: 50%;
-      background: #10b981;
+      background: var(--brand-500);
       cursor: pointer;
-      box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+      box-shadow: 0 0 10px rgb(var(--brand-500-rgb) / 0.5);
     }
   </style>
 </head>
@@ -100,8 +113,12 @@
         </div>
       </div>
 
-      <!-- Action Button -->
+      <!-- Action Buttons & Theme Picker -->
       <div class="flex items-center space-x-2">
+        <button onclick="switchTab('design')" id="top-theme-pill" class="px-2.5 py-1.5 text-xs font-mono font-bold rounded-lg bg-slate-900 border border-dark-border hover:border-brand-500/50 transition flex items-center space-x-1.5 text-slate-300 touch-target" title="Open Design & Color Studio">
+          <span id="top-theme-dot" class="w-2.5 h-2.5 rounded-full bg-brand-500 shadow-sm shadow-brand-500/50"></span>
+          <span id="top-theme-name" class="hidden sm:inline text-[11px]">Emerald</span>
+        </button>
         <a href="#deck" onclick="switchTab('deck')" class="px-3.5 py-2 text-xs font-semibold rounded-lg bg-brand-500 text-slate-950 hover:bg-brand-400 transition flex items-center space-x-1.5 shadow-md shadow-brand-500/20 touch-target justify-center">
           <i data-lucide="presentation" class="w-4 h-4"></i>
           <span>Pitch Deck</span>
@@ -121,6 +138,10 @@
         <button onclick="switchTab('arch')" id="tab-arch" class="tab-btn shrink-0 px-3.5 py-2.5 rounded-lg flex items-center space-x-2 transition text-slate-400 hover:text-white hover:bg-slate-800/50 touch-target">
           <i data-lucide="layers" class="w-4 h-4"></i>
           <span>System Architecture</span>
+        </button>
+        <button onclick="switchTab('design')" id="tab-design" class="tab-btn shrink-0 px-3.5 py-2.5 rounded-lg flex items-center space-x-2 transition text-slate-400 hover:text-white hover:bg-slate-800/50 touch-target">
+          <i data-lucide="palette" class="w-4 h-4 text-brand-400"></i>
+          <span>Design & Brand System</span>
         </button>
         <button onclick="switchTab('location')" id="tab-location" class="tab-btn shrink-0 px-3.5 py-2.5 rounded-lg flex items-center space-x-2 transition text-slate-400 hover:text-white hover:bg-slate-800/50 touch-target">
           <i data-lucide="map-pin" class="w-4 h-4"></i>
@@ -409,6 +430,340 @@
             <span class="font-mono text-brand-400 block mb-1">STEP 6</span>
             <div class="font-bold text-white">Ledger Settlement</div>
             <p class="text-slate-400 text-[11px] mt-1">Proof syncs; Ledger debits Escrow and credits Florist, Courier, and Platform.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 2.5: DESIGN SYSTEM & BRAND STUDIO  -->
+    <!-- ========================================== -->
+    <section id="view-design" class="view-panel hidden space-y-6 sm:space-y-8">
+      <div>
+        <div class="flex items-center space-x-2 text-brand-400 text-xs font-mono uppercase tracking-wider">
+          <i data-lucide="palette" class="w-4 h-4"></i>
+          <span>Brand Identity & Design Architecture</span>
+        </div>
+        <h1 class="text-xl sm:text-2xl font-bold text-white mt-1">Cross-Platform UI/UX, Design Tokens & Live Theme Studio</h1>
+        <p class="text-slate-400 text-xs sm:text-sm mt-1 max-w-3xl leading-relaxed">
+          How our brand identity translates between high-stakes web gifting portals and native Android Kotlin (Jetpack Compose) mobile screens. Pick any preset or choose a custom color below to dynamically repaint the entire application and phone chassis in real time.
+        </p>
+      </div>
+
+      <!-- INTERACTIVE COLOR PICKER & PALETTE SELECTOR -->
+      <div class="glass-card-active rounded-2xl p-5 sm:p-6 space-y-5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <span class="text-xs font-mono text-brand-400 uppercase tracking-wider">Interactive Pitch Engine</span>
+            <h3 class="text-base sm:text-lg font-bold text-white">Select a Brand Theme or Pick Any Custom Color</h3>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span id="contrast-badge" class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-mono font-bold flex items-center space-x-1">
+              <i data-lucide="check" class="w-3.5 h-3.5"></i>
+              <span>WCAG AAA (8.4:1 OLED)</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Preset Theme Swatches -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 font-mono text-xs">
+          <!-- 1. Emerald Flora -->
+          <button onclick="applyTheme('emerald')" id="theme-btn-emerald" class="p-3.5 rounded-xl border-2 border-brand-500 bg-slate-900/90 text-left transition relative overflow-hidden group touch-target">
+            <div class="flex items-center space-x-2">
+              <span class="w-4 h-4 rounded-full bg-[#10b981] shadow-md shadow-[#10b981]/50"></span>
+              <span class="font-bold text-white text-xs">Emerald Flora</span>
+            </div>
+            <div class="text-[10px] text-slate-400 mt-1">Signature · Nairobi Sun</div>
+            <div class="text-[10px] text-emerald-400 mt-0.5">#10B981</div>
+          </button>
+
+          <!-- 2. Royal Naivasha Crimson -->
+          <button onclick="applyTheme('rose')" id="theme-btn-rose" class="p-3.5 rounded-xl border border-dark-border hover:border-rose-500/60 bg-slate-900/90 text-left transition relative overflow-hidden group touch-target">
+            <div class="flex items-center space-x-2">
+              <span class="w-4 h-4 rounded-full bg-[#f43f5e] shadow-md shadow-[#f43f5e]/50"></span>
+              <span class="font-bold text-white text-xs">Naivasha Rose</span>
+            </div>
+            <div class="text-[10px] text-slate-400 mt-1">Export Red Roses</div>
+            <div class="text-[10px] text-rose-400 mt-0.5">#F43F5E</div>
+          </button>
+
+          <!-- 3. Savanna Gold -->
+          <button onclick="applyTheme('gold')" id="theme-btn-gold" class="p-3.5 rounded-xl border border-dark-border hover:border-amber-500/60 bg-slate-900/90 text-left transition relative overflow-hidden group touch-target">
+            <div class="flex items-center space-x-2">
+              <span class="w-4 h-4 rounded-full bg-[#f59e0b] shadow-md shadow-[#f59e0b]/50"></span>
+              <span class="font-bold text-white text-xs">Savanna Gold</span>
+            </div>
+            <div class="text-[10px] text-slate-400 mt-1">Champagne & Milestones</div>
+            <div class="text-[10px] text-amber-400 mt-0.5">#F59E0B</div>
+          </button>
+
+          <!-- 4. Coastal Orchid -->
+          <button onclick="applyTheme('orchid')" id="theme-btn-orchid" class="p-3.5 rounded-xl border border-dark-border hover:border-purple-500/60 bg-slate-900/90 text-left transition relative overflow-hidden group touch-target">
+            <div class="flex items-center space-x-2">
+              <span class="w-4 h-4 rounded-full bg-[#8b5cf6] shadow-md shadow-[#8b5cf6]/50"></span>
+              <span class="font-bold text-white text-xs">Coastal Orchid</span>
+            </div>
+            <div class="text-[10px] text-slate-400 mt-1">Mombasa & Diani Resorts</div>
+            <div class="text-[10px] text-purple-400 mt-0.5">#8B5CF6</div>
+          </button>
+
+          <!-- 5. Electric Cyan -->
+          <button onclick="applyTheme('cyan')" id="theme-btn-cyan" class="p-3.5 rounded-xl border border-dark-border hover:border-cyan-500/60 bg-slate-900/90 text-left transition relative overflow-hidden group touch-target">
+            <div class="flex items-center space-x-2">
+              <span class="w-4 h-4 rounded-full bg-[#06b6d4] shadow-md shadow-[#06b6d4]/50"></span>
+              <span class="font-bold text-white text-xs">Electric Cyan</span>
+            </div>
+            <div class="text-[10px] text-slate-400 mt-1">0G Crypto & PostGIS</div>
+            <div class="text-[10px] text-cyan-400 mt-0.5">#06B6D4</div>
+          </button>
+        </div>
+
+        <!-- Custom Color Picker Row -->
+        <div class="pt-4 border-t border-dark-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs font-mono">
+          <div class="flex items-center space-x-3 w-full sm:w-auto">
+            <span class="text-slate-400 shrink-0">Custom Color:</span>
+            <div class="flex items-center space-x-2 bg-slate-900 p-1.5 rounded-lg border border-dark-border">
+              <input type="color" id="theme-custom-picker" value="#10b981" oninput="handleCustomColor(this.value)" class="w-7 h-7 rounded border-0 cursor-pointer bg-transparent">
+              <input type="text" id="theme-hex-input" value="#10B981" oninput="handleCustomHex(this.value)" class="w-20 bg-transparent text-white font-mono text-xs uppercase focus:outline-none">
+            </div>
+            <span class="text-[11px] text-slate-500">Pick any color to repaint all screens</span>
+          </div>
+
+          <div class="flex items-center space-x-2 text-[11px] text-slate-400">
+            <span>Material 3 Token:</span>
+            <code id="compose-token-tag" class="px-2 py-0.5 rounded bg-slate-900 text-brand-400 border border-dark-border font-bold">Color(0xFF10B981)</code>
+          </div>
+        </div>
+      </div>
+
+      <!-- DUAL-PLATFORM PREVIEW: ANDROID JETPACK COMPOSE VS RESPONSIVE WEB -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
+        
+        <!-- LEFT: NATIVE ANDROID MOBILE APP (JETPACK COMPOSE PREVIEW) -->
+        <div class="lg:col-span-5 glass-card rounded-2xl p-5 sm:p-6 space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+              <i data-lucide="smartphone" class="w-4 h-4 text-brand-400"></i>
+              <span class="text-xs font-mono text-white font-bold uppercase">Native Android Phone (Compose)</span>
+            </div>
+            <span class="text-[10px] font-mono bg-brand-500/20 text-brand-400 px-2 py-0.5 rounded border border-brand-500/30">Kotlin 2.0</span>
+          </div>
+
+          <!-- Mobile App Role Switcher -->
+          <div class="grid grid-cols-3 gap-1 p-1 bg-slate-900/90 rounded-xl border border-dark-border text-[11px] font-mono text-center">
+            <button onclick="switchMobileRole('courier')" id="role-btn-courier" class="py-1.5 rounded-lg font-bold bg-brand-500 text-slate-950 transition touch-target flex items-center justify-center">Courier</button>
+            <button onclick="switchMobileRole('florist')" id="role-btn-florist" class="py-1.5 rounded-lg font-bold text-slate-400 hover:text-white transition touch-target flex items-center justify-center">Florist Hub</button>
+            <button onclick="switchMobileRole('client')" id="role-btn-client" class="py-1.5 rounded-lg font-bold text-slate-400 hover:text-white transition touch-target flex items-center justify-center">Customer</button>
+          </div>
+
+          <!-- Realistic Smartphone Chassis Container -->
+          <div class="mx-auto w-full max-w-[310px] bg-slate-950 rounded-[38px] p-3 shadow-2xl border-4 border-slate-800 relative overflow-hidden">
+            <!-- Camera Island Notch -->
+            <div class="absolute top-4 left-1/2 -translate-x-1/2 w-20 h-4 bg-black rounded-full z-20 flex items-center justify-center">
+              <div class="w-2.5 h-2.5 rounded-full bg-slate-900 border border-slate-800 ml-6"></div>
+            </div>
+
+            <!-- Phone Screen Viewport -->
+            <div class="w-full bg-[#080d1a] rounded-[28px] overflow-hidden pt-6 pb-2 text-white font-sans text-xs flex flex-col justify-between min-h-[460px] border border-slate-900">
+              
+              <!-- Android Status Bar -->
+              <div class="px-4 py-1 flex items-center justify-between text-[10px] text-slate-400 font-mono">
+                <span>12:45 PM</span>
+                <div class="flex items-center space-x-1">
+                  <span>5G</span>
+                  <i data-lucide="wifi" class="w-3 h-3"></i>
+                  <i data-lucide="battery-charging" class="w-3 h-3 text-brand-400"></i>
+                </div>
+              </div>
+
+              <!-- DYNAMIC MOBILE CONTENT SCREEN -->
+              <div id="mobile-screen-content" class="px-3.5 py-2 space-y-3 flex-1 flex flex-col justify-between">
+                <!-- Dynamically populated via switchMobileRole JS -->
+              </div>
+
+              <!-- Android Navigation Bar -->
+              <div class="px-4 pt-2 pb-1 border-t border-slate-900/80 bg-slate-950/90 grid grid-cols-4 text-center text-[10px] font-mono text-slate-400">
+                <div class="flex flex-col items-center text-brand-400">
+                  <i data-lucide="compass" class="w-4 h-4"></i>
+                  <span class="text-[9px] mt-0.5">Route</span>
+                </div>
+                <div class="flex flex-col items-center hover:text-white">
+                  <i data-lucide="package" class="w-4 h-4"></i>
+                  <span class="text-[9px] mt-0.5">Cargo</span>
+                </div>
+                <div class="flex flex-col items-center hover:text-white">
+                  <i data-lucide="wallet" class="w-4 h-4"></i>
+                  <span class="text-[9px] mt-0.5">Float</span>
+                </div>
+                <div class="flex flex-col items-center hover:text-white">
+                  <i data-lucide="user" class="w-4 h-4"></i>
+                  <span class="text-[9px] mt-0.5">Profile</span>
+                </div>
+              </div>
+
+              <!-- Home Indicator Bar -->
+              <div class="w-24 h-1 bg-slate-700 rounded-full mx-auto mt-2"></div>
+            </div>
+          </div>
+
+          <!-- Jetpack Compose Theme Code Block -->
+          <div class="p-3.5 rounded-xl bg-slate-950 border border-dark-border font-mono text-[11px] text-slate-300 space-y-1">
+            <div class="text-slate-500 flex items-center justify-between">
+              <span>Jetpack Compose Theme.kt:</span>
+              <span class="text-brand-400">Material 3</span>
+            </div>
+            <pre id="compose-code-preview" class="text-[10px] text-cyan-300 overflow-x-auto scroll-touch p-1">val Primary = Color(0xFF10B981)
+val OnPrimary = Color(0xFF003822)
+val PrimaryContainer = Color(0xFF005234)
+val Surface = Color(0xFF0F172A)
+val Background = Color(0xFF080D1A)</pre>
+          </div>
+        </div>
+
+        <!-- RIGHT: RESPONSIVE WEB DESIGN & COMPONENT LIBRARY -->
+        <div class="lg:col-span-7 glass-card-active rounded-2xl p-5 sm:p-6 space-y-6">
+          <div>
+            <div class="flex items-center space-x-2 text-brand-400 text-xs font-mono uppercase">
+              <i data-lucide="layout" class="w-4 h-4"></i>
+              <span>Web Platform Component System</span>
+            </div>
+            <h3 class="text-base sm:text-lg font-bold text-white mt-0.5">Unified Web UI Components & Contrast Ratios</h3>
+            <p class="text-xs text-slate-400 mt-1">Every button, chip, radar badge, and card border on the web portal responds dynamically to the chosen brand token.</p>
+          </div>
+
+          <!-- Live Web Component Showcase Grid -->
+          <div class="space-y-4">
+            
+            <!-- 1. Buttons & CTAs -->
+            <div class="p-4 rounded-xl bg-slate-900 border border-dark-border space-y-2">
+              <span class="text-[11px] font-mono text-slate-400 uppercase block">Interactive Buttons</span>
+              <div class="flex flex-wrap items-center gap-2.5">
+                <button class="px-4 py-2 rounded-xl text-xs font-mono font-bold bg-brand-500 text-slate-950 hover:bg-brand-400 transition shadow-lg shadow-brand-500/20 touch-target flex items-center space-x-1.5">
+                  <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                  <span>Confirm Dispatch</span>
+                </button>
+                <button class="px-4 py-2 rounded-xl text-xs font-mono font-bold border border-brand-500/50 text-brand-400 hover:bg-brand-500/10 transition touch-target flex items-center space-x-1.5">
+                  <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
+                  <span>Print 58mm Docket</span>
+                </button>
+                <button class="px-3 py-2 rounded-xl text-xs font-mono text-slate-400 bg-slate-800 hover:text-white transition touch-target">
+                  Cancel
+                </button>
+              </div>
+            </div>
+
+            <!-- 2. Badges & Invariant Chips -->
+            <div class="p-4 rounded-xl bg-slate-900 border border-dark-border space-y-2">
+              <span class="text-[11px] font-mono text-slate-400 uppercase block">Micro-Badges & Cold Statuses</span>
+              <div class="flex flex-wrap items-center gap-2 text-xs font-mono">
+                <span class="px-3 py-1 rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/30 font-bold flex items-center space-x-1.5">
+                  <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
+                  <span>4°C Cold Chain Active</span>
+                </span>
+                <span class="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 font-bold">
+                  PostGIS &lt;0.4ms
+                </span>
+                <span class="px-3 py-1 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/30 font-bold">
+                  0G Offline Cryptographic Ready
+                </span>
+              </div>
+            </div>
+
+            <!-- 3. Dynamic Price & Escrow Display Box -->
+            <div class="p-4 rounded-xl bg-slate-950 border border-dark-border space-y-2 font-mono text-xs">
+              <div class="flex items-center justify-between text-slate-400 border-b border-dark-border pb-2">
+                <span>ORDER ESCROW INVOICE:</span>
+                <span class="text-brand-400 font-bold">#ORD-9821</span>
+              </div>
+              <div class="flex justify-between text-slate-300">
+                <span>24 Premium Red Naivasha Roses:</span>
+                <span class="font-bold text-white">KSh 3,200.00</span>
+              </div>
+              <div class="flex justify-between text-slate-300">
+                <span>Precision Upright Boda Transit:</span>
+                <span class="font-bold text-white">KSh 350.00</span>
+              </div>
+              <div class="flex justify-between text-slate-300">
+                <span>Chilled Water Phial Packaging:</span>
+                <span class="font-bold text-white">KSh 300.00</span>
+              </div>
+              <div class="border-t border-dark-border pt-2 flex justify-between font-bold text-sm text-brand-400">
+                <span>Total Escrow Amount:</span>
+                <span>KSh 3,850.00</span>
+              </div>
+            </div>
+
+            <!-- 4. Design Tokens Matrix -->
+            <div class="p-4 rounded-xl bg-slate-900 border border-dark-border space-y-2 font-mono text-xs">
+              <span class="text-[11px] text-slate-400 uppercase block font-bold">Active Token System (CSS Variables)</span>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-[11px]">
+                <div class="p-2 rounded bg-slate-950 border border-dark-border">
+                  <span class="text-slate-500 block text-[10px]">--brand-500</span>
+                  <span id="token-val-500" class="text-brand-400 font-bold">#10B981</span>
+                </div>
+                <div class="p-2 rounded bg-slate-950 border border-dark-border">
+                  <span class="text-slate-500 block text-[10px]">--brand-400</span>
+                  <span id="token-val-400" class="text-brand-400 font-bold">#34D399</span>
+                </div>
+                <div class="p-2 rounded bg-slate-950 border border-dark-border">
+                  <span class="text-slate-500 block text-[10px]">--brand-600</span>
+                  <span id="token-val-600" class="text-brand-400 font-bold">#059669</span>
+                </div>
+                <div class="p-2 rounded bg-slate-950 border border-dark-border">
+                  <span class="text-slate-500 block text-[10px]">Contrast Ratio</span>
+                  <span id="token-val-contrast" class="text-emerald-400 font-bold">8.4:1 (AAA)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BRAND IDENTITY, NAMING & PHYSICAL DESIGN PRINCIPLES -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs font-sans">
+        
+        <!-- Pillar 1: Naming Architecture -->
+        <div class="glass-card rounded-2xl p-5 space-y-3">
+          <div class="flex items-center space-x-2 text-brand-400 font-mono text-xs font-bold uppercase">
+            <i data-lucide="tag" class="w-4 h-4"></i>
+            <span>1. Naming & Tone</span>
+          </div>
+          <h4 class="text-base font-bold text-white">CitiMarket Delivery</h4>
+          <p class="text-slate-300 leading-relaxed">
+            The name anchors directly into <strong>Nairobi City Market</strong>, the 85-year-old historic epicenter of Kenya's floral trade on Muindi Mbingu Street. It conveys institutional trust, street authenticity, and effortless convenience.
+          </p>
+          <div class="p-2.5 rounded-lg bg-slate-900 border border-dark-border font-mono text-[11px] text-slate-400">
+            Tagline: <em>"Fresh From Lake Naivasha to Your Doorstep in 45 Minutes."</em>
+          </div>
+        </div>
+
+        <!-- Pillar 2: High-Nit Sunlight Contrast -->
+        <div class="glass-card rounded-2xl p-5 space-y-3">
+          <div class="flex items-center space-x-2 text-cyan-400 font-mono text-xs font-bold uppercase">
+            <i data-lucide="sun" class="w-4 h-4"></i>
+            <span>2. High-Nit Contrast</span>
+          </div>
+          <h4 class="text-base font-bold text-white">Equatorial Sunlight UI</h4>
+          <p class="text-slate-300 leading-relaxed">
+            85% of courier usage occurs outdoors at midday in Nairobi and Mombasa. Pure OLED dark backgrounds (<code class="text-slate-200">#080d1a</code>) paired with vibrant high-contrast accents ensure <strong>zero screen glare</strong> while saving 42% battery on courier devices.
+          </p>
+          <div class="p-2.5 rounded-lg bg-slate-900 border border-dark-border font-mono text-[11px] text-cyan-300">
+            WCAG 2.1 AAA Compliant (>7:1 text-to-background contrast).
+          </div>
+        </div>
+
+        <!-- Pillar 3: One-Thumb Boda Ergonomics -->
+        <div class="glass-card rounded-2xl p-5 space-y-3">
+          <div class="flex items-center space-x-2 text-amber-400 font-mono text-xs font-bold uppercase">
+            <i data-lucide="hand" class="w-4 h-4"></i>
+            <span>3. One-Thumb Ergonomics</span>
+          </div>
+          <h4 class="text-base font-bold text-white">Motorcycle Touch Targets</h4>
+          <p class="text-slate-300 leading-relaxed">
+            Riders wear motorcycle gloves and balance on boda bodas. Every primary action button is locked to the bottom 40% of the screen with a minimum touch surface of <strong>48 × 48 px</strong>, accompanied by multi-sensory haptic buzzers on tilt warnings.
+          </p>
+          <div class="p-2.5 rounded-lg bg-slate-900 border border-dark-border font-mono text-[11px] text-amber-300">
+            Bottom-anchored primary action drawer for single-hand use.
           </div>
         </div>
       </div>
@@ -2557,6 +2912,372 @@
     }
 
     // ==========================================
+    // BRAND THEME STUDIO & DYNAMIC COLOR ENGINE
+    // ==========================================
+    const THEMES = {
+      emerald: {
+        name: "Emerald",
+        title: "Emerald Flora",
+        hex: "#10B981",
+        rgb: "16 185 129",
+        light: "#34D399",
+        lightRgb: "52 211 153",
+        dark: "#059669",
+        darkRgb: "5 150 105",
+        composePrimary: "0xFF10B981",
+        composeOnPrimary: "0xFF003822",
+        composeContainer: "0xFF005234",
+        contrast: "8.4:1 (AAA)"
+      },
+      rose: {
+        name: "Crimson",
+        title: "Naivasha Rose",
+        hex: "#F43F5E",
+        rgb: "244 63 94",
+        light: "#FB7185",
+        lightRgb: "251 113 133",
+        dark: "#E11D48",
+        darkRgb: "225 29 72",
+        composePrimary: "0xFFF43F5E",
+        composeOnPrimary: "0xFF400010",
+        composeContainer: "0xFF5C001B",
+        contrast: "7.9:1 (AAA)"
+      },
+      gold: {
+        name: "Savanna Gold",
+        title: "Savanna Gold",
+        hex: "#F59E0B",
+        rgb: "245 158 11",
+        light: "#FBBF24",
+        lightRgb: "251 191 36",
+        dark: "#D97706",
+        darkRgb: "217 119 6",
+        composePrimary: "0xFFF59E0B",
+        composeOnPrimary: "0xFF422B00",
+        composeContainer: "0xFF5E3E00",
+        contrast: "9.2:1 (AAA)"
+      },
+      orchid: {
+        name: "Coastal Orchid",
+        title: "Coastal Orchid",
+        hex: "#8B5CF6",
+        rgb: "139 92 246",
+        light: "#A78BFA",
+        lightRgb: "167 139 250",
+        dark: "#7C3AED",
+        darkRgb: "124 58 237",
+        composePrimary: "0xFF8B5CF6",
+        composeOnPrimary: "0xFF2A0066",
+        composeContainer: "0xFF3D008F",
+        contrast: "8.1:1 (AAA)"
+      },
+      cyan: {
+        name: "Electric Cyan",
+        title: "Electric Cyan",
+        hex: "#06B6D4",
+        rgb: "6 182 212",
+        light: "#22D3EE",
+        lightRgb: "34 211 238",
+        dark: "#0891B2",
+        darkRgb: "8 145 178",
+        composePrimary: "0xFF06B6D4",
+        composeOnPrimary: "0xFF003640",
+        composeContainer: "0xFF004F5C",
+        contrast: "8.8:1 (AAA)"
+      }
+    };
+
+    let currentThemeKey = 'emerald';
+    let currentMobileRole = 'courier';
+
+    function hexToRgb(hex) {
+      let c = hex.replace('#', '');
+      if (c.length === 3) c = c.split('').map(x => x + x).join('');
+      const num = parseInt(c, 16);
+      return {
+        r: (num >> 16) & 255,
+        g: (num >> 8) & 255,
+        b: num & 255
+      };
+    }
+
+    function adjustBrightness(hex, percent) {
+      const { r, g, b } = hexToRgb(hex);
+      const factor = 1 + (percent / 100);
+      const clamp = v => Math.min(255, Math.max(0, Math.round(v)));
+      const nr = clamp(r * factor);
+      const ng = clamp(g * factor);
+      const nb = clamp(b * factor);
+      return '#' + [nr, ng, nb].map(x => x.toString(16).padStart(2, '0')).join('').toUpperCase();
+    }
+
+    function setCssColorVariables(hex, lightHex, darkHex) {
+      const root = document.documentElement;
+      const { r, g, b } = hexToRgb(hex);
+      const lr = hexToRgb(lightHex);
+      const dr = hexToRgb(darkHex);
+
+      root.style.setProperty('--brand-50', '#ecfdf5');
+      root.style.setProperty('--brand-100', '#d1fae5');
+      root.style.setProperty('--brand-500', hex);
+      root.style.setProperty('--brand-500-rgb', `${r} ${g} ${b}`);
+      root.style.setProperty('--brand-400', lightHex);
+      root.style.setProperty('--brand-400-rgb', `${lr.r} ${lr.g} ${lr.b}`);
+      root.style.setProperty('--brand-600', darkHex);
+      root.style.setProperty('--brand-600-rgb', `${dr.r} ${dr.g} ${dr.b}`);
+      root.style.setProperty('--brand-glow', `rgba(${r}, ${g}, ${b}, 0.25)`);
+
+      // Update top header dot & badge
+      const topDot = document.getElementById('top-theme-dot');
+      if (topDot) topDot.style.backgroundColor = hex;
+      const topName = document.getElementById('top-theme-name');
+      if (topName) topName.innerText = hex;
+
+      // Update tokens display
+      const t500 = document.getElementById('token-val-500');
+      if (t500) t500.innerText = hex.toUpperCase();
+      const t400 = document.getElementById('token-val-400');
+      if (t400) t400.innerText = lightHex.toUpperCase();
+      const t600 = document.getElementById('token-val-600');
+      if (t600) t600.innerText = darkHex.toUpperCase();
+    }
+
+    function applyTheme(key) {
+      currentThemeKey = key;
+      const t = THEMES[key];
+      if (!t) return;
+
+      setCssColorVariables(t.hex, t.light, t.dark);
+
+      // Update preset buttons styling
+      Object.keys(THEMES).forEach(k => {
+        const btn = document.getElementById(`theme-btn-${k}`);
+        if (btn) {
+          if (k === key) {
+            btn.className = "p-3.5 rounded-xl border-2 border-brand-500 bg-slate-900/90 text-left transition relative overflow-hidden group touch-target shadow-lg shadow-brand-500/10";
+          } else {
+            btn.className = "p-3.5 rounded-xl border border-dark-border bg-slate-900/90 text-left transition relative overflow-hidden group touch-target";
+          }
+        }
+      });
+
+      // Update custom inputs
+      const picker = document.getElementById('theme-custom-picker');
+      if (picker) picker.value = t.hex.toLowerCase();
+      const hexInput = document.getElementById('theme-hex-input');
+      if (hexInput) hexInput.value = t.hex.toUpperCase();
+
+      // Update compose tag & code preview
+      const compTag = document.getElementById('compose-token-tag');
+      if (compTag) compTag.innerText = `Color(${t.composePrimary})`;
+
+      const compPreview = document.getElementById('compose-code-preview');
+      if (compPreview) {
+        compPreview.innerText = `val Primary = Color(${t.composePrimary})
+val OnPrimary = Color(${t.composeOnPrimary})
+val PrimaryContainer = Color(${t.composeContainer})
+val Surface = Color(0xFF0F172A)
+val Background = Color(0xFF080D1A)`;
+      }
+
+      const contrastBadge = document.getElementById('contrast-badge');
+      if (contrastBadge) contrastBadge.innerHTML = `<i data-lucide="check" class="w-3.5 h-3.5"></i><span>WCAG AAA (${t.contrast} OLED)</span>`;
+      
+      const contrastToken = document.getElementById('token-val-contrast');
+      if (contrastToken) contrastToken.innerText = t.contrast;
+
+      // Re-render mobile screen with new theme
+      renderMobileScreen();
+      lucide.createIcons();
+    }
+
+    function handleCustomColor(hex) {
+      const light = adjustBrightness(hex, 35);
+      const dark = adjustBrightness(hex, -20);
+      setCssColorVariables(hex, light, dark);
+
+      const hexInput = document.getElementById('theme-hex-input');
+      if (hexInput) hexInput.value = hex.toUpperCase();
+
+      // De-select preset theme buttons
+      Object.keys(THEMES).forEach(k => {
+        const btn = document.getElementById(`theme-btn-${k}`);
+        if (btn) btn.className = "p-3.5 rounded-xl border border-dark-border bg-slate-900/90 text-left transition relative overflow-hidden group touch-target";
+      });
+
+      const cleanHex = hex.replace('#', '').toUpperCase();
+      const composeToken = `0xFF${cleanHex}`;
+      const compTag = document.getElementById('compose-token-tag');
+      if (compTag) compTag.innerText = `Color(${composeToken})`;
+
+      const compPreview = document.getElementById('compose-code-preview');
+      if (compPreview) {
+        compPreview.innerText = `val Primary = Color(${composeToken})
+val Surface = Color(0xFF0F172A)
+val Background = Color(0xFF080D1A)`;
+      }
+
+      renderMobileScreen();
+      lucide.createIcons();
+    }
+
+    function handleCustomHex(rawHex) {
+      let hex = rawHex.trim();
+      if (!hex.startsWith('#')) hex = '#' + hex;
+      if (/^#[0-9A-Fa-f]{6}$/.test(hex)) {
+        const picker = document.getElementById('theme-custom-picker');
+        if (picker) picker.value = hex;
+        handleCustomColor(hex);
+      }
+    }
+
+    // ==========================================
+    // MOBILE APP SCREEN MOCKUP LOGIC
+    // ==========================================
+    const MOBILE_ROLES = {
+      courier: {
+        title: "Courier",
+        content: `
+          <div class="space-y-3">
+            <div>
+              <div class="flex items-center justify-between text-[11px] mb-1">
+                <span class="font-mono text-slate-400">ACTIVE DISPATCH</span>
+                <span class="px-2 py-0.5 rounded bg-brand-500/20 text-brand-400 border border-brand-500/30 font-mono font-bold text-[10px]">IN TRANSIT</span>
+              </div>
+              <div class="font-bold text-sm text-white">24 Red Naivasha Roses</div>
+              <div class="text-[11px] text-slate-400">Destination: Waiyaki Way, Westlands</div>
+            </div>
+
+            <div class="p-2.5 rounded-xl bg-slate-900/90 border border-dark-border flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 rounded-full border-2 border-brand-500 flex items-center justify-center text-brand-400 font-mono font-bold text-xs">
+                  12°
+                </div>
+                <div>
+                  <div class="font-bold text-[11px] text-white">Vase Tilt: Stable</div>
+                  <div class="text-[10px] text-slate-400">Water phial sealed (4°C)</div>
+                </div>
+              </div>
+              <span class="text-[10px] font-mono text-brand-400 font-bold">SAFE</span>
+            </div>
+
+            <div class="p-2.5 rounded-xl bg-slate-900 border border-dark-border space-y-1.5">
+              <span class="text-[10px] font-mono text-slate-400 block">RECIPIENT DELIVERY PIN (0G)</span>
+              <div class="flex space-x-1.5">
+                <input type="text" value="4821" readonly class="w-full px-2.5 py-1.5 bg-slate-950 border border-brand-500/50 rounded-lg text-white font-mono text-xs text-center font-bold">
+                <button class="px-3 py-1.5 bg-brand-500 text-slate-950 font-bold rounded-lg text-xs font-mono shrink-0">Verify</button>
+              </div>
+            </div>
+
+            <button class="w-full py-2.5 bg-brand-500 text-slate-950 font-bold rounded-xl text-xs font-mono flex items-center justify-center space-x-1.5 shadow-md shadow-brand-500/20">
+              <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+              <span>Complete 0G Handshake</span>
+            </button>
+          </div>
+        `
+      },
+      florist: {
+        title: "Florist Hub",
+        content: `
+          <div class="space-y-3">
+            <div>
+              <div class="flex items-center justify-between text-[11px] mb-1">
+                <span class="font-mono text-slate-400">CITY MARKET STALL #42</span>
+                <span class="px-2 py-0.5 rounded bg-brand-500/20 text-brand-400 border border-brand-500/30 font-mono font-bold text-[10px]">NEW ORDER</span>
+              </div>
+              <div class="font-bold text-sm text-white">Bouquet Prep: ORD-9821</div>
+              <div class="text-[11px] text-slate-400">Floral: 24 Red Naivasha Stem Roses</div>
+            </div>
+
+            <div class="p-2.5 rounded-xl bg-slate-900/90 border border-dark-border space-y-1 text-[11px]">
+              <div class="flex justify-between text-slate-300">
+                <span>Water Phials:</span>
+                <span class="text-brand-400 font-bold">24 Stems Sealed</span>
+              </div>
+              <div class="flex justify-between text-slate-300">
+                <span>Calligraphy Card:</span>
+                <span class="text-white">"Happy Anniversary!"</span>
+              </div>
+            </div>
+
+            <div class="p-2.5 rounded-xl bg-slate-900 border border-dark-border space-y-1">
+              <span class="text-[10px] font-mono text-slate-400 block">BLUETOOTH 58MM PRINTER</span>
+              <div class="flex items-center justify-between text-[11px] text-white">
+                <span>Stall Tab A9 Terminal</span>
+                <span class="text-brand-400 font-mono font-bold">CONNECTED</span>
+              </div>
+            </div>
+
+            <button class="w-full py-2.5 bg-brand-500 text-slate-950 font-bold rounded-xl text-xs font-mono flex items-center justify-center space-x-1.5 shadow-md shadow-brand-500/20">
+              <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+              <span>Auto-Print 58mm Docket</span>
+            </button>
+          </div>
+        `
+      },
+      client: {
+        title: "Customer",
+        content: `
+          <div class="space-y-3">
+            <div>
+              <div class="flex items-center justify-between text-[11px] mb-1">
+                <span class="font-mono text-slate-400">LIVE SURPRISE GIFT</span>
+                <span class="px-2 py-0.5 rounded bg-brand-500/20 text-brand-400 border border-brand-500/30 font-mono font-bold text-[10px]">ETA 18 MIN</span>
+              </div>
+              <div class="font-bold text-sm text-white">Surprise Bouquet Arriving</div>
+              <div class="text-[11px] text-slate-400">Courier: Kevin (Electric Boda Boda)</div>
+            </div>
+
+            <div class="p-2.5 rounded-xl bg-slate-900/90 border border-dark-border flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <i data-lucide="snowflake" class="w-5 h-5 text-brand-400"></i>
+                <div>
+                  <div class="font-bold text-[11px] text-white">Cold Transit Guaranteed</div>
+                  <div class="text-[10px] text-slate-400">Box Sensor: 4.2°C</div>
+                </div>
+              </div>
+              <span class="text-[10px] font-mono text-brand-400 font-bold">ACTIVE</span>
+            </div>
+
+            <div class="p-2.5 rounded-xl bg-slate-900 border border-dark-border space-y-1">
+              <span class="text-[10px] font-mono text-slate-400 block">SECRET DELIVERY PIN</span>
+              <div class="text-base font-bold font-mono text-brand-400 text-center tracking-widest">4 8 2 1</div>
+              <span class="text-[9px] text-slate-400 text-center block">Read to rider upon inspection</span>
+            </div>
+
+            <button class="w-full py-2.5 bg-brand-500 text-slate-950 font-bold rounded-xl text-xs font-mono flex items-center justify-center space-x-1.5 shadow-md shadow-brand-500/20">
+              <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+              <span>1-Tap WhatsApp Courier</span>
+            </button>
+          </div>
+        `
+      }
+    };
+
+    function switchMobileRole(role) {
+      currentMobileRole = role;
+      ['courier', 'florist', 'client'].forEach(r => {
+        const btn = document.getElementById(`role-btn-${r}`);
+        if (btn) {
+          if (r === role) {
+            btn.className = "py-1.5 rounded-lg font-bold bg-brand-500 text-slate-950 transition touch-target flex items-center justify-center";
+          } else {
+            btn.className = "py-1.5 rounded-lg font-bold text-slate-400 hover:text-white transition touch-target flex items-center justify-center";
+          }
+        }
+      });
+      renderMobileScreen();
+    }
+
+    function renderMobileScreen() {
+      const container = document.getElementById('mobile-screen-content');
+      if (container && MOBILE_ROLES[currentMobileRole]) {
+        container.innerHTML = MOBILE_ROLES[currentMobileRole].content;
+        lucide.createIcons();
+      }
+    }
+
+    // ==========================================
     // INITIALIZATION ON LOAD
     // ==========================================
     window.addEventListener('DOMContentLoaded', () => {
@@ -2564,6 +3285,8 @@
       switchCity('nairobi');
       stepLedger(1);
       switchCloudTier('lean');
+      applyTheme('emerald');
+      switchMobileRole('courier');
       lucide.createIcons();
     });
   </script>
